@@ -9,7 +9,6 @@ upload:
 
 clean:
 	rm -rf *.hi *.o .*.swp .*.swo website _site/ _cache/
-	cd lectures && make clean
 
 server:
 	stack exec -- homepage watch
