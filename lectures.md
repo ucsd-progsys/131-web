@@ -1,6 +1,6 @@
 ---
 title: Lectures
-headerImg: sea.jpg
+headerImg: books.jpg
 ---
 
 * [SPQR](lectures/spqr.html)

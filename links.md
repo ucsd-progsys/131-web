@@ -1,6 +1,6 @@
 ---
 title: Resources
-headerImg: beach.jpg
+headerImg: sea.jpg
 ---
 
 The below is a tiny fraction of what is available online.

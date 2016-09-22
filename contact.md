@@ -9,7 +9,7 @@ headerImg: world-map.jpg
 - *Lectures:*          MWF 3:00-4:50p in CENTER 212
 - *Section:*           TBD
 - *Final:*             Friday December 9, 3-6PM.
-- *Announcements:*     [Posted on Piazza. Please check often!](https://www.piazza.com/$piazza_classid$)
+- *Announcements:*     [Posted on Piazza. Please check often!](https://www.piazza.com/ucsd/fall2016/cse131/)
 
 
 ## Instructor 
