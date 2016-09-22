@@ -8,7 +8,7 @@ headerImg: beach.jpg
   - Register your clicker here: [iclicker.com](http://www.iclicker.com)
   - Use your PID `A0XXXXXXXXX`
 
-- **Homework Assignments (30%)** :
+- **7 Homework Assignments (30%)** :
   Will be assigned approximately every one or two weeks,
   and instructions on turning them in will be posted with
   each assignment. You have a total of *four late days*
