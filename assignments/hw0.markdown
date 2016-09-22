@@ -5,19 +5,14 @@ headerImg: angles.jpg
 
 ## Download 
 
-[Download and open these files](static/hw/00-warmup.tgz) 
-
-```bash
-wget $baseurl$/static/hw/00-warmup.tgz
-tar -zxvf 00-warmup.tgz
-```
+1. [Download this tarball](/static/hw/00-warmup.tgz) 
+2. Open the tarball with `tar -zxvf 00-warmup.tgz`
 
 ## Overview
 
 This is a _warm up_ assignment which will
 
 * refresh your memory of functional programming from CSE 130, and
-
 * provide a quick introduction to Haskell.
 
 To this end, you will, reimplement certain problems from
@@ -28,7 +23,6 @@ sure that you need to rethink your solution.
 
 1. [lib/Hw0.hs](/lib/Hw0.hs) has skeleton functions with
    missing bodies that you will fill in,
-
 2. [tests/Test.hs](/tests/Test.hs) has some sample tests,
    and testing code that you will use to check your
    assignments before submitting.
@@ -58,25 +52,21 @@ When you run
 $ stack test
 ```
 
-Your last line should look like
+Your last lines should have 
 
 ```
 All N tests passed (...)
+OVERALL SCORE = ... / ...
 ```
 
 **or**
 
 ```
 K out of N tests failed
+OVERALL SCORE = ... / ...
 ```
 
-**If instead an error message appears**, e.g.
-
-```
-Process exited with code: ExitFailure 1
-```
-
-**your code will receive a zero.**
+**If your output does not have one of the above your code will receive a zero**
 
 If for some problem, you cannot get the code to compile,
 leave it as is with the `error ...` with your partial
@@ -88,7 +78,7 @@ but you will not be graded on this.
 
 ## Submission Instructions
 
-TODO
+To submit your code, just do:
 
 ```bash
 $ make zip
@@ -101,7 +91,7 @@ indicated by `turnin` matches the size of your file.
 See the ACS Web page on [turnin](http://acs.ucsd.edu/info/turnin.php)
 for more information on the operation of the program.
 
-## Problem 1: [Digital Roots and Additive Persistence](http://mathworld.wolfram.com/AdditivePersistence.html)
+## Problem 1: [Roots and Persistence](http://mathworld.wolfram.com/AdditivePersistence.html)
 
 ### (a) 10 points
 
@@ -123,7 +113,7 @@ ghci> sumList [1, 2, 3, 4]
 ghci> sumList [1, -2, 3, 5]
 7
 
-ghci> sumList [1, 3, 5, 7, 9, 11];;
+ghci> sumList [1, 3, 5, 7, 9, 11]
 36
 ```
 
@@ -232,7 +222,7 @@ ghci> palindrome "myxomatosis"
 False
 ```
 
-## Problem #3: Folding Warm-Up
+## Problem 3: Folding Warm-Up
 
 ### (a) 15 points
 
@@ -286,13 +276,13 @@ Once you have implemented the function, you should get
 the following behavior:
 
 ```haskell
-ghci> pipe [] 3;;
+ghci> pipe [] 3
 3
 
 ghci> pipe [(\x -> x+x), (\x -> x + 3)] 3
 9
 
-ghci> pipe [(\x -> x + 3), (\x -> x + x)] 3;;
+ghci> pipe [(\x -> x + 3), (\x -> x + x)] 3
 12
 ```
 
@@ -308,7 +298,7 @@ sepConcat :: String -> [String] -> String
 Intuitively, the call `sepConcat sep [s1,...,sn]` where
 
 * `sep` is a string to be used as a separator, and
-* `[s1;...;sn]` is a list of strings
+* `[s1,...,sn]` is a list of strings
 
 should behave as follows:
 
@@ -334,7 +324,7 @@ ghci> sepConcat "---" []
 ghci> sepConcat "" ["a", "b", "c", "d", "e"]
 "abcde"
 
-ghci> sepConcat "X" ["hello"];;
+ghci> sepConcat "X" ["hello"]
 "hello"
 ```
 
@@ -359,14 +349,14 @@ You should get the following behavior:
 ghci> stringOfList show [1, 2, 3, 4, 5, 6]
 "[1, 2, 3, 4, 5, 6]"
 
-ghci> stringOfList (fun x -> x) ["foo"];;
+ghci> stringOfList (fun x -> x) ["foo"]
 "[foo]"
 
 ghci> stringOfList (stringOfList show) [[1, 2, 3], [4, 5], [6], []]
 "[[1, 2, 3], [4, 5], [6], []]"
 ```
 
-## Problem #4: Big Numbers
+## Problem 4: Big Numbers
 
 The Haskell type `Int` only contains values up to a certain size (for reasons
 that will become clear as we implement our own compiler). For example,

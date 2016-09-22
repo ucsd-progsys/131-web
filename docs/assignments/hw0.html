@@ -1,0 +1,555 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+    
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+ <!--
+      loads the http over https ssl -
+      welcome to my website!
+
+	this theme is based off the Ice & Fire theme created by Lucas Gatsas
+      https://www.twitter.com/LucasGatsas
+      www.lucasgatsas.ch - switzerland.
+  -->
+
+
+<!-- Microsoft Internet Explorer documentMode compatMode setting IE Modus -->
+<script type="text/javascript">
+var IE = null;
+if (window.navigator.appName == "Microsoft Internet Explorer") {
+  if (document.documentMode) {
+
+    IE = document.documentMode;
+    } else {
+
+        IE = 5;
+          if (document.compatMode) {
+      if (document.compatMode == "CSS1Compat")
+      IE = 11;
+      }
+    }
+  }
+</script>
+
+    <meta charset="utf-8">
+    <!-- X-UA -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="X-UA-Compatible" content="IE=11" />
+    <link rel="author" title="Ranjit Jhala" href="http://ranjitjhala.github.io" />
+
+    <meta name="google" content="notranslate" />
+    <!-- Viewport -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- index ROBOTS follow -->
+    <meta name="robots" content="index, follow" />
+    <!-- Site Desciption -->
+    <meta name="description" content="UCSD CSE 131">
+    <!-- Site Desciption -->
+    <meta name="keywords" content="Ranjit Jhala, ranjitjhala, haskell, compilers, type systems">
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="http://localhost:8000/static/img/ico.jpg" type="image/x-icon" />
+    <!-- Blog Title -->
+    <title>cse131</title>
+
+    <!--     <title>{% if page.title %}{{ page.title }} - {{ site.title }}{% else %}{{ site.title }}{% endif %}</title>
+-->
+    <!-- Property Metas -->
+    <meta property="og:image" content="http://localhost:8000/static/img/ix.png" />
+    <meta property="og:title" content="UCSD CSE 131" />
+    <meta property="og:site_name" content="UCSD CSE 131" />
+    <!-- Canonical -->
+    <link rel="canonical" href="{{ page.url | replace:'index.html','' | prepend: site.baseurl | prepend: site.url }}">
+    <!-- StyleSheet -->
+    <link rel="stylesheet" href="http://localhost:8000/static/css/bootstrap.min.css">
+    <link rel="stylesheet" href="http://localhost:8000/static/css/spaceg.stylesheets.css">
+    <link rel="stylesheet" href="http://localhost:8000/static/css/syntax.css">
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic,900,900italic" rel="stylesheet" type="text/css">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Playfair+Display:400,700,900,400italic,700italic,900italic" rel="stylesheet" type="text/css">
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <style>
+	#preloader {position:fixed;top:0;left:0;right:0;bottom:0;background-color:#fff; /* change if the mask should have another color then white */z-index:99; /* makes sure it stays on top */}
+	#status {width:200px;height:200px;position:absolute;left:50%; /* centers the loading animation horizontally one the screen */top:50%; /* centers the loading animation vertically one the screen */background-image:url("/static/img/preloader.gif"); /* path to your loading animation */background-repeat:no-repeat;background-position:center;margin:-100px 0 0 -100px; /* is width and height divided by two */}
+	ul, ol {margin-top: 0;margin-bottom: 10px;}
+	.navbar-inverse {background-color: #FFF;border-color: #FFFFFF;}
+</style>
+<!--link rel="stylesheet" href="http://localhost:8000/static/css/prettify.css"-->
+<style>
+	header.intro-header {background: #6f5499;background: no-repeat center center;background-attachment: scroll;-webkit-background-size: cover;-moz-background-size: cover;background-size: cover;-o-background-size: cover;}
+	/* Preloader */#preloader {position:fixed;top:0;left:0;right:0;bottom:0;background-color:#fff; /* change if the mask should have another color then white */z-index:99; /* makes sure it stays on top */}
+	#status {width:200px;height:200px;position:absolute;left:50%; /* centers the loading animation horizontally one the screen */top:50%; /* centers the loading animation vertically one the screen */background-image:; /* path to your loading animation */background-repeat:no-repeat;background-position:center;margin:-100px 0 0 -100px; /* is width and height divided by two */}
+	li {list-style: none;}
+            body.modal-open
+            {overflow: hidden;padding-right: 0px;
+        }
+	article li {list-style: inherit;}
+	article .figure {text-align: center}
+    </style>
+    <!-- end Loading front stylesheet here -->
+    </head>
+
+    <body>
+	<div id="preloader">
+	    <div id="status">
+
+	    </div>
+
+	</div>  
+	<!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="http://localhost:8000" id="blog-title-left-top">cse131</a>
+        </div>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav navbar-right">
+                <!-- <li class="dropdown">
+                    <a href="#portfolioModal2" data-toggle="modal"><i class="fa fa-random" id="icon-top"></i></a>
+                <ul class="dropdown-menu"></ul>
+                </li>-->
+                
+                <li><a href="http://localhost:8000/calendar.html" target="_blank">Calendar</a></li>
+                <li><a href="http://localhost:8000/contact.html" target="_blank">Contact</a></li>
+                <li><a href="http://localhost:8000/lectures.html" target="_blank">Lectures</a></li>
+                <li><a href="http://localhost:8000/assignments.html" target="_blank">Assignments</a></li>
+                <li><a href="http://localhost:8000/links.html" target="_blank">Links</a></li>
+                <li><a href="https://www.piazza.com/ucsd/fall2016/cse131/home" id="roundbutton" target="_blank"><i class="fa fa-twitter"></i>Piazza</a></li>
+                <!--
+                <li><a href="http://localhost:8000/archive.html">Archive</a></li>
+                <li><a href="https://www.twitter.com/ranjitjhala" id="roundbutton" target="_blank"><i class="fa fa-twitter"></i>RanjitJhala</a></li>
+                -->
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+<!-- Portfolio Modals -->
+    <div class="portfolio-modal modal fade" id="portfolioModal1" tabindex="-1" role="dialog" aria-hidden="true" style="padding-right:0px; overflow: hidden;">
+        <div class="modal-content">
+            <div class="close-modal" data-dismiss="modal">
+                <div class="lr">
+                    <div class="rl">
+                    </div>
+                </div>
+            </div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8 col-lg-offset-2">
+                        <div class="modal-body">
+                            <h1 class="font-style-inline-small-h1">Ranjit Jhala</h1>
+                            <hr class="star-primary">
+                            <img src="http://localhost:8000/static/img/kc.jpg" class="img-responsive img-centered" alt title>
+                            <p class="font-style-inline-small">
+                                <a href="https://www.twitter.com/ranjitjhala" target="_blank">follow me</a>. <br>
+                                <a href="https://www.github.com/ucsd-progsys/131-web" target="_blank">    <i class="fa fa-github" id="spaceg-social-modal"></i> </a>
+                                <a href="https://www.twitter.com/ranjitjhala" target="_blank"><i class="fa fa-twitter" id="spaceg-social-modal"></i> </a>
+                                <a href="https://plus.google.com/u/0/106612421534244742464" target="_blank"> <i class="fa fa-google-plus" id="spaceg-social-modal"></i></a>
+                            </p>
+                            <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times"></i> Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+<!-- Menu Modals Add New Sa.21.Feb.2015 03:22:25 -->
+    <div class="portfolio-modal modal fade" id="portfolioModal2" tabindex="-1" role="dialog" aria-hidden="true" style="padding-right:0px; overflow: hidden;">
+        <div class="modal-content">
+            <div class="close-modal" data-dismiss="modal">
+                <div class="lr">
+                    <div class="rl">
+                    </div>
+                </div>
+            </div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8 col-lg-offset-2">
+                        <div class="modal-body">
+                            <h1 class="font-style-inline-small-h1">Ranjit Jhala</h1>
+                            <hr class="star-primary">
+                            <p class="font-style-inline-small">
+                        <a href="https://www.twitter.com/ranjitjhala" target="_blank">follow</a>. <br>
+                        <a href="https://www.github.com/ucsd-progsys/131-web" target="_blank">    <i class="fa fa-github" id="spaceg-social-modal"></i> </a>
+                        <a href="https://www.twitter.com/ranjitjhala" target="_blank"><i class="fa fa-twitter" id="spaceg-social-modal"></i> </a>
+                        <a href="https://plus.google.com/u/0/106612421534244742464" target="_blank"> <i class="fa fa-google-plus" id="spaceg-social-modal"></i></a>  <br>
+                    <li><a href="http://localhost:8000/">Home</a></li>
+                    <li><a href="http://localhost:8000/about.html">About Me</a></li>
+                    <li><a href="http://localhost:8000/archive.html/">Archive</a></li>
+                            </p>
+
+                            <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times"></i> Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+        <div id="content">
+            <!-- Post Header -->
+<header class="intro-header" style="background-image: url('http://localhost:8000/static/img/angles.jpg')" alt title>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <h1>HW 0, due 9/30/2016</h1>
+                    
+                    <span class="meta">
+		    
+		    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+			<h2 id="download">Download</h2>
+<ol style="list-style-type: decimal">
+<li><a href="../static/hw/00-warmup.tgz">Download this tarball</a></li>
+<li>Open the tarball with <code>tar -zxvf 00-warmup.tgz</code></li>
+</ol>
+<h2 id="overview">Overview</h2>
+<p>This is a <em>warm up</em> assignment which will</p>
+<ul>
+<li>refresh your memory of functional programming from CSE 130, and</li>
+<li>provide a quick introduction to Haskell.</li>
+</ul>
+<p>To this end, you will, reimplement certain problems from CSE 130 in Haskell. Recall that the problems require relatively little code ranging from 2 to 15 lines. If any function requires more than that, you can be sure that you need to rethink your solution.</p>
+<ol style="list-style-type: decimal">
+<li><a href="../lib/Hw0.hs">lib/Hw0.hs</a> has skeleton functions with missing bodies that you will fill in,</li>
+<li><a href="../tests/Test.hs">tests/Test.hs</a> has some sample tests, and testing code that you will use to check your assignments before submitting.</li>
+</ol>
+<p>You should only need to modify the parts of the files which say:</p>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell">error <span class="st">&quot;TBD: ...&quot;</span></code></pre></div>
+<p>with suitable Haskell implementations.</p>
+<p><strong>Note:</strong> Start early, to avoid any unexpected shocks late in the day.</p>
+<h2 id="assignment-testing-and-evaluation">Assignment Testing and Evaluation</h2>
+<p>Your functions/programs <strong>must</strong> compile and run on <code>ieng6.ucsd.edu</code>.</p>
+<p>Most of the points, will be awarded automatically, by <strong>evaluating your functions against a given test suite</strong>.</p>
+<p><a href="../tests/Test.hs">Tests.hs</a> contains a very small suite of tests which gives you a flavor of of these tests. When you run</p>
+<pre class="shell"><code>$ stack test</code></pre>
+<p>Your last lines should have</p>
+<pre><code>All N tests passed (...)
+OVERALL SCORE = ... / ...</code></pre>
+<p><strong>or</strong></p>
+<pre><code>K out of N tests failed
+OVERALL SCORE = ... / ...</code></pre>
+<p><strong>If your output does not have one of the above your code will receive a zero</strong></p>
+<p>If for some problem, you cannot get the code to compile, leave it as is with the <code>error ...</code> with your partial solution enclosed below as a comment.</p>
+<p>The other lines will give you a readout for each test. You are encouraged to try to understand the testing code, but you will not be graded on this.</p>
+<h2 id="submission-instructions">Submission Instructions</h2>
+<p>To submit your code, just do:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="kw">make</span> zip
+$ <span class="kw">turnin</span> 00-warmup.tgz </code></pre></div>
+<p><code>turnin</code> will provide you with a confirmation of the submission process; make sure that the size of the file indicated by <code>turnin</code> matches the size of your file. See the ACS Web page on <a href="http://acs.ucsd.edu/info/turnin.php">turnin</a> for more information on the operation of the program.</p>
+<h2 id="problem-1-roots-and-persistence">Problem 1: <a href="http://mathworld.wolfram.com/AdditivePersistence.html">Roots and Persistence</a></h2>
+<h3 id="a-10-points">(a) 10 points</h3>
+<p>Fill in the implementation of</p>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="ot">sumList ::</span> [<span class="dt">Int</span>] <span class="ot">-&gt;</span> <span class="dt">Int</span>
+sumList xs <span class="fu">=</span> error <span class="st">&quot;TBD:sumList&quot;</span></code></pre></div>
+<p>that such that <code>sumList xs</code> returns the sum of the integer elements of <code>xs</code>. Once you have implemented the function, you should get the following behavior at the prompt:</p>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell">ghci<span class="fu">&gt;</span> sumList [<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>]
+<span class="dv">10</span>
+
+ghci<span class="fu">&gt;</span> sumList [<span class="dv">1</span>, <span class="fu">-</span><span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">5</span>]
+<span class="dv">7</span>
+
+ghci<span class="fu">&gt;</span> sumList [<span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">5</span>, <span class="dv">7</span>, <span class="dv">9</span>, <span class="dv">11</span>]
+<span class="dv">36</span></code></pre></div>
+<h2 id="b-10-points">(b) 10 points</h2>
+<p>Fill in the implementation of the function</p>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="ot">digitsOfInt ::</span> <span class="dt">Int</span> <span class="ot">-&gt;</span> [<span class="dt">Int</span>]
+digitsOfInt n <span class="fu">=</span> error <span class="st">&quot;TBD:digitsOfInt&quot;</span></code></pre></div>
+<p>such that <code>digitsOfInt n</code></p>
+<ul>
+<li>returns <code>[]</code> if <code>n</code> is not positive, and otherwise</li>
+<li>returns the list of digits of <code>n</code> in the order in which they appear in <code>n</code>.</li>
+</ul>
+<p>Once you have implemented the function, you should get the following:</p>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell">ghci<span class="fu">&gt;</span> digitsOfInt <span class="dv">3124</span>
+[<span class="dv">3</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">4</span>]
+
+ghci<span class="fu">&gt;</span> digitsOfInt <span class="dv">352663</span>
+[<span class="dv">3</span>, <span class="dv">5</span>, <span class="dv">2</span>, <span class="dv">6</span>, <span class="dv">6</span>, <span class="dv">3</span>]</code></pre></div>
+<h3 id="c-1010-points">(c) 10+10 points</h3>
+<p>Consider the process of taking a number, adding its digits, then adding the digits of the number derived from it, etc., until the remaining number has only one digit. The number of additions required to obtain a single digit from a number <code>n</code> is called the <em>additive persistence</em> of <code>n</code>, and the digit obtained is called the <em>digital root</em> of <code>n</code>.</p>
+<p>For example, the sequence obtained from the starting number <code>9876</code> is <code>9876</code>, <code>30</code>, <code>3</code>, so <code>9876</code> has an additive persistence of <code>2</code> and a digital root of <code>3</code>.</p>
+<p>Write two functions</p>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="ot">additivePersistence ::</span> int <span class="ot">-&gt;</span> int
+additivePersistence n <span class="fu">=</span> error <span class="st">&quot;TBD:additivePersistence&quot;</span>
+
+<span class="ot">digitalRoot ::</span> <span class="dt">Int</span> <span class="ot">-&gt;</span> <span class="dt">Int</span>
+digitalRoot n <span class="fu">=</span> error <span class="st">&quot;TBD:digitalRoot&quot;</span></code></pre></div>
+<p>that take positive integer arguments <code>n</code> and return respectively the additive persistence and the digital root of <code>n</code>. Once you have implemented the functions, you should get the following behavior at the OCaml prompt:</p>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell">ghci<span class="fu">&gt;</span> additivePersistence <span class="dv">9876</span>
+<span class="dv">2</span>
+
+ghci<span class="fu">&gt;</span> digitalRoot <span class="dv">9876</span>
+<span class="dv">3</span></code></pre></div>
+<h2 id="problem-2-palindromes">Problem 2: Palindromes</h2>
+<h3 id="a-15-points">(a) 15 points</h3>
+<p>Without using any built-in functions (e.g. <code>reverse</code>), write an OCaml function:</p>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="ot">listReverse ::</span> [a] <span class="ot">-&gt;</span> [a]
+listReverse xs <span class="fu">=</span> error <span class="st">&quot;TBD:listReverse&quot;</span></code></pre></div>
+<p>such that <code>listReverse [x1,x2,...,xn]</code> returns the list <code>[xn,...,x2,x1]</code> i.e. the input list but with the values in reversed order. You should get the following behavior:</p>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell">ghci<span class="fu">&gt;</span> listReverse [<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>]
+[<span class="dv">4</span>, <span class="dv">3</span>, <span class="dv">2</span>, <span class="dv">1</span>]
+
+ghci<span class="fu">&gt;</span> listReverse [<span class="st">&quot;a&quot;</span>, <span class="st">&quot;b&quot;</span>, <span class="st">&quot;c&quot;</span>, <span class="st">&quot;d&quot;</span>]
+[<span class="st">&quot;d&quot;</span>, <span class="st">&quot;c&quot;</span>, <span class="st">&quot;b&quot;</span>, <span class="st">&quot;a&quot;</span>]</code></pre></div>
+<h3 id="b-10-points-1">(b) 10 points</h3>
+<p>A <em>palindrome</em> is a word that reads the same from left-to-right and right-to-left. Write an OCaml function</p>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="ot">palindrome ::</span> <span class="dt">String</span> <span class="ot">-&gt;</span> <span class="dt">Bool</span>
+palindrome w <span class="fu">=</span> error <span class="st">&quot;TBD:palindrome&quot;</span></code></pre></div>
+<p>such that <code>palindrome w</code> returns <code>True</code> if the string is a palindrome and <code>False</code> otherwise. You may use the given helper function <code>explode</code>. You should get the following behavior:</p>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell">ghci<span class="fu">&gt;</span> palindrome <span class="st">&quot;malayalam&quot;</span>
+<span class="dt">True</span>
+ghci<span class="fu">&gt;</span> palindrome <span class="st">&quot;myxomatosis&quot;</span>
+<span class="dt">False</span></code></pre></div>
+<h2 id="problem-3-folding-warm-up">Problem 3: Folding Warm-Up</h2>
+<h3 id="a-15-points-1">(a) 15 points</h3>
+<p>Fill in the skeleton given for <code>sqsum</code>, which uses <code>foldl'</code> (the equivalent of Ocaml’s <code>List.fold_left</code>) to get a function</p>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="ot">sqSum ::</span> [<span class="dt">Int</span>] <span class="ot">-&gt;</span> <span class="dt">Int</span></code></pre></div>
+<p>such that <code>sqSum [x1,...,xn]</code> returns the integer <code>x1^2 + ... + xn^2</code></p>
+<p>Your task is to fill in the appropriate values for</p>
+<ol style="list-style-type: decimal">
+<li>the folding function <code>f</code> and</li>
+<li>the base case <code>base</code>.</li>
+</ol>
+<p>Once you have implemented the function, you should get the following behavior:</p>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell">ghci<span class="fu">&gt;</span> sqSum []
+<span class="dv">0</span>
+
+ghci<span class="fu">&gt;</span> sqSum [<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>]
+<span class="dv">30</span>
+
+ghci<span class="fu">&gt;</span> sqSum [(<span class="fu">-</span><span class="dv">1</span>), (<span class="fu">-</span><span class="dv">2</span>), (<span class="fu">-</span><span class="dv">3</span>), (<span class="fu">-</span><span class="dv">4</span>)]
+<span class="dv">30</span></code></pre></div>
+<h3 id="b-30-points">(b) 30 points</h3>
+<p>Fill in the skeleton given for <code>pipe</code> which uses <code>foldl'</code> to get a function</p>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="ot">pipe ::</span> [(a <span class="ot">-&gt;</span> a)] <span class="ot">-&gt;</span> (a <span class="ot">-&gt;</span> a)</code></pre></div>
+<p>such that <code>pipe [f1,...,fn]</code> (where <code>f1,...,fn</code> are functions!) returns a function <code>f</code> such that for any <code>x</code>, we have <code>f x</code> returns result <code>fn(...(f2(f1 x)))</code>.</p>
+<p>Again, your task is to fill in the appropriate values for</p>
+<ol style="list-style-type: decimal">
+<li>the folding function <code>f</code> and</li>
+<li>the base case <code>base</code>.</li>
+</ol>
+<p>Once you have implemented the function, you should get the following behavior:</p>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell">ghci<span class="fu">&gt;</span> pipe [] <span class="dv">3</span>
+<span class="dv">3</span>
+
+ghci<span class="fu">&gt;</span> pipe [(\x <span class="ot">-&gt;</span> x<span class="fu">+</span>x), (\x <span class="ot">-&gt;</span> x <span class="fu">+</span> <span class="dv">3</span>)] <span class="dv">3</span>
+<span class="dv">9</span>
+
+ghci<span class="fu">&gt;</span> pipe [(\x <span class="ot">-&gt;</span> x <span class="fu">+</span> <span class="dv">3</span>), (\x <span class="ot">-&gt;</span> x <span class="fu">+</span> x)] <span class="dv">3</span>
+<span class="dv">12</span></code></pre></div>
+<h3 id="c-20-points">(c) 20 points</h3>
+<p>Fill in the skeleton given for <code>sepConcat</code>, which uses <code>foldl'</code> to get a function</p>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="ot">sepConcat ::</span> <span class="dt">String</span> <span class="ot">-&gt;</span> [<span class="dt">String</span>] <span class="ot">-&gt;</span> <span class="dt">String</span></code></pre></div>
+<p>Intuitively, the call <code>sepConcat sep [s1,...,sn]</code> where</p>
+<ul>
+<li><code>sep</code> is a string to be used as a separator, and</li>
+<li><code>[s1,...,sn]</code> is a list of strings</li>
+</ul>
+<p>should behave as follows:</p>
+<ul>
+<li><code>sepConcat sep []</code> should return the empty string <code>&quot;&quot;</code>,</li>
+<li><code>sepConcat sep [s]</code> should return just the string <code>s</code>,</li>
+<li>otherwise (if there is more than one string) the output should be the string <code>s1 ^ sep ^ s2 ^ ... ^ sep ^ sn</code>.</li>
+</ul>
+<p>You should only modify the parts of the skeleton consisting of <code>error &quot;TBD&quot; &quot;</code>. You will need to define the function <code>f</code>, and give values for <code>base</code> and <code>l</code>.</p>
+<p>Once done, you should get the following behavior:</p>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell">ghci<span class="fu">&gt;</span> sepConcat <span class="st">&quot;, &quot;</span> [<span class="st">&quot;foo&quot;</span>, <span class="st">&quot;bar&quot;</span>, <span class="st">&quot;baz&quot;</span>]
+<span class="st">&quot;foo, bar, baz&quot;</span>
+
+ghci<span class="fu">&gt;</span> sepConcat <span class="st">&quot;---&quot;</span> []
+<span class="st">&quot;&quot;</span>
+
+ghci<span class="fu">&gt;</span> sepConcat <span class="st">&quot;&quot;</span> [<span class="st">&quot;a&quot;</span>, <span class="st">&quot;b&quot;</span>, <span class="st">&quot;c&quot;</span>, <span class="st">&quot;d&quot;</span>, <span class="st">&quot;e&quot;</span>]
+<span class="st">&quot;abcde&quot;</span>
+
+ghci<span class="fu">&gt;</span> sepConcat <span class="st">&quot;X&quot;</span> [<span class="st">&quot;hello&quot;</span>]
+<span class="st">&quot;hello&quot;</span></code></pre></div>
+<h3 id="d-10-points">(d) 10 points</h3>
+<p>Implement the OCaml function</p>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="ot">stringOfList ::</span> (a <span class="ot">-&gt;</span> <span class="dt">String</span>) <span class="ot">-&gt;</span> [a] <span class="ot">-&gt;</span> <span class="dt">String</span></code></pre></div>
+<p>such that <code>stringOfList f [x1,...,xn]</code> should return the string <code>&quot;[&quot; ^ (f x1) ^ &quot;, &quot; ^ ... ^ (f xn) ^ &quot;]&quot;</code></p>
+<p>This function can be implemented on one line, <strong>without using any recursion</strong> by calling <code>map</code> and <code>sepConcat</code> with appropriate inputs.</p>
+<p>You should get the following behavior:</p>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell">ghci<span class="fu">&gt;</span> stringOfList show [<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">6</span>]
+<span class="st">&quot;[1, 2, 3, 4, 5, 6]&quot;</span>
+
+ghci<span class="fu">&gt;</span> stringOfList (fun x <span class="ot">-&gt;</span> x) [<span class="st">&quot;foo&quot;</span>]
+<span class="st">&quot;[foo]&quot;</span>
+
+ghci<span class="fu">&gt;</span> stringOfList (stringOfList show) [[<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>], [<span class="dv">4</span>, <span class="dv">5</span>], [<span class="dv">6</span>], []]
+<span class="st">&quot;[[1, 2, 3], [4, 5], [6], []]&quot;</span></code></pre></div>
+<h2 id="problem-4-big-numbers">Problem 4: Big Numbers</h2>
+<p>The Haskell type <code>Int</code> only contains values up to a certain size (for reasons that will become clear as we implement our own compiler). For example,</p>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell">ghci<span class="fu">&gt;</span> <span class="kw">let</span> x <span class="fu">=</span> <span class="dv">99999999999999999999999999999999999999999999999</span><span class="ot"> ::</span> <span class="dt">Int</span>
+
+<span class="fu">&lt;</span>interactive<span class="fu">&gt;:</span><span class="dv">3</span><span class="fu">:</span><span class="dv">9</span><span class="fu">:</span> <span class="dt">Warning</span><span class="fu">:</span>
+    <span class="dt">Literal</span> <span class="dv">99999999999999999999999999999999999999999999999</span> is out <span class="kw">of</span> the <span class="dt">Int</span> range <span class="fu">-</span><span class="dv">9223372036854775808</span><span class="fu">..</span><span class="dv">9223372036854775807</span></code></pre></div>
+<p>You will now implement functions to manipulate arbitrarily large numbers represented as <code>[Int]</code>, i.e. lists of <code>Int</code>.</p>
+<h3 id="a-10-5-10-points">(a) 10 + 5 + 10 points</h3>
+<p>Write a function</p>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="ot">clone ::</span> a <span class="ot">-&gt;</span> <span class="dt">Int</span> <span class="ot">-&gt;</span> [a]</code></pre></div>
+<p>such that <code>clone x n</code> returns a list of <code>n</code> copies of the value <code>x</code>. If the integer <code>n</code> is <code>0</code> or negative, then <code>clone</code> should return the empty list. You should get the following behavior:</p>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell">ghci<span class="fu">&gt;</span> clone <span class="dv">3</span> <span class="dv">5</span>
+[<span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">3</span>]
+
+ghci<span class="fu">&gt;</span> clone <span class="st">&quot;foo&quot;</span> <span class="dv">2</span>
+[<span class="st">&quot;foo&quot;</span>, <span class="st">&quot;foo&quot;</span>]</code></pre></div>
+<p>Use <code>clone</code> to write a function</p>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="ot">padZero ::</span> [<span class="dt">Int</span>] <span class="ot">-&gt;</span> [<span class="dt">Int</span>] <span class="ot">-&gt;</span> ([<span class="dt">Int</span>], [<span class="dt">Int</span>])</code></pre></div>
+<p>which takes two lists: <code>[x1,...,xn]</code> <code>[y1,...,ym]</code> and adds zeros in front of the <em>shorter</em> list to make the lists equal.</p>
+<p>Your implementation should *not** be recursive.</p>
+<p>You should get the following behavior:</p>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell">ghci<span class="fu">&gt;</span> padZero [<span class="dv">9</span>, <span class="dv">9</span>] [<span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">2</span>]
+([<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">9</span>, <span class="dv">9</span>], [<span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">2</span>])
+
+ghci<span class="fu">&gt;</span> padZero [<span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">2</span>] [<span class="dv">9</span>, <span class="dv">9</span>]
+([<span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">2</span>], [<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">9</span>, <span class="dv">9</span>])</code></pre></div>
+<p>Next, write a function</p>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="ot">removeZero ::</span> [<span class="dt">Int</span>] <span class="ot">-&gt;</span> [<span class="dt">Int</span>]</code></pre></div>
+<p>that takes a list and removes a prefix of leading zeros, yielding the following behavior:</p>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell">ghci<span class="fu">&gt;</span> removeZero [<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">2</span>]
+[<span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">2</span>]
+
+ghci<span class="fu">&gt;</span> removeZero [<span class="dv">9</span>, <span class="dv">9</span>]
+[<span class="dv">9</span>, <span class="dv">9</span>]
+
+ghci<span class="fu">&gt;</span> removeZero [<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>]
+[]</code></pre></div>
+<h3 id="b-25-points">(b) 25 points</h3>
+<p>Let us use the list <code>[d1, d2, ..., dn]</code>, where each <code>di</code> is between <code>0</code> and <code>9</code>, to represent the (positive) <strong>big-integer</strong> <code>d1d2...dn</code>.</p>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="kw">type</span> <span class="dt">BigInt</span> <span class="fu">=</span> [<span class="dt">Int</span>]</code></pre></div>
+<p>For example, <code>[9, 9, 9, 9, 9, 9, 9, 9, 9, 8]</code> represents the big-integer <code>9999999998</code>. Fill out the implementation for</p>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="ot">bigAdd ::</span> <span class="dt">BigInt</span> <span class="ot">-&gt;</span> <span class="dt">BigInt</span> <span class="ot">-&gt;</span> <span class="dt">BigInt</span></code></pre></div>
+<p>so that it takes two integer lists, where each integer is between <code>0</code> and <code>9</code> and returns the list corresponding to the addition of the two big-integers. Again, you have to fill in the implementation to supply the appropriate values to <code>f</code>, <code>base</code>, <code>args</code>. You should get the following behavior:</p>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell">ghci<span class="fu">&gt;</span> bigAdd [<span class="dv">9</span>, <span class="dv">9</span>] [<span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">2</span>]
+[<span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">1</span>]
+
+ghci<span class="fu">&gt;</span> bigAdd [<span class="dv">9</span>, <span class="dv">9</span>, <span class="dv">9</span>, <span class="dv">9</span>] [<span class="dv">9</span>, <span class="dv">9</span>, <span class="dv">9</span>]
+[<span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">9</span>, <span class="dv">9</span>, <span class="dv">8</span>]</code></pre></div>
+<h3 id="c-15-20-points">(c) 15 + 20 points</h3>
+<p>Next you will write functions to multiply two big integers. First write a function</p>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="ot">mulByDigit ::</span> <span class="dt">Int</span> <span class="ot">-&gt;</span> <span class="dt">BigInt</span> <span class="ot">-&gt;</span> <span class="dt">BigInt</span></code></pre></div>
+<p>which takes an integer digit and a big integer, and returns the big integer list which is the result of multiplying the big integer with the digit. You should get the following behavior:</p>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell">ghci<span class="fu">&gt;</span> mulByDigit <span class="dv">9</span> [<span class="dv">9</span>,<span class="dv">9</span>,<span class="dv">9</span>,<span class="dv">9</span>]
+[<span class="dv">8</span>,<span class="dv">9</span>,<span class="dv">9</span>,<span class="dv">9</span>,<span class="dv">1</span>]</code></pre></div>
+<p>Now, using <code>mulByDigit</code>, fill in the implementation of</p>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="ot">bigMul ::</span> <span class="dt">BigInt</span> <span class="ot">-&gt;</span> <span class="dt">BigInt</span> <span class="ot">-&gt;</span> <span class="dt">BigInt</span></code></pre></div>
+<p>Again, you have to fill in implementations for <code>f</code> , <code>base</code> , <code>args</code> only. Once you are done, you should get the following behavior at the prompt:</p>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell">ghci<span class="fu">&gt;</span> bigMul [<span class="dv">9</span>,<span class="dv">9</span>,<span class="dv">9</span>,<span class="dv">9</span>] [<span class="dv">9</span>,<span class="dv">9</span>,<span class="dv">9</span>,<span class="dv">9</span>]
+[<span class="dv">9</span>,<span class="dv">9</span>,<span class="dv">9</span>,<span class="dv">8</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">1</span>]
+
+ghci<span class="fu">&gt;</span> bigMul [<span class="dv">9</span>,<span class="dv">9</span>,<span class="dv">9</span>,<span class="dv">9</span>,<span class="dv">9</span>] [<span class="dv">9</span>,<span class="dv">9</span>,<span class="dv">9</span>,<span class="dv">9</span>,<span class="dv">9</span>]
+[<span class="dv">9</span>,<span class="dv">9</span>,<span class="dv">9</span>,<span class="dv">9</span>,<span class="dv">8</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">1</span>]</code></pre></div>	
+                <hr>
+            </div>
+        </div>
+    </div>
+</article>
+
+        </div>
+        <div id="footer">
+        </div>
+      <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                    <li>
+                        <a href="http://localhost:8000/feed.xml" data-datatype="json" data-type="GET" data-target="#frame" class="reload" id="clickme">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="https://twitter.com/ranjitjhala" data-datatype="json" data-type="GET" data-target="#frame" class="reload" id="clickme" target="_blank">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li>
+                        <a href="https://plus.google.com/u/0/106612421534244742464" data-datatype="json" data-type="GET" data-target="#frame" class="reload" id="clickme" target="_blank">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-google-plus fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                     
+                     
+                    <li>
+                        <a href="https://github.com/ucsd-progsys/131-web" target="_blank">
+                            <span class="fa-stack fa-lg">
+
+                              <i class="fa fa-arrow-circle-o-down"></i>
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+		    
+                </ul>
+                <p class="copyright text-muted">Copyright &copy; Ranjit Jhala
+                2016. Please suggest fixes <a href="http://github.com/ucsd-progsys/131-web">here.</a><br><br> 
+                </p>
+<div class="col-md-12">
+     <p class="copyright text-muted">
+     Site generated by <a href="http://jaspervdj.be/hakyll">Hakyll</a>, using
+     a theme by <a href="http://katychuang.com/hakyll-cssgarden/gallery/" target="_blank">Katy Chuang.</a>
+     </p>
+</div>
+    
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="http://localhost:8000/static/js/jquery.min.js"></script>
+<script src="http://localhost:8000/static/js/spaceg.stylesheets.min.js"></script> 
+<script src="http://localhost:8000/static/js/bootstrap.min.js"></script>
+<script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js"></script>
+<script src="http://localhost:8000/static/js/scripts.js"></script>
+
+
+
+    </body>
+</html>

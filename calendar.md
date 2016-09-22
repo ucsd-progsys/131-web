@@ -3,9 +3,10 @@ title: Calendar
 headerImg: road.jpg 
 ---
 
-## Clicker Groups FIXME 
+## Clicker Groups
 
-- [Groups](static/groups.txt) and [Seating Chart](static/groups.pdf)
+- [Groups](/static/img/groups.txt) 
+- [Seating Chart](/static/img/center212.pdf)
 
 
 ## Calendar (Deadlines, Office Hours)

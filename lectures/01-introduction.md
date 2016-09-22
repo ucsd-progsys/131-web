@@ -1,5 +1,5 @@
 ---
-title: Welcome to CSE 131!
+title: What *is* a compiler? 
 headerImg: Eiffel.png
 date: 2016-09-23
 ---
