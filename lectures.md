@@ -1,6 +1,6 @@
 ---
 title: Lectures
-headerImg: Eiffel.png
+headerImg: sea.jpg
 ---
 
 * [SPQR](lectures/spqr.html)
@@ -22,12 +22,6 @@ headerImg: Eiffel.png
 | Date       | Topic                    | Notes         |  Code      |
 |:-----------|:-------------------------|:-------------:|:----------:|
 | 10/3       | Running Haskell in Lab   | TBD           | TBD        | 
-
-
-
-
-
-
 
 [lec1]: lectures/01-introduction.html
 [lec2]: lectures/02-haskell.html

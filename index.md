@@ -3,6 +3,8 @@ title: Compilers
 headerImg: Eiffel.png
 ---
 
+
+CSE 131 is an introduction to modern Compiler Design.
 According to the venerable [Wikipedia](https://en.wikipedia.org/wiki/Compiler)
 
 > A compiler is a computer program (or a set of programs)
@@ -13,7 +15,8 @@ According to the venerable [Wikipedia](https://en.wikipedia.org/wiki/Compiler)
 >  The most common reason for converting source code is
 > to create an executable program.
 
-CSE 131 is an introduction to modern Compiler Design.
+
+
 In the course of the next ten weeks, we will look at
 how to convert programs written in a high-level language
 think ML from [CSE 130](http://ucsd-progsys.github.io/cse130/),

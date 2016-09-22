@@ -1,6 +1,6 @@
 ---
 title: Assignments
-headerImg: Eiffel.png 
+headerImg: angles.jpg 
 ---
 
 **LATE POLICY:** You have a total of **4** late days that can be used in

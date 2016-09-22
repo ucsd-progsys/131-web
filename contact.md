@@ -1,16 +1,16 @@
 ---
 title: Contact
-headerImg: angles.jpg
+headerImg: world-map.jpg 
 ---
 
-## Co-ordinates FIXME 
+## Co-ordinates 
 
 - *Course ID:*         849836
-- *Lectures:*          MWF 1:00-1:50p in PCYNH 106
+- *Lectures:*          MWF 3:00-4:50p in CENTER 212
 - *Section:*           TBD
-- *Final:*             Monday, December 7th, 11:30-2:30p
-- *Office Hours:*      CSE B250, details below.
-- *Announcements:*     [Posted on Piazza. Please check often!](piazza.com/ucsd/fall2015/cse130/home)
+- *Final:*             Friday December 9, 3-6PM.
+- *Announcements:*     [Posted on Piazza. Please check often!](https://www.piazza.com/$piazza_classid$)
+
 
 ## Instructor 
 
