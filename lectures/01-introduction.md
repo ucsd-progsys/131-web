@@ -1,5 +1,5 @@
 ---
-title: What *is* a compiler? 
+title: Hello, world! 
 headerImg: Eiffel.png
 date: 2016-09-23
 ---
