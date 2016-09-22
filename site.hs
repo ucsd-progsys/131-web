@@ -71,7 +71,7 @@ siteCtx =
     -- constField "instagram_username" "ranjitjhala"               `mappend`
     constField "site_username"      "Ranjit Jhala"              `mappend`
     constField "twitter_username"   "ranjitjhala"               `mappend`
-    constField "github_username"    "ranjitjhala"               `mappend`
+    constField "github_username"    "ucsd-progsys/131-web"      `mappend`
     constField "google_username"    "rjhala@eng.ucsd.edu"       `mappend`
     constField "google_userid"      "u/0/106612421534244742464" `mappend`
     constField "piazza_classid"     "ucsd/fall2016/cse131/home" `mappend`
