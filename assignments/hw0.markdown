@@ -1,5 +1,5 @@
 ---
-title: Homework #0, due 9/30/2016 
+title: HW 0, due 9/30/2016 
 headerImg: angles.jpg
 ---
 

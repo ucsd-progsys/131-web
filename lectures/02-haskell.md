@@ -1,4 +1,8 @@
-# A Crash Course in Haskell
+---
+title: A crash course in Haskell 
+date: 2016-09-26
+headerImg: books.jpg
+---
 
 We're going to do this real fast; for 131:
 
@@ -10,7 +14,7 @@ So: we'll learn Haskell by comparison.
 
 ## Type Ascription
 
-Ocaml uses a `:` for type ascription 
+**Ocaml** uses  `:` for type ascription 
 
 * `e : t` means `e` has type `t` 
 
@@ -18,7 +22,9 @@ Ocaml uses a `:` for type ascription
 (12 : int)
 ```
 
-Haskell uses `::` for type ascription
+vs. 
+
+**Haskell** uses `::` for type ascription
 
 * `e :: t` means `e` has type `t` 
 
@@ -31,7 +37,7 @@ Haskell uses `::` for type ascription
 
 ## Function Definitions and Calls
 
-Ocaml
+**Ocaml**
 
 ```ocaml
 (* val incr : int -> int *)
@@ -42,7 +48,7 @@ let eleven = incr 10
 
 vs
 
-Haskell
+**Haskell**
 
 ```haskell
 incr :: Int -> Int
@@ -55,6 +61,8 @@ eleven = incr 10
 
 ## Pattern Matching
 
+**Ocaml** 
+
 ```ocaml
 (* val listSum : int list -> int list *)
 let rec listSum xs = match xs with
@@ -64,6 +72,7 @@ let rec listSum xs = match xs with
 
 vs
 
+**Haskell**
 
 ```haskell
 listSum :: [Int] -> [Int]
@@ -80,16 +89,30 @@ listSum []     = 0
 listSum (x:xs) = x + listSum xs
 ```
 
-Different _equations_ for different cases.
+Haskell allows **different equations** for different cases.
+
+
+
 
 ## Colon vs. Double-Colon 
 
-* Ocaml uses `::` for "cons" but Haskell uses `:` for "cons".
-* Ocaml uses `:`  for "has type" but Haskell uses `::` for "has type".
+**Ocaml** 
 
+* uses `::` for *"cons"* 
+* uses `:`  for *"has type"*
+
+vs 
+
+**Haskell**
+
+* uses `:`   for *"cons"* 
+* uses `::`  for *"has type"*
+
+
+A handy table
 
 | Operator | Ocaml       | Haskell     |
-|---------:|------------:|------------:| 
+|:--------:|:-----------:|:-----------:| 
 | `::`     | "cons"      | "has type"  |
 | `:`      | "has type"  | "cons"      |
 
@@ -98,6 +121,8 @@ Different _equations_ for different cases.
 
 
 ## Local Variables
+
+**Ocaml**
 
 ```ocaml
 (* val filter : ('a -> bool) -> 'a list -> 'a list *)
@@ -108,6 +133,8 @@ let filter f xs = match xs with
 ```
 
 vs
+
+**Haskell**
 
 ```haskell
 filter :: (a -> Bool) -> [a] -> [a]
@@ -126,12 +153,18 @@ filter f (x:xs) = if f x then x:rest else rest
     rest        = filter f xs'
 ```
 
-`where` lets you pull local variables aside:
+**where** lets you pull local variables aside:
 
-* meaning exactly same as `let`, but
+* meaning _exactly same as_ `let`, but
 * can specify them in _any_ order.
 
+(Seems wierd at first, but truly beautiful.)
+
+
 ## Anonymous Functions
+
+
+**Ocaml** 
 
 ```ocaml
 (* val negate : ('a -> bool) -> 'a -> bool *)
@@ -140,15 +173,18 @@ let negate f = fun x -> not (f x)
 
 vs
 
+**Haskell** 
+
 ```haskell
 negate :: (a -> Bool) -> a -> Bool
 negate f = \x -> not (f x)
 ```
 
-Very similar: `fun` is replaced with `\`
-
+Very similar: Ocaml's `fun` is replaced with Haskell's `\`
 
 ## Tuples and Lists
+
+**Ocaml** 
 
 ```ocaml
 (* val partition: ('a -> bool) -> 'a list -> ('a list * 'a list) *)
@@ -157,6 +193,8 @@ let partition f xs = (filter f xs, filter (negate f) xs)
 
 vs
 
+**Haskell** 
+
 ```haskell
 partition :: (a -> Bool) -> [a] -> ([a], [a])
 partition f xs = (filter f xs, filter (negate f) xs)
@@ -164,11 +202,13 @@ partition f xs = (filter f xs, filter (negate f) xs)
 
 **Note**
 
-`(t1, t2)` instead of `(t1 * t2)`
-`[t]`      instead of `t list`
++ Haskell uses `(t1, t2)` vs Ocaml's `(t1 * t2)`
++ Haskell uses `[t]`      vs Ocaml's `t list`
 
 
 ## Larger Example
+
+**Ocaml** 
 
 ```ocaml
 (* val sort : 'a list -> 'a list *)
@@ -179,6 +219,8 @@ let rec sort xs = match xs with
 ```
 
 vs
+
+**Haskell**
 
 ```haskell
 sort :: (Ord a) => [a] -> [a]
@@ -203,6 +245,8 @@ sort (h:t)  = sort ls @ [h] @ sort rs
 
 ## Defining Data
 
+**Ocaml** 
+
 ```ocaml
 type expr
   = Number of float
@@ -212,6 +256,8 @@ type expr
 ```
 
 vs
+
+**Haskell** 
 
 ```haskell
 data Expr
@@ -223,6 +269,8 @@ data Expr
 
 ## Constructing Data
 
+**Ocaml**
+     
 ```ocaml
 let ex0 = Number 5.
 let ex1 = Plus  (ex0, Number 7.)
@@ -231,6 +279,8 @@ let ex3 = Times (ex1, ex2)
 ```
 
 vs
+
+**Haskell** 
 
 ```haskell
 ex0 = Number 5
@@ -252,6 +302,8 @@ Times  :: Expr -> Expr -> Expr
 
 ## Destructing (Accessing) Data
 
+**Ocaml** 
+
 ```ocaml
 (* val eval: expr -> float *)
 let rec eval e = match e with
@@ -263,6 +315,8 @@ let rec eval e = match e with
 
 vs
 
+**Haskell**
+
 ```haskell
 eval :: Expr -> Double
 eval (Number    n) = n
@@ -271,12 +325,14 @@ eval (Minus e1 e2) = eval e1 - eval e2
 eval (Times e1 e2) = eval e1 * eval e2
 ```
 
-Oh look, we wrote a _compiler_
+Oh look, we wrote a _compiler_!
 
++ What's the _source_ language? 
++ What's the _target_ language? 
 
-## Printf Debugging
+## Recursive Functions 
 
-**Very Very Important**
+**Ocaml** 
 
 ```ocaml
 let fact n = if n <= 0 then 1 else n * fact (n-1)
@@ -284,17 +340,23 @@ let fact n = if n <= 0 then 1 else n * fact (n-1)
 
 vs.
 
+**Haskell** 
+
 ```haskell
 fact n = if n <= 0 then 1 else n * fact (n-1)
 ```
 
-Q: How to _print out_ each input-output pair for calls to `fact`?
+
 
 ## Printf Debugging
 
 **Very Very Important**
 
-In Ocaml (as in Java, C, Python...), just print it:
+Q: How to **print out** each input-output pair for calls to `fact`?
+
+**Ocaml** 
+    
+(as in Java, C, Python...), just print it:
 
 ```ocaml
 let fact n =
@@ -303,7 +365,11 @@ let fact n =
   res
 ```
 
-But in Haskell, you can't "just" print stuff (for very good reasons...)
+vs 
+
+**Haskell**
+
+You can't _just_ print stuff (for very good reasons...)
 
 However, you _can_ do this:
 
@@ -317,3 +383,24 @@ fact n  = trace msg res
     msg = printf "fact n = %d, res = %d\n" n res
     res = if n <= 0 then 1 else n * fact (n-1)   
 ```
+
+Which pretty much does what you want. 
+
+```haskell 
+*Foo> fact 5
+fact n = 0, res = 1
+
+fact n = 1, res = 1
+
+fact n = 2, res = 2
+
+fact n = 3, res = 6
+
+fact n = 4, res = 24
+
+fact n = 5, res = 120
+
+120
+```
+
+

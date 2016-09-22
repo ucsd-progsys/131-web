@@ -1,14 +1,11 @@
 ---
-title: Welcome to CSE 131
+title: Welcome to CSE 131!
+headerImg: Eiffel.png
 date: 2016-09-23
 ---
 
 
-# Welcome to **CSE 131: Compilers**
-
-## Compilers
-
-### What *is* a Compiler?
+## What *is* a Compiler?
 
 A function that maps an _input_ string to an _output_ string.
 
@@ -47,9 +44,7 @@ Key Requirements on output program:
 
 Compilers were invented to [avoid writing machine code by hand][soap-fortran-assembly]
 
-<!-- <img src="https://github.com/ucsd-progsys/131/blob/master/resources/binary-soap-fortran.png" height="400"> -->
-
-![From Binary to FORTRAN](/static/img/binary-soap-fortran.png")
+![From Binary to FORTRAN](/static/img/binary-soap-fortran.png)
 
 Richard Hamming -- The Art of Doing Science and Engineering, p25:
 
@@ -76,12 +71,7 @@ John A.N. Lee, Dept of Computer Science, Virginia Polytechnical Institute
 
 ### What does a Compiler *look like*?
 
-<!--
-  <img src="https://github.com/ucsd-progsys/131/blob/master/resources/compiler-pipeline.png" height="400">
--->
-
 ![Compiler Pipeline](/static/img/compiler-pipeline.png)
-
 
 An input source program is converted to an executable binary in many stages:
 
@@ -142,28 +132,32 @@ We will
 
 ### How will we *grade*?
 
-+ **(30%) Assignments**
-  + 7 assignments
-  + All programming
-  + Groups of 2
+**(30%) Assignments**
+
++ 7 assignments
++ All programming
++ Groups of 2
 
 
-+ **(30%) Midterm**
-  + In-class (TODO:DATE)
-  + 2-sided printed "cheat sheet"
+**(30%) Midterm**
+
++ In-class (TBA) 
++ 2-sided printed "cheat sheet"
 
 
-+ **(35%) Final**
-  + (TODO:DATE)
-  + 2-sided printed cheat sheet
+**(35%) Final**
+
++ 2-sided printed cheat sheet
 
 
-+ **(05%) Clickers**
-  + *Attempting to answer* > 75% questions
+**(05%) Clickers**
+
++ *Attempting to answer* > 75% questions
 
 
-+ **(05%) Piazza Extra Credit**
-  + To top-20 best participants (TODO:BEST?)
+**(05%) Piazza Extra Credit**
+
++ To top-20 best participants
 
 
 ## Course Outline
@@ -174,7 +168,7 @@ Write **a compiler** for `NanoML -> X86`
 
 But Rome wasn't built in a day ... and neither is any serious software.
 
-![Rome wasn't built in a day](/resources/Eiffel.jpg)
+![Rome wasn't built in a day](/static/img/Eiffel.jpg)
 
 So we will write _many_ compilers:
 
@@ -189,21 +183,24 @@ So we will write _many_ compilers:
 
 ## What will *you learn* ?
 
-* Several new languages
-  * `Haskell` to write the compiler
-  * `C`       to write the "run-time"
-  * `X86`     compilation target
+**Core principles of compiler construction**
 
-* Core principles of compiler construction
-  * Managing Stacks & Heap
-  * Type Checking
-  * Intermediate forms
-  * Optimization
+* Managing Stacks & Heap
+* Type Checking
+* Intermediate forms
+* Optimization
 
-* _More importantly_ how to write a large program
-  * How to use types for design
-  * How to add new features / refactor
-  * How to test & validate   
+**Several new languages**
+
+* `Haskell` to write the compiler
+* `C`       to write the "run-time"
+* `X86`     compilation target
+
+**_More importantly_ how to write a large program**
+
+* How to use types for design
+* How to add new features / refactor
+* How to test & validate   
 
 
 ## What do you *need to know* ?

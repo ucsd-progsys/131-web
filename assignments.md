@@ -7,13 +7,9 @@ headerImg: angles.jpg
 atomic units over the entire quarter. By *atomic* I mean, for example, that
 35 mins over the deadline is equal to 1 late day.
 
-## How to
-
-- [Run Ocaml in Lab/Home](homeworks/info_ocaml.html)
-
 ## Programming Assignments
 
-- [HW #1](homeworks/hw1.html), due Fri 9/30  by 23:59pm
+- [HW #0](assignments/hw0.html), due Fri 9/30  by 23:59pm
 
 <!-- 
 

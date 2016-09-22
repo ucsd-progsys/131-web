@@ -60,7 +60,7 @@ main = hakyll $ do
 postCtx :: Context String
 postCtx =
     dateField  "date"       "%B %e, %Y"  `mappend`
-    constField "headerImg"  "Eiffel.jpg" `mappend`
+    -- constField "headerImg"  "Eiffel.jpg" `mappend`
     siteCtx
 
 siteCtx :: Context String
