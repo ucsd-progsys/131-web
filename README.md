@@ -2,6 +2,30 @@
 
 Public course materials for [UCSD CSE 131](https://ucsd-progsys.github.io/131-web)
 
+## Install 
+
+You too, can build this webpage locally, like so:
+
+```bash
+git clone https://github.com/ucsd-progsys/131-web.git
+cd 131-web
+make
+``` 
+
+The website will live in `_site/`.
+
+## Customize 
+
+By editing the parameters in `siteCtx` in `Site.hs`
+
+## View
+
+You can view it by running 
+
+```bash
+make server
+```
+
 ## Update
 
 Either do 

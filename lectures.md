@@ -3,10 +3,10 @@ title: Lecture Notes
 headerImg: books.jpg
 ---
 
-| Date       | Topic                    | Notes         |  Code      |
-|:----------:|:-------------------------|:-------------:|:----------:|
-| 9/23       | Introduction             | [html][lec1]  |            | 
-| 9/26       | Crash course in Haskell  | [html][lec2]  | [hs][cod2] | 
+| Date       | Topic                    | Notes                  |  Code      |
+|:----------:|:-------------------------|:----------------------:|:----------:|
+| 9/23       | Introduction             | [html][lec1] [md][md1] |            | 
+| 9/26       | Crash course in Haskell  | [html][lec2] [md][md2] | [hs][cod2] | 
 
 
 ## Discussions 
@@ -26,4 +26,6 @@ headerImg: books.jpg
 
 [lec1]: lectures/01-introduction.html
 [lec2]: lectures/02-haskell.html
+[md1]: http://github.com/ucsd-progsys/131-web/blob/master/lectures/01-introduction.md 
+[md2]: http://github.com/ucsd-progsys/131-web/blob/master/lectures/02-haskell.md 
 [cod2]: http://github.com/ucsd-progsys/131-web/blob/master/code/01-haskell/ 
