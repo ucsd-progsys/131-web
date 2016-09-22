@@ -3,7 +3,7 @@ site:
 	stack build
 	stack exec -- homepage rebuild
 
-upload: site
+upload:
 	cp -r _site/* docs/ 
 	cd docs/ && git add . && git commit -a -m "update page" && git push origin master 
 

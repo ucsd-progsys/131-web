@@ -5,15 +5,15 @@ headerImg: books.jpg
 
 | Date       | Topic                    | Notes         |  Code      |
 |:----------:|:-------------------------|:-------------:|:----------:|
-| 9/29       | Introduction             | [html][lec1]  |            | 
-| 10/1       | Crash course in Haskell  | [html][lec2]  | [hs][cod2] | 
+| 9/23       | Introduction             | [html][lec1]  |            | 
+| 9/26       | Crash course in Haskell  | [html][lec2]  | [hs][cod2] | 
 
 
 ## Discussions 
 
 | Date       | Topic                    | Notes         |  Code      |
 |:----------:|:-------------------------|:-------------:|:----------:|
-| 10/3       | Running Haskell in Lab   | TBD           | TBD        | 
+| 9/28       | Running Haskell in Lab   | TBD           | TBD        | 
 
 <!-- 
 
