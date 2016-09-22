@@ -51,6 +51,11 @@ up to and including, expulsion from the University.  Should you have
 any doubts about the moral and/or ethical implications of an activity
 regarding the course, please see the instructor.
 
-## Data
+## Research
 
-FIXME
+Your class work might be used for research purposes. For example, we may
+use anonymized student assignments to design algorithms or build tools to
+help programmers. Any student who wishes to opt out can contact the
+instructor or TA to do so after final grades have been issued. 
+**This has no impact on your grade in any manner.**
+
