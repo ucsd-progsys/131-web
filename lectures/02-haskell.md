@@ -6,7 +6,7 @@ headerImg: books.jpg
 
 We're going to do this real fast; for 131:
 
-> Haskell = Ocaml + Better syntax + Better tools
+> Haskell = Ocaml + Better syntax
 
 *We assume you are familiar with Ocaml*
 
