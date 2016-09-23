@@ -352,7 +352,7 @@ ghci<span class="fu">&gt;</span> sqSum [(<span class="fu">-</span><span class="d
 <h3 id="b-30-points">(b) 30 points</h3>
 <p>Fill in the skeleton given for <code>pipe</code> which uses <code>foldl'</code> to get a function</p>
 <div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="ot">pipe ::</span> [(a <span class="ot">-&gt;</span> a)] <span class="ot">-&gt;</span> (a <span class="ot">-&gt;</span> a)</code></pre></div>
-<p>such that <code>pipe [f1,...,fn]</code> (where <code>f1,...,fn</code> are functions!) returns a function <code>f</code> such that for any <code>x</code>, we have <code>f x</code> returns result <code>fn(...(f2(f1 x)))</code>.</p>
+<p>such that <code>pipe [f1,...,fn]</code> (where <code>f1,...,fn</code> are functions!) returns a function <code>f</code> such that for any <code>x</code>, we have <code>f x</code> returns result <code>f1(f2(...(fn x)))</code>.</p>
 <p>Again, your task is to fill in the appropriate values for</p>
 <ol style="list-style-type: decimal">
 <li>the folding function <code>f</code> and</li>
