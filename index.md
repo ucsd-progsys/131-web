@@ -39,16 +39,20 @@ In particular,
 > all academic work will be done by the student to whom it is assigned,
 > without unauthorized aid of any kind.
 
-You are expected to do your own work on all assignments; there are no group projects in
-this course.  You may (and are encouraged to) engage in **general**
-discussions with your classmates regarding the assignments, but specific
-details of a solution, including the solution itself, **must always be your own work**.
-There will be graded assignments and exam in this course, as described below.
-All exams are closed book; no implement other than your brain and a writing
-instrument are to be used.
+You are expected to do your own work on all assignments; when 
+specified, you **may work in pairs** -- but will submit the 
+assignments individually. You may (and are encouraged to) 
+engage in **general discussions** with your classmates 
+regarding the assignments, but specific details of a 
+solution, including the solution itself, 
+**must always be your own work**.
+
+There will be graded assignments and exam in this course, 
+as described below. All exams are closed book; no tools 
+other than your brain and a writing instrument are to be used.
 
 Incidents which violate the University's rules on integrity of scholarship
-will be taken seriously.  In addition to receiving a zero (0) on the
+will be taken seriously.  In addition to **receiving a zero (0)** on the
 assignment/exam in question, students may also face other penalties,
 up to and including, expulsion from the University.  Should you have
 any doubts about the moral and/or ethical implications of an activity

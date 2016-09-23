@@ -8,10 +8,9 @@ headerImg: beach.jpg
   - Register your clicker here: [iclicker.com](http://www.iclicker.com)
   - Use your PID `A0XXXXXXXXX`
 
-- **7 Homework Assignments (30%)** :
-  Will be assigned approximately every one or two weeks,
-  and instructions on turning them in will be posted with
-  each assignment. You have a total of *four late days*
+- **(Eight) Homework Assignments (30%)** :
+  They may be **done in pairs**; they will be assigned at 
+  the rate of one per week. You have a total of *four late days*
   that you can use throughout the quarter as you need them,
   where a late day means anything between 1 second and 23
   hours 59 minutes and 59 seconds past a deadline.
