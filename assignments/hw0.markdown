@@ -265,7 +265,7 @@ pipe :: [(a -> a)] -> (a -> a)
 
 such that `pipe [f1,...,fn]` (where `f1,...,fn` are functions!)
 returns a function `f` such that for any `x`, we have `f x`
-returns result `fn(...(f2(f1 x)))`.
+returns result `f1(f2(...(fn x)))`.
 
 Again, your task is to fill in the appropriate values for
 
