@@ -244,7 +244,7 @@ if (window.navigator.appName == "Microsoft Internet Explorer") {
 <ul>
 <li><code>e :: t</code> means <code>e</code> has type <code>t</code></li>
 </ul>
-<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell">(<span class="dv">12</span><span class="ot"> ::</span> int)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell">(<span class="dv">12</span><span class="ot"> ::</span> <span class="dt">Int</span>)</code></pre></div>
 <h2 id="function-definitions-and-calls">Function Definitions and Calls</h2>
 <p><strong>Ocaml</strong></p>
 <div class="sourceCode"><pre class="sourceCode ocaml"><code class="sourceCode ocaml"><span class="co">(* val incr : int -&gt; int *)</span>
@@ -362,7 +362,7 @@ partition f xs <span class="fu">=</span> (filter f xs, filter (negate f) xs)</co
 <span class="kw">let</span> <span class="kw">rec</span> sort xs = <span class="kw">match</span> xs <span class="kw">with</span>
   | []     -&gt; []
   | (h::t) -&gt; <span class="kw">let</span> (ls, rs) = partition (<span class="kw">fun</span> x -&gt; x &lt; h) t <span class="kw">in</span>
-              sort ls @ [h] @ sort rs  </code></pre></div>
+              sort ls @ [h] @ sort rs</code></pre></div>
 <p>vs</p>
 <p><strong>Haskell</strong></p>
 <div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell">sort<span class="ot"> ::</span> (<span class="dt">Ord</span> a) <span class="ot">=&gt;</span> [a] <span class="ot">-&gt;</span> [a]
@@ -374,10 +374,10 @@ sort (h<span class="fu">:</span>t)  <span class="fu">=</span> sort ls <span clas
 <p>We can simplify the above, as in Python:</p>
 <div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell">sort<span class="ot"> ::</span> (<span class="dt">Ord</span> a) <span class="ot">=&gt;</span> [a] <span class="ot">-&gt;</span> [a]
 sort []     <span class="fu">=</span> []
-sort (h<span class="fu">:</span>t)  <span class="fu">=</span> sort ls <span class="fu">@</span> [h] <span class="fu">@</span> sort rs
+sort (h<span class="fu">:</span>t)  <span class="fu">=</span> sort ls <span class="fu">++</span> [h] <span class="fu">++</span> sort rs
   <span class="kw">where</span>
     ls      <span class="fu">=</span> [x <span class="fu">|</span> x <span class="ot">&lt;-</span> t, x <span class="fu">&lt;=</span> h]
-    ls      <span class="fu">=</span> [x <span class="fu">|</span> x <span class="ot">&lt;-</span> t,  h <span class="fu">&lt;</span> x]</code></pre></div>
+    rs      <span class="fu">=</span> [x <span class="fu">|</span> x <span class="ot">&lt;-</span> t,  h <span class="fu">&lt;</span> x]</code></pre></div>
 <h2 id="defining-data">Defining Data</h2>
 <p><strong>Ocaml</strong></p>
 <div class="sourceCode"><pre class="sourceCode ocaml"><code class="sourceCode ocaml"><span class="kw">type</span> expr
@@ -409,7 +409,7 @@ ex3 <span class="fu">=</span> <span class="dt">Times</span> ex1 ex2</code></pre>
 <div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="dt">Number</span><span class="ot"> ::</span> <span class="dt">Int</span> <span class="ot">-&gt;</span> <span class="dt">Expr</span>
 <span class="dt">Plus</span>,
 <span class="dt">Minus</span>,
-<span class="dt">Times</span><span class="ot">  ::</span> <span class="dt">Expr</span> <span class="ot">-&gt;</span> <span class="dt">Expr</span> <span class="ot">-&gt;</span> <span class="dt">Expr</span>  </code></pre></div>
+<span class="dt">Times</span><span class="ot">  ::</span> <span class="dt">Expr</span> <span class="ot">-&gt;</span> <span class="dt">Expr</span> <span class="ot">-&gt;</span> <span class="dt">Expr</span></code></pre></div>
 <h2 id="destructing-accessing-data">Destructing (Accessing) Data</h2>
 <p><strong>Ocaml</strong></p>
 <div class="sourceCode"><pre class="sourceCode ocaml"><code class="sourceCode ocaml"><span class="co">(* val eval: expr -&gt; float *)</span>
@@ -456,7 +456,7 @@ eval (<span class="dt">Times</span> e1 e2) <span class="fu">=</span> eval e1 <sp
 fact n  <span class="fu">=</span> trace msg res
   <span class="kw">where</span>
     msg <span class="fu">=</span> printf <span class="st">&quot;fact n = %d, res = %d\n&quot;</span> n res
-    res <span class="fu">=</span> <span class="kw">if</span> n <span class="fu">&lt;=</span> <span class="dv">0</span> <span class="kw">then</span> <span class="dv">1</span> <span class="kw">else</span> n <span class="fu">*</span> fact (n<span class="fu">-</span><span class="dv">1</span>)   </code></pre></div>
+    res <span class="fu">=</span> <span class="kw">if</span> n <span class="fu">&lt;=</span> <span class="dv">0</span> <span class="kw">then</span> <span class="dv">1</span> <span class="kw">else</span> n <span class="fu">*</span> fact (n<span class="fu">-</span><span class="dv">1</span>)</code></pre></div>
 <p>Which pretty much does what you want.</p>
 <div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="fu">*</span><span class="dt">Foo</span><span class="fu">&gt;</span> fact <span class="dv">5</span>
 fact n <span class="fu">=</span> <span class="dv">0</span>, res <span class="fu">=</span> <span class="dv">1</span>

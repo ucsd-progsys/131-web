@@ -264,7 +264,7 @@ OVERALL SCORE = ... / ...</code></pre>
 <h2 id="submission-instructions">Submission Instructions</h2>
 <p>To submit your code, just do:</p>
 <div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="kw">make</span> zip
-$ <span class="kw">turnin</span> 00-warmup.tgz </code></pre></div>
+$ <span class="kw">turnin</span> 00-warmup.tgz</code></pre></div>
 <p><code>turnin</code> will provide you with a confirmation of the submission process; make sure that the size of the file indicated by <code>turnin</code> matches the size of your file. See the ACS Web page on <a href="http://acs.ucsd.edu/info/turnin.php">turnin</a> for more information on the operation of the program.</p>
 <h2 id="problem-1-roots-and-persistence">Problem 1: <a href="http://mathworld.wolfram.com/AdditivePersistence.html">Roots and Persistence</a></h2>
 <h3 id="a-10-points">(a) 10 points</h3>
@@ -299,7 +299,7 @@ ghci<span class="fu">&gt;</span> digitsOfInt <span class="dv">352663</span>
 <p>Consider the process of taking a number, adding its digits, then adding the digits of the number derived from it, etc., until the remaining number has only one digit. The number of additions required to obtain a single digit from a number <code>n</code> is called the <em>additive persistence</em> of <code>n</code>, and the digit obtained is called the <em>digital root</em> of <code>n</code>.</p>
 <p>For example, the sequence obtained from the starting number <code>9876</code> is <code>9876</code>, <code>30</code>, <code>3</code>, so <code>9876</code> has an additive persistence of <code>2</code> and a digital root of <code>3</code>.</p>
 <p>Write two functions</p>
-<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="ot">additivePersistence ::</span> int <span class="ot">-&gt;</span> int
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="ot">additivePersistence ::</span> <span class="dt">Int</span> <span class="ot">-&gt;</span> <span class="dt">Int</span>
 additivePersistence n <span class="fu">=</span> error <span class="st">&quot;TBD:additivePersistence&quot;</span>
 
 <span class="ot">digitalRoot ::</span> <span class="dt">Int</span> <span class="ot">-&gt;</span> <span class="dt">Int</span>
@@ -325,7 +325,7 @@ ghci<span class="fu">&gt;</span> listReverse [<span class="st">&quot;a&quot;</sp
 <p>A <em>palindrome</em> is a word that reads the same from left-to-right and right-to-left. Write an OCaml function</p>
 <div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="ot">palindrome ::</span> <span class="dt">String</span> <span class="ot">-&gt;</span> <span class="dt">Bool</span>
 palindrome w <span class="fu">=</span> error <span class="st">&quot;TBD:palindrome&quot;</span></code></pre></div>
-<p>such that <code>palindrome w</code> returns <code>True</code> if the string is a palindrome and <code>False</code> otherwise. You may use the given helper function <code>explode</code>. You should get the following behavior:</p>
+<p>such that <code>palindrome w</code> returns <code>True</code> if the string is a palindrome and <code>False</code> otherwise. You should get the following behavior:</p>
 <div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell">ghci<span class="fu">&gt;</span> palindrome <span class="st">&quot;malayalam&quot;</span>
 <span class="dt">True</span>
 ghci<span class="fu">&gt;</span> palindrome <span class="st">&quot;myxomatosis&quot;</span>
@@ -379,7 +379,7 @@ ghci<span class="fu">&gt;</span> pipe [(\x <span class="ot">-&gt;</span> x <span
 <ul>
 <li><code>sepConcat sep []</code> should return the empty string <code>&quot;&quot;</code>,</li>
 <li><code>sepConcat sep [s]</code> should return just the string <code>s</code>,</li>
-<li>otherwise (if there is more than one string) the output should be the string <code>s1 ^ sep ^ s2 ^ ... ^ sep ^ sn</code>.</li>
+<li>otherwise (if there is more than one string) the output should be the string <code>s1 ++ sep ++ s2 ++ ... ++ sep ++ sn</code>.</li>
 </ul>
 <p>You should only modify the parts of the skeleton consisting of <code>error &quot;TBD&quot; &quot;</code>. You will need to define the function <code>f</code>, and give values for <code>base</code> and <code>l</code>.</p>
 <p>Once done, you should get the following behavior:</p>
@@ -397,7 +397,7 @@ ghci<span class="fu">&gt;</span> sepConcat <span class="st">&quot;X&quot;</span>
 <h3 id="d-10-points">(d) 10 points</h3>
 <p>Implement the OCaml function</p>
 <div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="ot">stringOfList ::</span> (a <span class="ot">-&gt;</span> <span class="dt">String</span>) <span class="ot">-&gt;</span> [a] <span class="ot">-&gt;</span> <span class="dt">String</span></code></pre></div>
-<p>such that <code>stringOfList f [x1,...,xn]</code> should return the string <code>&quot;[&quot; ^ (f x1) ^ &quot;, &quot; ^ ... ^ (f xn) ^ &quot;]&quot;</code></p>
+<p>such that <code>stringOfList f [x1,...,xn]</code> should return the string <code>&quot;[&quot; ++ (f x1) ++ &quot;, &quot; ++ ... ++ (f xn) ++ &quot;]&quot;</code></p>
 <p>This function can be implemented on one line, <strong>without using any recursion</strong> by calling <code>map</code> and <code>sepConcat</code> with appropriate inputs.</p>
 <p>You should get the following behavior:</p>
 <div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell">ghci<span class="fu">&gt;</span> stringOfList show [<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">6</span>]
