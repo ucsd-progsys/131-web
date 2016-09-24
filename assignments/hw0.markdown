@@ -1,11 +1,11 @@
 ---
-title: HW 0, due 9/30/2016 
+title: HW 0, due 9/30/2016
 headerImg: angles.jpg
 ---
 
-## Download 
+## Download
 
-1. [Download this tarball](/static/hw/00-warmup.tgz) 
+1. [Download this tarball](/static/hw/00-warmup.tgz)
 2. Open the tarball with `tar -zxvf 00-warmup.tgz`
 
 ## Overview
@@ -52,7 +52,7 @@ When you run
 $ stack test
 ```
 
-Your last lines should have 
+Your last lines should have
 
 ```
 All N tests passed (...)
@@ -82,7 +82,7 @@ To submit your code, just do:
 
 ```bash
 $ make zip
-$ turnin 00-warmup.tgz 
+$ turnin 00-warmup.tgz
 ```
 
 `turnin` will provide you with a confirmation of the
@@ -157,7 +157,7 @@ persistence of `2` and a digital root of `3`.
 Write two functions
 
 ```haskell
-additivePersistence :: int -> int
+additivePersistence :: Int -> Int
 additivePersistence n = error "TBD:additivePersistence"
 
 digitalRoot :: Int -> Int
@@ -305,7 +305,7 @@ should behave as follows:
 * `sepConcat sep []` should return the empty string `""`,
 * `sepConcat sep [s]` should return just the string `s`,
 * otherwise (if there is more than one string) the output
-  should be the string `s1 ^ sep ^ s2 ^ ... ^ sep ^ sn`.
+  should be the string `s1 ++ sep ++ s2 ++ ... ++ sep ++ sn`.
 
 You should only modify the parts of the skeleton consisting
 of `error "TBD" "`. You will need to define the function `f`,
@@ -336,7 +336,7 @@ stringOfList :: (a -> String) -> [a] -> String
 ```
 
 such that `stringOfList f [x1,...,xn]` should return the string
-`"[" ^ (f x1) ^ ", " ^ ... ^ (f xn) ^ "]"`
+`"[" ++ (f x1) ++ ", " ++ ... ++ (f xn) ++ "]"`
 
 This function can be implemented on one line,
 **without using any recursion** by calling
