@@ -212,8 +212,7 @@ palindrome w = error "TBD:palindrome"
 ```
 
 such that `palindrome w` returns `True` if the string is a palindrome and
-`False` otherwise. You may use the given helper function `explode`.
-You should get the following behavior:
+`False` otherwise. You should get the following behavior:
 
 ```haskell
 ghci> palindrome "malayalam"
