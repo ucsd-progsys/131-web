@@ -1,5 +1,5 @@
 ---
-title: A crash course in Haskell 
+title: A crash course in Haskell
 date: 2016-09-26
 headerImg: books.jpg
 ---
@@ -14,22 +14,22 @@ So: we'll learn Haskell by comparison.
 
 ## Type Ascription
 
-**Ocaml** uses  `:` for type ascription 
+**Ocaml** uses  `:` for type ascription
 
-* `e : t` means `e` has type `t` 
+* `e : t` means `e` has type `t`
 
-```ocaml 
+```ocaml
 (12 : int)
 ```
 
-vs. 
+vs.
 
 **Haskell** uses `::` for type ascription
 
-* `e :: t` means `e` has type `t` 
+* `e :: t` means `e` has type `t`
 
 ```Haskell
-(12 :: int)
+(12 :: Int)
 ```
 
 
@@ -61,7 +61,7 @@ eleven = incr 10
 
 ## Pattern Matching
 
-**Ocaml** 
+**Ocaml**
 
 ```ocaml
 (* val listSum : int list -> int list *)
@@ -94,25 +94,25 @@ Haskell allows **different equations** for different cases.
 
 
 
-## Colon vs. Double-Colon 
+## Colon vs. Double-Colon
 
-**Ocaml** 
+**Ocaml**
 
-* uses `::` for *"cons"* 
+* uses `::` for *"cons"*
 * uses `:`  for *"has type"*
 
-vs 
+vs
 
 **Haskell**
 
-* uses `:`   for *"cons"* 
+* uses `:`   for *"cons"*
 * uses `::`  for *"has type"*
 
 
 A handy table
 
 | Operator | Ocaml       | Haskell     |
-|:--------:|:-----------:|:-----------:| 
+|:--------:|:-----------:|:-----------:|
 | `::`     | "cons"      | "has type"  |
 | `:`      | "has type"  | "cons"      |
 
@@ -164,7 +164,7 @@ filter f (x:xs) = if f x then x:rest else rest
 ## Anonymous Functions
 
 
-**Ocaml** 
+**Ocaml**
 
 ```ocaml
 (* val negate : ('a -> bool) -> 'a -> bool *)
@@ -173,7 +173,7 @@ let negate f = fun x -> not (f x)
 
 vs
 
-**Haskell** 
+**Haskell**
 
 ```haskell
 negate :: (a -> Bool) -> a -> Bool
@@ -184,7 +184,7 @@ Very similar: Ocaml's `fun` is replaced with Haskell's `\`
 
 ## Tuples and Lists
 
-**Ocaml** 
+**Ocaml**
 
 ```ocaml
 (* val partition: ('a -> bool) -> 'a list -> ('a list * 'a list) *)
@@ -193,7 +193,7 @@ let partition f xs = (filter f xs, filter (negate f) xs)
 
 vs
 
-**Haskell** 
+**Haskell**
 
 ```haskell
 partition :: (a -> Bool) -> [a] -> ([a], [a])
@@ -208,14 +208,14 @@ partition f xs = (filter f xs, filter (negate f) xs)
 
 ## Larger Example
 
-**Ocaml** 
+**Ocaml**
 
 ```ocaml
 (* val sort : 'a list -> 'a list *)
 let rec sort xs = match xs with
   | []     -> []
   | (h::t) -> let (ls, rs) = partition (fun x -> x < h) t in
-              sort ls @ [h] @ sort rs  
+              sort ls @ [h] @ sort rs
 ```
 
 vs
@@ -237,15 +237,15 @@ We can simplify the above, as in Python:
 ```haskell
 sort :: (Ord a) => [a] -> [a]
 sort []     = []
-sort (h:t)  = sort ls @ [h] @ sort rs
+sort (h:t)  = sort ls ++ [h] ++ sort rs
   where
     ls      = [x | x <- t, x <= h]
-    ls      = [x | x <- t,  h < x]
+    rs      = [x | x <- t,  h < x]
 ```
 
 ## Defining Data
 
-**Ocaml** 
+**Ocaml**
 
 ```ocaml
 type expr
@@ -257,7 +257,7 @@ type expr
 
 vs
 
-**Haskell** 
+**Haskell**
 
 ```haskell
 data Expr
@@ -270,7 +270,7 @@ data Expr
 ## Constructing Data
 
 **Ocaml**
-     
+
 ```ocaml
 let ex0 = Number 5.
 let ex1 = Plus  (ex0, Number 7.)
@@ -280,7 +280,7 @@ let ex3 = Times (ex1, ex2)
 
 vs
 
-**Haskell** 
+**Haskell**
 
 ```haskell
 ex0 = Number 5
@@ -297,12 +297,12 @@ The _tags_ `Plus`, `Number` etc. are (constructor) functions
 Number :: Int -> Expr
 Plus,
 Minus,
-Times  :: Expr -> Expr -> Expr  
+Times  :: Expr -> Expr -> Expr
 ```
 
 ## Destructing (Accessing) Data
 
-**Ocaml** 
+**Ocaml**
 
 ```ocaml
 (* val eval: expr -> float *)
@@ -327,12 +327,12 @@ eval (Times e1 e2) = eval e1 * eval e2
 
 Oh look, we wrote a _compiler_!
 
-+ What's the _source_ language? 
-+ What's the _target_ language? 
++ What's the _source_ language?
++ What's the _target_ language?
 
-## Recursive Functions 
+## Recursive Functions
 
-**Ocaml** 
+**Ocaml**
 
 ```ocaml
 let fact n = if n <= 0 then 1 else n * fact (n-1)
@@ -340,7 +340,7 @@ let fact n = if n <= 0 then 1 else n * fact (n-1)
 
 vs.
 
-**Haskell** 
+**Haskell**
 
 ```haskell
 fact n = if n <= 0 then 1 else n * fact (n-1)
@@ -354,8 +354,8 @@ fact n = if n <= 0 then 1 else n * fact (n-1)
 
 Q: How to **print out** each input-output pair for calls to `fact`?
 
-**Ocaml** 
-    
+**Ocaml**
+
 (as in Java, C, Python...), just print it:
 
 ```ocaml
@@ -365,7 +365,7 @@ let fact n =
   res
 ```
 
-vs 
+vs
 
 **Haskell**
 
@@ -381,12 +381,12 @@ import Debug.Trace (trace)
 fact n  = trace msg res
   where
     msg = printf "fact n = %d, res = %d\n" n res
-    res = if n <= 0 then 1 else n * fact (n-1)   
+    res = if n <= 0 then 1 else n * fact (n-1)
 ```
 
-Which pretty much does what you want. 
+Which pretty much does what you want.
 
-```haskell 
+```haskell
 *Foo> fact 5
 fact n = 0, res = 1
 
@@ -402,5 +402,3 @@ fact n = 5, res = 120
 
 120
 ```
-
-
