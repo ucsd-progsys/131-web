@@ -225,7 +225,7 @@ vs
 ```haskell
 sort :: (Ord a) => [a] -> [a]
 sort []     = []
-sort (h:t)  = sort ls @ [h] @ sort rs
+sort (h:t)  = sort ls ++ [h] ++ sort rs
   where
     (ls,rs) = partition (\x -> x < h) t
 ```
