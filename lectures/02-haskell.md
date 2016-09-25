@@ -143,7 +143,87 @@ filter f (x:xs) let rest = filter f xs' in
                 if f x then x:rest else rest
 ```
 
-or, better
+## QUIZ: Local Variables
+
+```haskell
+quiz    = x + y
+  where
+    x   = 0
+    y   = 1
+```
+
+What is the value of `quiz`?
+
+A. Syntax error
+B. Type Error
+C. `0`
+D. `1`
+E. Other
+
+## QUIZ: Local Variables
+
+```haskell
+quiz    = x + y
+  where
+    x   = 0
+    y   = x + 1
+```
+
+What is the value of `quiz`?
+
+A. Syntax error
+B. Type Error
+C. `0`
+D. `1`
+E. Other
+
+## QUIZ: Local Variables
+
+```haskell
+quiz    = x + y
+  where
+    y   = x + 1
+    x   = 0
+```
+
+What is the value of `quiz`?
+
+A. Syntax error
+B. Type Error
+C. `0`
+D. `1`
+E. Other
+
+## QUIZ: Local Variables
+
+```haskell
+quiz    = x + y
+  where
+    y   = x + 1
+    x   = y
+```
+
+What is the value of `quiz`?
+
+A. Syntax error
+B. Type Error
+C. `0`
+D. `1`
+E. Other
+
+
+## Local Variables (revisited)
+
+So we can take
+
+```haskell
+filter :: (a -> Bool) -> [a] -> [a]
+filter f []     = []
+filter f (x:xs) let rest = filter f xs' in
+                if f x then x:rest else rest
+```
+
+and write it better as
 
 ```haskell
 filter :: (a -> Bool) -> [a] -> [a]
@@ -158,7 +238,7 @@ filter f (x:xs) = if f x then x:rest else rest
 * meaning _exactly same as_ `let`, but
 * can specify them in _any_ order.
 
-(Seems wierd at first, but truly beautiful.)
+(Seems strange at first, but truly beautiful.)
 
 
 ## Anonymous Functions
@@ -230,9 +310,56 @@ sort (h:t)  = sort ls ++ [h] ++ sort rs
     (ls,rs) = partition (\x -> x < h) t
 ```
 
-## List Comprehensions
+## QUIZ: List Comprehensions
 
-We can simplify the above, as in Python:
+What is the value of
+
+```haskell
+quiz = [0..5]
+```
+
+A. Syntax Error
+B. Type Error
+C. `[0, 5]`
+D. `[0, 1, 2, 3, 4]`
+E. `[0, 1, 2, 3, 4, 5]`
+
+## QUIZ: List Comprehensions
+
+What is the value of
+
+```haskell
+quiz   = [x * 10 | x <- xs]
+  where
+    xs = [0..5]
+```
+
+A. Syntax Error
+B. Type Error
+C. `[0, 50]`
+D. `[0, 10, 20, 30, 40]`
+E. `[0, 10, 20, 30, 40, 50]`
+
+## QUIZ: List Comprehensions
+
+What is the value of
+
+```haskell
+quiz   = [x * 10 | x <- xs, x < 3]
+  where
+    xs = [0..5]
+```
+
+A. `[]`
+B. `[0]`
+C. `[0, 10]`
+D. `[0, 10, 20]`
+E. `[0, 10, 20, 30]`
+
+
+## QUIZ: List Comprehensions
+
+We can simplify the `sort` using list comprehensions, as in Python:
 
 ```haskell
 sort :: (Ord a) => [a] -> [a]
@@ -294,11 +421,32 @@ ex3 = Times ex1 ex2
 The _tags_ `Plus`, `Number` etc. are (constructor) functions
 
 ```haskell
-Number :: Int -> Expr
-Plus,
-Minus,
+Plus   :: Expr -> Expr -> Expr
+Minus  :: Expr -> Expr -> Expr
 Times  :: Expr -> Expr -> Expr
 ```
+
+
+## QUIZ: Constructor Types
+
+Given
+
+```haskell
+data Expr
+  = Number Double
+  | Plus   Expr Expr
+  | Minus  Expr Expr
+  | Times  Expr Expr
+```
+
+What is the *type of* `Number` ?
+
+A. `Expr`
+B. `Double`
+C. `Double -> Expr`
+D. `Expr -> Double`
+E. `Expr -> Expr`
+
 
 ## Destructing (Accessing) Data
 
