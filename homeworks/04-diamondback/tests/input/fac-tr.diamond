@@ -1,7 +1,0 @@
-def facTR(acc, n):
-  if (n < 1):
-    acc 
-  else: 
-    facTR(acc * n, n - 1)
-
-facTR(1, 5)

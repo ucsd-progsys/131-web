@@ -1,4 +1,0 @@
-def add2(x, x):
-  x + y
-
-add2(12)

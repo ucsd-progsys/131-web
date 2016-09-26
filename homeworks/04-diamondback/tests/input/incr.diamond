@@ -1,4 +1,0 @@
-def incr(n):
-  n + 1
-
-incr(5)

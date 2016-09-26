@@ -125,11 +125,11 @@ if (window.navigator.appName == "Microsoft Internet Explorer") {
                 <ul class="dropdown-menu"></ul>
                 </li>-->
                 
-                <li><a href="https://ucsd-progsys.github.io/131-web/calendar.html" target="_blank">Calendar</a></li>
-                <li><a href="https://ucsd-progsys.github.io/131-web/contact.html" target="_blank">Contact</a></li>
-                <li><a href="https://ucsd-progsys.github.io/131-web/lectures.html" target="_blank">Lectures</a></li>
-                <li><a href="https://ucsd-progsys.github.io/131-web/assignments.html" target="_blank">Assignments</a></li>
-                <li><a href="https://ucsd-progsys.github.io/131-web/links.html" target="_blank">Links</a></li>
+                <li><a href="https://ucsd-progsys.github.io/131-web/calendar.html">Calendar</a></li>
+                <li><a href="https://ucsd-progsys.github.io/131-web/contact.html">Contact</a></li>
+                <li><a href="https://ucsd-progsys.github.io/131-web/lectures.html">Lectures</a></li>
+                <li><a href="https://ucsd-progsys.github.io/131-web/assignments.html">Assignments</a></li>
+                <li><a href="https://ucsd-progsys.github.io/131-web/links.html">Links</a></li>
                 <li><a href="https://www.piazza.com/ucsd/fall2016/cse131/home" id="roundbutton" target="_blank"><i class="fa fa-twitter"></i>Piazza</a></li>
                 <!--
                 <li><a href="https://ucsd-progsys.github.io/131-web/archive.html">Archive</a></li>
@@ -322,7 +322,41 @@ listSum (x<span class="fu">:</span>xs) <span class="fu">=</span> x <span class="
 filter f []     <span class="fu">=</span> []
 filter f (x<span class="fu">:</span>xs) <span class="kw">let</span> rest <span class="fu">=</span> filter f xs' <span class="kw">in</span>
                 <span class="kw">if</span> f x <span class="kw">then</span> x<span class="fu">:</span>rest <span class="kw">else</span> rest</code></pre></div>
-<p>or, better</p>
+<h2 id="quiz-local-variables">QUIZ: Local Variables</h2>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell">quiz    <span class="fu">=</span> x <span class="fu">+</span> y
+  <span class="kw">where</span>
+    x   <span class="fu">=</span> <span class="dv">0</span>
+    y   <span class="fu">=</span> <span class="dv">1</span></code></pre></div>
+<p>What is the value of <code>quiz</code>?</p>
+<p>A. Syntax error B. Type Error C. <code>0</code> D. <code>1</code> E. Other</p>
+<h2 id="quiz-local-variables-1">QUIZ: Local Variables</h2>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell">quiz    <span class="fu">=</span> x <span class="fu">+</span> y
+  <span class="kw">where</span>
+    x   <span class="fu">=</span> <span class="dv">0</span>
+    y   <span class="fu">=</span> x <span class="fu">+</span> <span class="dv">1</span></code></pre></div>
+<p>What is the value of <code>quiz</code>?</p>
+<p>A. Syntax error B. Type Error C. <code>0</code> D. <code>1</code> E. Other</p>
+<h2 id="quiz-local-variables-2">QUIZ: Local Variables</h2>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell">quiz    <span class="fu">=</span> x <span class="fu">+</span> y
+  <span class="kw">where</span>
+    y   <span class="fu">=</span> x <span class="fu">+</span> <span class="dv">1</span>
+    x   <span class="fu">=</span> <span class="dv">0</span></code></pre></div>
+<p>What is the value of <code>quiz</code>?</p>
+<p>A. Syntax error B. Type Error C. <code>0</code> D. <code>1</code> E. Other</p>
+<h2 id="quiz-local-variables-3">QUIZ: Local Variables</h2>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell">quiz    <span class="fu">=</span> x <span class="fu">+</span> y
+  <span class="kw">where</span>
+    y   <span class="fu">=</span> x <span class="fu">+</span> <span class="dv">1</span>
+    x   <span class="fu">=</span> y</code></pre></div>
+<p>What is the value of <code>quiz</code>?</p>
+<p>A. Syntax error B. Type Error C. <code>0</code> D. <code>1</code> E. Other</p>
+<h2 id="local-variables-revisited">Local Variables (revisited)</h2>
+<p>So we can take</p>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell">filter<span class="ot"> ::</span> (a <span class="ot">-&gt;</span> <span class="dt">Bool</span>) <span class="ot">-&gt;</span> [a] <span class="ot">-&gt;</span> [a]
+filter f []     <span class="fu">=</span> []
+filter f (x<span class="fu">:</span>xs) <span class="kw">let</span> rest <span class="fu">=</span> filter f xs' <span class="kw">in</span>
+                <span class="kw">if</span> f x <span class="kw">then</span> x<span class="fu">:</span>rest <span class="kw">else</span> rest</code></pre></div>
+<p>and write it better as</p>
 <div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell">filter<span class="ot"> ::</span> (a <span class="ot">-&gt;</span> <span class="dt">Bool</span>) <span class="ot">-&gt;</span> [a] <span class="ot">-&gt;</span> [a]
 filter f []     <span class="fu">=</span> []
 filter f (x<span class="fu">:</span>xs) <span class="fu">=</span> <span class="kw">if</span> f x <span class="kw">then</span> x<span class="fu">:</span>rest <span class="kw">else</span> rest
@@ -333,7 +367,7 @@ filter f (x<span class="fu">:</span>xs) <span class="fu">=</span> <span class="k
 <li>meaning <em>exactly same as</em> <code>let</code>, but</li>
 <li>can specify them in <em>any</em> order.</li>
 </ul>
-<p>(Seems wierd at first, but truly beautiful.)</p>
+<p>(Seems strange at first, but truly beautiful.)</p>
 <h2 id="anonymous-functions">Anonymous Functions</h2>
 <p><strong>Ocaml</strong></p>
 <div class="sourceCode"><pre class="sourceCode ocaml"><code class="sourceCode ocaml"><span class="co">(* val negate : ('a -&gt; bool) -&gt; 'a -&gt; bool *)</span>
@@ -370,8 +404,24 @@ sort []     <span class="fu">=</span> []
 sort (h<span class="fu">:</span>t)  <span class="fu">=</span> sort ls <span class="fu">++</span> [h] <span class="fu">++</span> sort rs
   <span class="kw">where</span>
     (ls,rs) <span class="fu">=</span> partition (\x <span class="ot">-&gt;</span> x <span class="fu">&lt;</span> h) t</code></pre></div>
-<h2 id="list-comprehensions">List Comprehensions</h2>
-<p>We can simplify the above, as in Python:</p>
+<h2 id="quiz-list-comprehensions">QUIZ: List Comprehensions</h2>
+<p>What is the value of</p>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell">quiz <span class="fu">=</span> [<span class="dv">0</span><span class="fu">..</span><span class="dv">5</span>]</code></pre></div>
+<p>A. Syntax Error B. Type Error C. <code>[0, 5]</code> D. <code>[0, 1, 2, 3, 4]</code> E. <code>[0, 1, 2, 3, 4, 5]</code></p>
+<h2 id="quiz-list-comprehensions-1">QUIZ: List Comprehensions</h2>
+<p>What is the value of</p>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell">quiz   <span class="fu">=</span> [x <span class="fu">*</span> <span class="dv">10</span> <span class="fu">|</span> x <span class="ot">&lt;-</span> xs]
+  <span class="kw">where</span>
+    xs <span class="fu">=</span> [<span class="dv">0</span><span class="fu">..</span><span class="dv">5</span>]</code></pre></div>
+<p>A. Syntax Error B. Type Error C. <code>[0, 50]</code> D. <code>[0, 10, 20, 30, 40]</code> E. <code>[0, 10, 20, 30, 40, 50]</code></p>
+<h2 id="quiz-list-comprehensions-2">QUIZ: List Comprehensions</h2>
+<p>What is the value of</p>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell">quiz   <span class="fu">=</span> [x <span class="fu">*</span> <span class="dv">10</span> <span class="fu">|</span> x <span class="ot">&lt;-</span> xs, x <span class="fu">&lt;</span> <span class="dv">3</span>]
+  <span class="kw">where</span>
+    xs <span class="fu">=</span> [<span class="dv">0</span><span class="fu">..</span><span class="dv">5</span>]</code></pre></div>
+<p>A. <code>[]</code> B. <code>[0]</code> C. <code>[0, 10]</code> D. <code>[0, 10, 20]</code> E. <code>[0, 10, 20, 30]</code></p>
+<h2 id="quiz-list-comprehensions-3">QUIZ: List Comprehensions</h2>
+<p>We can simplify the <code>sort</code> using list comprehensions, as in Python:</p>
 <div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell">sort<span class="ot"> ::</span> (<span class="dt">Ord</span> a) <span class="ot">=&gt;</span> [a] <span class="ot">-&gt;</span> [a]
 sort []     <span class="fu">=</span> []
 sort (h<span class="fu">:</span>t)  <span class="fu">=</span> sort ls <span class="fu">++</span> [h] <span class="fu">++</span> sort rs
@@ -406,10 +456,18 @@ ex2 <span class="fu">=</span> <span class="dt">Minus</span> (<span class="dt">Nu
 ex3 <span class="fu">=</span> <span class="dt">Times</span> ex1 ex2</code></pre></div>
 <p><strong>Note</strong></p>
 <p>The <em>tags</em> <code>Plus</code>, <code>Number</code> etc. are (constructor) functions</p>
-<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="dt">Number</span><span class="ot"> ::</span> <span class="dt">Int</span> <span class="ot">-&gt;</span> <span class="dt">Expr</span>
-<span class="dt">Plus</span>,
-<span class="dt">Minus</span>,
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="dt">Plus</span><span class="ot">   ::</span> <span class="dt">Expr</span> <span class="ot">-&gt;</span> <span class="dt">Expr</span> <span class="ot">-&gt;</span> <span class="dt">Expr</span>
+<span class="dt">Minus</span><span class="ot">  ::</span> <span class="dt">Expr</span> <span class="ot">-&gt;</span> <span class="dt">Expr</span> <span class="ot">-&gt;</span> <span class="dt">Expr</span>
 <span class="dt">Times</span><span class="ot">  ::</span> <span class="dt">Expr</span> <span class="ot">-&gt;</span> <span class="dt">Expr</span> <span class="ot">-&gt;</span> <span class="dt">Expr</span></code></pre></div>
+<h2 id="quiz-constructor-types">QUIZ: Constructor Types</h2>
+<p>Given</p>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="kw">data</span> <span class="dt">Expr</span>
+  <span class="fu">=</span> <span class="dt">Number</span> <span class="dt">Double</span>
+  <span class="fu">|</span> <span class="dt">Plus</span>   <span class="dt">Expr</span> <span class="dt">Expr</span>
+  <span class="fu">|</span> <span class="dt">Minus</span>  <span class="dt">Expr</span> <span class="dt">Expr</span>
+  <span class="fu">|</span> <span class="dt">Times</span>  <span class="dt">Expr</span> <span class="dt">Expr</span></code></pre></div>
+<p>What is the <em>type of</em> <code>Number</code> ?</p>
+<p>A. <code>Expr</code> B. <code>Double</code> C. <code>Double -&gt; Expr</code> D. <code>Expr -&gt; Double</code> E. <code>Expr -&gt; Expr</code></p>
 <h2 id="destructing-accessing-data">Destructing (Accessing) Data</h2>
 <p><strong>Ocaml</strong></p>
 <div class="sourceCode"><pre class="sourceCode ocaml"><code class="sourceCode ocaml"><span class="co">(* val eval: expr -&gt; float *)</span>
