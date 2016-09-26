@@ -81,8 +81,7 @@ but you will not be graded on this.
 To submit your code, just do:
 
 ```bash
-$ make zip
-$ turnin 00-warmup.tgz
+$ make turnin 
 ```
 
 `turnin` will provide you with a confirmation of the
