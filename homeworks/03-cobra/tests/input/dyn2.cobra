@@ -1,0 +1,7 @@
+let x = true,
+    y = if isBool(x):
+		  12
+	    else:
+    	  print(x + 1)
+in
+   y * y 

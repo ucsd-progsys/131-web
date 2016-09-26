@@ -1,0 +1,18 @@
+def even(n):
+  if (n == 0):
+    true
+  else:
+    odd(n - 1)
+
+def odd(n):
+  if (n == 0):
+    false
+  else:
+    even(n - 1)
+
+let t0 = print(even(0)),
+    t1 = print(even(1)),
+    t2 = print(even(2)),
+    t3 = print(even(3))
+in
+    0

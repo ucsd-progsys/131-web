@@ -1,0 +1,8 @@
+def fac(n):
+  lett t = print(n) in
+  if (n < 1):
+    1
+  else:
+    n * fac(m - 1)
+
+fact(5) + fac(3, 4)      

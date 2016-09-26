@@ -1,0 +1,7 @@
+let x = true,
+    y = if isNum(x):
+    	  print(x + 1)
+  	    else: 
+		  12
+in
+   y * 10

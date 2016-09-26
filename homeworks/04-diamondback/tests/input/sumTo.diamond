@@ -1,0 +1,8 @@
+def sumTo(n):
+  if (n < 0):
+    0
+  else:
+    n + sumTo(n - 1)
+
+sumTo(10000)
+
