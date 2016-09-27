@@ -127,7 +127,7 @@ We will
 ### Who *are* we?
 
 * **Boss:** Ranjit Jhala
-* **TAs:** Alexander Bakst, Ben Cosman, Rami Gokhan
+* **TAs:** Alexander Bakst, Rami Gokhan, Panagiotis Vekris
 * **Tutors:** TBA
 
 ### How will we *grade*?
