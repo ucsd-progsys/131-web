@@ -32,7 +32,7 @@ In 131 `TargetProgram` is going to be a binary executable.
 
 ### Recall: What does a Compiler *look like*?
 
-<img src="https://github.com/ucsd-progsys/131/blob/master/resources/compiler-pipeline.png" height="400">
+![Compiler Pipeline](/static/img/compiler-pipeline.png)
 
 An input source program is converted to an executable binary in many stages:
 
@@ -53,7 +53,7 @@ when run, **prints** the result of evaluating the source.
 1. A **compiler** from the input _string_ into _assembly_,
 2. A **run-time** that will let us do the printing.
 
-<img src="https://github.com/ucsd-progsys/131/blob/master/resources/compiler-pipeline-1-2.png" height="400">
+![Simplified Compiler Pipeline with Runtime](/static/img/compiler-pipeline-1-2.png)
 
 Next, lets see how to do (1) and (2) using our
 sequence of `adder` languages.
@@ -145,11 +145,11 @@ Recall, that compilers were invented to [avoid writing assembly by hand](01-intr
 
 To go from source to assembly, we must do:
 
-<img src="https://github.com/ucsd-progsys/131/blob/master/resources/simplified-pipeline-short.png" height="150">
+![Simplified Pipeline](/static/img/simplified-pipeline-short.png)
 
 Our first step will be to **model** the problem domain using **types**.
 
-<img src="https://github.com/ucsd-progsys/131/blob/master/resources/simplified-pipeline-short-types.png" height="150">
+![Simplified Pipeline with Types](/static/img/simplified-pipeline-short-types.png)
 
 Lets create types that represent each intermediate value:
 
@@ -377,7 +377,7 @@ add eax, 1
 
 Note correspondence between sub-expressions of _source_ and _assembly_
 
-<img src="https://github.com/ucsd-progsys/131/blob/master/resources/compositional-compilation.png" height="150">
+![Compositional Compilation](/static/img/compositional-compilation.png)
 
 We will write compiler in **compositional** manner
 
@@ -584,13 +584,13 @@ There is only a _fixed_ number (say, `N`) of registers:
 
 Here's what the memory -- i.e. storage -- looks like:
 
-<img src="https://github.com/ucsd-progsys/131/blob/master/resources/memory-layout.png" width="400">
+![Memory Layout](/static/img/memory-layout.png) 
 
 ### Focusing on "The Stack"
 
 Lets zoom into the stack region, which when we start looks like this:
 
-<img src="https://github.com/ucsd-progsys/131/blob/master/resources/stack-layout.png" width="400">
+![Stack Layout](/static/img/stack-layout.png) 
 
 The stack **grows downward** (i.e. to **smaller** addresses)
 
@@ -669,13 +669,15 @@ Lets see how our strategy works by example:
 
 <img src="https://github.com/ucsd-progsys/131/blob/master/resources/let-1-to-asm.png" height="150">
 
+![Convert let1 to Assembly](/static/img/let-1-to-asm.png) 
+
 ### Example: let2
 
-<img src="https://github.com/ucsd-progsys/131/blob/master/resources/let-2-to-asm.png" height="200">
+![Convert let2 to Assembly](/static/img/let-2-to-asm.png) 
 
 ### Example: let3
 
-<img src="https://github.com/ucsd-progsys/131/blob/master/resources/let-3-to-asm.png" height="350">
+![Convert let3 to Assembly](/static/img/let-3-to-asm.png) 
 
 ## Step 2: Types
 
