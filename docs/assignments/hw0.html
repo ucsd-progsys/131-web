@@ -228,10 +228,8 @@ if (window.navigator.appName == "Microsoft Internet Explorer") {
         <div class="row">
             <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
 			<h2 id="download">Download</h2>
-<ol style="list-style-type: decimal">
-<li><a href="../static/hw/00-warmup.tgz">Download this tarball</a></li>
-<li>Open the tarball with <code>tar -zxvf 00-warmup.tgz</code></li>
-</ol>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="kw">git</span> clone https://github.com/ucsd-cse131/00-warmup.git
+$ <span class="kw">cd</span> 00-warmup/</code></pre></div>
 <h2 id="overview">Overview</h2>
 <p>This is a <em>warm up</em> assignment which will</p>
 <ul>
@@ -303,7 +301,7 @@ additivePersistence n <span class="fu">=</span> error <span class="st">&quot;TBD
 
 <span class="ot">digitalRoot ::</span> <span class="dt">Int</span> <span class="ot">-&gt;</span> <span class="dt">Int</span>
 digitalRoot n <span class="fu">=</span> error <span class="st">&quot;TBD:digitalRoot&quot;</span></code></pre></div>
-<p>that take positive integer arguments <code>n</code> and return respectively the additive persistence and the digital root of <code>n</code>. Once you have implemented the functions, you should get the following behavior at the OCaml prompt:</p>
+<p>that take positive integer arguments <code>n</code> and return respectively the additive persistence and the digital root of <code>n</code>. Once you have implemented the functions, you should get the following behavior at the prompt:</p>
 <div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell">ghci<span class="fu">&gt;</span> additivePersistence <span class="dv">9876</span>
 <span class="dv">2</span>
 
@@ -311,7 +309,7 @@ ghci<span class="fu">&gt;</span> digitalRoot <span class="dv">9876</span>
 <span class="dv">3</span></code></pre></div>
 <h2 id="problem-2-palindromes">Problem 2: Palindromes</h2>
 <h3 id="a-15-points">(a) 15 points</h3>
-<p>Without using any built-in functions (e.g. <code>reverse</code>), write an OCaml function:</p>
+<p>Without using any built-in functions (e.g. <code>reverse</code>), write an function:</p>
 <div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="ot">listReverse ::</span> [a] <span class="ot">-&gt;</span> [a]
 listReverse xs <span class="fu">=</span> error <span class="st">&quot;TBD:listReverse&quot;</span></code></pre></div>
 <p>such that <code>listReverse [x1,x2,...,xn]</code> returns the list <code>[xn,...,x2,x1]</code> i.e. the input list but with the values in reversed order. You should get the following behavior:</p>
@@ -321,7 +319,7 @@ listReverse xs <span class="fu">=</span> error <span class="st">&quot;TBD:listRe
 ghci<span class="fu">&gt;</span> listReverse [<span class="st">&quot;a&quot;</span>, <span class="st">&quot;b&quot;</span>, <span class="st">&quot;c&quot;</span>, <span class="st">&quot;d&quot;</span>]
 [<span class="st">&quot;d&quot;</span>, <span class="st">&quot;c&quot;</span>, <span class="st">&quot;b&quot;</span>, <span class="st">&quot;a&quot;</span>]</code></pre></div>
 <h3 id="b-10-points-1">(b) 10 points</h3>
-<p>A <em>palindrome</em> is a word that reads the same from left-to-right and right-to-left. Write an OCaml function</p>
+<p>A <em>palindrome</em> is a word that reads the same from left-to-right and right-to-left. Write a function</p>
 <div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="ot">palindrome ::</span> <span class="dt">String</span> <span class="ot">-&gt;</span> <span class="dt">Bool</span>
 palindrome w <span class="fu">=</span> error <span class="st">&quot;TBD:palindrome&quot;</span></code></pre></div>
 <p>such that <code>palindrome w</code> returns <code>True</code> if the string is a palindrome and <code>False</code> otherwise. You should get the following behavior:</p>
@@ -351,7 +349,7 @@ ghci<span class="fu">&gt;</span> sqSum [(<span class="fu">-</span><span class="d
 <h3 id="b-30-points">(b) 30 points</h3>
 <p>Fill in the skeleton given for <code>pipe</code> which uses <code>foldl'</code> to get a function</p>
 <div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="ot">pipe ::</span> [(a <span class="ot">-&gt;</span> a)] <span class="ot">-&gt;</span> (a <span class="ot">-&gt;</span> a)</code></pre></div>
-<p>such that <code>pipe [f1,...,fn]</code> (where <code>f1,...,fn</code> are functions!) returns a function <code>f</code> such that for any <code>x</code>, we have <code>f x</code> returns result <code>f1(f2(...(fn x)))</code>.</p>
+<p>such that <code>pipe [f1,...,fn] x</code> (where <code>f1,...,fn</code> are functions!) should return <code>f1(f2(...(fn x)))</code>.</p>
 <p>Again, your task is to fill in the appropriate values for</p>
 <ol style="list-style-type: decimal">
 <li>the folding function <code>f</code> and</li>
@@ -362,10 +360,10 @@ ghci<span class="fu">&gt;</span> sqSum [(<span class="fu">-</span><span class="d
 <span class="dv">3</span>
 
 ghci<span class="fu">&gt;</span> pipe [(\x <span class="ot">-&gt;</span> x<span class="fu">+</span>x), (\x <span class="ot">-&gt;</span> x <span class="fu">+</span> <span class="dv">3</span>)] <span class="dv">3</span>
-<span class="dv">9</span>
+<span class="dv">12</span>
 
-ghci<span class="fu">&gt;</span> pipe [(\x <span class="ot">-&gt;</span> x <span class="fu">+</span> <span class="dv">3</span>), (\x <span class="ot">-&gt;</span> x <span class="fu">+</span> x)] <span class="dv">3</span>
-<span class="dv">12</span></code></pre></div>
+ghci<span class="fu">&gt;</span> pipe [(\x <span class="ot">-&gt;</span> x <span class="fu">*</span> <span class="dv">4</span>), (\x <span class="ot">-&gt;</span> x <span class="fu">+</span> x)] <span class="dv">3</span>
+<span class="dv">24</span></code></pre></div>
 <h3 id="c-20-points">(c) 20 points</h3>
 <p>Fill in the skeleton given for <code>sepConcat</code>, which uses <code>foldl'</code> to get a function</p>
 <div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="ot">sepConcat ::</span> <span class="dt">String</span> <span class="ot">-&gt;</span> [<span class="dt">String</span>] <span class="ot">-&gt;</span> <span class="dt">String</span></code></pre></div>
@@ -394,7 +392,7 @@ ghci<span class="fu">&gt;</span> sepConcat <span class="st">&quot;&quot;</span> 
 ghci<span class="fu">&gt;</span> sepConcat <span class="st">&quot;X&quot;</span> [<span class="st">&quot;hello&quot;</span>]
 <span class="st">&quot;hello&quot;</span></code></pre></div>
 <h3 id="d-10-points">(d) 10 points</h3>
-<p>Implement the OCaml function</p>
+<p>Implement the function</p>
 <div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="ot">stringOfList ::</span> (a <span class="ot">-&gt;</span> <span class="dt">String</span>) <span class="ot">-&gt;</span> [a] <span class="ot">-&gt;</span> <span class="dt">String</span></code></pre></div>
 <p>such that <code>stringOfList f [x1,...,xn]</code> should return the string <code>&quot;[&quot; ++ (f x1) ++ &quot;, &quot; ++ ... ++ (f xn) ++ &quot;]&quot;</code></p>
 <p>This function can be implemented on one line, <strong>without using any recursion</strong> by calling <code>map</code> and <code>sepConcat</code> with appropriate inputs.</p>

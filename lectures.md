@@ -28,4 +28,4 @@ headerImg: books.jpg
 [lec2]: lectures/02-haskell.html
 [md1]: http://github.com/ucsd-progsys/131-web/blob/master/lectures/01-introduction.md 
 [md2]: http://github.com/ucsd-progsys/131-web/blob/master/lectures/02-haskell.md 
-[cod2]: http://github.com/ucsd-progsys/131-web/blob/master/code/01-haskell/ 
+[cod2]: static/hs/CrashCourse.hs 

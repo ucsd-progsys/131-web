@@ -5,8 +5,10 @@ headerImg: angles.jpg
 
 ## Download
 
-1. [Download this tarball](/static/hw/00-warmup.tgz)
-2. Open the tarball with `tar -zxvf 00-warmup.tgz`
+```bash 
+$ git clone https://github.com/ucsd-cse131/00-warmup.git
+$ cd 00-warmup/
+```
 
 ## Overview
 
@@ -166,7 +168,7 @@ digitalRoot n = error "TBD:digitalRoot"
 that take positive integer arguments `n` and return respectively
 the additive persistence and the digital root of `n`. Once you
 have implemented the functions, you should get the following
-behavior at the OCaml prompt:
+behavior at the prompt:
 
 ```haskell
 ghci> additivePersistence 9876
@@ -181,7 +183,7 @@ ghci> digitalRoot 9876
 ### (a) 15 points
 
 Without using any built-in functions (e.g. `reverse`),
-write an OCaml function:
+write an function:
 
 ```haskell
 listReverse :: [a] -> [a]
@@ -203,7 +205,7 @@ ghci> listReverse ["a", "b", "c", "d"]
 ###(b) 10 points
 
 A *palindrome* is a word that reads the same from left-to-right and
-right-to-left. Write an OCaml function
+right-to-left. Write a function
 
 ```haskell
 palindrome :: String -> Bool
@@ -261,9 +263,8 @@ to get a function
 pipe :: [(a -> a)] -> (a -> a)
 ```
 
-such that `pipe [f1,...,fn]` (where `f1,...,fn` are functions!)
-returns a function `f` such that for any `x`, we have `f x`
-returns result `f1(f2(...(fn x)))`.
+such that `pipe [f1,...,fn] x` (where `f1,...,fn` are functions!)
+should return `f1(f2(...(fn x)))`.
 
 Again, your task is to fill in the appropriate values for
 
@@ -278,11 +279,12 @@ ghci> pipe [] 3
 3
 
 ghci> pipe [(\x -> x+x), (\x -> x + 3)] 3
-9
-
-ghci> pipe [(\x -> x + 3), (\x -> x + x)] 3
 12
+
+ghci> pipe [(\x -> x * 4), (\x -> x + x)] 3
+24
 ```
+
 
 ### (c) 20 points
 
@@ -328,7 +330,7 @@ ghci> sepConcat "X" ["hello"]
 
 ### (d) 10 points
 
-Implement the OCaml function
+Implement the function
 
 ```haskell
 stringOfList :: (a -> String) -> [a] -> String
