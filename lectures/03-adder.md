@@ -1,5 +1,5 @@
 ---
-title: The Adder: Numbers, Unary Operations & Variables
+title: Numbers, Unary Operations, Variables
 date: 2016-09-30
 headerImg: adder.jpg
 ---
