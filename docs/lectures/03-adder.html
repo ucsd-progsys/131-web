@@ -689,14 +689,14 @@ ghci<span class="fu">&gt;</span> compile (<span class="dt">Add1</span> (<span cl
 <p><strong>Variable Use</strong></p>
 <p>To compile <code>x</code> given <code>env</code></p>
 <ol style="list-style-type: decimal">
-<li>Move <code>[eax - 4 * i]</code> into <code>eax</code></li>
+<li>Move <code>[esp - 4 * i]</code> into <code>eax</code></li>
 </ol>
 <p>(where <code>env</code> maps <code>x |-&gt; i</code>)</p>
 <p><strong>Variable Definition</strong></p>
 <p>To compile <code>let x = e1 in e2</code> we</p>
 <ol style="list-style-type: decimal">
 <li>Compile <code>e1</code> using <code>env</code> (i.e. resulting value will be stored in <code>eax</code>)</li>
-<li>Move <code>eax</code> into <code>[eax - 4 * i]</code></li>
+<li>Move <code>eax</code> into <code>[esp - 4 * i]</code></li>
 <li>Compile <code>e2</code> using <code>env'</code></li>
 </ol>
 <p>(where <code>env'</code> be <code>env</code> with <code>x |-&gt; i</code> i.e. push <code>x</code> onto <code>env</code> at position <code>i</code>)</p>
@@ -726,9 +726,9 @@ ghci<span class="fu">&gt;</span> compile (<span class="dt">Add1</span> (<span cl
 <span class="kw">data</span> <span class="dt">Expr</span> <span class="fu">=</span> <span class="fu">...</span>
           <span class="fu">|</span> <span class="dt">Let</span> <span class="dt">Id</span> <span class="dt">Expr</span> <span class="dt">Expr</span>    <span class="co">-- `let x = e1 in e2` modeled as is `Let x e1 e2`</span>
           <span class="fu">|</span> <span class="dt">Var</span> <span class="dt">Id</span>             </code></pre></div>
-<p>Lets enrich the <code>Instruction</code> to include the register-offset <code>[eax - 4*i]</code></p>
+<p>Lets enrich the <code>Instruction</code> to include the register-offset <code>[esp - 4*i]</code></p>
 <div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="kw">data</span> <span class="dt">Arg</span> <span class="fu">=</span> <span class="fu">...</span>
-         <span class="fu">|</span> <span class="dt">RegOffset</span> <span class="dt">Reg</span> <span class="dt">Int</span>    <span class="co">-- `[eax - 4*i]` modeled as `RegOffset EAX i`</span></code></pre></div>
+         <span class="fu">|</span> <span class="dt">RegOffset</span> <span class="dt">Reg</span> <span class="dt">Int</span>    <span class="co">-- `[esp - 4*i]` modeled as `RegOffset ESP i`</span></code></pre></div>
 <h3 id="environments">Environments</h3>
 <p>Lets create a new <code>Env</code> type to track stack-positions of variables</p>
 <div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="kw">data</span> <span class="dt">Env</span> <span class="fu">=</span> [(<span class="dt">Id</span>, <span class="dt">Int</span>)]</code></pre></div>
