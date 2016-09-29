@@ -89,7 +89,7 @@ $ make turnin
 `turnin` will provide you with a confirmation of the
 submission process; make sure that the size of the file
 indicated by `turnin` matches the size of your file.
-See the ACS Web page on [turnin](http://acs.ucsd.edu/info/turnin.php)
+See the ACS Web page on [turnin](https://acms.ucsd.edu/info/turnin.html)
 for more information on the operation of the program.
 
 ## Problem 1: [Roots and Persistence](http://mathworld.wolfram.com/AdditivePersistence.html)
