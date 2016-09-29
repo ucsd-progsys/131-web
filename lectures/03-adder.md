@@ -647,7 +647,7 @@ At each point, we have `env` that maps (previously defined) `Id` to `StackPositi
 
 To compile `x` given `env`
 
-1. Move `[eax - 4 * i]` into `eax`
+1. Move `[esp - 4 * i]` into `eax`
 
 (where `env` maps `x |-> i`)
 
@@ -656,7 +656,7 @@ To compile `x` given `env`
 To compile `let x = e1 in e2` we
 
 1. Compile `e1` using `env` (i.e. resulting value will be stored in `eax`)
-2. Move `eax` into `[eax - 4 * i]`
+2. Move `eax` into `[esp - 4 * i]`
 3. Compile `e2` using `env'`
 
 (where `env'` be `env` with `x |-> i` i.e. push `x` onto `env` at position `i`)
@@ -693,11 +693,11 @@ data Expr = ...
           | Var Id             
 ```
 
-Lets enrich the `Instruction` to include the register-offset `[eax - 4*i]`
+Lets enrich the `Instruction` to include the register-offset `[esp - 4*i]`
 
 ```haskell
 data Arg = ...
-         | RegOffset Reg Int    -- `[eax - 4*i]` modeled as `RegOffset EAX i`
+         | RegOffset Reg Int    -- `[esp - 4*i]` modeled as `RegOffset ESP i`
 ```
 
 ### Environments
