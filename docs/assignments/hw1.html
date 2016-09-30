@@ -1,0 +1,499 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+    
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+ <!--
+      loads the http over https ssl -
+      welcome to my website!
+
+	this theme is based off the Ice & Fire theme created by Lucas Gatsas
+      https://www.twitter.com/LucasGatsas
+      www.lucasgatsas.ch - switzerland.
+  -->
+
+
+<!-- Microsoft Internet Explorer documentMode compatMode setting IE Modus -->
+<script type="text/javascript">
+var IE = null;
+if (window.navigator.appName == "Microsoft Internet Explorer") {
+  if (document.documentMode) {
+
+    IE = document.documentMode;
+    } else {
+
+        IE = 5;
+          if (document.compatMode) {
+      if (document.compatMode == "CSS1Compat")
+      IE = 11;
+      }
+    }
+  }
+</script>
+
+    <meta charset="utf-8">
+    <!-- X-UA -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="X-UA-Compatible" content="IE=11" />
+    <link rel="author" title="Ranjit Jhala" href="http://ranjitjhala.github.io" />
+
+    <meta name="google" content="notranslate" />
+    <!-- Viewport -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- index ROBOTS follow -->
+    <meta name="robots" content="index, follow" />
+    <!-- Site Desciption -->
+    <meta name="description" content="UCSD CSE 131">
+    <!-- Site Desciption -->
+    <meta name="keywords" content="Ranjit Jhala, ranjitjhala, haskell, compilers, type systems">
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="https://ucsd-progsys.github.io/131-web/static/img/ico.jpg" type="image/x-icon" />
+    <!-- Blog Title -->
+    <title>cse131</title>
+
+    <!--     <title>{% if page.title %}{{ page.title }} - {{ site.title }}{% else %}{{ site.title }}{% endif %}</title>
+-->
+    <!-- Property Metas -->
+    <meta property="og:image" content="https://ucsd-progsys.github.io/131-web/static/img/ix.png" />
+    <meta property="og:title" content="UCSD CSE 131" />
+    <meta property="og:site_name" content="UCSD CSE 131" />
+    <!-- Canonical -->
+    <link rel="canonical" href="{{ page.url | replace:'index.html','' | prepend: site.baseurl | prepend: site.url }}">
+    <!-- StyleSheet -->
+    <link rel="stylesheet" href="https://ucsd-progsys.github.io/131-web/static/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://ucsd-progsys.github.io/131-web/static/css/spaceg.stylesheets.css">
+    <link rel="stylesheet" href="https://ucsd-progsys.github.io/131-web/static/css/syntax.css">
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic,900,900italic" rel="stylesheet" type="text/css">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Playfair+Display:400,700,900,400italic,700italic,900italic" rel="stylesheet" type="text/css">
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <style>
+	#preloader {position:fixed;top:0;left:0;right:0;bottom:0;background-color:#fff; /* change if the mask should have another color then white */z-index:99; /* makes sure it stays on top */}
+	#status {width:200px;height:200px;position:absolute;left:50%; /* centers the loading animation horizontally one the screen */top:50%; /* centers the loading animation vertically one the screen */background-image:url("/static/img/preloader.gif"); /* path to your loading animation */background-repeat:no-repeat;background-position:center;margin:-100px 0 0 -100px; /* is width and height divided by two */}
+	ul, ol {margin-top: 0;margin-bottom: 10px;}
+	.navbar-inverse {background-color: #FFF;border-color: #FFFFFF;}
+</style>
+<!--link rel="stylesheet" href="https://ucsd-progsys.github.io/131-web/static/css/prettify.css"-->
+<style>
+	header.intro-header {background: #6f5499;background: no-repeat center center;background-attachment: scroll;-webkit-background-size: cover;-moz-background-size: cover;background-size: cover;-o-background-size: cover;}
+	/* Preloader */#preloader {position:fixed;top:0;left:0;right:0;bottom:0;background-color:#fff; /* change if the mask should have another color then white */z-index:99; /* makes sure it stays on top */}
+	#status {width:200px;height:200px;position:absolute;left:50%; /* centers the loading animation horizontally one the screen */top:50%; /* centers the loading animation vertically one the screen */background-image:; /* path to your loading animation */background-repeat:no-repeat;background-position:center;margin:-100px 0 0 -100px; /* is width and height divided by two */}
+	li {list-style: none;}
+            body.modal-open
+            {overflow: hidden;padding-right: 0px;
+        }
+	article li {list-style: inherit;}
+	article .figure {text-align: center}
+    </style>
+    <!-- end Loading front stylesheet here -->
+    </head>
+
+    <body>
+	<div id="preloader">
+	    <div id="status">
+
+	    </div>
+
+	</div>  
+	<!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="https://ucsd-progsys.github.io/131-web" id="blog-title-left-top">cse131</a>
+        </div>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav navbar-right">
+                <!-- <li class="dropdown">
+                    <a href="#portfolioModal2" data-toggle="modal"><i class="fa fa-random" id="icon-top"></i></a>
+                <ul class="dropdown-menu"></ul>
+                </li>-->
+                
+                <li><a href="https://ucsd-progsys.github.io/131-web/calendar.html">Calendar</a></li>
+                <li><a href="https://ucsd-progsys.github.io/131-web/contact.html">Contact</a></li>
+                <li><a href="https://ucsd-progsys.github.io/131-web/grades.html">Grades</a></li>
+                <li><a href="https://ucsd-progsys.github.io/131-web/lectures.html">Lectures</a></li>
+                <li><a href="https://ucsd-progsys.github.io/131-web/assignments.html">Assignments</a></li>
+                <li><a href="https://ucsd-progsys.github.io/131-web/links.html">Links</a></li>
+                <li><a href="https://www.piazza.com/ucsd/fall2016/cse131/home" id="roundbutton" target="_blank"><i class="fa fa-twitter"></i>Piazza</a></li>
+                <!--
+                <li><a href="https://ucsd-progsys.github.io/131-web/archive.html">Archive</a></li>
+                <li><a href="https://www.twitter.com/ranjitjhala" id="roundbutton" target="_blank"><i class="fa fa-twitter"></i>RanjitJhala</a></li>
+                -->
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+<!-- Portfolio Modals -->
+    <div class="portfolio-modal modal fade" id="portfolioModal1" tabindex="-1" role="dialog" aria-hidden="true" style="padding-right:0px; overflow: hidden;">
+        <div class="modal-content">
+            <div class="close-modal" data-dismiss="modal">
+                <div class="lr">
+                    <div class="rl">
+                    </div>
+                </div>
+            </div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8 col-lg-offset-2">
+                        <div class="modal-body">
+                            <h1 class="font-style-inline-small-h1">Ranjit Jhala</h1>
+                            <hr class="star-primary">
+                            <img src="https://ucsd-progsys.github.io/131-web/static/img/kc.jpg" class="img-responsive img-centered" alt title>
+                            <p class="font-style-inline-small">
+                                <a href="https://www.twitter.com/ranjitjhala" target="_blank">follow me</a>. <br>
+                                <a href="https://www.github.com/ucsd-progsys/131-web" target="_blank">    <i class="fa fa-github" id="spaceg-social-modal"></i> </a>
+                                <a href="https://www.twitter.com/ranjitjhala" target="_blank"><i class="fa fa-twitter" id="spaceg-social-modal"></i> </a>
+                                <a href="https://plus.google.com/u/0/106612421534244742464" target="_blank"> <i class="fa fa-google-plus" id="spaceg-social-modal"></i></a>
+                            </p>
+                            <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times"></i> Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+<!-- Menu Modals Add New Sa.21.Feb.2015 03:22:25 -->
+    <div class="portfolio-modal modal fade" id="portfolioModal2" tabindex="-1" role="dialog" aria-hidden="true" style="padding-right:0px; overflow: hidden;">
+        <div class="modal-content">
+            <div class="close-modal" data-dismiss="modal">
+                <div class="lr">
+                    <div class="rl">
+                    </div>
+                </div>
+            </div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8 col-lg-offset-2">
+                        <div class="modal-body">
+                            <h1 class="font-style-inline-small-h1">Ranjit Jhala</h1>
+                            <hr class="star-primary">
+                            <p class="font-style-inline-small">
+                        <a href="https://www.twitter.com/ranjitjhala" target="_blank">follow</a>. <br>
+                        <a href="https://www.github.com/ucsd-progsys/131-web" target="_blank">    <i class="fa fa-github" id="spaceg-social-modal"></i> </a>
+                        <a href="https://www.twitter.com/ranjitjhala" target="_blank"><i class="fa fa-twitter" id="spaceg-social-modal"></i> </a>
+                        <a href="https://plus.google.com/u/0/106612421534244742464" target="_blank"> <i class="fa fa-google-plus" id="spaceg-social-modal"></i></a>  <br>
+                    <li><a href="https://ucsd-progsys.github.io/131-web/">Home</a></li>
+                    <li><a href="https://ucsd-progsys.github.io/131-web/about.html">About Me</a></li>
+                    <li><a href="https://ucsd-progsys.github.io/131-web/archive.html/">Archive</a></li>
+                            </p>
+
+                            <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times"></i> Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+        <div id="content">
+            <!-- Post Header -->
+<header class="intro-header" style="background-image: url('https://ucsd-progsys.github.io/131-web/static/img/adder.jpg')" alt title>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <h1>HW 1, due 10/7/2016</h1>
+                    
+                    <span class="meta">
+		    
+		    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+			<p>In this assignment you’ll implement a compiler for a small language called Adder (because it primarily adds things).</p>
+<h2 id="download">Download</h2>
+<pre><code>$ git clone https://github.com/ucsd-cse131/01-adder.git
+$ cd 01-adder/</code></pre>
+<h2 id="the-adder-language">The Adder Language</h2>
+<p>In each of the next several assignments, we’ll introduce a language that we’ll implement. We’ll start small, and build up features incrementally. We’re starting with Adder, which has just a few features – defining variables, and primitive operations on numbers.</p>
+<p>There are a few pieces that go into defining a language for us to compile.</p>
+<ul>
+<li><p>A description of the <strong>concrete syntax</strong> – the text the programmer writes</p></li>
+<li><p>A description of the <strong>abstract syntax</strong> – how to express what the programmer wrote in a data structure our compiler uses.</p></li>
+<li><p>A description of the <strong>semantics</strong> — or <strong>behavior</strong> —of the abstract syntax, so our compiler knows what the code it generates should <em>evaluate</em>.</p></li>
+</ul>
+<h3 id="concrete-syntax">Concrete Syntax</h3>
+<p>The concrete syntax of Adder is:</p>
+<pre><code>&lt;expr&gt; :=
+  | &lt;number&gt;
+  | &lt;identifier&gt;
+  | let &lt;bindings&gt; in &lt;expr&gt;
+  | add1(&lt;expr&gt;)
+  | sub1(&lt;expr&gt;)
+
+&lt;bindings&gt; :=
+  | &lt;identifier&gt; = &lt;expr&gt;
+  | &lt;identifier&gt; = &lt;expr&gt;, &lt;bindings&gt;</code></pre>
+<p>Here, a <code>let</code> expression can have one <em>or more</em> bindings.</p>
+<h3 id="abstract-syntax">Abstract Syntax</h3>
+<p>The abstract syntax of Adder is a Haskell datatype, and corresponds nearly one-to-one with the concrete syntax.</p>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="kw">data</span> <span class="dt">Prim1</span> <span class="fu">=</span>
+  <span class="fu">|</span> <span class="dt">Add1</span>
+  <span class="fu">|</span> <span class="dt">Sub1</span>
+
+<span class="kw">data</span> <span class="dt">Expr</span> a
+  <span class="fu">=</span> <span class="dt">Number</span>  <span class="fu">!</span><span class="dt">Integer</span>                       a
+  <span class="fu">|</span> <span class="dt">Prim1</span>   <span class="fu">!</span><span class="dt">Prim1</span>    <span class="fu">!</span>(<span class="dt">Expr</span> a)            a
+  <span class="fu">|</span> <span class="dt">Let</span>     <span class="fu">!</span>(<span class="dt">Bind</span> a) <span class="fu">!</span>(<span class="dt">Expr</span> a)  <span class="fu">!</span>(<span class="dt">Expr</span> a) a
+  <span class="fu">|</span> <span class="dt">Id</span>      <span class="fu">!</span><span class="dt">Id</span>                            a</code></pre></div>
+<p>We introduce a type to represent places where a variable is <strong>defined</strong> (i.e. <strong>bound</strong>)</p>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="kw">data</span> <span class="dt">Bind</span> a
+  <span class="fu">=</span> <span class="dt">Bind</span> <span class="fu">!</span><span class="dt">Id</span> a
+    <span class="kw">deriving</span> (<span class="dt">Show</span>, <span class="dt">Functor</span>)</code></pre></div>
+<p><strong>NOTE:</strong> Ignore the <code>!</code> in the definitions above, you can just pretend they are not there at all. (For the curious: they are called <a href="https://wiki.haskell.org/Performance/Data_types#Strict_fields">strictness annotations</a>)</p>
+<h3 id="semantics">Semantics</h3>
+<p>An Adder program always evaluates to a single integer. <code>Number</code>s evaluate to themselves (so a program just consisting of <code>Number(5)</code> should evaluate to the integer <code>5</code>). Primitive expressions perform addition or subtraction by one on their argument. Let bindings should evaluate all the binding expressions to values one by one, and after each, store a mapping from the given name to the corresponding value in both (a) the rest of the bindings, and (b) the body of the let expression. Identifiers evaluate to whatever their current stored value is. There are several examples further down to make this concrete.</p>
+<p>Here are some examples of Adder programs:</p>
+<table style="width:59%;">
+<colgroup>
+<col width="23%" />
+<col width="22%" />
+<col width="12%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="left">Concrete Syntax</th>
+<th align="left">Abstract Syntax</th>
+<th align="left">Answer</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">5</td>
+<td align="left"><code>Number(5)</code></td>
+<td align="left">5</td>
+</tr>
+<tr class="even">
+<td align="left">sub1(add1(sub1(5)))</td>
+<td align="left"><code>Prim1(Sub1, Prim1(Add1, Prim1(Sub1, Number(5))))</code></td>
+<td align="left">4</td>
+</tr>
+<tr class="odd">
+<td align="left">let x = 5 in add1(x)</td>
+<td align="left"><code>Let([(&quot;x&quot;, Number(5))], Prim1(Add1, Id(&quot;x&quot;)))</code></td>
+<td align="left">6</td>
+</tr>
+<tr class="even">
+<td align="left">let x = 5, y = sub1(x) in sub1(y)</td>
+<td align="left"><code>Let([(&quot;x&quot;, Number(5)), (&quot;y&quot;, Prim1(Sub1(Id(&quot;x&quot;))))], Prim1(Sub1(&quot;y&quot;)))</code></td>
+<td align="left">3</td>
+</tr>
+</tbody>
+</table>
+<h2 id="implementing-a-compiler-for-adder">Implementing a Compiler for Adder</h2>
+<p>You’ve been given a starter codebase that has several pieces of infrastructure:</p>
+<ul>
+<li><p><code>Types.hs</code> Which contains the key type definitions for source and assembly programs,</p></li>
+<li><p><code>Parse.hs</code> A parser for Adder, which takes concrete syntax (text files) and turns it into <code>Expr SourceSpan</code> (aka <code>Bare</code>) values, via the function:</p></li>
+</ul>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="ot">parse ::</span> FilePath <span class="ot">-&gt;</span> <span class="dt">Text</span> <span class="ot">-&gt;</span> <span class="dt">Expr</span> <span class="dt">SourceSpan</span></code></pre></div>
+<p>You don’t need to edit <code>Parse.hs</code> (or even understand how it works) in order to complete this assignment.</p>
+<ul>
+<li><p><code>UX.hs</code> which has code for reporting errors,</p></li>
+<li><p><code>Utils.hs</code> which has miscellaneous helper functions.</p></li>
+</ul>
+<p><strong>You will only edit</strong></p>
+<ul>
+<li><code>Compiler.hs</code> which has the main code for converting source expressions into assembly, via a function</li>
+</ul>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="ot">compile ::</span> <span class="dt">Expr</span> <span class="dt">SourceSpan</span> <span class="ot">-&gt;</span> [<span class="dt">Instruction</span>]</code></pre></div>
+<p>and which uses <code>parse</code> to produce assembly code from an input Adder text file via the function <code>compiler</code>.</p>
+<ul>
+<li><p><code>Asm.hs</code> which has the code for rendering our <code>Instruction</code> into raw assembly text.</p></li>
+<li><p><code>tests/Test.hs</code> to add new tests for your code.</p></li>
+</ul>
+<h3 id="writing-the-compiler">Writing the Compiler</h3>
+<p>The primary task of writing the Adder compiler is simple to state: take an instance of the <code>Expr a</code> datatype and turn it into a list of assembly <code>Instruction</code>. The provided compiler skeleton is set up to do just this, broken up over a few functions.</p>
+<p>Your task is to fill in the appropriate implementations in place of <code>error &quot;TBD&quot;</code> in the function:</p>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="co">-- in Compiler.hs</span>
+<span class="ot">compileEnv ::</span> <span class="dt">Env</span> <span class="ot">-&gt;</span> <span class="dt">AExp</span> <span class="ot">-&gt;</span> [<span class="dt">Instruction</span>]</code></pre></div>
+<p>Use only the provided <code>Instruction</code> types for this assignment; we will be gradually expanding this as the quarter progresses.</p>
+<p>The <code>compileEnv</code> function has an associated helper that takes some extra arguments to track the variable environment <code>Env</code> and stack offset. These will be discussed in more detail in lecture.</p>
+<p>The other component you need to implement is:</p>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="co">-- in Asm.hs</span>
+<span class="ot">instrAsm ::</span> <span class="dt">Instruction</span> <span class="ot">-&gt;</span> <span class="dt">Text</span>
+<span class="ot">regAsm   ::</span> <span class="dt">Reg</span> <span class="ot">-&gt;</span> <span class="dt">Text</span>
+<span class="ot">argAsm   ::</span> <span class="dt">Arg</span> <span class="ot">-&gt;</span> <span class="dt">Text</span></code></pre></div>
+<p>which renders individual instances of the instruction datatype into a string representation of the instruction (this is done for you for <code>mov</code> and <code>ret</code>). This second step is straightforward, but forces you to understand the syntax of the assembly code you are generating. Most of the compiler concepts happen in the first step, that of generating assembly instructions from abstract syntax (i.e. <code>compileEnv</code>).</p>
+<p>Do use <a href="http://www.cs.virginia.edu/~evans/cs216/guides/x86.html">this assembly guide</a> if you have questions about the concrete syntax (or ask) of an instruction.</p>
+<h3 id="errors">Errors</h3>
+<p>The compiler should <strong>signal an error</strong> if:</p>
+<ol style="list-style-type: decimal">
+<li>There is a binding list containing <strong>two or more bindings with the same name</strong></li>
+<li>An <strong>identifier is unbound</strong> (there is no surrounding let binding for it)</li>
+</ol>
+<p>At any place in your code, you can signal an error by using</p>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="ot">panic ::</span> <span class="dt">String</span> <span class="ot">-&gt;</span> <span class="dt">SourceSpan</span> <span class="ot">-&gt;</span> a</code></pre></div>
+<ol style="list-style-type: decimal">
+<li>The <code>String</code> parameter is whatever error message you want,</li>
+<li>The <code>SourceSpan</code> is the source position, which is available</li>
+</ol>
+<ul>
+<li>from an <code>AExp</code> or <code>Bare</code> by calling <code>sourceSpan</code>, or</li>
+<li>as the variable <code>l :: Tag</code> in <code>compileEnv</code>.</li>
+</ul>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="ot">compileEnv ::</span> <span class="dt">Env</span> <span class="ot">-&gt;</span> <span class="dt">AExp</span> <span class="ot">-&gt;</span> [<span class="dt">Instruction</span>]
+compileEnv _   (<span class="dt">Number</span> n l)     <span class="fu">=</span> [ <span class="dt">IMov</span> (<span class="dt">Reg</span> <span class="dt">EAX</span>) (repr n) ]
+compileEnv env (<span class="dt">Prim1</span> <span class="dt">Add1</span> e l) <span class="fu">=</span> error <span class="st">&quot;TBD&quot;</span>
+compileEnv env (<span class="dt">Prim1</span> <span class="dt">Sub1</span> e l) <span class="fu">=</span> error <span class="st">&quot;TBD&quot;</span>
+compileEnv env (<span class="dt">Id</span> x l)         <span class="fu">=</span> error <span class="st">&quot;TBD&quot;</span>
+compileEnv env (<span class="dt">Let</span> x e1 e2 l)  <span class="fu">=</span> error <span class="st">&quot;TBD&quot;</span></code></pre></div>
+<h3 id="testing-the-compiler">Testing the Compiler</h3>
+<p>The file <code>tests/Test.hs</code> contains code for testing your compiler.</p>
+<h4 id="adding-new-tests">Adding new Tests</h4>
+<p>To add new tests, fill in new tests as elements of the list in <code>yourTests</code>. Each test is of <em>one of two forms</em>:</p>
+<ol style="list-style-type: decimal">
+<li><code>mkTest FILE File (Right RESULT)</code> or</li>
+<li><code>mkTest FILE File (Left ERROR)</code>.</li>
+</ol>
+<p>In both cases, the actual test-file should be in <code>tests/input/FILE.adder</code>.</p>
+<ul>
+<li><p>In the first case, <code>RESULT</code> is a single string containing the correct output (of compiling, linking and running the test).</p></li>
+<li><p>In the second case, <code>ERROR</code> is a <em>substring</em> of the error message that should be produced. This includes problems building at the assembler/linker level, as well as any explicit errors thrown by <code>error</code> or <code>panic</code> calls in the compiler itself. You <em>should</em> use this case to explicitly test for the two error cases mentioned above.</p></li>
+</ul>
+<h4 id="running-a-single-test">Running a Single Test</h4>
+<p>For each test, we have the following files:</p>
+<ul>
+<li><code>tests/input/FILE.adder</code> : The source file</li>
+<li><code>tests/output/FILE.s</code> : The generated assembly</li>
+<li><code>tests/output/FILE.run</code> : The binary executable produced after linking</li>
+<li><code>tests/output/FILE.result</code> : The output of running the binary</li>
+<li><code>tests/output/FILE.log</code> : The log of all messages generated during compiling &amp; linking.</li>
+</ul>
+<p>Only the first of the above is <em>hand written</em>; the rest are all automatically generated.</p>
+<p><strong>To generate assembly</strong> for an individual test, do:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">make</span> tests/output/five.s</code></pre></div>
+<p><strong>To generate an executable</strong> for an individual test, do</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">make</span> tests/output/five.run</code></pre></div>
+<p><strong>To run an executable</strong> for an individual test, invoke the executable after building it,</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">./tests/output/five.run</span></code></pre></div>
+<p>or simply do</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">make</span> tests/output/five.result</code></pre></div>
+<p><strong>To debug an assembly file</strong> you can hand-edit (or simply write) a file, <code>tests/output/FILE.s</code> and then <em>execute</em> it by doing</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">make</span> tests/output/FILE.result</code></pre></div>
+<p>to trigger the build-link-execute from that assembly file. This can be helpful if you think you’re generating mostly-correct code, but just want to try a small edit to fix something up. It’s also helpful if you want to hand-write a small assembly example: you can create <code>.s</code> files from scratch in the <code>output</code> directory to experiment with, if you want to practice with assembly instructions without the compiler in the way.</p>
+<h3 id="crafting-tests-10-for-10">Crafting Tests (10-for-10)</h3>
+<p>The creators of the <strong>5 hardest tests</strong> get <strong>5%</strong> of total points as <strong>extra credit</strong></p>
+<ul>
+<li><p>You can add upto 10 new tests in <code>yourTests</code></p></li>
+<li><p>Feel free to add more, we’ll just take the first 10.</p></li>
+<li><p>A test’s “score” is the total number of compilers (submitted by the entire class) on which the test produces the <strong>wrong</strong> output.</p></li>
+<li><p>That is, the <strong>harder</strong> a test, the <strong>higher</strong> its score.</p></li>
+</ul>
+<h3 id="turnin">Turnin</h3>
+<p>Before submitting your solutions, make sure you have included a file <code>group.txt</code> containing the PIDs of the people who worked on this assignment. Include this file even if you worked on this assigment alone (in this case the file will only contain one PID).</p>
+<p>To submit your code do:</p>
+<pre><code>make turnin</code></pre>
+<p><code>turnin</code> will provide you with a confirmation of the submission process; make sure that the size of the file indicated by <code>turnin</code> matches the size of your file. See the ACS Web page on <a href="https://acms.ucsd.edu/info/turnin.html">turnin</a> for more information on the operation of the program.</p>
+<p>If this is not the first time submitting this assigmment, make sure you remove old copies of <code>01-adder.tgz</code> left in this directory.</p>	
+                <hr>
+            </div>
+        </div>
+    </div>
+</article>
+
+        </div>
+        <div id="footer">
+        </div>
+      <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                    <li>
+                        <a href="https://ucsd-progsys.github.io/131-web/feed.xml" data-datatype="json" data-type="GET" data-target="#frame" class="reload" id="clickme">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="https://twitter.com/ranjitjhala" data-datatype="json" data-type="GET" data-target="#frame" class="reload" id="clickme" target="_blank">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li>
+                        <a href="https://plus.google.com/u/0/106612421534244742464" data-datatype="json" data-type="GET" data-target="#frame" class="reload" id="clickme" target="_blank">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-google-plus fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                     
+                     
+                    <li>
+                        <a href="https://github.com/ucsd-progsys/131-web" target="_blank">
+                            <span class="fa-stack fa-lg">
+
+                              <i class="fa fa-arrow-circle-o-down"></i>
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+		    
+                </ul>
+                <p class="copyright text-muted">Copyright &copy; Ranjit Jhala
+                2016. Please suggest fixes <a href="http://github.com/ucsd-progsys/131-web">here.</a><br><br> 
+                </p>
+<div class="col-md-12">
+     <p class="copyright text-muted">
+     Site generated by <a href="http://jaspervdj.be/hakyll">Hakyll</a>, using
+     a theme by <a href="http://katychuang.com/hakyll-cssgarden/gallery/" target="_blank">Katy Chuang.</a>
+     </p>
+</div>
+    
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="https://ucsd-progsys.github.io/131-web/static/js/jquery.min.js"></script>
+<script src="https://ucsd-progsys.github.io/131-web/static/js/spaceg.stylesheets.min.js"></script> 
+<script src="https://ucsd-progsys.github.io/131-web/static/js/bootstrap.min.js"></script>
+<script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js"></script>
+<script src="https://ucsd-progsys.github.io/131-web/static/js/scripts.js"></script>
+
+
+
+    </body>
+</html>

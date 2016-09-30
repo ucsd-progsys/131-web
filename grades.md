@@ -5,7 +5,7 @@ headerImg: beach.jpg
 
 - **Class Participation (5%)** :
   Involves answering questions with the clicker.
-  - Register your clicker here: [iclicker.com](http://www.iclicker.com)
+  Register your clicker [in this google form](https://goo.gl/forms/0O2zwkV8b1BWOBsu2)
   - Use your PID `A0XXXXXXXXX`
 
 - **(Eight) Homework Assignments (30%)** :
