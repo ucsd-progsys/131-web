@@ -124,8 +124,10 @@ For now, lets just
 
 ```bash
 $ nasm -f aout -o forty_two.o forty_two.s
-$ clang -g -m32 -o forty_two.o main.c $<
+$ clang -g -m32 -o forty_two.run forty_two.o main.c
 ```
+
+On a Mac use `-f macho` instead of `-f aout`
 
 We can now run it:
 
