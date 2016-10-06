@@ -723,7 +723,7 @@ How can we create **distinct** names out of thin air?
 
 What's that? Global variables? Increment a counter?
 
-![Get thee behind me Satan!](/resources/dr-evil.jpg)
+![Get thee behind me Satan!](/static/img/dr-evil.jpg)
 
 We will use a counter, but will have to **pass its value around**
 
