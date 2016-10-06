@@ -332,7 +332,8 @@ our_code_label:
 <li><em>linking</em> works</li>
 </ul>
 <div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="kw">nasm</span> -f aout -o forty_two.o forty_two.s
-$ <span class="kw">clang</span> -g -m32 -o forty_two.o main.c $<span class="kw">&lt;</span></code></pre></div>
+$ <span class="kw">clang</span> -g -m32 -o forty_two.run forty_two.o main.c</code></pre></div>
+<p>On a Mac use <code>-f macho</code> instead of <code>-f aout</code></p>
 <p>We can now run it:</p>
 <div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="kw">forty_two.run</span>
 <span class="kw">42</span></code></pre></div>

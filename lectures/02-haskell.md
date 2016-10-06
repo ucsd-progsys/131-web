@@ -324,6 +324,10 @@ C. `[0, 5]`
 D. `[0, 1, 2, 3, 4]`
 E. `[0, 1, 2, 3, 4, 5]`
 
+
+
+
+
 ## QUIZ: List Comprehensions
 
 What is the value of
@@ -340,6 +344,9 @@ C. `[0, 50]`
 D. `[0, 10, 20, 30, 40]`
 E. `[0, 10, 20, 30, 40, 50]`
 
+
+
+
 ## QUIZ: List Comprehensions
 
 What is the value of
@@ -355,6 +362,9 @@ B. `[0]`
 C. `[0, 10]`
 D. `[0, 10, 20]`
 E. `[0, 10, 20, 30]`
+
+
+
 
 
 ## QUIZ: List Comprehensions

@@ -586,13 +586,13 @@ There is only a _fixed_ number (say, `N`) of registers:
 
 Here's what the memory -- i.e. storage -- looks like:
 
-![Memory Layout](/static/img/memory-layout.png) 
+![Memory Layout](/static/img/memory-layout.png)
 
 ### Focusing on "The Stack"
 
 Lets zoom into the stack region, which when we start looks like this:
 
-![Stack Layout](/static/img/stack-layout.png) 
+![Stack Layout](/static/img/stack-layout.png)
 
 The stack **grows downward** (i.e. to **smaller** addresses)
 
@@ -671,15 +671,15 @@ Lets see how our strategy works by example:
 
 <img src="https://github.com/ucsd-progsys/131/blob/master/resources/let-1-to-asm.png" height="150">
 
-![Convert let1 to Assembly](/static/img/let-1-to-asm.png) 
+![Convert let1 to Assembly](/static/img/let-1-to-asm.png)
 
 ### Example: let2
 
-![Convert let2 to Assembly](/static/img/let-2-to-asm.png) 
+![Convert let2 to Assembly](/static/img/let-2-to-asm.png)
 
 ### Example: let3
 
-![Convert let3 to Assembly](/static/img/let-3-to-asm.png) 
+![Convert let3 to Assembly](/static/img/let-3-to-asm.png)
 
 ## Step 2: Types
 

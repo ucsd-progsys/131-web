@@ -1,0 +1,915 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+    
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+ <!--
+      loads the http over https ssl -
+      welcome to my website!
+
+	this theme is based off the Ice & Fire theme created by Lucas Gatsas
+      https://www.twitter.com/LucasGatsas
+      www.lucasgatsas.ch - switzerland.
+  -->
+
+
+<!-- Microsoft Internet Explorer documentMode compatMode setting IE Modus -->
+<script type="text/javascript">
+var IE = null;
+if (window.navigator.appName == "Microsoft Internet Explorer") {
+  if (document.documentMode) {
+
+    IE = document.documentMode;
+    } else {
+
+        IE = 5;
+          if (document.compatMode) {
+      if (document.compatMode == "CSS1Compat")
+      IE = 11;
+      }
+    }
+  }
+</script>
+
+    <meta charset="utf-8">
+    <!-- X-UA -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="X-UA-Compatible" content="IE=11" />
+    <link rel="author" title="Ranjit Jhala" href="http://ranjitjhala.github.io" />
+
+    <meta name="google" content="notranslate" />
+    <!-- Viewport -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- index ROBOTS follow -->
+    <meta name="robots" content="index, follow" />
+    <!-- Site Desciption -->
+    <meta name="description" content="UCSD CSE 131">
+    <!-- Site Desciption -->
+    <meta name="keywords" content="Ranjit Jhala, ranjitjhala, haskell, compilers, type systems">
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="https://ucsd-progsys.github.io/131-web/static/img/ico.jpg" type="image/x-icon" />
+    <!-- Blog Title -->
+    <title>cse131</title>
+
+    <!--     <title>{% if page.title %}{{ page.title }} - {{ site.title }}{% else %}{{ site.title }}{% endif %}</title>
+-->
+    <!-- Property Metas -->
+    <meta property="og:image" content="https://ucsd-progsys.github.io/131-web/static/img/ix.png" />
+    <meta property="og:title" content="UCSD CSE 131" />
+    <meta property="og:site_name" content="UCSD CSE 131" />
+    <!-- Canonical -->
+    <link rel="canonical" href="{{ page.url | replace:'index.html','' | prepend: site.baseurl | prepend: site.url }}">
+    <!-- StyleSheet -->
+    <link rel="stylesheet" href="https://ucsd-progsys.github.io/131-web/static/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://ucsd-progsys.github.io/131-web/static/css/spaceg.stylesheets.css">
+    <link rel="stylesheet" href="https://ucsd-progsys.github.io/131-web/static/css/syntax.css">
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic,900,900italic" rel="stylesheet" type="text/css">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Playfair+Display:400,700,900,400italic,700italic,900italic" rel="stylesheet" type="text/css">
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <style>
+	#preloader {position:fixed;top:0;left:0;right:0;bottom:0;background-color:#fff; /* change if the mask should have another color then white */z-index:99; /* makes sure it stays on top */}
+	#status {width:200px;height:200px;position:absolute;left:50%; /* centers the loading animation horizontally one the screen */top:50%; /* centers the loading animation vertically one the screen */background-image:url("/static/img/preloader.gif"); /* path to your loading animation */background-repeat:no-repeat;background-position:center;margin:-100px 0 0 -100px; /* is width and height divided by two */}
+	ul, ol {margin-top: 0;margin-bottom: 10px;}
+	.navbar-inverse {background-color: #FFF;border-color: #FFFFFF;}
+</style>
+<!--link rel="stylesheet" href="https://ucsd-progsys.github.io/131-web/static/css/prettify.css"-->
+<style>
+	header.intro-header {background: #6f5499;background: no-repeat center center;background-attachment: scroll;-webkit-background-size: cover;-moz-background-size: cover;background-size: cover;-o-background-size: cover;}
+	/* Preloader */#preloader {position:fixed;top:0;left:0;right:0;bottom:0;background-color:#fff; /* change if the mask should have another color then white */z-index:99; /* makes sure it stays on top */}
+	#status {width:200px;height:200px;position:absolute;left:50%; /* centers the loading animation horizontally one the screen */top:50%; /* centers the loading animation vertically one the screen */background-image:; /* path to your loading animation */background-repeat:no-repeat;background-position:center;margin:-100px 0 0 -100px; /* is width and height divided by two */}
+	li {list-style: none;}
+            body.modal-open
+            {overflow: hidden;padding-right: 0px;
+        }
+	article li {list-style: inherit;}
+	article .figure {text-align: center}
+    </style>
+    <!-- end Loading front stylesheet here -->
+    </head>
+
+    <body>
+	<div id="preloader">
+	    <div id="status">
+
+	    </div>
+
+	</div>  
+	<!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="https://ucsd-progsys.github.io/131-web" id="blog-title-left-top">cse131</a>
+        </div>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav navbar-right">
+                <!-- <li class="dropdown">
+                    <a href="#portfolioModal2" data-toggle="modal"><i class="fa fa-random" id="icon-top"></i></a>
+                <ul class="dropdown-menu"></ul>
+                </li>-->
+                
+                <li><a href="https://ucsd-progsys.github.io/131-web/calendar.html">Calendar</a></li>
+                <li><a href="https://ucsd-progsys.github.io/131-web/contact.html">Contact</a></li>
+                <li><a href="https://ucsd-progsys.github.io/131-web/grades.html">Grades</a></li>
+                <li><a href="https://ucsd-progsys.github.io/131-web/lectures.html">Lectures</a></li>
+                <li><a href="https://ucsd-progsys.github.io/131-web/assignments.html">Assignments</a></li>
+                <li><a href="https://ucsd-progsys.github.io/131-web/links.html">Links</a></li>
+                <li><a href="https://www.piazza.com/ucsd/fall2016/cse131/home" id="roundbutton" target="_blank"><i class="fa fa-twitter"></i>Piazza</a></li>
+                <!--
+                <li><a href="https://ucsd-progsys.github.io/131-web/archive.html">Archive</a></li>
+                <li><a href="https://www.twitter.com/ranjitjhala" id="roundbutton" target="_blank"><i class="fa fa-twitter"></i>RanjitJhala</a></li>
+                -->
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+<!-- Portfolio Modals -->
+    <div class="portfolio-modal modal fade" id="portfolioModal1" tabindex="-1" role="dialog" aria-hidden="true" style="padding-right:0px; overflow: hidden;">
+        <div class="modal-content">
+            <div class="close-modal" data-dismiss="modal">
+                <div class="lr">
+                    <div class="rl">
+                    </div>
+                </div>
+            </div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8 col-lg-offset-2">
+                        <div class="modal-body">
+                            <h1 class="font-style-inline-small-h1">Ranjit Jhala</h1>
+                            <hr class="star-primary">
+                            <img src="https://ucsd-progsys.github.io/131-web/static/img/kc.jpg" class="img-responsive img-centered" alt title>
+                            <p class="font-style-inline-small">
+                                <a href="https://www.twitter.com/ranjitjhala" target="_blank">follow me</a>. <br>
+                                <a href="https://www.github.com/ucsd-progsys/131-web" target="_blank">    <i class="fa fa-github" id="spaceg-social-modal"></i> </a>
+                                <a href="https://www.twitter.com/ranjitjhala" target="_blank"><i class="fa fa-twitter" id="spaceg-social-modal"></i> </a>
+                                <a href="https://plus.google.com/u/0/106612421534244742464" target="_blank"> <i class="fa fa-google-plus" id="spaceg-social-modal"></i></a>
+                            </p>
+                            <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times"></i> Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+<!-- Menu Modals Add New Sa.21.Feb.2015 03:22:25 -->
+    <div class="portfolio-modal modal fade" id="portfolioModal2" tabindex="-1" role="dialog" aria-hidden="true" style="padding-right:0px; overflow: hidden;">
+        <div class="modal-content">
+            <div class="close-modal" data-dismiss="modal">
+                <div class="lr">
+                    <div class="rl">
+                    </div>
+                </div>
+            </div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8 col-lg-offset-2">
+                        <div class="modal-body">
+                            <h1 class="font-style-inline-small-h1">Ranjit Jhala</h1>
+                            <hr class="star-primary">
+                            <p class="font-style-inline-small">
+                        <a href="https://www.twitter.com/ranjitjhala" target="_blank">follow</a>. <br>
+                        <a href="https://www.github.com/ucsd-progsys/131-web" target="_blank">    <i class="fa fa-github" id="spaceg-social-modal"></i> </a>
+                        <a href="https://www.twitter.com/ranjitjhala" target="_blank"><i class="fa fa-twitter" id="spaceg-social-modal"></i> </a>
+                        <a href="https://plus.google.com/u/0/106612421534244742464" target="_blank"> <i class="fa fa-google-plus" id="spaceg-social-modal"></i></a>  <br>
+                    <li><a href="https://ucsd-progsys.github.io/131-web/">Home</a></li>
+                    <li><a href="https://ucsd-progsys.github.io/131-web/about.html">About Me</a></li>
+                    <li><a href="https://ucsd-progsys.github.io/131-web/archive.html/">Archive</a></li>
+                            </p>
+
+                            <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times"></i> Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+        <div id="content">
+            <!-- Post Header -->
+<header class="intro-header" style="background-image: url('https://ucsd-progsys.github.io/131-web/static/img/boa.jpg')" alt title>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <h1>Branches and Binary Operators</h1>
+                    
+                    <span class="meta">
+		    
+		    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+			<h2 id="boa-branches-and-binary-operators">BOA: Branches and Binary Operators</h2>
+<p>Next, lets add</p>
+<ul>
+<li>Branches (<code>if</code>-expressions)</li>
+<li>Binary Operators (<code>+</code>, <code>-</code>, etc.)</li>
+</ul>
+<p>In the process of doing so, we will learn about</p>
+<ul>
+<li><strong>Intermediate Forms</strong></li>
+<li><strong>Normalization</strong></li>
+</ul>
+<h2 id="branches">Branches</h2>
+<p>Lets start first with branches (conditionals).</p>
+<p>We will stick to our recipe of:</p>
+<ol style="list-style-type: decimal">
+<li>Build intuition with <strong>examples</strong>,</li>
+<li>Model problem with <strong>types</strong>,</li>
+<li>Implement with <strong>type-transforming-functions</strong>,</li>
+<li>Validate with <strong>tests</strong>.</li>
+</ol>
+<h3 id="examples">Examples</h3>
+<p>First, lets look at some examples of what we mean by branches.</p>
+<ul>
+<li>For now, lets treat <code>0</code> as “false” and non-zero as “true”</li>
+</ul>
+<h3 id="example-if1">Example: <code>If1</code></h3>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="kw">if</span> <span class="dv">10</span><span class="fu">:</span>
+  <span class="dv">22</span>
+<span class="kw">else</span><span class="fu">:</span>
+  sub1(<span class="dv">0</span>)</code></pre></div>
+<ul>
+<li>Since <code>10</code> is <em>not</em> <code>0</code> we evaluate the “then” case to get <code>22</code></li>
+</ul>
+<h3 id="example-if2">Example: <code>If2</code></h3>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="kw">if</span> sub(<span class="dv">1</span>)<span class="fu">:</span>
+  <span class="dv">22</span>
+<span class="kw">else</span><span class="fu">:</span>
+  sub1(<span class="dv">0</span>)</code></pre></div>
+<ul>
+<li>Since <code>sub(1)</code> <em>is</em> <code>0</code> we evaluate the “else” case to get <code>-1</code></li>
+</ul>
+<h3 id="example-if3">Example: <code>If3</code></h3>
+<p><code>if-else</code> is also an <em>expression</em> so we can nest them:</p>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="kw">let</span> x <span class="fu">=</span> <span class="kw">if</span> sub(<span class="dv">1</span>)<span class="fu">:</span>
+          <span class="dv">22</span>
+        <span class="kw">else</span><span class="fu">:</span>
+          sub1(<span class="dv">0</span>)
+<span class="kw">in</span>
+  <span class="kw">if</span> x<span class="fu">:</span>
+    add1(x)
+  <span class="kw">else</span><span class="fu">:</span>
+    <span class="dv">999</span></code></pre></div>
+<ul>
+<li><code>x</code> is bound to <code>-1</code>…</li>
+<li>… which is <em>non-zero</em> so we evaluate <code>add1(x)</code> yielding <code>0</code></li>
+</ul>
+<h3 id="control-flow-in-assembly">Control Flow in Assembly</h3>
+<p>To compile branches, we will use:</p>
+<ul>
+<li><strong>labels</strong> of the form</li>
+</ul>
+<pre class="asm"><code>our_code_label:
+  ...</code></pre>
+<p>are “landmark” from which execution (control-flow) can be started, or to which it can be diverted,</p>
+<ul>
+<li><strong>comparisons</strong> of the form</li>
+</ul>
+<pre class="asm"><code>cmp a1, a2</code></pre>
+<p>do a (numeric) comparison between the values referred to by <code>a1</code> and <code>a2</code>, storing the result in a special processor <strong>flag</strong>,</p>
+<ul>
+<li><strong>Jump</strong> operations of the form</li>
+</ul>
+<pre class="asm"><code>jmp LABEL     # jump unconditionally (i.e. always)
+je  LABEL     # jump if previous comparison result was EQUAL  
+jne LABEL     # jump if previous comparison result was NOT-EQUAL  </code></pre>
+<p>use the result of the <em>flag</em> set by the most recent <code>cmp</code> to <em>transfer control flow</em> to the given <code>LABEL</code></p>
+<h3 id="strategy">Strategy</h3>
+<p>To compile an expression of the form</p>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="kw">if</span> eCond<span class="fu">:</span>
+  eThen
+<span class="kw">else</span><span class="fu">:</span>
+  eElse</code></pre></div>
+<p>We will:</p>
+<ol style="list-style-type: decimal">
+<li>Evaluate <code>eCond</code></li>
+<li>Compare the result (in <code>eax</code>) against <code>0</code></li>
+<li>Jump if the result <em>is zero</em> to a <strong>special</strong> <code>&quot;IfFalse&quot;</code> label</li>
+</ol>
+<ul>
+<li>At which we will evaluate <code>eElse</code>,</li>
+<li>Ending with a special <code>&quot;IfExit&quot;</code> label.</li>
+</ul>
+<ol start="4" style="list-style-type: decimal">
+<li>(Otherwise) continue to evaluate <code>eTrue</code></li>
+</ol>
+<ul>
+<li>And then jump (unconditionally) to the <code>&quot;IfExit&quot;</code> label.</li>
+</ul>
+<h3 id="example-if-expressions-to-asm">Example: If-Expressions to <code>Asm</code></h3>
+<p>Lets see how our strategy works by example:</p>
+<h3 id="example-if1-1">Example: if1</h3>
+<div class="figure">
+<img src="../static/img/if-1-to-asm.png" alt="Example: if1" />
+<p class="caption">Example: if1</p>
+</div>
+<h3 id="example-if2-1">Example: if2</h3>
+<div class="figure">
+<img src="../static/img/if-2-to-asm.png" alt="Example: if2" />
+<p class="caption">Example: if2</p>
+</div>
+<h3 id="example-if3-1">Example: if3</h3>
+<div class="figure">
+<img src="../static/img/if-3-to-asm.png" alt="Example: if3" />
+<p class="caption">Example: if3</p>
+</div>
+<p>Oops, <strong>cannot reuse labels</strong> across if-expressions!</p>
+<ul>
+<li>Can’t use same label in two places (invalid assembly)</li>
+</ul>
+<div class="figure">
+<img src="../static/img/if-3-to-asm-bad.png" alt="Example: if3 wrong" />
+<p class="caption">Example: if3 wrong</p>
+</div>
+<p>Oops, need <strong>distinct labels</strong> for each branch!</p>
+<ul>
+<li>Require <strong>distinct tags</strong> for each <code>if-else</code> expression</li>
+</ul>
+<div class="figure">
+<img src="../static/img/if-3-to-asm-tag.png" alt="Example: if3 tagged" />
+<p class="caption">Example: if3 tagged</p>
+</div>
+<h3 id="types-source">Types: Source</h3>
+<p>Lets modify the <em>Source Expression</em></p>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="kw">data</span> <span class="dt">Expr</span> a
+  <span class="fu">=</span> <span class="dt">Number</span> <span class="dt">Int</span>                        a
+  <span class="fu">|</span> <span class="dt">Add1</span>   (<span class="dt">Expr</span> a)                   a
+  <span class="fu">|</span> <span class="dt">Sub1</span>   (<span class="dt">Expr</span> a)                   a
+  <span class="fu">|</span> <span class="dt">Let</span>    <span class="dt">Id</span> (<span class="dt">Expr</span> a) (<span class="dt">Expr</span> a)       a   
+  <span class="fu">|</span> <span class="dt">Var</span>    <span class="dt">Id</span>                         a
+  <span class="fu">|</span> <span class="dt">If</span>     (<span class="dt">Expr</span> a) (<span class="dt">Expr</span> a) (<span class="dt">Expr</span> a) a         </code></pre></div>
+<ul>
+<li>Add <code>if-else</code> expressions and</li>
+<li>Add <strong>tags</strong> of type <code>a</code> for each sub-expression</li>
+<li>Tags are polymorphic <code>a</code> so we can have <em>different types</em> of tags</li>
+<li>e.g. Source-Position information for error messages</li>
+</ul>
+<p>Lets define a name for <code>Tag</code> (just integers).</p>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="kw">type</span> <span class="dt">Tag</span>   <span class="fu">=</span> <span class="dt">Int</span></code></pre></div>
+<p>We will now use:</p>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="kw">type</span> <span class="dt">BareE</span> <span class="fu">=</span> <span class="dt">Bare</span> ()     <span class="co">-- AST after parsing   </span>
+<span class="kw">type</span> <span class="dt">TagE</span>  <span class="fu">=</span> <span class="dt">Expr</span> <span class="dt">Tag</span>    <span class="co">-- AST with distinct tags</span></code></pre></div>
+<h3 id="types-assembly">Types: Assembly</h3>
+<p>Now, lets extend the <em>Assembly</em> with labels, comparisons and jumps:</p>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="kw">data</span> <span class="dt">Label</span>
+  <span class="fu">=</span> <span class="dt">BranchFalse</span> <span class="dt">Tag</span>
+  <span class="fu">|</span> <span class="dt">BranchExit</span>  <span class="dt">Tag</span>          
+
+<span class="kw">data</span> <span class="dt">Instruction</span>
+  <span class="fu">=</span> <span class="fu">...</span>
+  <span class="fu">|</span> <span class="dt">ICmp</span>   <span class="dt">Arg</span>   <span class="dt">Arg</span>  <span class="co">-- Compare two arguments</span>
+  <span class="fu">|</span> <span class="dt">ILabel</span> <span class="dt">Label</span>      <span class="co">-- Create a label</span>
+  <span class="fu">|</span> <span class="dt">IJmp</span>   <span class="dt">Label</span>      <span class="co">-- Jump always</span>
+  <span class="fu">|</span> <span class="dt">IJe</span>    <span class="dt">Label</span>      <span class="co">-- Jump if equal  </span>
+  <span class="fu">|</span> <span class="dt">IJne</span>   <span class="dt">Label</span>      <span class="co">-- Jump if not-equal</span></code></pre></div>
+<h3 id="transforms">Transforms</h3>
+<p>We can’t expect <em>programmer</em> to put in tags (yuck.)</p>
+<ul>
+<li>Lets squeeze in a <code>tagging</code> transform into our pipeline</li>
+</ul>
+<div class="figure">
+<img src="../static/img/compiler-pipeline-tag.png" alt="Adding Tagging to the Compiler Pipeline" />
+<p class="caption">Adding Tagging to the Compiler Pipeline</p>
+</div>
+<h3 id="transforms-parse">Transforms: Parse</h3>
+<p>Just as before, but now puts a dummy <code>()</code> into each position</p>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell">ghci<span class="fu">&gt;</span> parse <span class="st">&quot;if 1: 22 else: 33&quot;</span>
+<span class="dt">If</span> (<span class="dt">Number</span> <span class="dv">1</span> ()) (<span class="dt">Number</span> <span class="dv">22</span> ()) (<span class="dt">Number</span> <span class="dv">33</span> ()) ()</code></pre></div>
+<h3 id="transforms-tag">Transforms: Tag</h3>
+<p>The key work is done by <code>doTag i e</code> * Recursively walk over the <code>BareE</code> named <code>e</code> starting tagging at counter <code>i</code> * Returning a pair <code>(i', e')</code> of <em>updated counter</em> <code>i'</code> and tagged expr <code>e'</code></p>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="ot">doTag ::</span> <span class="dt">Int</span> <span class="ot">-&gt;</span> <span class="dt">BareE</span> <span class="ot">-&gt;</span> (<span class="dt">Int</span>, <span class="dt">TagE</span>)
+doTag i (<span class="dt">Number</span> n _)    <span class="fu">=</span> (i <span class="fu">+</span> <span class="dv">1</span> , <span class="dt">Number</span> n i)
+doTag i (<span class="dt">Var</span>    x _)    <span class="fu">=</span> (i <span class="fu">+</span> <span class="dv">1</span> , <span class="dt">Var</span>     x i)
+doTag i (<span class="dt">If</span> e1 e2 e3 i) <span class="fu">=</span> (i3 <span class="fu">+</span> <span class="dv">1</span>, <span class="dt">If</span> e1' e2' e3' i3)
+  <span class="kw">where</span>
+    (i1, e1')           <span class="fu">=</span> doTag i  e1
+    (i2, e2')           <span class="fu">=</span> doTag i1 e2
+    (i3, e3')           <span class="fu">=</span> doTag i2 e3
+doTag i (<span class="dt">Let</span> x e1 e2 i) <span class="fu">=</span> (i2 <span class="fu">+</span> <span class="dv">1</span>, <span class="dt">Let</span> x e1' e2' i2)
+  <span class="kw">where</span>
+    (i1, e1')           <span class="fu">=</span> doTag i  e1
+    (i2, e2')           <span class="fu">=</span> doTag i1 e2</code></pre></div>
+<p>(<strong>ProTip:</strong> Use <code>mapAccumL</code>)</p>
+<p>We can now tag the whole program by * calling <code>doTag</code> with the initial counter (e.g. <code>0</code>), * throwing away the final counter.</p>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="ot">tag ::</span> <span class="dt">BareE</span> <span class="ot">-&gt;</span> <span class="dt">TagE</span>
+tag e <span class="fu">=</span> e'  <span class="kw">where</span>  (_, e') <span class="fu">=</span> doTag <span class="dv">0</span> e</code></pre></div>
+<h3 id="transforms-codegen">Transforms: CodeGen</h3>
+<p>Now that we have the tags we lets implement our <a href="#strategy">compilation strategy</a></p>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell">compile env (<span class="dt">If</span> eCond eTrue eFalse i)    
+  <span class="fu">=</span>   compile env eCond <span class="fu">++</span>
+    [ <span class="dt">ICmp</span> (<span class="dt">Reg</span> <span class="dt">EAX</span>) (<span class="dt">Const</span> <span class="dv">0</span>)
+    , <span class="dt">IJe</span> (<span class="dt">BranchFalse</span> i)
+    ]
+   <span class="fu">++</span> compile env eTrue  <span class="fu">++</span>
+    [ <span class="dt">IJmp</span>   lExit
+    , <span class="dt">ILabel</span> (<span class="dt">BranchFalse</span> i)
+    ]
+   <span class="fu">++</span> compile env eFalse <span class="fu">++</span>
+    [ <span class="dt">ILabel</span> (<span class="dt">BranchExit</span> i) ]</code></pre></div>
+<h3 id="recap-branches">Recap: Branches</h3>
+<ul>
+<li><code>Tag</code> each sub-expression,</li>
+<li>Use tag to generate control-flow labels implementing branch.</li>
+</ul>
+<p><strong>Lesson:</strong> Tagged program representation simplifies compilation…</p>
+<ul>
+<li>Next: another example of how intermediate representations help.</li>
+</ul>
+<h2 id="binary-operations">Binary Operations</h2>
+<p>You know the drill.</p>
+<ol style="list-style-type: decimal">
+<li>Build intuition with <strong>examples</strong>,</li>
+<li>Model problem with <strong>types</strong>,</li>
+<li>Implement with <strong>type-transforming-functions</strong>,</li>
+<li>Validate with <strong>tests</strong>.</li>
+</ol>
+<h3 id="compiling-binary-operations">Compiling Binary Operations</h3>
+<p>Lets look at some expressions and figure out how they would get compiled.</p>
+<ul>
+<li>Recall: We want the result to be in <code>eax</code> after the instructions finish.</li>
+</ul>
+<h4 id="example-bin1">Example: Bin1</h4>
+<p>Lets start with some easy ones. The source:</p>
+<div class="figure">
+<img src="../static/img/bin-1-to-asm.png" alt="Example: Bin 1" />
+<p class="caption">Example: Bin 1</p>
+</div>
+<p><strong>Strategy:</strong> Given <code>n1 + n2</code></p>
+<ul>
+<li>Move <code>n1</code> into <code>eax</code>,</li>
+<li>Add <code>n2</code> to <code>eax</code>.</li>
+</ul>
+<h4 id="example-bin2">Example: Bin2</h4>
+<p>What if the first operand is a variable?</p>
+<div class="figure">
+<img src="../static/img/bin-2-to-asm.png" alt="Example: Bin 2" />
+<p class="caption">Example: Bin 2</p>
+</div>
+<p>Simple, just copy the variable off the stack into <code>eax</code></p>
+<p><strong>Strategy:</strong> Given <code>x + n</code></p>
+<ul>
+<li>Move <code>x</code> (from stack) into <code>eax</code>,</li>
+<li>Add <code>n</code> to <code>eax</code>.</li>
+</ul>
+<h4 id="example-bin3">Example: Bin3</h4>
+<p>Same thing works if the second operand is a variable.</p>
+<div class="figure">
+<img src="../static/img/bin-3-to-asm.png" alt="Example: Bin 3" />
+<p class="caption">Example: Bin 3</p>
+</div>
+<p>Strategy: Given <code>x + n</code></p>
+<ul>
+<li>Move <code>x</code> (from stack) into <code>eax</code>,</li>
+<li>Add <code>n</code> to <code>eax</code>.</li>
+</ul>
+<h3 id="example-bin4">Example: Bin4</h3>
+<p>But what if we have <em>nested</em> expressions</p>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell">(<span class="dv">1</span> <span class="fu">+</span> <span class="dv">2</span>) <span class="fu">*</span> (<span class="dv">3</span> <span class="fu">+</span> <span class="dv">4</span>)</code></pre></div>
+<ul>
+<li>Can compile <code>1 + 2</code> with result in <code>eax</code> …</li>
+<li>.. but then need to <em>reuse</em> <code>eax</code> for <code>3 + 4</code></li>
+</ul>
+<p>Need to <strong>save</strong> <code>1 + 2</code> somewhere!</p>
+<p><strong>Idea</strong> How about use <em>another</em> register for <code>3 + 4</code>? * But then what about <code>(1 + 2) * (3 + 4) * (5 + 6)</code> ? * In general, may need to <em>save</em> more sub-expressions than we have registers.</p>
+<h3 id="idea-immediate-expressions">Idea: Immediate Expressions</h3>
+<p>Why were <code>1 + 2</code> and <code>x + y</code> so easy to compile but <code>(1 + 2) * (3 + 4)</code> not?</p>
+<p>Because <code>1</code> and <code>x</code> are <strong>immediate expressions</strong></p>
+<ul>
+<li>Their values don’t require any computation,</li>
+<li>Either a constant, or,</li>
+<li>Can be read off the stack.</li>
+</ul>
+<h3 id="idea-administrative-normal-form">Idea: Administrative Normal Form</h3>
+<blockquote>
+<p>An expression is in <strong>Administrative Normal Form (ANF)</strong> if all <strong>primitive operations</strong> have <strong>immediate</strong> arguments.</p>
+</blockquote>
+<p><strong>Primitive Operations:</strong> Those whose values we <em>need</em> for computation to proceed.</p>
+<ul>
+<li><code>v1 + v2</code></li>
+<li><code>v1 - v2</code></li>
+<li><code>v1 * v2</code></li>
+<li><code>if v: e1 else: e2</code></li>
+</ul>
+<p>Examples:</p>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="dv">2</span> <span class="fu">+</span> <span class="dv">3</span>
+
+<span class="kw">let</span> x <span class="fu">=</span> <span class="dv">12</span>
+<span class="kw">in</span>
+    x <span class="fu">+</span> <span class="dv">1</span>
+
+<span class="kw">let</span> x <span class="fu">=</span> <span class="dv">12</span>
+  , y <span class="fu">=</span> <span class="dv">18</span>
+<span class="kw">in</span>
+    x <span class="fu">+</span> y
+
+<span class="kw">let</span> x <span class="fu">=</span> <span class="dv">12</span>
+  , y <span class="fu">=</span> <span class="dv">18</span>
+  , t <span class="fu">=</span> x <span class="fu">+</span> y
+<span class="kw">in</span>
+  <span class="kw">if</span> t<span class="fu">:</span> <span class="dv">7</span> <span class="kw">else</span><span class="fu">:</span> <span class="dv">9</span></code></pre></div>
+<p>Unfortunately, the below is <em>not</em> in ANF</p>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell">(<span class="dv">1</span> <span class="fu">+</span> <span class="dv">2</span>) <span class="fu">*</span> (<span class="dv">3</span> <span class="fu">+</span> <span class="dv">4</span>)</code></pre></div>
+<ul>
+<li>As the <code>*</code> has <em>non-immediate</em> arguments.</li>
+</ul>
+<p>However, note the following variant <em>is in ANF</em></p>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="kw">let</span> t1 <span class="fu">=</span> <span class="dv">1</span> <span class="fu">+</span> <span class="dv">2</span>
+  , t2 <span class="fu">=</span> <span class="dv">3</span> <span class="fu">+</span> <span class="dv">4</span>
+<span class="kw">in</span>  
+    t1 <span class="fu">*</span> t2</code></pre></div>
+<h3 id="binary-operations-strategy">Binary Operations: Strategy</h3>
+<p>We can convert <em>any</em> expression to ANF</p>
+<ul>
+<li>By adding “temporary” variables for sub-expressions</li>
+</ul>
+<div class="figure">
+<img src="../static/img/compiler-pipeline-anf.png" alt="Compiler Pipeline with ANF" />
+<p class="caption">Compiler Pipeline with ANF</p>
+</div>
+<ul>
+<li><strong>Step 1:</strong> Compiling ANF into Assembly<br />
+</li>
+<li><strong>Step 2:</strong> Converting Expressions into ANF</li>
+</ul>
+<h3 id="types-source-1">Types: Source</h3>
+<p>Lets add binary primitive operators</p>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="kw">data</span> <span class="dt">Prim2</span>
+  <span class="fu">=</span> <span class="dt">Plus</span> <span class="fu">|</span> <span class="dt">Minus</span> <span class="fu">|</span> <span class="dt">Times</span></code></pre></div>
+<p>and use them to extend the source language:</p>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="kw">data</span> <span class="dt">Expr</span> a
+  <span class="fu">=</span> <span class="fu">...</span>
+  <span class="fu">|</span> <span class="dt">Prim2</span> <span class="dt">Prim2</span>  (<span class="dt">Expr</span> a) (<span class="dt">Expr</span> a) a</code></pre></div>
+<p>So, for example, <code>2 + 3</code> would be parsed as:</p>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="dt">Prim2</span> <span class="dt">Plus</span> (<span class="dt">Number</span> <span class="dv">2</span> ()) (<span class="dt">Number</span> <span class="dv">3</span> ()) ()</code></pre></div>
+<h3 id="types-assembly-1">Types: Assembly</h3>
+<p>Need to add X86 instructions for primitive arithmetic:</p>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="kw">data</span> <span class="dt">Instruction</span>
+  <span class="fu">=</span> <span class="fu">...</span>
+  <span class="fu">|</span> <span class="dt">IAdd</span> <span class="dt">Arg</span> <span class="dt">Arg</span>
+  <span class="fu">|</span> <span class="dt">ISub</span> <span class="dt">Arg</span> <span class="dt">Arg</span>
+  <span class="fu">|</span> <span class="dt">IMul</span> <span class="dt">Arg</span> <span class="dt">Arg</span></code></pre></div>
+<h3 id="types-anf">Types: ANF</h3>
+<p>We <em>can</em> define a separate type for ANF (try it!) * but cumbersome as it requires duplicating a bunch of code.</p>
+<p>Instead, lets write a <em>function</em> that describes <strong>immediate expressions</strong></p>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="ot">isImm ::</span> <span class="dt">Expr</span> a <span class="ot">-&gt;</span> <span class="dt">Bool</span>
+isImm (<span class="dt">Number</span> _ _) <span class="fu">=</span> <span class="dt">True</span>
+isImm (<span class="dt">Var</span>    _ _) <span class="fu">=</span> <span class="dt">True</span>
+isImm _            <span class="fu">=</span> <span class="dt">False</span></code></pre></div>
+<p>We can now think of <strong>immediate</strong> expressions as:</p>
+<blockquote>
+<p>The <em>subset</em> of <code>Expr</code> <em>such that</em> <code>isImm</code> returns <code>True</code></p>
+</blockquote>
+<p>Similarly, lets write a function that describes <strong>ANF</strong> expressions</p>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="ot">isAnf ::</span> <span class="dt">Expr</span> a <span class="ot">-&gt;</span> <span class="dt">Bool</span>
+isAnf (<span class="dt">Number</span>  _     _) <span class="fu">=</span> <span class="dt">True</span>
+isAnf (<span class="dt">Var</span>     _     _) <span class="fu">=</span> <span class="dt">True</span>
+isAnf (<span class="dt">Prim2</span> _ e1 e2 _) <span class="fu">=</span> isImm e1 <span class="fu">&amp;&amp;</span> isImm e2
+isAnf (<span class="dt">If</span> e1 e2 e3   _) <span class="fu">=</span> isImm e1 <span class="fu">&amp;&amp;</span> isAnf e2 <span class="fu">&amp;&amp;</span> isAnf e3
+isAnf (<span class="dt">Let</span> x e1 e2   _) <span class="fu">=</span> isAnf e1 <span class="fu">&amp;&amp;</span> isAnf e2</code></pre></div>
+<p>We can now think of <strong>ANF</strong> expressions as:</p>
+<blockquote>
+<p>The <em>subset</em> of <code>Expr</code> <em>such that</em> <code>isAnf</code> returns <code>True</code></p>
+</blockquote>
+<p>We can use the above to <strong>test</strong> our ANF conversion.</p>
+<h3 id="types-strategy">Types &amp; Strategy</h3>
+<p>Writing the type aliases:</p>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="kw">type</span> <span class="dt">BareE</span>   <span class="fu">=</span> <span class="dt">Expr</span> ()
+<span class="kw">type</span> <span class="dt">AnfE</span>    <span class="fu">=</span> <span class="dt">Expr</span> ()  <span class="co">-- such that isAnf is True</span>
+<span class="kw">type</span> <span class="dt">AnfTagE</span> <span class="fu">=</span> <span class="dt">Expr</span> <span class="dt">Tag</span> <span class="co">-- such that isAnf is True</span>
+<span class="kw">type</span> <span class="dt">ImmTagE</span> <span class="fu">=</span> <span class="dt">Expr</span> <span class="dt">Tag</span> <span class="co">-- such that isImm is True</span></code></pre></div>
+<p>we get the overall pipeline:</p>
+<div class="figure">
+<img src="../static/img/compiler-pipeline-anf-types.png" alt="Compiler Pipeline with ANF: Types" />
+<p class="caption">Compiler Pipeline with ANF: Types</p>
+</div>
+<h3 id="transforms-compiling-anftage-to-asm">Transforms: Compiling <code>AnfTagE</code> to <code>Asm</code></h3>
+<div class="figure">
+<img src="../static/img/compiler-pipeline-anf-to-asm.png" alt="Compiler Pipeline: ANF to ASM" />
+<p class="caption">Compiler Pipeline: ANF to ASM</p>
+</div>
+<p>The compilation from ANF is easy, lets recall our examples and strategy:</p>
+<p>Strategy: Given <code>v1 + v2</code> (where <code>v1</code> and <code>v2</code> are <strong>immediate expressions</strong>)</p>
+<ul>
+<li>Move <code>v1</code> into <code>eax</code>,</li>
+<li>Add <code>v2</code> to <code>eax</code>.</li>
+</ul>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="ot">compile ::</span> <span class="dt">Env</span> <span class="ot">-&gt;</span> <span class="dt">TagE</span> <span class="ot">-&gt;</span> <span class="dt">Asm</span>
+compile env (<span class="dt">Prim2</span> o v1 v2)
+  <span class="fu">=</span> [ <span class="dt">IMov</span>      (<span class="dt">Reg</span> <span class="dt">EAX</span>) (immArg env v1)
+    , (prim2 o) (<span class="dt">Reg</span> <span class="dt">EAX</span>) (immArg env v2)
+    ]</code></pre></div>
+<p>where we have a helper to find the <code>Asm</code> variant of a <code>Prim2</code> operation</p>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="ot">prim2 ::</span> <span class="dt">Prim2</span> <span class="ot">-&gt;</span> <span class="dt">Arg</span> <span class="ot">-&gt;</span> <span class="dt">Arg</span> <span class="ot">-&gt;</span> <span class="dt">Instruction</span>
+prim2 <span class="dt">Plus</span>  <span class="fu">=</span> <span class="dt">IAdd</span>
+prim2 <span class="dt">Minus</span> <span class="fu">=</span> <span class="dt">ISub</span>
+prim2 <span class="dt">Times</span> <span class="fu">=</span> <span class="dt">IMul</span></code></pre></div>
+<p>and another to convert an <em>immediate expression</em> to an x86 argument:</p>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="ot">immArg ::</span> <span class="dt">Env</span> <span class="ot">-&gt;</span> <span class="dt">ImmTag</span> <span class="ot">-&gt;</span> <span class="dt">Arg</span>
+immArg _   (<span class="dt">Number</span> n _) <span class="fu">=</span> <span class="dt">Const</span> n
+immArg env (<span class="dt">Var</span>    x _) <span class="fu">=</span> <span class="dt">RegOffset</span> <span class="dt">ESP</span> i
+  <span class="kw">where</span>
+    i                   <span class="fu">=</span> fromMaybe err (lookup x env)
+    err                 <span class="fu">=</span> error (printf <span class="st">&quot;Error: Variable '%s' is unbound&quot;</span> x)</code></pre></div>
+<h3 id="transforms-compiling-bare-to-anf">Transforms: Compiling <code>Bare</code> to <code>Anf</code></h3>
+<p>Next lets focus on <strong>A-Normalization</strong> i.e. transforming expressions into ANF</p>
+<div class="figure">
+<img src="../static/img/compiler-pipeline-bare-to-anf.png" alt="Compiler Pipeline: Bare to ANF" />
+<p class="caption">Compiler Pipeline: Bare to ANF</p>
+</div>
+<h3 id="a-normalization">A-Normalization</h3>
+<p>We can fill in the base cases easily</p>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell">anf (<span class="dt">Number</span> n)      <span class="fu">=</span> <span class="dt">Number</span> n
+anf (<span class="dt">Var</span> x)         <span class="fu">=</span> <span class="dt">Var</span> x</code></pre></div>
+<p>Interesting cases are the binary operations</p>
+<h4 id="example-anf-1">Example: Anf-1</h4>
+<p>Left operand is not immediate</p>
+<div class="figure">
+<img src="../static/img/anf-1.png" alt="Example: ANF 1" />
+<p class="caption">Example: ANF 1</p>
+</div>
+<p><strong>Key Idea: Helper Function</strong></p>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="ot">imm ::</span> <span class="dt">BareE</span> <span class="ot">-&gt;</span> ([(<span class="dt">Id</span>, <span class="dt">AnfE</span>)], <span class="dt">ImmE</span>)</code></pre></div>
+<p><code>imm e</code> returns <code>([(t1, a1),...,(tn, an)], v)</code> where</p>
+<ul>
+<li><code>ti, ai</code> are new temporary variables bound to ANF exprs,</li>
+<li><code>v</code> is an <strong>immediate value</strong> (either a constant or variable)</li>
+</ul>
+<p>Such that <code>e</code> is <em>equivalent to</em></p>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="kw">let</span> t1 <span class="fu">=</span> a1
+  , <span class="fu">...</span>
+  , tn <span class="fu">=</span> an
+<span class="kw">in</span>
+   v</code></pre></div>
+<p>Lets look at some more examples.</p>
+<h4 id="example-anf-2">Example: Anf-2</h4>
+<p>Left operand is not internally immediate</p>
+<div class="figure">
+<img src="../static/img/anf-2.png" alt="Example: ANF 2" />
+<p class="caption">Example: ANF 2</p>
+</div>
+<h4 id="example-anf-3">Example: Anf-3</h4>
+<p>Both operands are not immediate</p>
+<div class="figure">
+<img src="../static/img/anf-3.png" alt="Example: ANF 3" />
+<p class="caption">Example: ANF 3</p>
+</div>
+<h3 id="anf-general-strategy">ANF: General Strategy</h3>
+<div class="figure">
+<img src="../static/img/anf-strategy.png" alt="ANF Strategy" />
+<p class="caption">ANF Strategy</p>
+</div>
+<ol style="list-style-type: decimal">
+<li><strong>Invoke</strong> <code>imm</code> on both the operands</li>
+<li><strong>Concat</strong> the <code>let</code> bindings</li>
+<li><strong>Apply</strong> the binop to the immediate values</li>
+</ol>
+<h3 id="anf-implementation">ANF: Implementation</h3>
+<p>Lets implement the above strategy</p>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell">anf (<span class="dt">Prim2</span> o e1 e2) <span class="fu">=</span> lets (b1s <span class="fu">++</span> b2s)
+                        (<span class="dt">Prim2</span> o (<span class="dt">Var</span> v1) (<span class="dt">Var</span> v2))
+  <span class="kw">where</span>
+    (b1s, v1)       <span class="fu">=</span> imm e1
+    (b2s, v2)       <span class="fu">=</span> imm e2
+
+<span class="ot">lets ::</span> [(<span class="dt">Id</span>, <span class="dt">AnfE</span>)] <span class="ot">-&gt;</span> <span class="dt">AnfE</span> <span class="ot">-&gt;</span> <span class="dt">AnfE</span>
+lets [] e'         <span class="fu">=</span> e
+lets ((x,e)<span class="fu">:</span>bs) e' <span class="fu">=</span> <span class="dt">Let</span> x e (lets bs e')</code></pre></div>
+<p>Same principle applies to <code>If</code></p>
+<ul>
+<li>use <code>imm</code> to make the condition <em>immediate</em></li>
+<li>use <code>anf</code> to recursively transform the branches.</li>
+</ul>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell">anf (<span class="dt">If</span> e1 e2 e3)   <span class="fu">=</span> lets bs (<span class="dt">If</span> t e1' e2')  
+  <span class="kw">where</span>
+    (bs, t)         <span class="fu">=</span> imm e1
+    e1'             <span class="fu">=</span> anf e1
+    e2'             <span class="fu">=</span> anf e2</code></pre></div>
+<p>Finally, for <code>Let</code> just make sure we recursively <code>anf</code> the sub-expressions.</p>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell">anf (<span class="dt">Let</span> x e1 e2)   <span class="fu">=</span> <span class="dt">Let</span> x e1' e2'
+  <span class="kw">where</span>
+    e1'             <span class="fu">=</span> anf e1
+    e2'             <span class="fu">=</span> anf e2</code></pre></div>
+<h3 id="anf-making-arguments-immediate-via-imm">ANF: Making Arguments Immediate via <code>imm</code></h3>
+<p>The workhorse is the function</p>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="ot">imm ::</span> <span class="dt">BareE</span> <span class="ot">-&gt;</span> ([(<span class="dt">Id</span>, <span class="dt">AnfE</span>)], <span class="dt">ImmE</span>)</code></pre></div>
+<p>which creates temporary variables to crunch an arbitrary <code>Bare</code> into an <em>immediate</em> value.</p>
+<p>No need to create an variables if the expression is <em>already</em> immediate:</p>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell">imm v<span class="fu">@</span>(<span class="dt">Number</span> _)    <span class="fu">=</span> ( [], v )
+imm v<span class="fu">@</span>(<span class="dt">Id</span>     _)    <span class="fu">=</span> ( [], v )</code></pre></div>
+<p>The tricky case is when the expression has a primop:</p>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell">imm (<span class="dt">Prim2</span> o e1 e2) <span class="fu">=</span> ( b1s <span class="fu">++</span> b2s <span class="fu">++</span> [(t,  <span class="dt">Prim2</span> o v1 v2)]
+                      , <span class="dt">Id</span> t  )
+  t                 <span class="fu">=</span> <span class="dt">FreshVar</span>
+  (b1s, v1)         <span class="fu">=</span> imm e1
+  (b2s, v2)         <span class="fu">=</span> imm e2  </code></pre></div>
+<p>Oh, what shall we do when:</p>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell">imm (<span class="dt">If</span> e1 e2 e3)   <span class="fu">=</span> <span class="fu">???</span>
+imm (<span class="dt">Let</span> x e1 e2)   <span class="fu">=</span> <span class="fu">???</span></code></pre></div>
+<p>Lets look at an example for inspiration.</p>
+<div class="figure">
+<img src="../static/img/anf-4.png" alt="Example: ANF 4" />
+<p class="caption">Example: ANF 4</p>
+</div>
+<p>That is, simply</p>
+<ul>
+<li><code>anf</code> the relevent expressions,</li>
+<li>bind them to a fresh variable.</li>
+</ul>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell">imm e<span class="fu">@</span>(<span class="dt">If</span> _ _ _) <span class="fu">=</span> immExp e
+imm e<span class="fu">@</span>(<span class="dt">If</span> _ _ _) <span class="fu">=</span> immExp e
+
+<span class="ot">immExp ::</span> <span class="dt">AnfE</span> <span class="ot">-&gt;</span> ([(<span class="dt">Id</span>, <span class="dt">AnfE</span>)], <span class="dt">ImmE</span>)
+immExp e <span class="fu">=</span> [(t, e')], t
+  <span class="kw">where</span>
+    t    <span class="fu">=</span> <span class="dt">FreshVar</span>
+    e'   <span class="fu">=</span> anf e</code></pre></div>
+<h3 id="one-last-thing-whats-up-with-freshvar">One last thing: Whats up with <code>FreshVar</code> ?</h3>
+<p>Wait a minute, what is this magic <strong>FRESH</strong> ?</p>
+<p>How can we create <strong>distinct</strong> names out of thin air?</p>
+<p>What’s that? Global variables? Increment a counter?</p>
+<div class="figure">
+<img src="../resources/dr-evil.jpg" alt="Get thee behind me Satan!" />
+<p class="caption">Get thee behind me Satan!</p>
+</div>
+<p>We will use a counter, but will have to <strong>pass its value around</strong></p>
+<ul>
+<li>Just like <code>tag</code></li>
+</ul>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="ot">anf ::</span> <span class="dt">Int</span> <span class="ot">-&gt;</span> <span class="dt">BareE</span> <span class="ot">-&gt;</span> (<span class="dt">Int</span>, <span class="dt">AnfE</span>)
+
+anf i (<span class="dt">Number</span> n l)      <span class="fu">=</span> (i, <span class="dt">Number</span> n l)
+
+anf i (<span class="dt">Id</span>     x l)      <span class="fu">=</span> (i, <span class="dt">Id</span>     x l)
+
+anf i (<span class="dt">Let</span> x e b l)     <span class="fu">=</span> (i'', <span class="dt">Let</span> x e' b' l)
+  <span class="kw">where</span>
+    (i',  e')           <span class="fu">=</span> anf i e
+    (i'', b')           <span class="fu">=</span> anf i' b
+
+anf i (<span class="dt">Prim2</span> o e1 e2 l) <span class="fu">=</span> (i'', lets (b1s <span class="fu">++</span> b2s) (<span class="dt">Prim2</span> o e1' e2' l))
+  <span class="kw">where</span>
+    (i' , b1s, e1')     <span class="fu">=</span> imm i  e1
+    (i'', b2s, e2')     <span class="fu">=</span> imm i' e2
+
+anf i (<span class="dt">If</span> c e1 e2 l)    <span class="fu">=</span> (i''', lets bs  (<span class="dt">If</span> c' e1' e2' l))
+  <span class="kw">where</span>
+    (i'  , bs, c')      <span class="fu">=</span> imm i   c
+    (i'' ,     e1')     <span class="fu">=</span> anf i'  e1
+    (i''',     e2')     <span class="fu">=</span> anf i'' e2</code></pre></div>
+<p>and</p>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="ot">imm ::</span> <span class="dt">Int</span> <span class="ot">-&gt;</span> <span class="dt">AnfE</span> <span class="ot">-&gt;</span> (<span class="dt">Int</span>, [(<span class="dt">Id</span>, <span class="dt">AnfE</span>)], <span class="dt">ImmE</span>)
+
+imm i (<span class="dt">Number</span> n l)        <span class="fu">=</span> (i  , [], <span class="dt">Number</span> n l)
+
+imm i (<span class="dt">Var</span> x l)           <span class="fu">=</span> (i  , [], <span class="dt">Var</span> x l)
+
+imm i (<span class="dt">Prim2</span> o e1 e2 l) <span class="fu">=</span> (i''', bs, <span class="dt">Var</span> v l)
+  <span class="kw">where</span>
+    (i'  , b1s, v1)     <span class="fu">=</span> imm i  e1
+    (i'' , b2s, v2)     <span class="fu">=</span> imm i' e2
+    (i''', v)           <span class="fu">=</span> fresh i''
+    bs                  <span class="fu">=</span> b1s <span class="fu">++</span> b2s <span class="fu">++</span> [(v, <span class="dt">Prim2</span> o v1 v2 l)]
+
+imm i e<span class="fu">@</span>(<span class="dt">If</span> _ _ _  l)   <span class="fu">=</span> immExp i e
+
+imm i e<span class="fu">@</span>(<span class="dt">Let</span> _ _ _ l)   <span class="fu">=</span> immExp i e
+
+<span class="ot">immExp ::</span> <span class="dt">Int</span> <span class="ot">-&gt;</span> <span class="dt">BareE</span> <span class="ot">-&gt;</span> (<span class="dt">Int</span>, [(<span class="dt">Id</span>, <span class="dt">AnfE</span>)], <span class="dt">ImmE</span>)
+immExp i e l  <span class="fu">=</span> (i'', bs, <span class="dt">Var</span> v ())
+  <span class="kw">where</span>
+    (i' , e') <span class="fu">=</span> anf i e
+    (i'', v)  <span class="fu">=</span> fresh i'
+    bs        <span class="fu">=</span> [(v, e')]</code></pre></div>
+<p>where now, the <code>fresh</code> function returns a <em>new counter</em> and a variable</p>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="ot">fresh ::</span> <span class="dt">Int</span> <span class="ot">-&gt;</span> (<span class="dt">Int</span>, <span class="dt">Id</span>)
+fresh n <span class="fu">=</span> (n<span class="fu">+</span><span class="dv">1</span>, <span class="st">&quot;t&quot;</span> <span class="fu">++</span> show n)</code></pre></div>
+<p><strong>Note</strong> this is super clunky. There <em>is</em> a really slick way to write the above code without the clutter of the <code>i</code> but thats too much of a digression, <a href="https://cseweb.ucsd.edu/classes/wi12/cse230-a/lectures/monads.html">but feel free to look it up yourself</a></p>
+<h2 id="recap-and-summary">Recap and Summary</h2>
+<p>Just created <code>Boa</code> with</p>
+<ul>
+<li>Branches (<code>if</code>-expressions)</li>
+<li>Binary Operators (<code>+</code>, <code>-</code>, etc.)</li>
+</ul>
+<p>In the process of doing so, we will learned about</p>
+<ul>
+<li><strong>Intermediate Forms</strong></li>
+<li><strong>Normalization</strong></li>
+</ul>
+<p>Specifically,</p>
+<div class="figure">
+<img src="../static/img/compiler-pipeline-anf-types.png" alt="Compiler Pipeline with ANF" />
+<p class="caption">Compiler Pipeline with ANF</p>
+</div>	
+                <hr>
+            </div>
+        </div>
+    </div>
+</article>
+
+        </div>
+        <div id="footer">
+        </div>
+      <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                    <li>
+                        <a href="https://ucsd-progsys.github.io/131-web/feed.xml" data-datatype="json" data-type="GET" data-target="#frame" class="reload" id="clickme">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="https://twitter.com/ranjitjhala" data-datatype="json" data-type="GET" data-target="#frame" class="reload" id="clickme" target="_blank">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li>
+                        <a href="https://plus.google.com/u/0/106612421534244742464" data-datatype="json" data-type="GET" data-target="#frame" class="reload" id="clickme" target="_blank">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-google-plus fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                     
+                     
+                    <li>
+                        <a href="https://github.com/ucsd-progsys/131-web" target="_blank">
+                            <span class="fa-stack fa-lg">
+
+                              <i class="fa fa-arrow-circle-o-down"></i>
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+		    
+                </ul>
+                <p class="copyright text-muted">Copyright &copy; Ranjit Jhala
+                2016. Please suggest fixes <a href="http://github.com/ucsd-progsys/131-web">here.</a><br><br> 
+                </p>
+<div class="col-md-12">
+     <p class="copyright text-muted">
+     Site generated by <a href="http://jaspervdj.be/hakyll">Hakyll</a>, using
+     a theme by <a href="http://katychuang.com/hakyll-cssgarden/gallery/" target="_blank">Katy Chuang.</a>
+     </p>
+</div>
+    
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="https://ucsd-progsys.github.io/131-web/static/js/jquery.min.js"></script>
+<script src="https://ucsd-progsys.github.io/131-web/static/js/spaceg.stylesheets.min.js"></script> 
+<script src="https://ucsd-progsys.github.io/131-web/static/js/bootstrap.min.js"></script>
+<script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js"></script>
+<script src="https://ucsd-progsys.github.io/131-web/static/js/scripts.js"></script>
+
+
+
+    </body>
+</html>
