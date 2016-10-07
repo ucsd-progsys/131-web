@@ -284,17 +284,21 @@ We can now fill in the complete version:
 
 ```haskell
 doTag :: Int -> BareE -> (Int, TagE)
+
 doTag i (Number n _)    = (i + 1 , Number n i)
+
 doTag i (Var    x _)    = (i + 1 , Var     x i)
+
+doTag i (Let x e1 e2 i) = (i2 + 1, Let x e1' e2' i2)
+  where
+    (i1, e1')           = doTag i  e1
+    (i2, e2')           = doTag i1 e2
+
 doTag i (If e1 e2 e3 i) = (i3 + 1, If e1' e2' e3' i3)
   where
     (i1, e1')           = doTag i  e1
     (i2, e2')           = doTag i1 e2
     (i3, e3')           = doTag i2 e3
-doTag i (Let x e1 e2 i) = (i2 + 1, Let x e1' e2' i2)
-  where
-    (i1, e1')           = doTag i  e1
-    (i2, e2')           = doTag i1 e2
 ```
 
 (**ProTip:** Use `mapAccumL`)
