@@ -253,7 +253,7 @@ The key work is done by `doTag i e`
 doTag :: Int -> BareE -> (Int, TagE)
 doTag i (Number n _)    = (i + 1 , Number n i)
 doTag i (Var    x _)    = (i + 1 , Var     x i)
-doTag i (Let x e1 e2 i) = (_2    , Let x e1' e2' i2)
+doTag i (Let x e1 e2 _) = (_2    , Let x e1' e2' i2)
   where
     (i1, e1')           = doTag i  e1
     (i2, e2')           = doTag _1 e2
