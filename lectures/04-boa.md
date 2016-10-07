@@ -124,63 +124,6 @@ else
 
 ![QUIZ: Compiling if-else](/static/img/quiz-if-asm.png)
 
-A. 
-
-```asm
-  mov eax, 10
-  cmp eax, 0
-  je  if_false 
-if_true:
-  mov eax, 22
-  jmp if_done
-if_false:
-  mov eax, 33 
-if_done:
-```
-
-B. 
-
-```asm
-  mov eax, 10
-  cmp eax, 0
-  je  if_false 
-if_true:
-  mov eax, 22
-if_false:
-  mov eax, 33 
-if_done:
-```
-
-C. 
-
-```asm
-  mov eax, 10
-  cmp eax, 0
-  je  if_true 
-if_true:
-  mov eax, 22
-  jmp if_done
-if_false:
-  mov eax, 33 
-if_done:
-```
-
-D. 
-
-```asm
-  mov eax, 10
-  cmp eax, 0
-  je  if_true 
-if_true:
-  mov eax, 22
-if_false:
-  mov eax, 33 
-if_done
-```
-
-
-
-
 
 ### Strategy
 
