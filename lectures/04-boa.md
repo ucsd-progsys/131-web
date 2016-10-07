@@ -111,6 +111,75 @@ jne LABEL     # jump if previous comparison result was NOT-EQUAL
 use the result of the _flag_ set by the most recent `cmp` to
 *transfer control flow* to the given `LABEL`
 
+### Quiz 
+
+Which of the following is a valid x86 encoding of 
+
+```python
+if 10:
+  22
+else
+  33
+```
+
+A. 
+
+```asm
+  mov eax, 10
+  cmp eax, 0
+  je  if_false 
+if_true:
+  mov eax, 22
+  jmp if_done
+if_false:
+  mov eax, 33 
+if_done:
+```
+
+B. 
+
+```asm
+  mov eax, 10
+  cmp eax, 0
+  je  if_false 
+if_true:
+  mov eax, 22
+if_false:
+  mov eax, 33 
+if_done:
+```
+
+C. 
+
+```asm
+  mov eax, 10
+  cmp eax, 0
+  je  if_true 
+if_true:
+  mov eax, 22
+  jmp if_done
+if_false:
+  mov eax, 33 
+if_done:
+```
+
+D. 
+
+```asm
+  mov eax, 10
+  cmp eax, 0
+  je  if_true 
+if_true:
+  mov eax, 22
+if_false:
+  mov eax, 33 
+if_done
+```
+
+
+
+
+
 ### Strategy
 
 To compile an expression of the form
@@ -232,6 +301,41 @@ If (Number 1 ()) (Number 22 ()) (Number 33 ()) ()
 The key work is done by `doTag i e`
 * Recursively walk over the `BareE` named `e` starting tagging at counter `i`
 * Returning a pair `(i', e')` of _updated counter_ `i'` and  tagged expr `e'`
+
+**QUIZ** 
+
+```haskell
+doTag :: Int -> BareE -> (Int, TagE)
+doTag i (Number n _)    = (i + 1 , Number n i)
+doTag i (Var    x _)    = (i + 1 , Var     x i)
+doTag i (Let x e1 e2 i) = (_2    , Let x e1' e2' i2)
+  where
+    (i1, e1')           = doTag i  e1
+    (i2, e2')           = doTag _1 e2
+```
+
+What expressions shall we fill in for `_1` and `_2` ? 
+
+```
+{- A -}   _1 = i 
+          _2 = i + 1
+
+{- B -}   _1 = i 
+          _2 = i1 + 1
+
+{- C -}   _1 = i 
+          _2 = i2 + 1
+
+{- D -}   _1 = i1 
+          _2 = i2 + 1
+
+{- E -}   _1 = i2 
+          _2 = i1 + 1
+```
+
+
+We can now fill in the complete version:
+
 
 ```haskell
 doTag :: Int -> BareE -> (Int, TagE)
