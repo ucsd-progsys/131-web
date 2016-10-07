@@ -111,7 +111,7 @@ jne LABEL     # jump if previous comparison result was NOT-EQUAL
 use the result of the _flag_ set by the most recent `cmp` to
 *transfer control flow* to the given `LABEL`
 
-### Quiz 
+### QUIZ 
 
 Which of the following is a valid x86 encoding of 
 
@@ -121,6 +121,8 @@ if 10:
 else
   33
 ```
+
+![QUIZ: Compiling if-else](/static/img/quiz-if-asm.png)
 
 A. 
 
