@@ -111,9 +111,9 @@ jne LABEL     # jump if previous comparison result was NOT-EQUAL
 use the result of the _flag_ set by the most recent `cmp` to
 *transfer control flow* to the given `LABEL`
 
-### QUIZ 
+### QUIZ
 
-Which of the following is a valid x86 encoding of 
+Which of the following is a valid x86 encoding of
 
 ```python
 if 10:
@@ -247,7 +247,7 @@ The key work is done by `doTag i e`
 * Recursively walk over the `BareE` named `e` starting tagging at counter `i`
 * Returning a pair `(i', e')` of _updated counter_ `i'` and  tagged expr `e'`
 
-**QUIZ** 
+**QUIZ**
 
 ```haskell
 doTag :: Int -> BareE -> (Int, TagE)
@@ -259,22 +259,22 @@ doTag i (Let x e1 e2 _) = (_2    , Let x e1' e2' i2)
     (i2, e2')           = doTag _1 e2
 ```
 
-What expressions shall we fill in for `_1` and `_2` ? 
+What expressions shall we fill in for `_1` and `_2` ?
 
 ```
-{- A -}   _1 = i 
+{- A -}   _1 = i
           _2 = i + 1
 
-{- B -}   _1 = i 
+{- B -}   _1 = i
           _2 = i1 + 1
 
-{- C -}   _1 = i 
+{- C -}   _1 = i
           _2 = i2 + 1
 
-{- D -}   _1 = i1 
+{- D -}   _1 = i1
           _2 = i2 + 1
 
-{- E -}   _1 = i2 
+{- E -}   _1 = i2
           _2 = i1 + 1
 ```
 
@@ -354,6 +354,20 @@ Lets look at some expressions and figure out how they would get compiled.
 
 * Recall: We want the result to be in `eax` after the instructions finish.
 
+#### QUIZ
+
+What is the assembly corresponding to `33 - 10` ?
+
+```nasm
+?1 eax, ?2
+?3 eax, ?4
+```
+
+A. `?1 = sub`, `?2 = 33`, `?3 = mov`, `?4 = 10`
+B. `?1 = mov`, `?2 = 33`, `?3 = sub`, `?4 = 10`
+C. `?1 = sub`, `?2 = 10`, `?3 = mov`, `?4 = 33`
+D. `?1 = mov`, `?2 = 10`, `?3 = sub`, `?4 = 33`
+
 
 #### Example: Bin1
 
@@ -391,6 +405,31 @@ Strategy: Given `x + n`
 * Move `x` (from stack) into `eax`,
 * Add `n` to `eax`.
 
+### QUIZ
+
+What is the assembly corresponding to `(10 + 20) * 30` ?
+
+```nasm
+mov eax, 10
+?1  eax, ?2
+?3  eax, ?4
+```
+
+A. `?1 = add`, `?2 = 30`, `?3 = mul`, `?4 = 20`
+B. `?1 = mul`, `?2 = 30`, `?3 = add`, `?4 = 20`
+C. `?1 = add`, `?2 = 20`, `?3 = mul`, `?4 = 30`
+D. `?1 = mul`, `?2 = 20`, `?3 = add`, `?4 = 30`
+
+### Second Operand is Constant
+
+In general, to compile `e + n` we can do
+
+```haskell
+     compile e      
+  ++              -- result of e is in eax
+     [add eax, n]
+```
+
 ### Example: Bin4
 
 But what if we have _nested_ expressions
@@ -405,6 +444,7 @@ But what if we have _nested_ expressions
 Need to **save** `1 + 2` somewhere!
 
 **Idea** How about use _another_ register for `3 + 4`?
+
 * But then what about `(1 + 2) * (3 + 4) * (5 + 6)` ?
 * In general, may need to _save_ more sub-expressions than we have registers.
 
@@ -418,10 +458,10 @@ Because `1` and `x` are **immediate expressions**
 * Either a constant, or,
 * Can be read off the stack.
 
-### Idea: Administrative Normal Form
+### Idea: Administrative Normal Form (ANF)
 
 > An expression is in **Administrative Normal Form (ANF)**
-> if all **primitive operations** have **immediate** arguments.
+> if **all primitive operations** have **immediate** arguments.
 
 **Primitive Operations:** Those whose values we _need_ for computation to proceed.
 
@@ -430,26 +470,37 @@ Because `1` and `x` are **immediate expressions**
 * `v1 * v2`
 * `if v: e1 else: e2`
 
-Examples:
+### QUIZ
+
+Which of the below are in ANF ?
 
 ```haskell
-2 + 3
+{- 1 -} 2 + 3 + 4
 
-let x = 12
-in
-    x + 1
+{- 2 -} let x = 12 in
+          x + 1
 
-let x = 12
-  , y = 18
-in
-    x + y
+{- 3 -} let x = 12
+          , y = x + 6
+        in
+          x + y
 
-let x = 12
-  , y = 18
-  , t = x + y
-in
-  if t: 7 else: 9
+{- 4 -} let x = 12
+          , y = 18
+          , t = x + y + 1
+        in
+          if t: 7 else: 9
 ```
+
+1. `[1, 2, 3, 4]`
+2. `[1, 2, 3]`
+3. `[2, 3, 4]`
+4. `[1, 2]`
+5. `[2, 3]`
+
+
+
+### Compound Expressions
 
 Unfortunately, the below is _not_ in ANF
 
@@ -754,7 +805,7 @@ Lets look at an example for inspiration.
 
 That is, simply
 
-* `anf` the relevent expressions,
+* `anf` the relevant expressions,
 * bind them to a fresh variable.
 
 ```haskell
