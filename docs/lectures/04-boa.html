@@ -304,6 +304,16 @@ if (window.navigator.appName == "Microsoft Internet Explorer") {
 je  LABEL     # jump if previous comparison result was EQUAL  
 jne LABEL     # jump if previous comparison result was NOT-EQUAL  </code></pre>
 <p>use the result of the <em>flag</em> set by the most recent <code>cmp</code> to <em>transfer control flow</em> to the given <code>LABEL</code></p>
+<h3 id="quiz">QUIZ</h3>
+<p>Which of the following is a valid x86 encoding of</p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="cf">if</span> <span class="dv">10</span>:
+  <span class="dv">22</span>
+<span class="cf">else</span>
+  <span class="dv">33</span></code></pre></div>
+<div class="figure">
+<img src="../static/img/quiz-if-asm.png" alt="QUIZ: Compiling if-else" />
+<p class="caption">QUIZ: Compiling if-else</p>
+</div>
 <h3 id="strategy">Strategy</h3>
 <p>To compile an expression of the form</p>
 <div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="kw">if</span> eCond<span class="fu">:</span>
@@ -407,18 +417,46 @@ jne LABEL     # jump if previous comparison result was NOT-EQUAL  </code></pre>
 <span class="dt">If</span> (<span class="dt">Number</span> <span class="dv">1</span> ()) (<span class="dt">Number</span> <span class="dv">22</span> ()) (<span class="dt">Number</span> <span class="dv">33</span> ()) ()</code></pre></div>
 <h3 id="transforms-tag">Transforms: Tag</h3>
 <p>The key work is done by <code>doTag i e</code> * Recursively walk over the <code>BareE</code> named <code>e</code> starting tagging at counter <code>i</code> * Returning a pair <code>(i', e')</code> of <em>updated counter</em> <code>i'</code> and tagged expr <code>e'</code></p>
+<p><strong>QUIZ</strong></p>
 <div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="ot">doTag ::</span> <span class="dt">Int</span> <span class="ot">-&gt;</span> <span class="dt">BareE</span> <span class="ot">-&gt;</span> (<span class="dt">Int</span>, <span class="dt">TagE</span>)
 doTag i (<span class="dt">Number</span> n _)    <span class="fu">=</span> (i <span class="fu">+</span> <span class="dv">1</span> , <span class="dt">Number</span> n i)
 doTag i (<span class="dt">Var</span>    x _)    <span class="fu">=</span> (i <span class="fu">+</span> <span class="dv">1</span> , <span class="dt">Var</span>     x i)
+doTag i (<span class="dt">Let</span> x e1 e2 _) <span class="fu">=</span> (_2    , <span class="dt">Let</span> x e1' e2' i2)
+  <span class="kw">where</span>
+    (i1, e1')           <span class="fu">=</span> doTag i  e1
+    (i2, e2')           <span class="fu">=</span> doTag _1 e2</code></pre></div>
+<p>What expressions shall we fill in for <code>_1</code> and <code>_2</code> ?</p>
+<pre><code>{- A -}   _1 = i
+          _2 = i + 1
+
+{- B -}   _1 = i
+          _2 = i1 + 1
+
+{- C -}   _1 = i
+          _2 = i2 + 1
+
+{- D -}   _1 = i1
+          _2 = i2 + 1
+
+{- E -}   _1 = i2
+          _2 = i1 + 1</code></pre>
+<p>We can now fill in the complete version:</p>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="ot">doTag ::</span> <span class="dt">Int</span> <span class="ot">-&gt;</span> <span class="dt">BareE</span> <span class="ot">-&gt;</span> (<span class="dt">Int</span>, <span class="dt">TagE</span>)
+
+doTag i (<span class="dt">Number</span> n _)    <span class="fu">=</span> (i <span class="fu">+</span> <span class="dv">1</span> , <span class="dt">Number</span> n i)
+
+doTag i (<span class="dt">Var</span>    x _)    <span class="fu">=</span> (i <span class="fu">+</span> <span class="dv">1</span> , <span class="dt">Var</span>     x i)
+
+doTag i (<span class="dt">Let</span> x e1 e2 i) <span class="fu">=</span> (i2 <span class="fu">+</span> <span class="dv">1</span>, <span class="dt">Let</span> x e1' e2' i2)
+  <span class="kw">where</span>
+    (i1, e1')           <span class="fu">=</span> doTag i  e1
+    (i2, e2')           <span class="fu">=</span> doTag i1 e2
+
 doTag i (<span class="dt">If</span> e1 e2 e3 i) <span class="fu">=</span> (i3 <span class="fu">+</span> <span class="dv">1</span>, <span class="dt">If</span> e1' e2' e3' i3)
   <span class="kw">where</span>
     (i1, e1')           <span class="fu">=</span> doTag i  e1
     (i2, e2')           <span class="fu">=</span> doTag i1 e2
-    (i3, e3')           <span class="fu">=</span> doTag i2 e3
-doTag i (<span class="dt">Let</span> x e1 e2 i) <span class="fu">=</span> (i2 <span class="fu">+</span> <span class="dv">1</span>, <span class="dt">Let</span> x e1' e2' i2)
-  <span class="kw">where</span>
-    (i1, e1')           <span class="fu">=</span> doTag i  e1
-    (i2, e2')           <span class="fu">=</span> doTag i1 e2</code></pre></div>
+    (i3, e3')           <span class="fu">=</span> doTag i2 e3</code></pre></div>
 <p>(<strong>ProTip:</strong> Use <code>mapAccumL</code>)</p>
 <p>We can now tag the whole program by * calling <code>doTag</code> with the initial counter (e.g. <code>0</code>), * throwing away the final counter.</p>
 <div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="ot">tag ::</span> <span class="dt">BareE</span> <span class="ot">-&gt;</span> <span class="dt">TagE</span>
@@ -458,6 +496,11 @@ tag e <span class="fu">=</span> e'  <span class="kw">where</span>  (_, e') <span
 <ul>
 <li>Recall: We want the result to be in <code>eax</code> after the instructions finish.</li>
 </ul>
+<h4 id="quiz-1">QUIZ</h4>
+<p>What is the assembly corresponding to <code>33 - 10</code> ?</p>
+<div class="sourceCode"><pre class="sourceCode nasm"><code class="sourceCode nasm">?<span class="dv">1</span> <span class="kw">eax</span>, ?<span class="dv">2</span>
+?<span class="dv">3</span> <span class="kw">eax</span>, ?<span class="dv">4</span></code></pre></div>
+<p>A. <code>?1 = sub</code>, <code>?2 = 33</code>, <code>?3 = mov</code>, <code>?4 = 10</code> B. <code>?1 = mov</code>, <code>?2 = 33</code>, <code>?3 = sub</code>, <code>?4 = 10</code> C. <code>?1 = sub</code>, <code>?2 = 10</code>, <code>?3 = mov</code>, <code>?4 = 33</code> D. <code>?1 = mov</code>, <code>?2 = 10</code>, <code>?3 = sub</code>, <code>?4 = 33</code></p>
 <h4 id="example-bin1">Example: Bin1</h4>
 <p>Lets start with some easy ones. The source:</p>
 <div class="figure">
@@ -492,6 +535,17 @@ tag e <span class="fu">=</span> e'  <span class="kw">where</span>  (_, e') <span
 <li>Move <code>x</code> (from stack) into <code>eax</code>,</li>
 <li>Add <code>n</code> to <code>eax</code>.</li>
 </ul>
+<h3 id="quiz-2">QUIZ</h3>
+<p>What is the assembly corresponding to <code>(10 + 20) * 30</code> ?</p>
+<div class="sourceCode"><pre class="sourceCode nasm"><code class="sourceCode nasm"><span class="kw">mov</span> <span class="kw">eax</span>, <span class="dv">10</span>
+?<span class="dv">1</span>  <span class="kw">eax</span>, ?<span class="dv">2</span>
+?<span class="dv">3</span>  <span class="kw">eax</span>, ?<span class="dv">4</span></code></pre></div>
+<p>A. <code>?1 = add</code>, <code>?2 = 30</code>, <code>?3 = mul</code>, <code>?4 = 20</code> B. <code>?1 = mul</code>, <code>?2 = 30</code>, <code>?3 = add</code>, <code>?4 = 20</code> C. <code>?1 = add</code>, <code>?2 = 20</code>, <code>?3 = mul</code>, <code>?4 = 30</code> D. <code>?1 = mul</code>, <code>?2 = 20</code>, <code>?3 = add</code>, <code>?4 = 30</code></p>
+<h3 id="second-operand-is-constant">Second Operand is Constant</h3>
+<p>In general, to compile <code>e + n</code> we can do</p>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell">     compile e      
+  <span class="fu">++</span>              <span class="co">-- result of e is in eax</span>
+     [add eax, n]</code></pre></div>
 <h3 id="example-bin4">Example: Bin4</h3>
 <p>But what if we have <em>nested</em> expressions</p>
 <div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell">(<span class="dv">1</span> <span class="fu">+</span> <span class="dv">2</span>) <span class="fu">*</span> (<span class="dv">3</span> <span class="fu">+</span> <span class="dv">4</span>)</code></pre></div>
@@ -500,7 +554,11 @@ tag e <span class="fu">=</span> e'  <span class="kw">where</span>  (_, e') <span
 <li>.. but then need to <em>reuse</em> <code>eax</code> for <code>3 + 4</code></li>
 </ul>
 <p>Need to <strong>save</strong> <code>1 + 2</code> somewhere!</p>
-<p><strong>Idea</strong> How about use <em>another</em> register for <code>3 + 4</code>? * But then what about <code>(1 + 2) * (3 + 4) * (5 + 6)</code> ? * In general, may need to <em>save</em> more sub-expressions than we have registers.</p>
+<p><strong>Idea</strong> How about use <em>another</em> register for <code>3 + 4</code>?</p>
+<ul>
+<li>But then what about <code>(1 + 2) * (3 + 4) * (5 + 6)</code> ?</li>
+<li>In general, may need to <em>save</em> more sub-expressions than we have registers.</li>
+</ul>
 <h3 id="idea-immediate-expressions">Idea: Immediate Expressions</h3>
 <p>Why were <code>1 + 2</code> and <code>x + y</code> so easy to compile but <code>(1 + 2) * (3 + 4)</code> not?</p>
 <p>Because <code>1</code> and <code>x</code> are <strong>immediate expressions</strong></p>
@@ -509,9 +567,9 @@ tag e <span class="fu">=</span> e'  <span class="kw">where</span>  (_, e') <span
 <li>Either a constant, or,</li>
 <li>Can be read off the stack.</li>
 </ul>
-<h3 id="idea-administrative-normal-form">Idea: Administrative Normal Form</h3>
+<h3 id="idea-administrative-normal-form-anf">Idea: Administrative Normal Form (ANF)</h3>
 <blockquote>
-<p>An expression is in <strong>Administrative Normal Form (ANF)</strong> if all <strong>primitive operations</strong> have <strong>immediate</strong> arguments.</p>
+<p>An expression is in <strong>Administrative Normal Form (ANF)</strong> if <strong>all primitive operations</strong> have <strong>immediate</strong> arguments.</p>
 </blockquote>
 <p><strong>Primitive Operations:</strong> Those whose values we <em>need</em> for computation to proceed.</p>
 <ul>
@@ -520,23 +578,31 @@ tag e <span class="fu">=</span> e'  <span class="kw">where</span>  (_, e') <span
 <li><code>v1 * v2</code></li>
 <li><code>if v: e1 else: e2</code></li>
 </ul>
-<p>Examples:</p>
-<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="dv">2</span> <span class="fu">+</span> <span class="dv">3</span>
+<h3 id="quiz-3">QUIZ</h3>
+<p>Which of the below are in ANF ?</p>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="co">{- 1 -}</span> <span class="dv">2</span> <span class="fu">+</span> <span class="dv">3</span> <span class="fu">+</span> <span class="dv">4</span>
 
-<span class="kw">let</span> x <span class="fu">=</span> <span class="dv">12</span>
-<span class="kw">in</span>
-    x <span class="fu">+</span> <span class="dv">1</span>
+<span class="co">{- 2 -}</span> <span class="kw">let</span> x <span class="fu">=</span> <span class="dv">12</span> <span class="kw">in</span>
+          x <span class="fu">+</span> <span class="dv">1</span>
 
-<span class="kw">let</span> x <span class="fu">=</span> <span class="dv">12</span>
-  , y <span class="fu">=</span> <span class="dv">18</span>
-<span class="kw">in</span>
-    x <span class="fu">+</span> y
+<span class="co">{- 3 -}</span> <span class="kw">let</span> x <span class="fu">=</span> <span class="dv">12</span>
+          , y <span class="fu">=</span> x <span class="fu">+</span> <span class="dv">6</span>
+        <span class="kw">in</span>
+          x <span class="fu">+</span> y
 
-<span class="kw">let</span> x <span class="fu">=</span> <span class="dv">12</span>
-  , y <span class="fu">=</span> <span class="dv">18</span>
-  , t <span class="fu">=</span> x <span class="fu">+</span> y
-<span class="kw">in</span>
-  <span class="kw">if</span> t<span class="fu">:</span> <span class="dv">7</span> <span class="kw">else</span><span class="fu">:</span> <span class="dv">9</span></code></pre></div>
+<span class="co">{- 4 -}</span> <span class="kw">let</span> x <span class="fu">=</span> <span class="dv">12</span>
+          , y <span class="fu">=</span> <span class="dv">18</span>
+          , t <span class="fu">=</span> x <span class="fu">+</span> y <span class="fu">+</span> <span class="dv">1</span>
+        <span class="kw">in</span>
+          <span class="kw">if</span> t<span class="fu">:</span> <span class="dv">7</span> <span class="kw">else</span><span class="fu">:</span> <span class="dv">9</span></code></pre></div>
+<ol style="list-style-type: decimal">
+<li><code>[1, 2, 3, 4]</code></li>
+<li><code>[1, 2, 3]</code></li>
+<li><code>[2, 3, 4]</code></li>
+<li><code>[1, 2]</code></li>
+<li><code>[2, 3]</code></li>
+</ol>
+<h3 id="compound-expressions">Compound Expressions</h3>
 <p>Unfortunately, the below is <em>not</em> in ANF</p>
 <div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell">(<span class="dv">1</span> <span class="fu">+</span> <span class="dv">2</span>) <span class="fu">*</span> (<span class="dv">3</span> <span class="fu">+</span> <span class="dv">4</span>)</code></pre></div>
 <ul>
@@ -742,7 +808,7 @@ imm (<span class="dt">Let</span> x e1 e2)   <span class="fu">=</span> <span clas
 </div>
 <p>That is, simply</p>
 <ul>
-<li><code>anf</code> the relevent expressions,</li>
+<li><code>anf</code> the relevant expressions,</li>
 <li>bind them to a fresh variable.</li>
 </ul>
 <div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell">imm e<span class="fu">@</span>(<span class="dt">If</span> _ _ _) <span class="fu">=</span> immExp e
