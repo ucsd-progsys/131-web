@@ -477,39 +477,6 @@ Because `1` and `x` are **immediate expressions**
 * `v1 * v2`
 * `if v: e1 else: e2`
 
-### QUIZ
-
-Which of the below are in ANF ?
-
-```haskell
-{- 1 -} 2 + 3 + 4
-
-{- 2 -} let x = 12 in
-          x + 1
-
-{- 3 -} let x = 12
-          , y = x + 6
-        in
-          x + y
-
-{- 4 -} let x = 12
-          , y = 18
-          , t = x + y + 1
-        in
-          if t: 7 else: 9
-```
-
-* **A.** `1, 2, 3, 4`
-
-* **B.** `1, 2, 3`
-
-* **C.** `2, 3, 4`
-
-* **D.** `1, 2`
-
-* **E.** `2, 3`
-
-
 
 ### Compound Expressions
 
@@ -666,6 +633,38 @@ immArg env (Var    x _) = RegOffset ESP i
     i                   = fromMaybe err (lookup x env)
     err                 = error (printf "Error: Variable '%s' is unbound" x)
 ```
+
+### QUIZ
+
+Which of the below are in ANF ?
+
+```haskell
+{- 1 -} 2 + 3 + 4
+
+{- 2 -} let x = 12 in
+          x + 1
+
+{- 3 -} let x = 12
+          , y = x + 6
+        in
+          x + y
+
+{- 4 -} let x = 12
+          , y = 18
+          , t = x + y + 1
+        in
+          if t: 7 else: 9
+```
+
+* **A.** `1, 2, 3, 4`
+
+* **B.** `1, 2, 3`
+
+* **C.** `2, 3, 4`
+
+* **D.** `1, 2`
+
+* **E.** `2, 3`
 
 ### Transforms: Compiling `Bare` to `Anf`
 
