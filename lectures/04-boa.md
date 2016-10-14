@@ -823,7 +823,7 @@ imm e@(If _ _ _) = immExp e
 imm e@(If _ _ _) = immExp e
 
 immExp :: AnfE -> ([(Id, AnfE)], ImmE)
-immExp e = [(t, e')], t
+immExp e = ([(t, e')], t)
   where
     t    = FreshVar
     e'   = anf e
