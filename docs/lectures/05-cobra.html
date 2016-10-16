@@ -1,0 +1,1176 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+    
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+ <!--
+      loads the http over https ssl -
+      welcome to my website!
+
+	this theme is based off the Ice & Fire theme created by Lucas Gatsas
+      https://www.twitter.com/LucasGatsas
+      www.lucasgatsas.ch - switzerland.
+  -->
+
+
+<!-- Microsoft Internet Explorer documentMode compatMode setting IE Modus -->
+<script type="text/javascript">
+var IE = null;
+if (window.navigator.appName == "Microsoft Internet Explorer") {
+  if (document.documentMode) {
+
+    IE = document.documentMode;
+    } else {
+
+        IE = 5;
+          if (document.compatMode) {
+      if (document.compatMode == "CSS1Compat")
+      IE = 11;
+      }
+    }
+  }
+</script>
+
+    <meta charset="utf-8">
+    <!-- X-UA -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="X-UA-Compatible" content="IE=11" />
+    <link rel="author" title="Ranjit Jhala" href="http://ranjitjhala.github.io" />
+
+    <meta name="google" content="notranslate" />
+    <!-- Viewport -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- index ROBOTS follow -->
+    <meta name="robots" content="index, follow" />
+    <!-- Site Desciption -->
+    <meta name="description" content="UCSD CSE 131">
+    <!-- Site Desciption -->
+    <meta name="keywords" content="Ranjit Jhala, ranjitjhala, haskell, compilers, type systems">
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="https://ucsd-progsys.github.io/131-web/static/img/ico.jpg" type="image/x-icon" />
+    <!-- Blog Title -->
+    <title>cse131</title>
+
+    <!--     <title>{% if page.title %}{{ page.title }} - {{ site.title }}{% else %}{{ site.title }}{% endif %}</title>
+-->
+    <!-- Property Metas -->
+    <meta property="og:image" content="https://ucsd-progsys.github.io/131-web/static/img/ix.png" />
+    <meta property="og:title" content="UCSD CSE 131" />
+    <meta property="og:site_name" content="UCSD CSE 131" />
+    <!-- Canonical -->
+    <link rel="canonical" href="{{ page.url | replace:'index.html','' | prepend: site.baseurl | prepend: site.url }}">
+    <!-- StyleSheet -->
+    <link rel="stylesheet" href="https://ucsd-progsys.github.io/131-web/static/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://ucsd-progsys.github.io/131-web/static/css/spaceg.stylesheets.css">
+    <link rel="stylesheet" href="https://ucsd-progsys.github.io/131-web/static/css/syntax.css">
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic,900,900italic" rel="stylesheet" type="text/css">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Playfair+Display:400,700,900,400italic,700italic,900italic" rel="stylesheet" type="text/css">
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <style>
+	#preloader {position:fixed;top:0;left:0;right:0;bottom:0;background-color:#fff; /* change if the mask should have another color then white */z-index:99; /* makes sure it stays on top */}
+	#status {width:200px;height:200px;position:absolute;left:50%; /* centers the loading animation horizontally one the screen */top:50%; /* centers the loading animation vertically one the screen */background-image:url("/static/img/preloader.gif"); /* path to your loading animation */background-repeat:no-repeat;background-position:center;margin:-100px 0 0 -100px; /* is width and height divided by two */}
+	ul, ol {margin-top: 0;margin-bottom: 10px;}
+	.navbar-inverse {background-color: #FFF;border-color: #FFFFFF;}
+</style>
+<!--link rel="stylesheet" href="https://ucsd-progsys.github.io/131-web/static/css/prettify.css"-->
+<style>
+	header.intro-header {background: #6f5499;background: no-repeat center center;background-attachment: scroll;-webkit-background-size: cover;-moz-background-size: cover;background-size: cover;-o-background-size: cover;}
+	/* Preloader */#preloader {position:fixed;top:0;left:0;right:0;bottom:0;background-color:#fff; /* change if the mask should have another color then white */z-index:99; /* makes sure it stays on top */}
+	#status {width:200px;height:200px;position:absolute;left:50%; /* centers the loading animation horizontally one the screen */top:50%; /* centers the loading animation vertically one the screen */background-image:; /* path to your loading animation */background-repeat:no-repeat;background-position:center;margin:-100px 0 0 -100px; /* is width and height divided by two */}
+	li {list-style: none;}
+            body.modal-open
+            {overflow: hidden;padding-right: 0px;
+        }
+	article li {list-style: inherit;}
+	article .figure {text-align: center}
+    </style>
+    <!-- end Loading front stylesheet here -->
+    </head>
+
+    <body>
+	<div id="preloader">
+	    <div id="status">
+
+	    </div>
+
+	</div>  
+	<!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="https://ucsd-progsys.github.io/131-web" id="blog-title-left-top">cse131</a>
+        </div>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav navbar-right">
+                <!-- <li class="dropdown">
+                    <a href="#portfolioModal2" data-toggle="modal"><i class="fa fa-random" id="icon-top"></i></a>
+                <ul class="dropdown-menu"></ul>
+                </li>-->
+                
+                <li><a href="https://ucsd-progsys.github.io/131-web/calendar.html">Calendar</a></li>
+                <li><a href="https://ucsd-progsys.github.io/131-web/contact.html">Contact</a></li>
+                <li><a href="https://ucsd-progsys.github.io/131-web/grades.html">Grades</a></li>
+                <li><a href="https://ucsd-progsys.github.io/131-web/lectures.html">Lectures</a></li>
+                <li><a href="https://ucsd-progsys.github.io/131-web/assignments.html">Assignments</a></li>
+                <li><a href="https://ucsd-progsys.github.io/131-web/links.html">Links</a></li>
+                <li><a href="https://www.piazza.com/ucsd/fall2016/cse131/home" id="roundbutton" target="_blank"><i class="fa fa-twitter"></i>Piazza</a></li>
+                <!--
+                <li><a href="https://ucsd-progsys.github.io/131-web/archive.html">Archive</a></li>
+                <li><a href="https://www.twitter.com/ranjitjhala" id="roundbutton" target="_blank"><i class="fa fa-twitter"></i>RanjitJhala</a></li>
+                -->
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+<!-- Portfolio Modals -->
+    <div class="portfolio-modal modal fade" id="portfolioModal1" tabindex="-1" role="dialog" aria-hidden="true" style="padding-right:0px; overflow: hidden;">
+        <div class="modal-content">
+            <div class="close-modal" data-dismiss="modal">
+                <div class="lr">
+                    <div class="rl">
+                    </div>
+                </div>
+            </div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8 col-lg-offset-2">
+                        <div class="modal-body">
+                            <h1 class="font-style-inline-small-h1">Ranjit Jhala</h1>
+                            <hr class="star-primary">
+                            <img src="https://ucsd-progsys.github.io/131-web/static/img/kc.jpg" class="img-responsive img-centered" alt title>
+                            <p class="font-style-inline-small">
+                                <a href="https://www.twitter.com/ranjitjhala" target="_blank">follow me</a>. <br>
+                                <a href="https://www.github.com/ucsd-progsys/131-web" target="_blank">    <i class="fa fa-github" id="spaceg-social-modal"></i> </a>
+                                <a href="https://www.twitter.com/ranjitjhala" target="_blank"><i class="fa fa-twitter" id="spaceg-social-modal"></i> </a>
+                                <a href="https://plus.google.com/u/0/106612421534244742464" target="_blank"> <i class="fa fa-google-plus" id="spaceg-social-modal"></i></a>
+                            </p>
+                            <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times"></i> Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+<!-- Menu Modals Add New Sa.21.Feb.2015 03:22:25 -->
+    <div class="portfolio-modal modal fade" id="portfolioModal2" tabindex="-1" role="dialog" aria-hidden="true" style="padding-right:0px; overflow: hidden;">
+        <div class="modal-content">
+            <div class="close-modal" data-dismiss="modal">
+                <div class="lr">
+                    <div class="rl">
+                    </div>
+                </div>
+            </div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8 col-lg-offset-2">
+                        <div class="modal-body">
+                            <h1 class="font-style-inline-small-h1">Ranjit Jhala</h1>
+                            <hr class="star-primary">
+                            <p class="font-style-inline-small">
+                        <a href="https://www.twitter.com/ranjitjhala" target="_blank">follow</a>. <br>
+                        <a href="https://www.github.com/ucsd-progsys/131-web" target="_blank">    <i class="fa fa-github" id="spaceg-social-modal"></i> </a>
+                        <a href="https://www.twitter.com/ranjitjhala" target="_blank"><i class="fa fa-twitter" id="spaceg-social-modal"></i> </a>
+                        <a href="https://plus.google.com/u/0/106612421534244742464" target="_blank"> <i class="fa fa-google-plus" id="spaceg-social-modal"></i></a>  <br>
+                    <li><a href="https://ucsd-progsys.github.io/131-web/">Home</a></li>
+                    <li><a href="https://ucsd-progsys.github.io/131-web/about.html">About Me</a></li>
+                    <li><a href="https://ucsd-progsys.github.io/131-web/archive.html/">Archive</a></li>
+                            </p>
+
+                            <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times"></i> Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+        <div id="content">
+            <!-- Post Header -->
+<header class="intro-header" style="background-image: url('https://ucsd-progsys.github.io/131-web/static/img/cobra.jpg')" alt title>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <h1>Data Representation</h1>
+                    
+                    <span class="meta">
+		    
+		    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+			<p>Next, lets add support for</p>
+<ul>
+<li><strong>Multiple datatypes</strong> (<code>number</code> and <code>boolean</code>)</li>
+<li><strong>Calling</strong> external functions</li>
+</ul>
+<p>In the process of doing so, we will learn about</p>
+<ul>
+<li><strong>Tagged Representations</strong></li>
+<li><strong>Calling Conventions</strong></li>
+</ul>
+<h2 id="plan">Plan</h2>
+<p>Our plan will be to (start with <code>boa</code>) and add the following features:</p>
+<ol style="list-style-type: decimal">
+<li><p><strong>Representing</strong> boolean values (and numbers)</p></li>
+<li><p><strong>Arithmetic Operations</strong></p></li>
+<li><p><strong>Arithmetic Comparisons</strong></p></li>
+<li><p><strong>Dynamic Checking</strong> (to ensure operators are well behaved)</p></li>
+</ol>
+<h2 id="representation">1. Representation</h2>
+<h3 id="motivation-why-booleans">Motivation: Why booleans?</h3>
+<p>In the 21st century, its a bit silly to use + <code>0</code> for <code>false</code> and + non-zero for <code>true</code>.</p>
+<p>But really, <code>boolean</code> is a stepping stone to other data</p>
+<ul>
+<li>Pointers,</li>
+<li>Tuples,</li>
+<li>Structures,</li>
+<li>Closures.</li>
+</ul>
+<h3 id="the-key-issue">The Key Issue</h3>
+<p>How to <em>distinguish</em> numbers from booleans?</p>
+<ul>
+<li>Need to store some <em>extra</em> information to mark values as <code>number</code> or <code>bool</code>.</li>
+</ul>
+<h3 id="option-1-use-two-words">Option 1: Use <em>Two</em> Words</h3>
+<p>First word is <code>0</code> means <code>bool</code>, is <code>1</code> means <code>number</code>, <code>2</code> means pointer etc.</p>
+<table>
+<thead>
+<tr class="header">
+<th align="right">Value</th>
+<th align="right">Representation (HEX)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="right"><code>3</code></td>
+<td align="right"><code>[0x000000000][0x00000003]</code></td>
+</tr>
+<tr class="even">
+<td align="right"><code>5</code></td>
+<td align="right"><code>[0x000000000][0x00000005]</code></td>
+</tr>
+<tr class="odd">
+<td align="right"><code>12</code></td>
+<td align="right"><code>[0x000000000][0x0000000c]</code></td>
+</tr>
+<tr class="even">
+<td align="right"><code>42</code></td>
+<td align="right"><code>[0x000000000][0x0000002a]</code></td>
+</tr>
+<tr class="odd">
+<td align="right"><code>false</code></td>
+<td align="right"><code>[0x000000001][0x00000000]</code></td>
+</tr>
+<tr class="even">
+<td align="right"><code>true</code></td>
+<td align="right"><code>[0x000000001][0x00000001]</code></td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>Can have <em>lots</em> of different types, but</li>
+<li>Takes up double memory,</li>
+<li>Operators <code>+</code>, <code>-</code> do two memory reads <code>[eax]</code>, <code>[eax - 4]</code>.</li>
+</ul>
+<p>In short, rather wasteful. Don’t need <em>so many</em> types.</p>
+<h3 id="option-2-use-a-tag-bit">Option 2: Use a <em>Tag Bit</em></h3>
+<p>Can distinguish <em>two</em> types with a <em>single bit</em>.</p>
+<p><em>Least Significant Bit</em> (LSB) is</p>
+<ul>
+<li><code>0</code> for <code>number</code></li>
+<li><code>1</code> for <code>boolean</code></li>
+</ul>
+<h3 id="tag-bit-numbers">Tag Bit: Numbers</h3>
+<p>So <code>number</code> is the binary representation shifted left by 1 bit</p>
+<ul>
+<li>Lowest bit is always <code>0</code></li>
+<li>Remaining bits are number’s binary representation</li>
+</ul>
+<p>For example,</p>
+<table>
+<thead>
+<tr class="header">
+<th align="right">Value</th>
+<th align="right">Representation (Binary)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="right"><code>3</code></td>
+<td align="right"><code>[0b00000000000000000000000000000110]</code></td>
+</tr>
+<tr class="even">
+<td align="right"><code>5</code></td>
+<td align="right"><code>[0b00000000000000000000000000001010]</code></td>
+</tr>
+<tr class="odd">
+<td align="right"><code>12</code></td>
+<td align="right"><code>[0b00000000000000000000000000011000]</code></td>
+</tr>
+<tr class="even">
+<td align="right"><code>42</code></td>
+<td align="right"><code>[0b00000000000000000000000001010100]</code></td>
+</tr>
+</tbody>
+</table>
+<p>Or in HEX,</p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Value</th>
+<th align="left">Representation (HEX)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left"><code>3</code></td>
+<td align="left"><code>[0x00000006]</code></td>
+</tr>
+<tr class="even">
+<td align="left"><code>5</code></td>
+<td align="left"><code>[0x0000000a]</code></td>
+</tr>
+<tr class="odd">
+<td align="left"><code>12</code></td>
+<td align="left"><code>[0x0000000c]</code></td>
+</tr>
+<tr class="even">
+<td align="left"><code>42</code></td>
+<td align="left"><code>[0x0000002a]</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="tag-bit-booleans">Tag Bit: Booleans</h3>
+<p><em>Most Significant Bit</em> (MSB) is</p>
+<ul>
+<li><code>1</code> for <code>true</code></li>
+<li><code>0</code> for <code>false</code></li>
+</ul>
+<p>For example</p>
+<table>
+<thead>
+<tr class="header">
+<th align="right">Value</th>
+<th align="right">Representation (Binary)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="right"><code>true</code></td>
+<td align="right"><code>[0b10000000000000000000000000000001]</code></td>
+</tr>
+<tr class="even">
+<td align="right"><code>false</code></td>
+<td align="right"><code>[0b00000000000000000000000000000001]</code></td>
+</tr>
+</tbody>
+</table>
+<p>Or, in HEX</p>
+<table>
+<thead>
+<tr class="header">
+<th align="right">Value</th>
+<th align="right">Representation (HEX)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="right"><code>false</code></td>
+<td align="right"><code>[0x00000001]</code></td>
+</tr>
+<tr class="even">
+<td align="right"><code>true</code></td>
+<td align="right"><code>[0x80000001]</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="types">Types</h3>
+<p>Lets extend our source types with <code>boolean</code> constants</p>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="kw">data</span> <span class="dt">Expr</span> a
+  <span class="fu">=</span> <span class="fu">...</span>
+  <span class="fu">|</span> <span class="dt">Boolean</span> <span class="dt">Bool</span> a</code></pre></div>
+<p>Correspondingly, we extend our assembly <code>Arg</code> (values) with</p>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="kw">data</span> <span class="dt">Arg</span>
+  <span class="fu">=</span> <span class="fu">...</span>
+  <span class="fu">|</span> <span class="dt">HexConst</span>  <span class="dt">Int</span></code></pre></div>
+<p>So, our examples become:</p>
+<table>
+<thead>
+<tr class="header">
+<th align="right">Value</th>
+<th align="right">Representation (HEX)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="right"><code>Boolean False</code></td>
+<td align="right"><code>HexConst 0x00000001</code></td>
+</tr>
+<tr class="even">
+<td align="right"><code>Boolean True</code></td>
+<td align="right"><code>HexConst 0x80000001</code></td>
+</tr>
+<tr class="odd">
+<td align="right"><code>Number 3</code></td>
+<td align="right"><code>HexConst 0x00000006</code></td>
+</tr>
+<tr class="even">
+<td align="right"><code>Number 5</code></td>
+<td align="right"><code>HexConst 0x0000000a</code></td>
+</tr>
+<tr class="odd">
+<td align="right"><code>Number 12</code></td>
+<td align="right"><code>HexConst 0x0000000c</code></td>
+</tr>
+<tr class="even">
+<td align="right"><code>Number 42</code></td>
+<td align="right"><code>HexConst 0x0000002a</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="transforms">Transforms</h3>
+<p>Next, lets update our implementation</p>
+<div class="figure">
+<img src="../resources/compiler-pipeline-representation.png" alt="Compiler Pipeline" />
+<p class="caption">Compiler Pipeline</p>
+</div>
+<p>The <code>parse</code>, <code>anf</code> and <code>tag</code> stages are straightforward.</p>
+<p>Lets focus on the <code>compile</code> function.</p>
+<h4 id="a-typeclass-for-representing-constants">A TypeClass for Representing Constants</h4>
+<p>Its convenient to introduce a type class describing Haskell types that can be <em>represented</em> as x86 arguments:</p>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="kw">class</span> <span class="dt">ToX86Arg</span> a <span class="kw">where</span>
+<span class="ot">  arg ::</span> a <span class="ot">-&gt;</span> <span class="dt">Arg</span></code></pre></div>
+<p>We can now define instances for <code>Int</code> and <code>Bool</code> as:</p>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="kw">instance</span> <span class="dt">ToX86</span> <span class="dt">Int</span> <span class="kw">where</span>
+  arg n <span class="fu">=</span> <span class="dt">Const</span> (Data.Bits.shift n <span class="dv">1</span>) <span class="co">-- left-shift `n` by 1</span>
+
+<span class="kw">instance</span> <span class="dt">ToX86</span> <span class="dt">Bool</span> <span class="kw">where</span>
+  arg <span class="dt">False</span> <span class="fu">=</span> <span class="dt">HexConst</span> <span class="bn">0x00000001</span>
+  arg <span class="dt">True</span>  <span class="fu">=</span> <span class="dt">HexConst</span> <span class="bn">0x80000001</span></code></pre></div>
+<h4 id="immediate-values-to-arguments">Immediate Values to Arguments</h4>
+<p><code>Boolean b</code> is an <em>immediate</em> value (like <code>Number n</code>).</p>
+<p>Lets extend <code>immArg</code> that tranforms an immediate expression to an x86 argument.</p>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="ot">immArg ::</span> <span class="dt">Env</span> <span class="ot">-&gt;</span> <span class="dt">ImmTag</span> <span class="ot">-&gt;</span> <span class="dt">Arg</span>
+immArg (<span class="dt">Var</span>    x _)  <span class="fu">=</span> <span class="fu">...</span>
+immArg (<span class="dt">Number</span> n _)  <span class="fu">=</span> arg n
+immArg (<span class="dt">Boolean</span> b _) <span class="fu">=</span> arg b</code></pre></div>
+<h4 id="compiling-constants">Compiling Constants</h4>
+<p>Finally, we can easily update the <code>compile</code> function as:</p>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="ot">compileEnv ::</span> <span class="dt">Env</span> <span class="ot">-&gt;</span> <span class="dt">AnfTagE</span> <span class="ot">-&gt;</span> <span class="dt">Asm</span>
+compileEnv _ e<span class="fu">@</span>(<span class="dt">Number</span> _ _)  <span class="fu">=</span> [<span class="dt">IMov</span> (<span class="dt">Reg</span> <span class="dt">EAX</span>) (immArg env e)]
+compileEnv _ e<span class="fu">@</span>(<span class="dt">Boolean</span> _ _) <span class="fu">=</span> [<span class="dt">IMov</span> (<span class="dt">Reg</span> <span class="dt">EAX</span>) (immArg env e)]</code></pre></div>
+<p>(The other cases remain unchanged.)</p>
+<h3 id="tests">Tests</h3>
+<p>Lets run some tests to double check:</p>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell">ghci<span class="fu">&gt;</span> compileAndRun <span class="st">&quot;15&quot;</span>
+<span class="dv">30</span></code></pre></div>
+<p>Say what?! Ah. Need to update our run-time printer in <code>main.c</code></p>
+<div class="sourceCode"><pre class="sourceCode c"><code class="sourceCode c"><span class="dt">void</span> print(<span class="dt">int</span> val){
+  <span class="kw">if</span> (val == CONST_TRUE)
+    printf(<span class="st">&quot;true&quot;</span>);
+  <span class="kw">else</span> <span class="kw">if</span> (val == CONST_FALSE)
+    printf(<span class="st">&quot;false&quot;</span>);
+  <span class="kw">else</span> <span class="co">// should be a number!</span>
+    printf(<span class="st">&quot;%d&quot;</span>, d &gt;&gt; <span class="dv">1</span>);  <span class="co">// shift right to remove tag bit.</span>
+}</code></pre></div>
+<p>and now we get:</p>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell">ghci<span class="fu">&gt;</span> compileAndRun <span class="st">&quot;15&quot;</span>
+<span class="dv">15</span></code></pre></div>
+<p>Can you think of some other tests we should write?</p>
+<p>QUIZ: if, let?</p>
+<h2 id="arithmetic-operations">2. Arithmetic Operations</h2>
+<p>Constants like <code>2</code>, <code>29</code>, <code>false</code> are only useful if we can perform computations with them.</p>
+<h3 id="quiz-addition">QUIZ: Addition</h3>
+<p>First lets see what happens with our arithmetic operators.</p>
+<p>What will be the result (using our code so far) of:</p>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell">ghci<span class="fu">&gt;</span> compileAndRun <span class="st">&quot;12 + 4&quot;</span></code></pre></div>
+<ol style="list-style-type: decimal">
+<li>Does not compile</li>
+<li>Run-time error (e.g. segmentation fault)</li>
+<li><code>16</code></li>
+<li><code>32</code></li>
+<li><code>0</code></li>
+</ol>
+<h3 id="shifted-representation-and-addition">Shifted Representation and Addition</h3>
+<p>We are <em>representing</em> a number <code>n</code> by <strong>shifting it left by 1</strong></p>
+<blockquote>
+<p><code>n</code> has the machine representation <code>2*n</code></p>
+</blockquote>
+<p>Thus, our <em>source values</em> have the following _representations:</p>
+<table>
+<thead>
+<tr class="header">
+<th align="right">Source Value</th>
+<th align="right">Representation (DEC)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="right"><code>3</code></td>
+<td align="right"><code>6</code></td>
+</tr>
+<tr class="even">
+<td align="right"><code>5</code></td>
+<td align="right"><code>10</code></td>
+</tr>
+<tr class="odd">
+<td align="right"><code>3 + 5 = 8</code></td>
+<td align="right"><code>6 + 10 = 16</code></td>
+</tr>
+<tr class="even">
+<td align="right"><code>n1 + n2</code></td>
+<td align="right"><code>2*n1 + 2*n2 = 2*(n1 + n2)</code></td>
+</tr>
+</tbody>
+</table>
+<p>That is, <em>addition</em> (and similarly, _subtraction) work <em>as is</em> with the shifted representation.</p>
+<h3 id="quiz-multiplication">QUIZ: Multiplication</h3>
+<p>What will be the result (using our code so far) of:</p>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell">ghci<span class="fu">&gt;</span> compileAndRun <span class="st">&quot;12 * 4&quot;</span></code></pre></div>
+<ol style="list-style-type: decimal">
+<li>Does not compile</li>
+<li>Run-time error (e.g. segmentation fault)</li>
+<li><code>24</code></li>
+<li><code>48</code></li>
+<li><code>96</code></li>
+</ol>
+<p>Hmm. What happened?</p>
+<h3 id="shifted-representation-and-multiplication">Shifted Representation and Multiplication</h3>
+<p>We are <em>representing</em> a number <code>n</code> by <strong>shifting it left by 1</strong></p>
+<blockquote>
+<p><code>n</code> has the machine representation <code>2*n</code></p>
+</blockquote>
+<p>Thus, our <em>source values</em> have the following _representations:</p>
+<table>
+<thead>
+<tr class="header">
+<th align="right">Source Value</th>
+<th align="right">Representation (DEC)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="right"><code>3</code></td>
+<td align="right"><code>6</code></td>
+</tr>
+<tr class="even">
+<td align="right"><code>5</code></td>
+<td align="right"><code>10</code></td>
+</tr>
+<tr class="odd">
+<td align="right"><code>3 * 5 = 15</code></td>
+<td align="right"><code>6 * 10 = 60</code></td>
+</tr>
+<tr class="even">
+<td align="right"><code>n1 + n2</code></td>
+<td align="right"><code>2*n1 * 2*n2 = 4*(n1 + n2)</code></td>
+</tr>
+</tbody>
+</table>
+<p>Thus, multiplication ends up accumulating the factor of 2. * Result is <em>two times</em> the desired one.</p>
+<h3 id="strategy">Strategy</h3>
+<p>Thus, our strategy for compiling arithmetic operations is simply:</p>
+<ul>
+<li>Addition and Subtraction “just work” as before, as shifting “cancels out”,</li>
+<li>Multiplication result must be “adjusted” by dividing-by-two</li>
+<li>i.e. <strong>right shifting by 1</strong></li>
+</ul>
+<h3 id="types-1">Types</h3>
+<p>The <em>source</em> language does not change at all, for the <code>Asm</code> lets add a “right shift” instruction (<code>shr</code>):</p>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="kw">data</span> <span class="dt">Instruction</span>
+  <span class="fu">=</span> <span class="fu">...</span>
+  <span class="fu">|</span> <span class="dt">IShr</span>    <span class="dt">Arg</span>   <span class="dt">Arg</span></code></pre></div>
+<h3 id="transforms-1">Transforms</h3>
+<p>We need only modify <code>compileEnv</code> to account for the “fixing up”</p>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="ot">compileEnv ::</span> <span class="dt">Env</span> <span class="ot">-&gt;</span> <span class="dt">AnfTagE</span> <span class="ot">-&gt;</span> [<span class="dt">Instruction</span>]
+compileEnv env (<span class="dt">Prim2</span> o v1 v2 _) <span class="fu">=</span> compilePrim2 env o v1 v2</code></pre></div>
+<p>where the helper <code>compilePrim2</code> works for <code>Prim2</code> (binary) operators and <em>immediate arguments</em>:</p>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="ot">compilePrim2 ::</span> <span class="dt">Env</span> <span class="ot">-&gt;</span> <span class="dt">Prim2</span> <span class="ot">-&gt;</span> <span class="dt">ImmE</span> <span class="ot">-&gt;</span> <span class="dt">ImmE</span> <span class="ot">-&gt;</span> [<span class="dt">Instruction</span>]
+compilePrim2 env <span class="dt">Plus</span> v1 v2   <span class="fu">=</span> [ <span class="dt">IMov</span> (<span class="dt">Reg</span> <span class="dt">EAX</span>) (immArg env v1)
+                                , <span class="dt">IAdd</span> (<span class="dt">Reg</span> <span class="dt">EAX</span>) (immArg env v2)
+                                ]
+compilePrim2 env <span class="dt">Minus</span> v1 v2  <span class="fu">=</span> [ <span class="dt">IMov</span> (<span class="dt">Reg</span> <span class="dt">EAX</span>) (immArg env v1)
+                                , <span class="dt">ISub</span> (<span class="dt">Reg</span> <span class="dt">EAX</span>) (immArg env v2)
+                                ]
+compilePrim2 env <span class="dt">Times</span> v1 v2  <span class="fu">=</span> [ <span class="dt">IMov</span> (<span class="dt">Reg</span> <span class="dt">EAX</span>) (immArg env v1)
+                                , <span class="dt">IMul</span> (<span class="dt">Reg</span> <span class="dt">EAX</span>) (immArg env v2)
+                                , <span class="dt">IShr</span> (<span class="dt">Reg</span> <span class="dt">EAX</span>) (<span class="dt">Const</span> <span class="dv">1</span>)
+                                ]</code></pre></div>
+<h3 id="tests-1">Tests</h3>
+<p>Lets take it out for a drive.</p>
+<p>Suppose we have a file <code>tests/input/mul3.cobra</code></p>
+<p>```haskell 2 * -1</p>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell">ghci<span class="fu">&gt;</span> compileAndRun <span class="st">&quot;2 * -1&quot;</span>
+<span class="dv">2147483644</span></code></pre></div>
+<p>Whoa?!</p>
+<p>Well, its easy to figure out if you look at the generated assembly:</p>
+<div class="sourceCode"><pre class="sourceCode nasm"><code class="sourceCode nasm"><span class="kw">mov</span> <span class="kw">eax</span>, <span class="dv">4</span>
+<span class="kw">imul</span> <span class="kw">eax</span>, -<span class="dv">2</span>
+<span class="kw">shr</span> <span class="kw">eax</span>, <span class="dv">1</span>
+<span class="kw">ret</span></code></pre></div>
+<p>The trouble is that the <strong>negative</strong> result of the multiplication is saved in <strong>twos-complement</strong> format, and when we shift that right by one bit, we get the wierd value (<strong>does not “divide by two”</strong>)</p>
+<table>
+<thead>
+<tr class="header">
+<th align="right">Decimal</th>
+<th align="right">Hexadecimal</th>
+<th align="right">Binary</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="right"><code>-8</code></td>
+<td align="right"><code>0xFFFFFFF8</code></td>
+<td align="right"><code>0b11111111111111111111111111111000</code></td>
+</tr>
+<tr class="even">
+<td align="right"><code>2147483644</code></td>
+<td align="right"><code>0x7FFFFFFC</code></td>
+<td align="right"><code>0b01111111111111111111111111111100</code></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Solution: Signed/Arithmetic Shift</strong></p>
+<p>The instruction <code>sar</code> <a href="https://en.wikibooks.org/wiki/X86_Assembly/Shift_and_Rotate#Arithmetic_Shift_Instructions">shift arithmetic right</a> does what we want, namely: * preserves the sign-bit when shifting * i.e. doesn’t introduce a <code>0</code> by default</p>
+<h3 id="transforms-revisited">Transforms Revisited</h3>
+<p>Lets add <code>sar</code> to our target:</p>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="kw">data</span> <span class="dt">Instruction</span>
+  <span class="fu">=</span> <span class="fu">...</span>
+  <span class="fu">|</span> <span class="dt">ISar</span> <span class="dt">Arg</span> <span class="dt">Arg</span></code></pre></div>
+<p>and use it to fix the post-multiplication adjustment</p>
+<ul>
+<li>i.e. use <code>ISar</code> instead of <code>IShr</code></li>
+</ul>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell">compilePrim2 env <span class="dt">Times</span> v1 v2  <span class="fu">=</span> [ <span class="dt">IMov</span> (<span class="dt">Reg</span> <span class="dt">EAX</span>) (immArg env v1)
+                                , <span class="dt">IMul</span> (<span class="dt">Reg</span> <span class="dt">EAX</span>) (immArg env v2)
+                                , <span class="dt">ISar</span> (<span class="dt">Reg</span> <span class="dt">EAX</span>) (<span class="dt">Const</span> <span class="dv">1</span>)
+                                ]</code></pre></div>
+<p>After which all is well:</p>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell">ghci<span class="fu">&gt;</span> compileAndRun <span class="st">&quot;2 * -1&quot;</span>
+<span class="fu">-</span><span class="dv">2</span></code></pre></div>
+<h2 id="arithmetic-comparisons">3. Arithmetic Comparisons</h2>
+<p>Many ways to do this:</p>
+<ul>
+<li>branches <code>jne, jl, jg</code> or</li>
+<li>bit-twiddling.</li>
+</ul>
+<h3 id="comparisons-via-bit-twiddling">Comparisons via Bit-Twiddling</h3>
+<p><strong>Key idea:</strong></p>
+<blockquote>
+<p>A <em>negative</em> number’s <strong>most significant bit</strong> is <code>1</code></p>
+</blockquote>
+<p>To implement <code>arg1 &lt; arg2</code>, compute <code>arg1 - arg2</code> * When result is negative, MSB is <code>1</code>, ensure <code>eax</code> set to <code>0x80000001</code> * When result is non-negative, MSB is <code>0</code>, ensure <code>eax</code> set to <code>0x00000001</code></p>
+<ol style="list-style-type: decimal">
+<li>Can <strong>extract msb</strong> by bitwise <code>and</code> with <code>0x80000000</code>.</li>
+<li>Can <strong>set tag bit</strong> by bitwise <code>or</code> with <code>0x00000001</code></li>
+</ol>
+<p>So compilation strategy is:</p>
+<div class="sourceCode"><pre class="sourceCode nasm"><code class="sourceCode nasm"><span class="kw">mov</span> <span class="kw">eax</span>, arg1
+<span class="kw">sub</span> <span class="kw">eax</span>, arg2
+<span class="kw">and</span> <span class="kw">eax</span><span class="bn">, 0x80000000   </span><span class="co">; mask out &quot;sign&quot; bit (msb)</span>
+<span class="kw">or</span>  <span class="kw">eax</span><span class="bn">, 0x00000001   </span><span class="co">; set tag bit to bool</span></code></pre></div>
+<h3 id="exercise-comparisons-via-bit-twiddling">Exercise: Comparisons via Bit-Twiddling</h3>
+<ul>
+<li>Can compute <code>arg1 &gt; arg2</code> by computing <code>arg2 &lt; arg1</code>.</li>
+<li>Can compute <code>arg1 != arg2</code> by computing <code>arg1 &lt; arg2 || arg2 &lt; arg1</code></li>
+<li>Can compute <code>arg1 = arg2</code> by computing <code>! (arg1 != arg2)</code></li>
+</ul>
+<p>For the above, can you figure out how to implement:</p>
+<ol style="list-style-type: decimal">
+<li>Boolean <code>!</code> ?</li>
+<li>Boolean <code>||</code> ?</li>
+<li>Boolean <code>&amp;&amp;</code> ?</li>
+</ol>
+<p>You may find <a href="https://en.wikibooks.org/wiki/X86_Assembly/Logic">these instructions useful</a></p>
+<h2 id="dynamic-checking">4. Dynamic Checking</h2>
+<p>We’ve added support for <code>Number</code> and <code>Boolean</code> but we have no way to ensure that we don’t write gibberish programs like:</p>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="dv">2</span> <span class="fu">+</span> true</code></pre></div>
+<p>or</p>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="dv">7</span> <span class="fu">&lt;</span> false</code></pre></div>
+<p>In fact, lets try to see what happens with our code on the above:</p>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell">ghci<span class="fu">&gt;</span> compileAndRun <span class="st">&quot;2 + true&quot;</span>
+<span class="dt">FIXME</span></code></pre></div>
+<p>Oops.</p>
+<h3 id="checking-tags-at-run-time">Checking Tags at Run-Time</h3>
+<p>Later, we will look into adding a <em>static</em> type system that will reject such meaningless programs at <em>compile</em> time. For now, lets see how to extend the compilation to <em>abort execution</em> when the wrong <em>types of operands</em> are found when the code is <em>executing</em>.</p>
+<p>The following table lists the types of operands that <em>should be</em> allowed for each primitive operation.</p>
+<table>
+<thead>
+<tr class="header">
+<th align="right">Operation</th>
+<th align="right">Op-1</th>
+<th align="right">Op-2</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="right"><code>+</code></td>
+<td align="right"><code>int</code></td>
+<td align="right"><code>int</code></td>
+</tr>
+<tr class="even">
+<td align="right"><code>-</code></td>
+<td align="right"><code>int</code></td>
+<td align="right"><code>int</code></td>
+</tr>
+<tr class="odd">
+<td align="right"><code>*</code></td>
+<td align="right"><code>int</code></td>
+<td align="right"><code>int</code></td>
+</tr>
+<tr class="even">
+<td align="right"><code>&lt;</code></td>
+<td align="right"><code>int</code></td>
+<td align="right"><code>int</code></td>
+</tr>
+<tr class="odd">
+<td align="right"><code>&gt;</code></td>
+<td align="right"><code>int</code></td>
+<td align="right"><code>int</code></td>
+</tr>
+<tr class="even">
+<td align="right"><code>&amp;&amp;</code></td>
+<td align="right"><code>bool</code></td>
+<td align="right"><code>bool</code></td>
+</tr>
+<tr class="odd">
+<td align="right"><code>||</code></td>
+<td align="right"><code>bool</code></td>
+<td align="right"><code>bool</code></td>
+</tr>
+<tr class="even">
+<td align="right"><code>!</code></td>
+<td align="right"><code>bool</code></td>
+<td align="right"></td>
+</tr>
+<tr class="odd">
+<td align="right"><code>if</code></td>
+<td align="right"><code>bool</code></td>
+<td align="right"></td>
+</tr>
+<tr class="even">
+<td align="right"><code>=</code></td>
+<td align="right"><code>int</code> or <code>bool</code></td>
+<td align="right"><code>int</code> or <code>bool</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="strategy-1">Strategy</h3>
+<p>Lets check that the data in <code>eax</code> is an <code>int</code> * Suffices to check that the LSB is <code>0</code> * If not, jump to special <code>error_non_int</code> label</p>
+<p>For example, to check if <code>arg</code> is a <code>Number</code></p>
+<div class="sourceCode"><pre class="sourceCode nasm"><code class="sourceCode nasm"><span class="kw">mov</span> <span class="kw">eax</span>, arg
+<span class="kw">mov</span> <span class="kw">ebx</span>, <span class="kw">eax</span>              <span class="co">; copy into ebx register</span>
+<span class="kw">and</span> <span class="kw">ebx</span><span class="bn">, 0x00000001       </span><span class="co">; extract lsb</span>
+<span class="kw">cmp</span> <span class="kw">ebx</span>, <span class="dv">0</span>                <span class="co">; check if lsb equals 0</span>
+<span class="kw">jne</span> error_non_number      
+...</code></pre></div>
+<p>at <code>error_non_number</code> we can call into a <code>C</code> function:</p>
+<pre><code>error_non_number:
+  push eax                ; pass erroneous value
+  push 0                  ; pass error code
+  call error              ; call run-time &quot;error&quot; function</code></pre>
+<p>Finally, the <code>error</code> function is part of the <em>run-time</em> and looks like:</p>
+<div class="sourceCode"><pre class="sourceCode c"><code class="sourceCode c"><span class="dt">void</span> error(<span class="dt">int</span> code, <span class="dt">int</span> v){
+   <span class="kw">if</span> (code == <span class="dv">0</span>) {
+     fprintf(stderr, <span class="st">&quot;Error: expected a number but got %#010x</span><span class="ch">\n</span><span class="st">&quot;</span>, v);
+   }
+   <span class="kw">else</span> <span class="kw">if</span> (code == <span class="dv">1</span>) {
+     <span class="co">// print out message for errorcode 1 ...</span>
+   }
+   <span class="kw">else</span> <span class="kw">if</span> (code == <span class="dv">2</span>) {
+     <span class="co">// print out message for errorcode 2 ...</span>
+   } ...
+   exit(<span class="dv">1</span>);
+ }</code></pre></div>
+<h3 id="strategy-by-example">Strategy By Example</h3>
+<p>Lets implement the above in a simple file <code>tests/output/int-check.s</code></p>
+<div class="sourceCode"><pre class="sourceCode nasm"><code class="sourceCode nasm"><span class="kw">section</span> .text
+<span class="kw">extern</span> error
+<span class="kw">extern</span> print
+<span class="kw">global</span> our_code_starts_here
+<span class="fu">our_code_starts_here:</span>
+  <span class="kw">mov</span> <span class="kw">eax</span>, <span class="dv">1</span>                <span class="co">; not a valid number</span>
+  <span class="kw">mov</span> <span class="kw">ebx</span>, <span class="kw">eax</span>              <span class="co">; copy into ebx register</span>
+  <span class="kw">and</span> <span class="kw">ebx</span><span class="bn">, 0x00000001       </span><span class="co">; extract lsb</span>
+  <span class="kw">cmp</span> <span class="kw">ebx</span>, <span class="dv">0</span>                <span class="co">; check if lsb equals 0</span>
+  <span class="kw">jne</span> error_non_number      
+<span class="fu">error_non_number:</span>
+  <span class="kw">push</span> <span class="kw">eax</span>
+  <span class="kw">push</span> <span class="dv">0</span>
+  <span class="kw">call</span> error</code></pre></div>
+<p>Alas</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">make</span> tests/output/int-check.result
+<span class="kw">...</span> segmentation fault ...</code></pre></div>
+<p>What happened ?</p>
+<h3 id="managing-the-call-stack">Managing the Call Stack</h3>
+<p>To properly call into C functions (like <code>error</code>), we must play by the rules of the <a href="http://www.cs.virginia.edu/~evans/cs216/guides/x86.html#calling">C calling convention</a></p>
+<div class="figure">
+<img src="../resources/stack-frames.png" alt="Stack Frames" />
+<p class="caption">Stack Frames</p>
+</div>
+<ol style="list-style-type: decimal">
+<li>The <em>local variables</em> of an (executing) function are saved in its <em>stack frame</em>.</li>
+<li>The <em>start</em> of the stack frame is saved in register <code>ebp</code>,</li>
+<li>The <em>start</em> of the <em>next</em> frame is saved in register <code>esp</code>.</li>
+</ol>
+<h3 id="calling-convention">Calling Convention</h3>
+<p>We must <strong>preserve the above invariant</strong> as follows:</p>
+<h4 id="in-the-callee">In the Callee</h4>
+<p>At the <strong>start</strong> of the function</p>
+<div class="sourceCode"><pre class="sourceCode nasm"><code class="sourceCode nasm"><span class="kw">push</span> <span class="kw">ebp</span>          <span class="co">; save (previous, caller's) ebp on stack</span>
+<span class="kw">mov</span> <span class="kw">ebp</span>, <span class="kw">esp</span>      <span class="co">; make current esp the new ebp</span>
+<span class="kw">sub</span> <span class="kw">esp</span>, <span class="dv">4</span>*N      <span class="co">; &quot;allocate space&quot; for N local variables</span></code></pre></div>
+<p>At the <strong>end</strong> of the function</p>
+<div class="sourceCode"><pre class="sourceCode nasm"><code class="sourceCode nasm"><span class="kw">mov</span> <span class="kw">esp</span>, <span class="kw">ebp</span>      <span class="co">; restore value of esp to that just before call</span>
+                  <span class="co">; now, value at [esp] is caller's (saved) ebp</span>
+<span class="kw">pop</span> <span class="kw">ebp</span>           <span class="co">; so: restore caller's ebp from stack [esp]</span>
+<span class="kw">ret</span>               <span class="co">; return to caller</span></code></pre></div>
+<h4 id="in-the-caller">In the Caller</h4>
+<p>To call a function <code>target</code> that takes <code>N</code> parameters:</p>
+<div class="sourceCode"><pre class="sourceCode nasm"><code class="sourceCode nasm"><span class="kw">push</span> arg_N        <span class="co">; push last arg first ...</span>
+...
+<span class="kw">push</span> arg_2        <span class="co">; then the second ...</span>
+<span class="kw">push</span> arg_1        <span class="co">; finally the first</span>
+<span class="kw">call</span> target       <span class="co">; make the call (which puts return addr on stack)</span>
+<span class="kw">add</span> <span class="kw">esp</span>, <span class="dv">4</span>*N      <span class="co">; now we are back: &quot;clear&quot; args by adding 4*numArgs</span></code></pre></div>
+<p><strong>NOTE:</strong> If you are compiling on MacOS, you must respect the <a href="http://www.fabiensanglard.net/macosxassembly/index.php">16-Byte Stack Alignment Invariant</a></p>
+<h3 id="fixed-strategy-by-example">Fixed Strategy By Example</h3>
+<p>Lets implement the above in a simple file <code>tests/output/int-check.s</code></p>
+<p>TODO</p>
+<div class="sourceCode"><pre class="sourceCode nasm"><code class="sourceCode nasm"><span class="kw">section</span> .text
+<span class="kw">extern</span> error
+<span class="kw">extern</span> print
+<span class="kw">global</span> our_code_starts_here
+<span class="fu">our_code_starts_here:</span>
+  <span class="kw">push</span> <span class="kw">ebp</span>
+  <span class="kw">mov</span> <span class="kw">ebp</span>, <span class="kw">esp</span>
+  <span class="kw">sub</span> <span class="kw">esp</span>, <span class="dv">0</span>                <span class="co">; 0 local variables here</span>
+  <span class="kw">mov</span> <span class="kw">eax</span>, <span class="dv">1</span>                <span class="co">; not a valid number</span>
+  <span class="kw">mov</span> <span class="kw">ebx</span>, <span class="kw">eax</span>              <span class="co">; copy into ebx register</span>
+  <span class="kw">and</span> <span class="kw">ebx</span><span class="bn">, 0x00000001       </span><span class="co">; extract lsb</span>
+  <span class="kw">cmp</span> <span class="kw">ebx</span>, <span class="dv">0</span>                <span class="co">; check if lsb equals 0</span>
+  <span class="kw">jne</span> error_non_number      
+  <span class="kw">mov</span> <span class="kw">esp</span>, <span class="kw">ebp</span>
+  <span class="kw">pop</span> <span class="kw">ebp</span>  
+<span class="fu">error_non_number:</span>
+  <span class="kw">push</span> <span class="kw">eax</span>
+  <span class="kw">push</span> <span class="dv">0</span>
+  <span class="kw">call</span> error</code></pre></div>
+<p>Aha, now the above works!</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">make</span> tests/output/int-check.result
+<span class="kw">...</span> expected number but got ...</code></pre></div>
+<p><strong>Q:</strong> What NEW thing does our compiler need to compute?</p>
+<p><strong>Hint:</strong> Why do we <code>sub esp, 0</code> above?</p>
+<h3 id="types-2">Types</h3>
+<p>Lets implement the above strategy.</p>
+<p>To do so, we need a new data type for run-time types:</p>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="kw">data</span> <span class="dt">Ty</span> <span class="fu">=</span> <span class="dt">TNumber</span> <span class="fu">|</span> <span class="dt">TBoolean</span></code></pre></div>
+<p>a new <code>Label</code> for the error</p>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="kw">data</span> <span class="dt">Label</span>
+  <span class="fu">=</span> <span class="fu">...</span>
+  <span class="fu">|</span> <span class="dt">TypeError</span> <span class="dt">Ty</span>        <span class="co">-- Type Error Labels</span>
+  <span class="fu">|</span> <span class="dt">Builtin</span>   <span class="dt">Text</span>      <span class="co">-- Functions implemented in C</span></code></pre></div>
+<p>and thats it.</p>
+<h3 id="transforms-2">Transforms</h3>
+<p>The compiler must generate code to:</p>
+<ol style="list-style-type: decimal">
+<li>Perform dynamic type checks,</li>
+<li>Exit by calling <code>error</code> if a failure occurs,</li>
+<li>Manage the stack per the convention above.</li>
+</ol>
+<h4 id="type-assertions">1. Type Assertions</h4>
+<p>The key step in the implementation is to write a function</p>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="ot">assertType ::</span> <span class="dt">Env</span> <span class="ot">-&gt;</span> <span class="dt">IExp</span> <span class="ot">-&gt;</span> <span class="dt">Ty</span> <span class="ot">-&gt;</span> [<span class="dt">Instruction</span>]
+assertType env v ty
+  <span class="fu">=</span> [ <span class="dt">IMov</span> (<span class="dt">Reg</span> <span class="dt">EAX</span>) (immArg env v)
+    , <span class="dt">IMov</span> (<span class="dt">Reg</span> <span class="dt">EBX</span>) (<span class="dt">Reg</span> <span class="dt">EAX</span>)
+    , <span class="dt">IAnd</span> (<span class="dt">Reg</span> <span class="dt">EBX</span>) (<span class="dt">HexConst</span> <span class="bn">0x00000001</span>)
+    , <span class="dt">ICmp</span> (<span class="dt">Reg</span> <span class="dt">EBX</span>) (typeTag  ty)
+    , <span class="dt">IJne</span> (<span class="dt">TypeError</span> ty)
+    ]</code></pre></div>
+<p>where <code>typeTag</code> is:</p>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="ot">typeTag ::</span> <span class="dt">Ty</span> <span class="ot">-&gt;</span> <span class="dt">Arg</span>
+typeTag <span class="dt">TNumber</span>  <span class="fu">=</span> <span class="dt">HexConst</span> <span class="bn">0x00000000</span>
+typeTag <span class="dt">TBoolean</span> <span class="fu">=</span> <span class="dt">HexConst</span> <span class="bn">0x00000001</span>  </code></pre></div>
+<p>You can now splice <code>assertType</code> prior to doing the actual computations, e.g.</p>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="ot">compilePrim2 ::</span> <span class="dt">Env</span> <span class="ot">-&gt;</span> <span class="dt">Prim2</span> <span class="ot">-&gt;</span> <span class="dt">ImmE</span> <span class="ot">-&gt;</span> <span class="dt">ImmE</span> <span class="ot">-&gt;</span> [<span class="dt">Instruction</span>]
+compilePrim2 env <span class="dt">Plus</span> v1 v2   <span class="fu">=</span> assertType env v1 <span class="dt">TNumber</span>
+                             <span class="fu">++</span> assertType env v2 <span class="dt">TNumber</span>  
+                             <span class="fu">++</span> [ <span class="dt">IMov</span> (<span class="dt">Reg</span> <span class="dt">EAX</span>) (immArg env v1)
+                                , <span class="dt">IAdd</span> (<span class="dt">Reg</span> <span class="dt">EAX</span>) (immArg env v2)
+                                ]</code></pre></div>
+<h4 id="errors">2. Errors</h4>
+<p>We must also add code <em>at</em> the <code>TypeError TNumber</code> and <code>TypeError TBoolean</code> labels.</p>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="ot">errorHandler ::</span> <span class="dt">Ty</span> <span class="ot">-&gt;</span> <span class="dt">Asm</span>
+errorHandler t <span class="fu">=</span>
+  [ <span class="dt">ILabel</span>   (<span class="dt">TypeError</span> t)        <span class="co">-- the expected-number error</span>
+  ,   <span class="dt">IPush</span>  (<span class="dt">Reg</span> <span class="dt">EAX</span>)            <span class="co">-- push the second &quot;value&quot; param first,</span>
+  ,   <span class="dt">IPush</span>  (ecode t)            <span class="co">-- then the first  &quot;code&quot; param,</span>
+  ,   <span class="dt">ICall</span>  (<span class="dt">Builtin</span> <span class="st">&quot;error&quot;</span>)    <span class="co">-- call the run-time's &quot;error&quot; function.  </span>
+  ]
+
+<span class="ot">ecode ::</span> <span class="dt">Ty</span> <span class="ot">-&gt;</span> <span class="dt">Arg</span>   
+ecode <span class="dt">TNumber</span>  <span class="fu">=</span> <span class="dt">Const</span> <span class="dv">0</span>
+ecode <span class="dt">TBoolean</span> <span class="fu">=</span> <span class="dt">Const</span> <span class="dv">1</span></code></pre></div>
+<h4 id="stack-management">4. Stack Management</h4>
+<p><strong>Local Variables</strong></p>
+<p>First, <a href="#calling-convention">note that</a> the local variables live at offsets from <code>ebp</code>, so lets update</p>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="ot">immArg ::</span> <span class="dt">Env</span> <span class="ot">-&gt;</span> <span class="dt">ImmTag</span> <span class="ot">-&gt;</span> <span class="dt">Arg</span>
+immArg _   (<span class="dt">Number</span> n _) <span class="fu">=</span> <span class="dt">Const</span> n
+immArg env (<span class="dt">Var</span>    x _) <span class="fu">=</span> <span class="dt">RegOffset</span> <span class="dt">EBP</span> i
+  <span class="kw">where</span>
+    i                   <span class="fu">=</span> fromMaybe err (lookup x env)
+    err                 <span class="fu">=</span> error (printf <span class="st">&quot;Error: Variable '%s' is unbound&quot;</span> x)</code></pre></div>
+<p><strong>Maintaining <code>esp</code> and <code>ebp</code></strong></p>
+<p>We need to make sure that <em>all</em> our code respects <a href="#calling-convention">the C calling convention.</a>.</p>
+<p>To do so, just <em>wrap</em> the generated code, with instructions to save and restore <code>ebp</code> and <code>esp</code></p>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="ot">compileBody ::</span> <span class="dt">AnfTagE</span> <span class="ot">-&gt;</span> <span class="dt">Asm</span>
+compileBody e <span class="fu">=</span> entryCode e
+             <span class="fu">++</span> compileEnv emptyEnv e
+             <span class="fu">++</span> exitCode e
+
+<span class="ot">entryCode ::</span> <span class="dt">AnfTagE</span> <span class="ot">-&gt;</span> <span class="dt">Asm</span>
+entryCode e <span class="fu">=</span> [ <span class="dt">IPush</span> (<span class="dt">Reg</span> <span class="dt">EBP</span>)
+              , <span class="dt">IMov</span>  (<span class="dt">Reg</span> <span class="dt">EBP</span>) (<span class="dt">Reg</span> <span class="dt">ESP</span>)
+              , <span class="dt">ISub</span>  (<span class="dt">Reg</span> <span class="dt">ESP</span>) (<span class="dt">Const</span> <span class="dv">4</span> <span class="fu">*</span> n)
+              ]
+  <span class="kw">where</span>
+    n       <span class="fu">=</span> countVars e
+
+<span class="ot">exitCode ::</span> <span class="dt">AnfTagE</span> <span class="ot">-&gt;</span> <span class="dt">Asm</span>
+exitCode <span class="fu">=</span> [ <span class="dt">IMove</span> (<span class="dt">Reg</span> <span class="dt">ESP</span>) (<span class="dt">Reg</span> <span class="dt">EBP</span>)
+           , <span class="dt">IPop</span>  (<span class="dt">Reg</span> <span class="dt">EBP</span>)
+           , <span class="dt">IRet</span>
+           ]</code></pre></div>
+<p><strong>Q:</strong> But how shall we compute <code>countVars</code>?</p>
+<p>Here’s a shady kludge:</p>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="ot">countVars ::</span> <span class="dt">AnfTagE</span> <span class="ot">-&gt;</span> <span class="dt">Int</span>
+countVars <span class="fu">=</span> <span class="dv">100</span></code></pre></div>
+<p>Obviously a sleazy hack (<em>why?</em>), but lets use it to <em>test everything else</em>; then we can fix it.</p>
+<h2 id="computing-the-size-of-the-stack">5. Computing the Size of the Stack</h2>
+<p>Ok, now that everything (else) seems to work, lets work out:</p>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="ot">countVars ::</span> <span class="dt">AnfTagE</span> <span class="ot">-&gt;</span> <span class="dt">Int</span></code></pre></div>
+<p>Finding the <em>exact</em> answer is <strong>undecidable</strong> in general (CSE 105), i.e. is <em>impossible</em> to compute.</p>
+<p>However, it is easy to find an <em>overapproximate</em> heuristic * a value guaranteed to be <em>larger</em> than the than the max size, * and which is reasonable in practice.</p>
+<p>As usual, lets see if we can work out a heuristic by example.</p>
+<h3 id="quiz">QUIZ</h3>
+<p>How many stack slots/vars are needed for the following program?</p>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="dv">1</span> <span class="fu">+</span> <span class="dv">2</span></code></pre></div>
+<ol style="list-style-type: decimal">
+<li><code>0</code></li>
+<li><code>1</code></li>
+<li><code>2</code></li>
+</ol>
+<h3 id="quiz-1">QUIZ</h3>
+<p>How many stack slots/vars are needed for the following program?</p>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="kw">let</span> x <span class="fu">=</span> <span class="dv">1</span>
+  , y <span class="fu">=</span> <span class="dv">2</span>
+  , z <span class="fu">=</span> <span class="dv">3</span>
+<span class="kw">in</span>
+  x <span class="fu">+</span> y <span class="fu">+</span> z</code></pre></div>
+<ol style="list-style-type: decimal">
+<li><code>0</code></li>
+<li><code>1</code></li>
+<li><code>2</code></li>
+<li><code>3</code></li>
+<li><code>4</code></li>
+</ol>
+<h3 id="quiz-2">QUIZ</h3>
+<p>How many stack slots/vars are needed for the following program?</p>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="kw">if</span> true<span class="fu">:</span>
+  <span class="kw">let</span> x <span class="fu">=</span> <span class="dv">1</span>
+    , y <span class="fu">=</span> <span class="dv">2</span>
+    , z <span class="fu">=</span> <span class="dv">3</span>
+  <span class="kw">in</span>
+    x <span class="fu">+</span> y <span class="fu">+</span> z
+<span class="kw">else</span><span class="fu">:</span>
+  <span class="dv">0</span></code></pre></div>
+<ol style="list-style-type: decimal">
+<li><code>0</code></li>
+<li><code>1</code></li>
+<li><code>2</code></li>
+<li><code>3</code></li>
+<li><code>4</code></li>
+</ol>
+<h3 id="quiz-3">QUIZ</h3>
+<p>How many stack slots/vars are needed for the following program?</p>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="kw">let</span> x <span class="fu">=</span>
+  <span class="kw">let</span> y <span class="fu">=</span>
+    <span class="kw">let</span> z <span class="fu">=</span> <span class="dv">3</span>  
+    <span class="kw">in</span> z <span class="fu">+</span> <span class="dv">1</span>
+  <span class="kw">in</span> y <span class="fu">+</span> <span class="dv">1</span>
+<span class="kw">in</span> x <span class="fu">+</span> <span class="dv">1</span></code></pre></div>
+<ol style="list-style-type: decimal">
+<li><code>0</code></li>
+<li><code>1</code></li>
+<li><code>2</code></li>
+<li><code>3</code></li>
+<li><code>4</code></li>
+</ol>
+<h3 id="strategy-2">Strategy</h3>
+<p>Let <code>countVars e</code> be:</p>
+<ul>
+<li><p>The <em>maximum</em> number of let-binds in scope at any point <em>inside</em> <code>e</code>, i.e.</p></li>
+<li><p>The <em>maximum</em> size of the <code>Env</code> when compiling <code>e</code></p></li>
+</ul>
+<p>Lets work it out on a case-by-case basis:</p>
+<ul>
+<li><strong>Immediate values</strong> like <code>Number</code> or <code>Var</code></li>
+<li>are compiled <em>without pushing</em> anything onto the <code>Env</code></li>
+<li><p>i.e. <code>countVars</code> = 0</p></li>
+<li><strong>Binary Operations</strong> like <code>Prim2 o v1 v2</code> take immediate values,</li>
+<li>are compiled <em>without pushing</em> anything onto the <code>Env</code></li>
+<li><p>i.e. <code>countVars</code> = 0</p></li>
+<li><strong>Branches</strong> like <code>If v e1 e2</code> can go either way</li>
+<li>can’t tell at compile-time</li>
+<li><p>i.e. worst-case is larger of <code>countVars e1</code> and <code>countVars e2</code></p></li>
+<li><strong>Let-bindings</strong> like <code>Let x e1 e2</code> require</li>
+<li>evaluating <code>e1</code> and</li>
+<li><em>pushing</em> the result onto the stack and then evaluating <code>e2</code></li>
+<li><p>i.e. larger of <code>countVars e1</code> and <code>1 + countVars e2</code></p></li>
+</ul>
+<h3 id="implementation">Implementation</h3>
+<p>We can implement the above a simple recursive function:</p>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="ot">countVars ::</span> <span class="dt">AnfTagE</span> <span class="ot">-&gt;</span> <span class="dt">Int</span>  
+countVars (<span class="dt">If</span> v e1 e2)  <span class="fu">=</span> max (countVars e1) (countVars e2)
+countVars (<span class="dt">Let</span> x e1 e2) <span class="fu">=</span> max (countVars e1) (<span class="dv">1</span> <span class="fu">+</span> countVars e2)
+countVars _             <span class="fu">=</span> <span class="dv">0</span></code></pre></div>
+<h3 id="naive-heuristic-is-naive">Naive Heuristic is Naive</h3>
+<p>The above method is quite simplistic. For example, consider the expression:</p>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="kw">let</span> x <span class="fu">=</span> <span class="dv">1</span>
+  , y <span class="fu">=</span> <span class="dv">2</span>
+  , z <span class="fu">=</span> <span class="dv">3</span>
+<span class="kw">in</span>
+    <span class="dv">0</span></code></pre></div>
+<p><code>countVars</code> would tell us that we need to allocate <code>3</code> stack spaces but clearly <em>none</em> of the variables are actually used.</p>
+<p>Will revisit this problem later, when looking at optimizations.</p>
+<h2 id="recap">Recap</h2>
+<p>We just saw how to add support for</p>
+<ul>
+<li><strong>Multiple datatypes</strong> (<code>number</code> and <code>boolean</code>)</li>
+<li><strong>Calling</strong> external functions</li>
+</ul>
+<p>and in doing so, learned about</p>
+<ul>
+<li><strong>Tagged Representations</strong></li>
+<li><strong>Calling Conventions</strong></li>
+</ul>
+<p>To get some practice, in your assignment, you will add:</p>
+<ol style="list-style-type: decimal">
+<li>Dynamic Checks for Arithmetic Overflows (see the <code>jo</code> and <code>jno</code> operations)</li>
+<li>A Primitive <code>print</code> operation implemented by a function in the <code>c</code> run-time.</li>
+</ol>
+<p>And next, we’ll see how to easily add <strong>user-defined functions</strong>.</p>	
+                <hr>
+            </div>
+        </div>
+    </div>
+</article>
+
+        </div>
+        <div id="footer">
+        </div>
+      <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                    <li>
+                        <a href="https://ucsd-progsys.github.io/131-web/feed.xml" data-datatype="json" data-type="GET" data-target="#frame" class="reload" id="clickme">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="https://twitter.com/ranjitjhala" data-datatype="json" data-type="GET" data-target="#frame" class="reload" id="clickme" target="_blank">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li>
+                        <a href="https://plus.google.com/u/0/106612421534244742464" data-datatype="json" data-type="GET" data-target="#frame" class="reload" id="clickme" target="_blank">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-google-plus fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                     
+                     
+                    <li>
+                        <a href="https://github.com/ucsd-progsys/131-web" target="_blank">
+                            <span class="fa-stack fa-lg">
+
+                              <i class="fa fa-arrow-circle-o-down"></i>
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+		    
+                </ul>
+                <p class="copyright text-muted">Copyright &copy; Ranjit Jhala
+                2016. Please suggest fixes <a href="http://github.com/ucsd-progsys/131-web">here.</a><br><br> 
+                </p>
+<div class="col-md-12">
+     <p class="copyright text-muted">
+     Site generated by <a href="http://jaspervdj.be/hakyll">Hakyll</a>, using
+     a theme by <a href="http://katychuang.com/hakyll-cssgarden/gallery/" target="_blank">Katy Chuang.</a>
+     </p>
+</div>
+    
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="https://ucsd-progsys.github.io/131-web/static/js/jquery.min.js"></script>
+<script src="https://ucsd-progsys.github.io/131-web/static/js/spaceg.stylesheets.min.js"></script> 
+<script src="https://ucsd-progsys.github.io/131-web/static/js/bootstrap.min.js"></script>
+<script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js"></script>
+<script src="https://ucsd-progsys.github.io/131-web/static/js/scripts.js"></script>
+
+
+
+    </body>
+</html>

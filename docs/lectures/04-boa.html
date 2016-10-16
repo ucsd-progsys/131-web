@@ -500,7 +500,12 @@ tag e <span class="fu">=</span> e'  <span class="kw">where</span>  (_, e') <span
 <p>What is the assembly corresponding to <code>33 - 10</code> ?</p>
 <div class="sourceCode"><pre class="sourceCode nasm"><code class="sourceCode nasm">?<span class="dv">1</span> <span class="kw">eax</span>, ?<span class="dv">2</span>
 ?<span class="dv">3</span> <span class="kw">eax</span>, ?<span class="dv">4</span></code></pre></div>
-<p>A. <code>?1 = sub</code>, <code>?2 = 33</code>, <code>?3 = mov</code>, <code>?4 = 10</code> B. <code>?1 = mov</code>, <code>?2 = 33</code>, <code>?3 = sub</code>, <code>?4 = 10</code> C. <code>?1 = sub</code>, <code>?2 = 10</code>, <code>?3 = mov</code>, <code>?4 = 33</code> D. <code>?1 = mov</code>, <code>?2 = 10</code>, <code>?3 = sub</code>, <code>?4 = 33</code></p>
+<ul>
+<li><p><strong>A.</strong> <code>?1 = sub</code>, <code>?2 = 33</code>, <code>?3 = mov</code>, <code>?4 = 10</code></p></li>
+<li><p><strong>B.</strong> <code>?1 = mov</code>, <code>?2 = 33</code>, <code>?3 = sub</code>, <code>?4 = 10</code></p></li>
+<li><p><strong>C.</strong> <code>?1 = sub</code>, <code>?2 = 10</code>, <code>?3 = mov</code>, <code>?4 = 33</code></p></li>
+<li><p><strong>D.</strong> <code>?1 = mov</code>, <code>?2 = 10</code>, <code>?3 = sub</code>, <code>?4 = 33</code></p></li>
+</ul>
 <h4 id="example-bin1">Example: Bin1</h4>
 <p>Lets start with some easy ones. The source:</p>
 <div class="figure">
@@ -540,7 +545,12 @@ tag e <span class="fu">=</span> e'  <span class="kw">where</span>  (_, e') <span
 <div class="sourceCode"><pre class="sourceCode nasm"><code class="sourceCode nasm"><span class="kw">mov</span> <span class="kw">eax</span>, <span class="dv">10</span>
 ?<span class="dv">1</span>  <span class="kw">eax</span>, ?<span class="dv">2</span>
 ?<span class="dv">3</span>  <span class="kw">eax</span>, ?<span class="dv">4</span></code></pre></div>
-<p>A. <code>?1 = add</code>, <code>?2 = 30</code>, <code>?3 = mul</code>, <code>?4 = 20</code> B. <code>?1 = mul</code>, <code>?2 = 30</code>, <code>?3 = add</code>, <code>?4 = 20</code> C. <code>?1 = add</code>, <code>?2 = 20</code>, <code>?3 = mul</code>, <code>?4 = 30</code> D. <code>?1 = mul</code>, <code>?2 = 20</code>, <code>?3 = add</code>, <code>?4 = 30</code></p>
+<ul>
+<li><p><strong>A.</strong> <code>?1 = add</code>, <code>?2 = 30</code>, <code>?3 = mul</code>, <code>?4 = 20</code></p></li>
+<li><p><strong>B.</strong> <code>?1 = mul</code>, <code>?2 = 30</code>, <code>?3 = add</code>, <code>?4 = 20</code></p></li>
+<li><p><strong>C.</strong> <code>?1 = add</code>, <code>?2 = 20</code>, <code>?3 = mul</code>, <code>?4 = 30</code></p></li>
+<li><p><strong>D.</strong> <code>?1 = mul</code>, <code>?2 = 20</code>, <code>?3 = add</code>, <code>?4 = 30</code></p></li>
+</ul>
 <h3 id="second-operand-is-constant">Second Operand is Constant</h3>
 <p>In general, to compile <code>e + n</code> we can do</p>
 <div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell">     compile e      
@@ -578,30 +588,6 @@ tag e <span class="fu">=</span> e'  <span class="kw">where</span>  (_, e') <span
 <li><code>v1 * v2</code></li>
 <li><code>if v: e1 else: e2</code></li>
 </ul>
-<h3 id="quiz-3">QUIZ</h3>
-<p>Which of the below are in ANF ?</p>
-<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="co">{- 1 -}</span> <span class="dv">2</span> <span class="fu">+</span> <span class="dv">3</span> <span class="fu">+</span> <span class="dv">4</span>
-
-<span class="co">{- 2 -}</span> <span class="kw">let</span> x <span class="fu">=</span> <span class="dv">12</span> <span class="kw">in</span>
-          x <span class="fu">+</span> <span class="dv">1</span>
-
-<span class="co">{- 3 -}</span> <span class="kw">let</span> x <span class="fu">=</span> <span class="dv">12</span>
-          , y <span class="fu">=</span> x <span class="fu">+</span> <span class="dv">6</span>
-        <span class="kw">in</span>
-          x <span class="fu">+</span> y
-
-<span class="co">{- 4 -}</span> <span class="kw">let</span> x <span class="fu">=</span> <span class="dv">12</span>
-          , y <span class="fu">=</span> <span class="dv">18</span>
-          , t <span class="fu">=</span> x <span class="fu">+</span> y <span class="fu">+</span> <span class="dv">1</span>
-        <span class="kw">in</span>
-          <span class="kw">if</span> t<span class="fu">:</span> <span class="dv">7</span> <span class="kw">else</span><span class="fu">:</span> <span class="dv">9</span></code></pre></div>
-<ol style="list-style-type: decimal">
-<li><code>[1, 2, 3, 4]</code></li>
-<li><code>[1, 2, 3]</code></li>
-<li><code>[2, 3, 4]</code></li>
-<li><code>[1, 2]</code></li>
-<li><code>[2, 3]</code></li>
-</ol>
 <h3 id="compound-expressions">Compound Expressions</h3>
 <p>Unfortunately, the below is <em>not</em> in ANF</p>
 <div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell">(<span class="dv">1</span> <span class="fu">+</span> <span class="dv">2</span>) <span class="fu">*</span> (<span class="dv">3</span> <span class="fu">+</span> <span class="dv">4</span>)</code></pre></div>
@@ -706,6 +692,30 @@ immArg env (<span class="dt">Var</span>    x _) <span class="fu">=</span> <span 
   <span class="kw">where</span>
     i                   <span class="fu">=</span> fromMaybe err (lookup x env)
     err                 <span class="fu">=</span> error (printf <span class="st">&quot;Error: Variable '%s' is unbound&quot;</span> x)</code></pre></div>
+<h3 id="quiz-3">QUIZ</h3>
+<p>Which of the below are in ANF ?</p>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="co">{- 1 -}</span> <span class="dv">2</span> <span class="fu">+</span> <span class="dv">3</span> <span class="fu">+</span> <span class="dv">4</span>
+
+<span class="co">{- 2 -}</span> <span class="kw">let</span> x <span class="fu">=</span> <span class="dv">12</span> <span class="kw">in</span>
+          x <span class="fu">+</span> <span class="dv">1</span>
+
+<span class="co">{- 3 -}</span> <span class="kw">let</span> x <span class="fu">=</span> <span class="dv">12</span>
+          , y <span class="fu">=</span> x <span class="fu">+</span> <span class="dv">6</span>
+        <span class="kw">in</span>
+          x <span class="fu">+</span> y
+
+<span class="co">{- 4 -}</span> <span class="kw">let</span> x <span class="fu">=</span> <span class="dv">12</span>
+          , y <span class="fu">=</span> <span class="dv">18</span>
+          , t <span class="fu">=</span> x <span class="fu">+</span> y <span class="fu">+</span> <span class="dv">1</span>
+        <span class="kw">in</span>
+          <span class="kw">if</span> t<span class="fu">:</span> <span class="dv">7</span> <span class="kw">else</span><span class="fu">:</span> <span class="dv">9</span></code></pre></div>
+<ul>
+<li><p><strong>A.</strong> <code>1, 2, 3, 4</code></p></li>
+<li><p><strong>B.</strong> <code>1, 2, 3</code></p></li>
+<li><p><strong>C.</strong> <code>2, 3, 4</code></p></li>
+<li><p><strong>D.</strong> <code>1, 2</code></p></li>
+<li><p><strong>E.</strong> <code>2, 3</code></p></li>
+</ul>
 <h3 id="transforms-compiling-bare-to-anf">Transforms: Compiling <code>Bare</code> to <code>Anf</code></h3>
 <p>Next lets focus on <strong>A-Normalization</strong> i.e. transforming expressions into ANF</p>
 <div class="figure">
@@ -815,7 +825,7 @@ imm (<span class="dt">Let</span> x e1 e2)   <span class="fu">=</span> <span clas
 imm e<span class="fu">@</span>(<span class="dt">If</span> _ _ _) <span class="fu">=</span> immExp e
 
 <span class="ot">immExp ::</span> <span class="dt">AnfE</span> <span class="ot">-&gt;</span> ([(<span class="dt">Id</span>, <span class="dt">AnfE</span>)], <span class="dt">ImmE</span>)
-immExp e <span class="fu">=</span> [(t, e')], t
+immExp e <span class="fu">=</span> ([(t, e')], t)
   <span class="kw">where</span>
     t    <span class="fu">=</span> <span class="dt">FreshVar</span>
     e'   <span class="fu">=</span> anf e</code></pre></div>
