@@ -9,6 +9,7 @@ headerImg: books.jpg
 | 9/26       | Crash course in Haskell       | [html][lec2] [md][md2] |             | [hs][cod2] | 
 | 9/30       | Numbers, Unary-Ops, Variables | [html][lec3] [md][md3] | [pdf][pdf3] | [hs][cod3] | 
 | 10/7       | Branches and Bin-Ops          | [html][lec4] [md][md4] | [pdf][pdf4] | [hs][cod4] | 
+| 10/7       | Data Representation           | [html][lec5] [md][md5] | [pdf][pdf5] | [hs][cod5] | 
 
 ## Discussions 
 
@@ -41,4 +42,9 @@ headerImg: books.jpg
 [md4]:  http://github.com/ucsd-progsys/131-web/blob/master/lectures/04-boa.md 
 [cod4]: https://github.com/ucsd-cse131/04-boa 
 [pdf4]: static/img/04-boa.pdf 
+
+[lec5]: lectures/05-cobra.html 
+[md5]:  http://github.com/ucsd-progsys/131-web/blob/master/lectures/05-cobra.md 
+[cod5]: https://github.com/ucsd-cse131/05-cobra 
+[pdf5]: static/img/05-cobra.pdf 
 

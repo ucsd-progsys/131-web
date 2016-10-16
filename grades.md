@@ -16,12 +16,12 @@ headerImg: beach.jpg
   hours 59 minutes and 59 seconds past a deadline.
 
 - **Midterm (30%)** :
-  Will be held sometime in the middle of the quarter.
+  Will be held on **Friday October 28, in lecture**.
   The midterm is **closed book**, but you may use a
   double-sided **"cheat sheet"**.
 
 - **Final (35%)** :
-  Will be held on **Friday June 12th, from 3.00 -- 6:00pm** in CENTER 115.
+  Will be held on **Friday Dec 9th, from 3.00 -- 6:00pm**.
   It **must** be taken at the scheduled time and location.
   To turn in your completed final examination, you must
   present a valid UCSD ID at the time the examination
