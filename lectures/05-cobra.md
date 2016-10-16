@@ -158,7 +158,7 @@ So, our examples become:
 
 Next, lets update our implementation
 
-![Compiler Pipeline](/resources/compiler-pipeline-representation.png)
+![Compiler Pipeline](/static/img/compiler-pipeline-representation.png)
 
 The `parse`, `anf` and `tag` stages are straightforward.
 
@@ -602,7 +602,7 @@ What happened ?
 To properly call into C functions (like `error`), we must play by the rules of
 the [C calling convention](http://www.cs.virginia.edu/~evans/cs216/guides/x86.html#calling)
 
-![Stack Frames](/resources/stack-frames.png)
+![Stack Frames](/static/img/stack-frames.png)
 
 1. The _local variables_ of an (executing) function are saved in its _stack frame_.
 2. The _start_ of the stack frame is saved in register `ebp`,
