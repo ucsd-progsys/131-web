@@ -9,7 +9,7 @@ headerImg: books.jpg
 | 9/26       | Crash course in Haskell       | [html][lec2] [md][md2] |             | [hs][cod2] | 
 | 9/30       | Numbers, Unary-Ops, Variables | [html][lec3] [md][md3] | [pdf][pdf3] | [hs][cod3] | 
 | 10/7       | Branches and Bin-Ops          | [html][lec4] [md][md4] | [pdf][pdf4] | [hs][cod4] | 
-| 10/7       | Data Representation           | [html][lec5] [md][md5] | [pdf][pdf5] | [hs][cod5] | 
+| 10/17      | Data Representation           | [html][lec5] [md][md5] | [pdf][pdf5] | [hs][cod5] | 
 
 ## Discussions 
 
