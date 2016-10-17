@@ -1,5 +1,5 @@
 ---
-title: Data Representation 
+title: Data Representation
 date: 2016-10-17
 headerImg: cobra.jpg
 ---
@@ -170,19 +170,19 @@ Its convenient to introduce a type class describing Haskell types that can
 be _represented_ as x86 arguments:
 
 ```haskell
-class ToX86Arg a where
-  arg :: a -> Arg
+class Repr a where
+  repr :: a -> Arg
 ```
 
 We can now define instances for `Int` and `Bool` as:
 
 ```haskell
-instance ToX86 Int where
-  arg n = Const (Data.Bits.shift n 1) -- left-shift `n` by 1
+instance Repr Int where
+  repr n = Const (Data.Bits.shift n 1) -- left-shift `n` by 1
 
-instance ToX86 Bool where
-  arg False = HexConst 0x00000001
-  arg True  = HexConst 0x80000001
+instance Repr Bool where
+  repr False = HexConst 0x00000001
+  repr True  = HexConst 0x80000001
 ```  
 
 #### Immediate Values to Arguments
@@ -194,8 +194,8 @@ Lets extend `immArg` that tranforms an immediate expression to an x86 argument.
 ```haskell
 immArg :: Env -> ImmTag -> Arg
 immArg (Var    x _)  = ...
-immArg (Number n _)  = arg n
-immArg (Boolean b _) = arg b
+immArg (Number n _)  = repr n
+immArg (Boolean b _) = repr b
 ```
 
 #### Compiling Constants
@@ -210,14 +210,24 @@ compileEnv _ e@(Boolean _ _) = [IMov (Reg EAX) (immArg env e)]
 
 (The other cases remain unchanged.)
 
-### Tests
+Lets run some tests to double check.
 
-Lets run some tests to double check:
+### QUIZ
+
+What is the result of:
 
 ```haskell
-ghci> compileAndRun "15"
-30
+ghci> exec "15"
 ```
+
+* **A** Error
+* **B** `0`
+* **C** `15`
+* **D** `30`
+
+
+### Output Representation
+
 
 Say what?! Ah. Need to update our run-time printer in `main.c`
 
@@ -235,28 +245,52 @@ void print(int val){
 and now we get:
 
 ```haskell
-ghci> compileAndRun "15"
+ghci> exec "15"
 15
 ```
 
 Can you think of some other tests we should write?
 
-QUIZ: if, let?
+### QUIZ
+
+What is the result of
+
+```haskell
+ghci> exec "let x = 15 in x"
+```
+
+* **A** Error
+* **B** `0`
+* **C** `15`
+* **D** `30`
+
+
+### QUIZ
+
+What is the result of
+
+```haskell
+ghci> exec "if 3: 12 else: 49"
+```
+
+* **A** Error
+* **B** `0`
+* **C** `12`
+* **D** `49`
 
 ## 2. Arithmetic Operations
 
 Constants like `2`, `29`, `false` are only useful if we can perform
 computations with them.
 
+First lets see what happens with our arithmetic operators.
 
 ### QUIZ: Addition
 
-First lets see what happens with our arithmetic operators.
-
-What will be the result (using our code so far) of:
+What will be the result of:
 
 ```haskell
-ghci> compileAndRun "12 + 4"
+ghci> exec "12 + 4"
 ```
 
 1. Does not compile
@@ -288,7 +322,7 @@ work _as is_ with the shifted representation.
 What will be the result (using our code so far) of:
 
 ```haskell
-ghci> compileAndRun "12 * 4"
+ghci> exec "12 * 4"
 ```
 
 1. Does not compile
@@ -312,7 +346,7 @@ Thus, our _source values_ have the following _representations:
 |              `3`|                          `6` |
 |              `5`|                         `10` |
 |     `3 * 5 = 15`|                `6 * 10 = 60` |
-|        `n1 + n2`|  `2*n1 * 2*n2 = 4*(n1 + n2)` |
+|        `n1 * n2`|  `2*n1 * 2*n2 = 4*(n1 + n2)` |
 
 Thus, multiplication ends up accumulating the factor of 2.
 * Result is _two times_ the desired one.
@@ -366,19 +400,15 @@ compilePrim2 env Times v1 v2  = [ IMov (Reg EAX) (immArg env v1)
 
 Lets take it out for a drive.
 
-Suppose we have a file `tests/input/mul3.cobra`
-
 ```haskell
-2 * -1
-
-```haskell
-ghci> compileAndRun "2 * -1"
+ghci> exec "2 * (-1)"
 2147483644
 ```
 
 Whoa?!
 
-Well, its easy to figure out if you look at the generated assembly:
+Well, its easy to figure out if you look at
+the generated assembly:
 
 ```nasm
 mov eax, 4
@@ -401,6 +431,7 @@ one bit, we get the wierd value (**does not "divide by two"**)
 The instruction `sar`
 [shift arithmetic right](https://en.wikibooks.org/wiki/X86_Assembly/Shift_and_Rotate#Arithmetic_Shift_Instructions)
 does what we want, namely:
+
 * preserves the sign-bit when shifting
 * i.e. doesn't introduce a `0` by default
 
@@ -428,7 +459,7 @@ compilePrim2 env Times v1 v2  = [ IMov (Reg EAX) (immArg env v1)
 After which all is well:
 
 ```haskell
-ghci> compileAndRun "2 * -1"
+ghci> exec "2 * (-1)"
 -2
 ```
 
