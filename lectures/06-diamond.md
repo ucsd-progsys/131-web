@@ -355,7 +355,7 @@ renders the result.
 
 Next, lets insert a `checker` phase into our pipeline:
 
-![Compiler Pipeline with Checking Phase](/resources/compiler-pipeline-functions-check.png)
+![Compiler Pipeline with Checking Phase](/static/img/compiler-pipeline-functions-check.png)
 
 In the above, we have defined the types:
 
@@ -473,7 +473,7 @@ You should understand the above and be able to easily add extra error checks.
 
 ## 3. Compiling Functions
 
-![Compiler Pipeline for Functions](/resources/compiler-pipeline-functions.png)
+![Compiler Pipeline for Functions](/static/img/compiler-pipeline-functions.png)
 
 In the above, we have defined the types:
 
@@ -484,22 +484,22 @@ type AnfTagP = Program (SourceSpan, Tag) -- ^ each sub-expression has unique tag
 ```
 ### Tagging
 
-![Compiler Pipeline ANF](/resources/compiler-pipeline-functions-tag.png)
+![Compiler Pipeline ANF](/static/img/compiler-pipeline-functions-tag.png)
 
 The `tag` phase simply recursively tags each
 function body and the main expression
 
 ### ANF Conversion
 
-![Compiler Pipeline ANF](/resources/compiler-pipeline-functions-anf.png)
+![Compiler Pipeline ANF](/static/img/compiler-pipeline-functions-anf.png)
 
 * The `normalize` phase (i.e. `anf`) is recursively
   applied to each function body.
 
 * In addition to `Prim2` operands, each call's arguments
-  should be transformed into an [immediate expression](/resources/04-boa.md/#idea-immediate-expressions)
+  should be transformed into an [immediate expression](04-boa.md/#idea-immediate-expressions)
 
-Generalize the [strategy for _binary_ operators](/resources/05-boa.md/#anf-implementation)
+Generalize the [strategy for _binary_ operators](04-boa.md/#anf-implementation)
 
 * from (`2` arguments) to `n`-arguments.
 
@@ -508,7 +508,7 @@ Generalize the [strategy for _binary_ operators](/resources/05-boa.md/#anf-imple
 
 Now, lets look at _compiling_ function _definitions_ and _calls_.
 
-![Compiler Pipeline with Checking Phase](/resources/compiler-pipeline-functions-codegen.png)
+![Compiler Pipeline with Checking Phase](/static/img/compiler-pipeline-functions-codegen.png)
 
 We need a co-ordinated strategy for _definitions_ and _calls_.
 
@@ -523,7 +523,7 @@ We need a co-ordinated strategy for _definitions_ and _calls_.
 
 ### Strategy: The Stack
 
-![Stack Frames](/resources/stack-frames.png)
+![Stack Frames](/static/img/stack-frames.png)
 
 We will use our old friend, _the stack_ to
 
@@ -535,7 +535,7 @@ We will use our old friend, _the stack_ to
 Recall that we are using the `C` calling convention that ensures
 the following stack layout:
 
-![Stack Layout](/resources/stack-layout.png)
+![Stack Layout](/static/img/stack-layout.png)
 
 ### Strategy: Definitions
 
@@ -903,7 +903,7 @@ We can do the above in a single step, i.e., we could
 identify the tail calls _during_ the code generation,
 but its cleaner to separate the steps into:
 
-![Labeling `Expr` with Tail Calls](/resources/compiler-pipeline-tails.png)
+![Labeling `Expr` with Tail Calls](/static/img/compiler-pipeline-tails.png)
 
 In the above, we have defined the types:
 
@@ -928,7 +928,7 @@ tails :: Program a -> Program (a, Bool)
 
 #### Labeling Tail Calls
 
-![Which Calls are Tail Calls?](/resources/tail-rec-code-and-type.png)
+![Which Calls are Tail Calls?](/static/img/tail-rec-code-and-type.png)
 
 The `Expr` in _non tail positions_
 
