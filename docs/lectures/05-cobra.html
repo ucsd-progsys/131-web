@@ -405,12 +405,12 @@ if (window.navigator.appName == "Microsoft Internet Explorer") {
 </thead>
 <tbody>
 <tr class="odd">
-<td align="right"><code>false</code></td>
-<td align="right"><code>[0x00000001]</code></td>
-</tr>
-<tr class="even">
 <td align="right"><code>true</code></td>
 <td align="right"><code>[0x80000001]</code></td>
+</tr>
+<tr class="even">
+<td align="right"><code>false</code></td>
+<td align="right"><code>[0x00000001]</code></td>
 </tr>
 </tbody>
 </table>
@@ -468,32 +468,39 @@ if (window.navigator.appName == "Microsoft Internet Explorer") {
 <p>Lets focus on the <code>compile</code> function.</p>
 <h4 id="a-typeclass-for-representing-constants">A TypeClass for Representing Constants</h4>
 <p>Its convenient to introduce a type class describing Haskell types that can be <em>represented</em> as x86 arguments:</p>
-<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="kw">class</span> <span class="dt">ToX86Arg</span> a <span class="kw">where</span>
-<span class="ot">  arg ::</span> a <span class="ot">-&gt;</span> <span class="dt">Arg</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="kw">class</span> <span class="dt">Repr</span> a <span class="kw">where</span>
+<span class="ot">  repr ::</span> a <span class="ot">-&gt;</span> <span class="dt">Arg</span></code></pre></div>
 <p>We can now define instances for <code>Int</code> and <code>Bool</code> as:</p>
-<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="kw">instance</span> <span class="dt">ToX86</span> <span class="dt">Int</span> <span class="kw">where</span>
-  arg n <span class="fu">=</span> <span class="dt">Const</span> (Data.Bits.shift n <span class="dv">1</span>) <span class="co">-- left-shift `n` by 1</span>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="kw">instance</span> <span class="dt">Repr</span> <span class="dt">Int</span> <span class="kw">where</span>
+  repr n <span class="fu">=</span> <span class="dt">Const</span> (Data.Bits.shift n <span class="dv">1</span>) <span class="co">-- left-shift `n` by 1</span>
 
-<span class="kw">instance</span> <span class="dt">ToX86</span> <span class="dt">Bool</span> <span class="kw">where</span>
-  arg <span class="dt">False</span> <span class="fu">=</span> <span class="dt">HexConst</span> <span class="bn">0x00000001</span>
-  arg <span class="dt">True</span>  <span class="fu">=</span> <span class="dt">HexConst</span> <span class="bn">0x80000001</span></code></pre></div>
+<span class="kw">instance</span> <span class="dt">Repr</span> <span class="dt">Bool</span> <span class="kw">where</span>
+  repr <span class="dt">False</span> <span class="fu">=</span> <span class="dt">HexConst</span> <span class="bn">0x00000001</span>
+  repr <span class="dt">True</span>  <span class="fu">=</span> <span class="dt">HexConst</span> <span class="bn">0x80000001</span></code></pre></div>
 <h4 id="immediate-values-to-arguments">Immediate Values to Arguments</h4>
 <p><code>Boolean b</code> is an <em>immediate</em> value (like <code>Number n</code>).</p>
 <p>Lets extend <code>immArg</code> that tranforms an immediate expression to an x86 argument.</p>
 <div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="ot">immArg ::</span> <span class="dt">Env</span> <span class="ot">-&gt;</span> <span class="dt">ImmTag</span> <span class="ot">-&gt;</span> <span class="dt">Arg</span>
 immArg (<span class="dt">Var</span>    x _)  <span class="fu">=</span> <span class="fu">...</span>
-immArg (<span class="dt">Number</span> n _)  <span class="fu">=</span> arg n
-immArg (<span class="dt">Boolean</span> b _) <span class="fu">=</span> arg b</code></pre></div>
+immArg (<span class="dt">Number</span> n _)  <span class="fu">=</span> repr n
+immArg (<span class="dt">Boolean</span> b _) <span class="fu">=</span> repr b</code></pre></div>
 <h4 id="compiling-constants">Compiling Constants</h4>
 <p>Finally, we can easily update the <code>compile</code> function as:</p>
 <div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="ot">compileEnv ::</span> <span class="dt">Env</span> <span class="ot">-&gt;</span> <span class="dt">AnfTagE</span> <span class="ot">-&gt;</span> <span class="dt">Asm</span>
 compileEnv _ e<span class="fu">@</span>(<span class="dt">Number</span> _ _)  <span class="fu">=</span> [<span class="dt">IMov</span> (<span class="dt">Reg</span> <span class="dt">EAX</span>) (immArg env e)]
 compileEnv _ e<span class="fu">@</span>(<span class="dt">Boolean</span> _ _) <span class="fu">=</span> [<span class="dt">IMov</span> (<span class="dt">Reg</span> <span class="dt">EAX</span>) (immArg env e)]</code></pre></div>
 <p>(The other cases remain unchanged.)</p>
-<h3 id="tests">Tests</h3>
-<p>Lets run some tests to double check:</p>
-<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell">ghci<span class="fu">&gt;</span> compileAndRun <span class="st">&quot;15&quot;</span>
-<span class="dv">30</span></code></pre></div>
+<p>Lets run some tests to double check.</p>
+<h3 id="quiz">QUIZ</h3>
+<p>What is the result of:</p>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell">ghci<span class="fu">&gt;</span> exec <span class="st">&quot;15&quot;</span></code></pre></div>
+<ul>
+<li><strong>A</strong> Error</li>
+<li><strong>B</strong> <code>0</code></li>
+<li><strong>C</strong> <code>15</code></li>
+<li><strong>D</strong> <code>30</code></li>
+</ul>
+<h3 id="output-representation">Output Representation</h3>
 <p>Say what?! Ah. Need to update our run-time printer in <code>main.c</code></p>
 <div class="sourceCode"><pre class="sourceCode c"><code class="sourceCode c"><span class="dt">void</span> print(<span class="dt">int</span> val){
   <span class="kw">if</span> (val == CONST_TRUE)
@@ -504,16 +511,33 @@ compileEnv _ e<span class="fu">@</span>(<span class="dt">Boolean</span> _ _) <sp
     printf(<span class="st">&quot;%d&quot;</span>, d &gt;&gt; <span class="dv">1</span>);  <span class="co">// shift right to remove tag bit.</span>
 }</code></pre></div>
 <p>and now we get:</p>
-<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell">ghci<span class="fu">&gt;</span> compileAndRun <span class="st">&quot;15&quot;</span>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell">ghci<span class="fu">&gt;</span> exec <span class="st">&quot;15&quot;</span>
 <span class="dv">15</span></code></pre></div>
 <p>Can you think of some other tests we should write?</p>
-<p>QUIZ: if, let?</p>
+<h3 id="quiz-1">QUIZ</h3>
+<p>What is the result of</p>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell">ghci<span class="fu">&gt;</span> exec <span class="st">&quot;let x = 15 in x&quot;</span></code></pre></div>
+<ul>
+<li><strong>A</strong> Error</li>
+<li><strong>B</strong> <code>0</code></li>
+<li><strong>C</strong> <code>15</code></li>
+<li><strong>D</strong> <code>30</code></li>
+</ul>
+<h3 id="quiz-2">QUIZ</h3>
+<p>What is the result of</p>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell">ghci<span class="fu">&gt;</span> exec <span class="st">&quot;if 3: 12 else: 49&quot;</span></code></pre></div>
+<ul>
+<li><strong>A</strong> Error</li>
+<li><strong>B</strong> <code>0</code></li>
+<li><strong>C</strong> <code>12</code></li>
+<li><strong>D</strong> <code>49</code></li>
+</ul>
 <h2 id="arithmetic-operations">2. Arithmetic Operations</h2>
 <p>Constants like <code>2</code>, <code>29</code>, <code>false</code> are only useful if we can perform computations with them.</p>
-<h3 id="quiz-addition">QUIZ: Addition</h3>
 <p>First lets see what happens with our arithmetic operators.</p>
-<p>What will be the result (using our code so far) of:</p>
-<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell">ghci<span class="fu">&gt;</span> compileAndRun <span class="st">&quot;12 + 4&quot;</span></code></pre></div>
+<h3 id="quiz-addition">QUIZ: Addition</h3>
+<p>What will be the result of:</p>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell">ghci<span class="fu">&gt;</span> exec <span class="st">&quot;12 + 4&quot;</span></code></pre></div>
 <ol style="list-style-type: decimal">
 <li>Does not compile</li>
 <li>Run-time error (e.g. segmentation fault)</li>
@@ -556,7 +580,7 @@ compileEnv _ e<span class="fu">@</span>(<span class="dt">Boolean</span> _ _) <sp
 <p>That is, <em>addition</em> (and similarly, _subtraction) work <em>as is</em> with the shifted representation.</p>
 <h3 id="quiz-multiplication">QUIZ: Multiplication</h3>
 <p>What will be the result (using our code so far) of:</p>
-<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell">ghci<span class="fu">&gt;</span> compileAndRun <span class="st">&quot;12 * 4&quot;</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell">ghci<span class="fu">&gt;</span> exec <span class="st">&quot;12 * 4&quot;</span></code></pre></div>
 <ol style="list-style-type: decimal">
 <li>Does not compile</li>
 <li>Run-time error (e.g. segmentation fault)</li>
@@ -592,7 +616,7 @@ compileEnv _ e<span class="fu">@</span>(<span class="dt">Boolean</span> _ _) <sp
 <td align="right"><code>6 * 10 = 60</code></td>
 </tr>
 <tr class="even">
-<td align="right"><code>n1 + n2</code></td>
+<td align="right"><code>n1 * n2</code></td>
 <td align="right"><code>2*n1 * 2*n2 = 4*(n1 + n2)</code></td>
 </tr>
 </tbody>
@@ -626,11 +650,9 @@ compilePrim2 env <span class="dt">Times</span> v1 v2  <span class="fu">=</span> 
                                 , <span class="dt">IMul</span> (<span class="dt">Reg</span> <span class="dt">EAX</span>) (immArg env v2)
                                 , <span class="dt">IShr</span> (<span class="dt">Reg</span> <span class="dt">EAX</span>) (<span class="dt">Const</span> <span class="dv">1</span>)
                                 ]</code></pre></div>
-<h3 id="tests-1">Tests</h3>
+<h3 id="tests">Tests</h3>
 <p>Lets take it out for a drive.</p>
-<p>Suppose we have a file <code>tests/input/mul3.cobra</code></p>
-<p>```haskell 2 * -1</p>
-<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell">ghci<span class="fu">&gt;</span> compileAndRun <span class="st">&quot;2 * -1&quot;</span>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell">ghci<span class="fu">&gt;</span> exec <span class="st">&quot;2 * (-1)&quot;</span>
 <span class="dv">2147483644</span></code></pre></div>
 <p>Whoa?!</p>
 <p>Well, its easy to figure out if you look at the generated assembly:</p>
@@ -661,7 +683,11 @@ compilePrim2 env <span class="dt">Times</span> v1 v2  <span class="fu">=</span> 
 </tbody>
 </table>
 <p><strong>Solution: Signed/Arithmetic Shift</strong></p>
-<p>The instruction <code>sar</code> <a href="https://en.wikibooks.org/wiki/X86_Assembly/Shift_and_Rotate#Arithmetic_Shift_Instructions">shift arithmetic right</a> does what we want, namely: * preserves the sign-bit when shifting * i.e. doesn’t introduce a <code>0</code> by default</p>
+<p>The instruction <code>sar</code> <a href="https://en.wikibooks.org/wiki/X86_Assembly/Shift_and_Rotate#Arithmetic_Shift_Instructions">shift arithmetic right</a> does what we want, namely:</p>
+<ul>
+<li>preserves the sign-bit when shifting</li>
+<li>i.e. doesn’t introduce a <code>0</code> by default</li>
+</ul>
 <h3 id="transforms-revisited">Transforms Revisited</h3>
 <p>Lets add <code>sar</code> to our target:</p>
 <div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="kw">data</span> <span class="dt">Instruction</span>
@@ -676,9 +702,14 @@ compilePrim2 env <span class="dt">Times</span> v1 v2  <span class="fu">=</span> 
                                 , <span class="dt">ISar</span> (<span class="dt">Reg</span> <span class="dt">EAX</span>) (<span class="dt">Const</span> <span class="dv">1</span>)
                                 ]</code></pre></div>
 <p>After which all is well:</p>
-<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell">ghci<span class="fu">&gt;</span> compileAndRun <span class="st">&quot;2 * -1&quot;</span>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell">ghci<span class="fu">&gt;</span> exec <span class="st">&quot;2 * (-1)&quot;</span>
 <span class="fu">-</span><span class="dv">2</span></code></pre></div>
 <h2 id="arithmetic-comparisons">3. Arithmetic Comparisons</h2>
+<p>Next, lets try to implement comparisons:</p>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell">ghci<span class="fu">&gt;</span> exec <span class="st">&quot;1 &lt; 2&quot;</span>
+<span class="fu">...</span>
+boa<span class="fu">:</span> lib<span class="fu">/</span><span class="dt">Language</span><span class="fu">/</span><span class="dt">Boa</span><span class="fu">/</span>Compiler.hs<span class="fu">:</span>(<span class="dv">104</span>,<span class="dv">1</span>)<span class="fu">-</span>(<span class="dv">106</span>,<span class="dv">43</span>)<span class="fu">:</span> <span class="dt">Non</span><span class="fu">-</span>exhaustive patterns <span class="kw">in</span> function compilePrim2</code></pre></div>
+<p>Oops. Need to implement it first!</p>
 <p>Many ways to do this:</p>
 <ul>
 <li>branches <code>jne, jl, jg</code> or</li>
@@ -699,6 +730,24 @@ compilePrim2 env <span class="dt">Times</span> v1 v2  <span class="fu">=</span> 
 <span class="kw">sub</span> <span class="kw">eax</span>, arg2
 <span class="kw">and</span> <span class="kw">eax</span><span class="bn">, 0x80000000   </span><span class="co">; mask out &quot;sign&quot; bit (msb)</span>
 <span class="kw">or</span>  <span class="kw">eax</span><span class="bn">, 0x00000001   </span><span class="co">; set tag bit to bool</span></code></pre></div>
+<h3 id="comparisons-implementation">Comparisons: Implementation</h3>
+<p>Lets go and extend:</p>
+<ol style="list-style-type: decimal">
+<li>The <code>Instruction</code> type</li>
+</ol>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="kw">data</span> <span class="dt">Instruction</span>
+  <span class="fu">=</span> <span class="fu">...</span>
+  <span class="fu">|</span> <span class="dt">IAnd</span>    <span class="dt">Arg</span>   <span class="dt">Arg</span>
+  <span class="fu">|</span> <span class="dt">IOr</span>     <span class="dt">Arg</span>   <span class="dt">Arg</span></code></pre></div>
+<ol start="2" style="list-style-type: decimal">
+<li>The <code>instrAsm</code> converter</li>
+</ol>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="ot">instrAsm ::</span> <span class="dt">Instruction</span> <span class="ot">-&gt;</span> <span class="dt">Text</span>
+instrAsm (<span class="dt">IAnd</span> a1 a2) <span class="fu">=</span> <span class="fu">...</span>
+instrAsm (<span class="dt">IOr</span>  a1 a2) <span class="fu">=</span> <span class="fu">...</span></code></pre></div>
+<ol start="3" style="list-style-type: decimal">
+<li>The actual <code>compilePrim2</code> function</li>
+</ol>
 <h3 id="exercise-comparisons-via-bit-twiddling">Exercise: Comparisons via Bit-Twiddling</h3>
 <ul>
 <li>Can compute <code>arg1 &gt; arg2</code> by computing <code>arg2 &lt; arg1</code>.</li>
@@ -718,8 +767,7 @@ compilePrim2 env <span class="dt">Times</span> v1 v2  <span class="fu">=</span> 
 <p>or</p>
 <div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="dv">7</span> <span class="fu">&lt;</span> false</code></pre></div>
 <p>In fact, lets try to see what happens with our code on the above:</p>
-<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell">ghci<span class="fu">&gt;</span> compileAndRun <span class="st">&quot;2 + true&quot;</span>
-<span class="dt">FIXME</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell">ghci<span class="fu">&gt;</span> exec <span class="st">&quot;2 + true&quot;</span></code></pre></div>
 <p>Oops.</p>
 <h3 id="checking-tags-at-run-time">Checking Tags at Run-Time</h3>
 <p>Later, we will look into adding a <em>static</em> type system that will reject such meaningless programs at <em>compile</em> time. For now, lets see how to extend the compilation to <em>abort execution</em> when the wrong <em>types of operands</em> are found when the code is <em>executing</em>.</p>
@@ -983,7 +1031,7 @@ countVars <span class="fu">=</span> <span class="dv">100</span></code></pre></di
 <p>Finding the <em>exact</em> answer is <strong>undecidable</strong> in general (CSE 105), i.e. is <em>impossible</em> to compute.</p>
 <p>However, it is easy to find an <em>overapproximate</em> heuristic * a value guaranteed to be <em>larger</em> than the than the max size, * and which is reasonable in practice.</p>
 <p>As usual, lets see if we can work out a heuristic by example.</p>
-<h3 id="quiz">QUIZ</h3>
+<h3 id="quiz-3">QUIZ</h3>
 <p>How many stack slots/vars are needed for the following program?</p>
 <div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="dv">1</span> <span class="fu">+</span> <span class="dv">2</span></code></pre></div>
 <ol style="list-style-type: decimal">
@@ -991,7 +1039,7 @@ countVars <span class="fu">=</span> <span class="dv">100</span></code></pre></di
 <li><code>1</code></li>
 <li><code>2</code></li>
 </ol>
-<h3 id="quiz-1">QUIZ</h3>
+<h3 id="quiz-4">QUIZ</h3>
 <p>How many stack slots/vars are needed for the following program?</p>
 <div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="kw">let</span> x <span class="fu">=</span> <span class="dv">1</span>
   , y <span class="fu">=</span> <span class="dv">2</span>
@@ -1005,7 +1053,7 @@ countVars <span class="fu">=</span> <span class="dv">100</span></code></pre></di
 <li><code>3</code></li>
 <li><code>4</code></li>
 </ol>
-<h3 id="quiz-2">QUIZ</h3>
+<h3 id="quiz-5">QUIZ</h3>
 <p>How many stack slots/vars are needed for the following program?</p>
 <div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="kw">if</span> true<span class="fu">:</span>
   <span class="kw">let</span> x <span class="fu">=</span> <span class="dv">1</span>
@@ -1022,7 +1070,7 @@ countVars <span class="fu">=</span> <span class="dv">100</span></code></pre></di
 <li><code>3</code></li>
 <li><code>4</code></li>
 </ol>
-<h3 id="quiz-3">QUIZ</h3>
+<h3 id="quiz-6">QUIZ</h3>
 <p>How many stack slots/vars are needed for the following program?</p>
 <div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="kw">let</span> x <span class="fu">=</span>
   <span class="kw">let</span> y <span class="fu">=</span>
