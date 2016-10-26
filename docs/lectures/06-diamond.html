@@ -459,7 +459,7 @@ esHandle es <span class="fu">=</span> renderErrors es <span class="fu">&gt;&gt;=
 <h3 id="transforms">Transforms</h3>
 <p>Next, lets insert a <code>checker</code> phase into our pipeline:</p>
 <div class="figure">
-<img src="../resources/compiler-pipeline-functions-check.png" alt="Compiler Pipeline with Checking Phase" />
+<img src="../static/img/compiler-pipeline-functions-check.png" alt="Compiler Pipeline with Checking Phase" />
 <p class="caption">Compiler Pipeline with Checking Phase</p>
 </div>
 <p>In the above, we have defined the types:</p>
@@ -539,7 +539,7 @@ wellFormedE fEnv vEnv0 e <span class="fu">=</span> go vEnv0 e
 </ol>
 <h2 id="compiling-functions">3. Compiling Functions</h2>
 <div class="figure">
-<img src="../resources/compiler-pipeline-functions.png" alt="Compiler Pipeline for Functions" />
+<img src="../static/img/compiler-pipeline-functions.png" alt="Compiler Pipeline for Functions" />
 <p class="caption">Compiler Pipeline for Functions</p>
 </div>
 <p>In the above, we have defined the types:</p>
@@ -548,27 +548,27 @@ wellFormedE fEnv vEnv0 e <span class="fu">=</span> go vEnv0 e
 <span class="kw">type</span> <span class="dt">AnfTagP</span> <span class="fu">=</span> <span class="dt">Program</span> (<span class="dt">SourceSpan</span>, <span class="dt">Tag</span>) <span class="co">-- ^ each sub-expression has unique tag</span></code></pre></div>
 <h3 id="tagging">Tagging</h3>
 <div class="figure">
-<img src="../resources/compiler-pipeline-functions-tag.png" alt="Compiler Pipeline ANF" />
+<img src="../static/img/compiler-pipeline-functions-tag.png" alt="Compiler Pipeline ANF" />
 <p class="caption">Compiler Pipeline ANF</p>
 </div>
 <p>The <code>tag</code> phase simply recursively tags each function body and the main expression</p>
 <h3 id="anf-conversion">ANF Conversion</h3>
 <div class="figure">
-<img src="../resources/compiler-pipeline-functions-anf.png" alt="Compiler Pipeline ANF" />
+<img src="../static/img/compiler-pipeline-functions-anf.png" alt="Compiler Pipeline ANF" />
 <p class="caption">Compiler Pipeline ANF</p>
 </div>
 <ul>
 <li><p>The <code>normalize</code> phase (i.e. <code>anf</code>) is recursively applied to each function body.</p></li>
-<li><p>In addition to <code>Prim2</code> operands, each call’s arguments should be transformed into an <a href="../resources/04-boa.md/#idea-immediate-expressions">immediate expression</a></p></li>
+<li><p>In addition to <code>Prim2</code> operands, each call’s arguments should be transformed into an <a href="04-boa.md/#idea-immediate-expressions">immediate expression</a></p></li>
 </ul>
-<p>Generalize the <a href="../resources/05-boa.md/#anf-implementation">strategy for <em>binary</em> operators</a></p>
+<p>Generalize the <a href="04-boa.md/#anf-implementation">strategy for <em>binary</em> operators</a></p>
 <ul>
 <li>from (<code>2</code> arguments) to <code>n</code>-arguments.</li>
 </ul>
 <h3 id="strategy">Strategy</h3>
 <p>Now, lets look at <em>compiling</em> function <em>definitions</em> and <em>calls</em>.</p>
 <div class="figure">
-<img src="../resources/compiler-pipeline-functions-codegen.png" alt="Compiler Pipeline with Checking Phase" />
+<img src="../static/img/compiler-pipeline-functions-codegen.png" alt="Compiler Pipeline with Checking Phase" />
 <p class="caption">Compiler Pipeline with Checking Phase</p>
 </div>
 <p>We need a co-ordinated strategy for <em>definitions</em> and <em>calls</em>.</p>
@@ -576,7 +576,7 @@ wellFormedE fEnv vEnv0 e <span class="fu">=</span> go vEnv0 e
 <p><strong>Calls</strong> * Each <em>call</em> of <code>f(args)</code> will execute the block labeled <code>f</code> * (But what about the <em>parameters</em>)?</p>
 <h3 id="strategy-the-stack">Strategy: The Stack</h3>
 <div class="figure">
-<img src="../resources/stack-frames.png" alt="Stack Frames" />
+<img src="../static/img/stack-frames.png" alt="Stack Frames" />
 <p class="caption">Stack Frames</p>
 </div>
 <p>We will use our old friend, <em>the stack</em> to</p>
@@ -587,7 +587,7 @@ wellFormedE fEnv vEnv0 e <span class="fu">=</span> go vEnv0 e
 <p><strong>Calling Convention</strong></p>
 <p>Recall that we are using the <code>C</code> calling convention that ensures the following stack layout:</p>
 <div class="figure">
-<img src="../resources/stack-layout.png" alt="Stack Layout" />
+<img src="../static/img/stack-layout.png" alt="Stack Layout" />
 <p class="caption">Stack Layout</p>
 </div>
 <h3 id="strategy-definitions">Strategy: Definitions</h3>
@@ -811,7 +811,7 @@ sumTo(<span class="dv">10000</span>)</code></pre></div>
 <h3 id="types-3">Types</h3>
 <p>We can do the above in a single step, i.e., we could identify the tail calls <em>during</em> the code generation, but its cleaner to separate the steps into:</p>
 <div class="figure">
-<img src="../resources/compiler-pipeline-tails.png" alt="Labeling Expr with Tail Calls" />
+<img src="../static/img/compiler-pipeline-tails.png" alt="Labeling Expr with Tail Calls" />
 <p class="caption">Labeling <code>Expr</code> with Tail Calls</p>
 </div>
 <p>In the above, we have defined the types:</p>
@@ -826,7 +826,7 @@ sumTo(<span class="dv">10000</span>)</code></pre></div>
 <p><strong>2. To Compile</strong> tail calls, by extending <code>compileExpr</code></p>
 <h4 id="labeling-tail-calls">Labeling Tail Calls</h4>
 <div class="figure">
-<img src="../resources/tail-rec-code-and-type.png" alt="Which Calls are Tail Calls?" />
+<img src="../static/img/tail-rec-code-and-type.png" alt="Which Calls are Tail Calls?" />
 <p class="caption">Which Calls are Tail Calls?</p>
 </div>
 <p>The <code>Expr</code> in <em>non tail positions</em></p>
