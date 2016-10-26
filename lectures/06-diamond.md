@@ -1,7 +1,7 @@
 ---
 title: Functions 
 date: 2016-10-26
-headerImg: diamondback.jpg
+headerImg: diamond.jpg
 ---
 
 Next, we'll build **diamondback** which adds support for
