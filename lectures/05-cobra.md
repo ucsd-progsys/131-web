@@ -120,8 +120,8 @@ Or, in HEX
 
 |    Value |   Representation (HEX) |
 |---------:|-----------------------:|
-|   `false`|          `[0x00000001]`|
 |    `true`|          `[0x80000001]`|
+|   `false`|          `[0x00000001]`|
 
 
 ### Types
@@ -465,6 +465,16 @@ ghci> exec "2 * (-1)"
 
 ## 3. Arithmetic Comparisons
 
+Next, lets try to implement comparisons:
+
+```haskell
+ghci> exec "1 < 2"
+...
+boa: lib/Language/Boa/Compiler.hs:(104,1)-(106,43): Non-exhaustive patterns in function compilePrim2
+```
+
+Oops. Need to implement it first!
+
 Many ways to do this:
 
 * branches `jne, jl, jg` or
@@ -491,6 +501,31 @@ sub eax, arg2
 and eax, 0x80000000   ; mask out "sign" bit (msb)
 or  eax, 0x00000001   ; set tag bit to bool
 ```
+
+### Comparisons: Implementation
+
+Lets go and extend:
+
+1. The `Instruction` type
+
+```haskell
+data Instruction
+  = ...
+  | IAnd    Arg   Arg
+  | IOr     Arg   Arg
+```
+
+2. The `instrAsm` converter
+
+```haskell
+instrAsm :: Instruction -> Text
+instrAsm (IAnd a1 a2) = ...
+instrAsm (IOr  a1 a2) = ...
+```
+
+3. The actual `compilePrim2` function   
+
+
 
 ### Exercise: Comparisons via Bit-Twiddling
 
@@ -524,8 +559,7 @@ or
 In fact, lets try to see what happens with our code on the above:
 
 ```haskell
-ghci> compileAndRun "2 + true"
-FIXME
+ghci> exec "2 + true"
 ```
 
 Oops.
