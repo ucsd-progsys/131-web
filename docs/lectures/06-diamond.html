@@ -487,8 +487,8 @@ check p <span class="fu">=</span> <span class="kw">case</span> wellFormed p <spa
 <p>The bulk of the work is done by:</p>
 <div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="ot">wellFormed ::</span> <span class="dt">BareProgram</span> <span class="ot">-&gt;</span> [<span class="dt">UserError</span>]
 wellFormed (<span class="dt">Prog</span> ds e) <span class="fu">=</span> duplicateFunErrors ds
-                      <span class="fu">&lt;&gt;</span> concatMap (wellFormedD fEnv) ds
-                      <span class="fu">&lt;&gt;</span> wellFormedE fEnv emptyEnv e
+                      <span class="fu">++</span> concatMap (wellFormedD fEnv) ds
+                      <span class="fu">++</span> wellFormedE fEnv emptyEnv e
   <span class="kw">where</span>
     fEnv               <span class="fu">=</span> fromListEnv [(bindId f, length xs) <span class="fu">|</span> <span class="dt">Decl</span> f xs _ _ <span class="ot">&lt;-</span> ds]</code></pre></div>
 <p>This function,</p>
@@ -632,7 +632,7 @@ wellFormedE fEnv vEnv0 e <span class="fu">=</span> go vEnv0 e
 <h4 id="compiling-programs">Compiling Programs</h4>
 <p>To compile a <code>Program</code> we compile each <code>Decl</code> and the main body expression</p>
 <div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell">compileProg (<span class="dt">Prog</span> ds e) <span class="fu">=</span> compileBody emptyEnv e
-                       <span class="fu">&lt;&gt;</span> concatMap   compileDecl ds</code></pre></div>
+                       <span class="fu">++</span> concatMap   compileDecl ds</code></pre></div>
 <p><strong>EXERCISE:</strong></p>
 <ol style="list-style-type: decimal">
 <li>Does it matter whether we put the code for <code>e</code> before <code>ds</code>?</li>
@@ -654,9 +654,9 @@ paramsEnv xs <span class="fu">=</span> fromListEnv (zip (bindId <span class="fu"
 <p>Finally, as in cobra, <code>compileBody env e</code> wraps the assmbly for <code>e</code> with the code that manages <code>esp</code> and <code>ebp</code>.</p>
 <div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="ot">compileBody ::</span> <span class="dt">Env</span> <span class="ot">-&gt;</span> <span class="dt">AnfTagE</span> <span class="ot">-&gt;</span> <span class="dt">Asm</span>
 compileBody env e <span class="fu">=</span> entryCode e
-                 <span class="fu">&lt;&gt;</span> compileExpr env e
-                 <span class="fu">&lt;&gt;</span> exitCode e
-                 <span class="fu">&lt;&gt;</span> [<span class="dt">IRet</span>]
+                 <span class="fu">++</span> compileExpr env e
+                 <span class="fu">++</span> exitCode e
+                 <span class="fu">++</span> [<span class="dt">IRet</span>]
 
 <span class="ot">entryCode ::</span> <span class="dt">AnfTagE</span> <span class="ot">-&gt;</span> <span class="dt">Asm</span>
 entryCode e <span class="fu">=</span> [ <span class="dt">IPush</span> (<span class="dt">Reg</span> <span class="dt">EBP</span>)
