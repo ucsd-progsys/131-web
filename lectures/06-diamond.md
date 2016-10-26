@@ -401,8 +401,8 @@ The bulk of the work is done by:
 ```haskell
 wellFormed :: BareProgram -> [UserError]
 wellFormed (Prog ds e) = duplicateFunErrors ds
-                      <> concatMap (wellFormedD fEnv) ds
-                      <> wellFormedE fEnv emptyEnv e
+                      ++ concatMap (wellFormedD fEnv) ds
+                      ++ wellFormedE fEnv emptyEnv e
   where
     fEnv               = fromListEnv [(bindId f, length xs) | Decl f xs _ _ <- ds]
 ```
@@ -625,7 +625,7 @@ To compile a `Program` we compile each `Decl` and the main body expression
 
 ```haskell
 compileProg (Prog ds e) = compileBody emptyEnv e
-                       <> concatMap   compileDecl ds
+                       ++ concatMap   compileDecl ds
 ```
 
 **EXERCISE:**
@@ -664,9 +664,9 @@ with the code that manages `esp` and `ebp`.
 ```haskell
 compileBody :: Env -> AnfTagE -> Asm
 compileBody env e = entryCode e
-                 <> compileExpr env e
-                 <> exitCode e
-                 <> [IRet]
+                 ++ compileExpr env e
+                 ++ exitCode e
+                 ++ [IRet]
 
 entryCode :: AnfTagE -> Asm
 entryCode e = [ IPush (Reg EBP)
