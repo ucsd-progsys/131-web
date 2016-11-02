@@ -706,7 +706,6 @@ a double word (i.e. 4 bytes) on the stack.
 
 ```haskell
 call :: Label -> [Arg] -> [Instruction]
-tailCall :: Label -> [Arg] -> [Instruction]
 ```
 
 which [implements the strategy for calls](#strategy-calls).
