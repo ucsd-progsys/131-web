@@ -738,7 +738,7 @@ which _should_ generate the equivalent of the assembly:
   push DWORD 14
   push DWORD 24
   call label_def_add2
-  add esp, 16
+  add esp, 8 
 ```
 
 ## 4. Compiling Tail Calls
