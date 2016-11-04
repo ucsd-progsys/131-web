@@ -679,8 +679,7 @@ compileExpr env (<span class="dt">App</span> f vs _) <span class="fu">=</span> c
 param env v <span class="fu">=</span> <span class="dt">Sized</span> <span class="dt">DWordPtr</span> (immArg env v)</code></pre></div>
 <p>The <code>Sized DWordPtr</code> specifies that each argument will occupy a double word (i.e. 4 bytes) on the stack.</p>
 <p><strong>EXERCISE</strong> The hard work in compiling calls is done by:</p>
-<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="ot">call ::</span> <span class="dt">Label</span> <span class="ot">-&gt;</span> [<span class="dt">Arg</span>] <span class="ot">-&gt;</span> [<span class="dt">Instruction</span>]
-<span class="ot">tailCall ::</span> <span class="dt">Label</span> <span class="ot">-&gt;</span> [<span class="dt">Arg</span>] <span class="ot">-&gt;</span> [<span class="dt">Instruction</span>]</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="ot">call ::</span> <span class="dt">Label</span> <span class="ot">-&gt;</span> [<span class="dt">Arg</span>] <span class="ot">-&gt;</span> [<span class="dt">Instruction</span>]</code></pre></div>
 <p>which <a href="#strategy-calls">implements the strategy for calls</a>. Fill in the implementation of <code>call</code> yourself. As an example, of its behavior, consider the (source) program:</p>
 <div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="kw">def</span> add2(x, y):
   x <span class="op">+</span> y
@@ -694,7 +693,7 @@ add2(<span class="dv">12</span>, <span class="dv">7</span>)</code></pre></div>
 <div class="sourceCode"><pre class="sourceCode nasm"><code class="sourceCode nasm">  <span class="kw">push</span> <span class="dt">DWORD</span> <span class="dv">14</span>
   <span class="kw">push</span> <span class="dt">DWORD</span> <span class="dv">24</span>
   <span class="kw">call</span> label_def_add2
-  <span class="kw">add</span> <span class="kw">esp</span>, <span class="dv">16</span></code></pre></div>
+  <span class="kw">add</span> <span class="kw">esp</span>, <span class="dv">8</span> </code></pre></div>
 <h2 id="compiling-tail-calls">4. Compiling Tail Calls</h2>
 <p>Our language doesn’t have <em>loops</em>. While recursion is more general, it is more <em>expensive</em> because it uses up stack space (and requires all the attendant management overhead). For example (the <code>python</code> program):</p>
 <div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="kw">def</span> sumTo(n):
