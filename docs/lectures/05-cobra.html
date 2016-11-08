@@ -904,13 +904,13 @@ instrAsm (<span class="dt">IOr</span>  a1 a2) <span class="fu">=</span> <span cl
 <span class="kw">pop</span> <span class="kw">ebp</span>           <span class="co">; so: restore caller's ebp from stack [esp]</span>
 <span class="kw">ret</span>               <span class="co">; return to caller</span></code></pre></div>
 <h4 id="in-the-caller">In the Caller</h4>
-<p>To call a function <code>target</code> that takes <code>M</code> parameters:</p>
-<div class="sourceCode"><pre class="sourceCode nasm"><code class="sourceCode nasm"><span class="kw">push</span> arg_M        <span class="co">; push last arg first ...</span>
+<p>To call a function <code>target</code> that takes <code>N</code> parameters:</p>
+<div class="sourceCode"><pre class="sourceCode nasm"><code class="sourceCode nasm"><span class="kw">push</span> arg_N        <span class="co">; push last arg first ...</span>
 ...
 <span class="kw">push</span> arg_2        <span class="co">; then the second ...</span>
 <span class="kw">push</span> arg_1        <span class="co">; finally the first</span>
 <span class="kw">call</span> target       <span class="co">; make the call (which puts return addr on stack)</span>
-<span class="kw">add</span> <span class="kw">esp</span>, <span class="dv">4</span>*M      <span class="co">; now we are back: &quot;clear&quot; args by adding 4*numArgs</span></code></pre></div>
+<span class="kw">add</span> <span class="kw">esp</span>, <span class="dv">4</span>*N      <span class="co">; now we are back: &quot;clear&quot; args by adding 4*numArgs</span></code></pre></div>
 <p><strong>NOTE:</strong> If you are compiling on MacOS, you must respect the <a href="http://www.fabiensanglard.net/macosxassembly/index.php">16-Byte Stack Alignment Invariant</a></p>
 <h3 id="fixed-strategy-by-example">Fixed Strategy By Example</h3>
 <p>Lets implement the above in a simple file <code>tests/output/int-check.s</code></p>
