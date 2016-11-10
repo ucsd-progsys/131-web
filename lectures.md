@@ -11,6 +11,7 @@ headerImg: books.jpg
 | 10/7       | Branches and Bin-Ops          | [html][lec4] [md][md4] | [pdf][pdf4] | [hs][cod4] | 
 | 10/17      | Data Representation           | [html][lec5] [md][md5] | [pdf][pdf5] | [hs][cod5] | 
 | 10/26      | Functions                     | [html][lec6] [md][md6] | [pdf][pdf6] | [hs][cod6] | 
+| 11/4       | Heap Data                     | [html][lec7] [md][md7] |             |            | 
 
 ## Discussions 
 
@@ -53,3 +54,9 @@ headerImg: books.jpg
 [md6]:  http://github.com/ucsd-progsys/131-web/blob/master/lectures/06-diamond.md 
 [cod6]: https://github.com/ucsd-cse131/06-diamondback
 [pdf6]: static/img/06-diamond.pdf 
+
+[lec7]: lectures/07-egg-eater.html 
+[md7]: http://github.com/ucsd-progsys/131-web/blob/master/lectures/07-egg-eater.md 
+
+
+
