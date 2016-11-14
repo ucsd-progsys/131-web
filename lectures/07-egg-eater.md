@@ -623,14 +623,35 @@ def tup5(x1, x2, x3, x4, x5):
 
 We can write a single function to access tuples of any size.
 
-* (of course, we'll get a run-time error if we try to get the fourth element of a pair...)
+So the below code 
+
+```python
+let t  = tup5( 1, 2 , 3 , 4 , 5) in 
+  , x0 = print(get(t, 0)) 
+  , x1 = print(get(t, 1)) 
+  , x2 = print(get(t, 2)) 
+  , x3 = print(get(t, 3)) 
+  , x4 = print(get(t, 4)) 
+in 
+  99
+```
+
+should print out:
+
+```
+0
+1
+2
+3
+4
+99
+```
+
+How shall we write it?
 
 ```python
 def get(t, i):
-  if (i == 0):
-    t[0]
-  else:
-    get(t[1], i-1)
+  TODO-IN-CLASS
 ```
 
 ### QUIZ
@@ -639,7 +660,7 @@ Using the above "library" we can write code like:
 
 ```haskell
 let quad = tup4(1, 2, 3, 4) in
-  get(quad, 1) + get(quad, 2) + get(quad, 3) + get(quad, 4)
+  get(quad, 0) + get(quad, 1) + get(quad, 2) + get(quad, 3)
 ```
 
 What will be the result of compiling the above?
@@ -656,7 +677,7 @@ Using the above "library" we can write code like:
 
 ```haskell
 let quad = tup4(1, 2, 3) in
-  get(quad, 1) + get(quad, 2) + get(quad, 3) + get(quad, 4)
+  get(quad, 0) + get(quad, 1) + get(quad, 2) + get(quad, 3)
 ```
 
 What will be the result of compiling the above?
