@@ -659,9 +659,39 @@ def get(t, i):
 Using the above "library" we can write code like:
 
 ```haskell
+def tup4(x1, x2, x3, x4):
+  (x1, (x2, (x3, (x4, false)))
+
+def head(e):
+  e[0]
+
+def tail(e):
+  e[1]
+
+def get(e, i):
+  if (i == 0):
+      head(e) 
+  else:
+    get(tail(e), i-1)
+
 let quad = tup4(1, 2, 3, 4) in
   get(quad, 0) + get(quad, 1) + get(quad, 2) + get(quad, 3)
+
+q = (1, (2, (3, (4, false))))
+
+get(q, 0) = q[0] = 1 
+get(q, 1) = get(q[1], 0) = 2   
+get(q, 2) = get(q[1], 1) = get(q[1][1], 0) = 3 
+get(q, 3) = get(q[1], 2) = get(q[1][1], 1) = get(q[1][1][1], 0) = get(4, 0)
+          = 4[0]
+
+
+
+
+  
 ```
+
+
 
 What will be the result of compiling the above?
 
@@ -670,6 +700,9 @@ What will be the result of compiling the above?
 3. Other run-time error
 4. `4`
 5. `10`
+
+
+
 
 ### QUIZ
 
