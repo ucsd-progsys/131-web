@@ -15,7 +15,7 @@ atomic units over the entire quarter. By *atomic* I mean, for example, that
 - [HW #3][hw3-git], due Wed 10/26  by 23:59pm
 - [HW #4][hw4-git], due Mon 11/07  by 23:59pm
 - [HW #5][hw5-git], due Mon 11/14  by 23:59pm
-- [HW #6][hw6-git], due Mon 11/29  by 23:59pm
+- [HW #6][hw6-git], due Tue 11/29  by 23:59pm
 
 
 
