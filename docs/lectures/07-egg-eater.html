@@ -738,29 +738,18 @@ unsetTag r ty <span class="fu">=</span> <span class="dt">ISub</span> (<span clas
   (x1, (x2, (x3, (x4, x5))))</code></pre></div>
 <h3 id="accessing-tuples">Accessing Tuples</h3>
 <p>We can write a single function to access tuples of any size.</p>
-<p>So the below code</p>
-<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">let t  <span class="op">=</span> tup5( <span class="dv">1</span>, <span class="dv">2</span> , <span class="dv">3</span> , <span class="dv">4</span> , <span class="dv">5</span>) <span class="op">in</span> 
-  , x0 <span class="op">=</span> <span class="bu">print</span>(get(t, <span class="dv">0</span>)) 
-  , x1 <span class="op">=</span> <span class="bu">print</span>(get(t, <span class="dv">1</span>)) 
-  , x2 <span class="op">=</span> <span class="bu">print</span>(get(t, <span class="dv">2</span>)) 
-  , x3 <span class="op">=</span> <span class="bu">print</span>(get(t, <span class="dv">3</span>)) 
-  , x4 <span class="op">=</span> <span class="bu">print</span>(get(t, <span class="dv">4</span>)) 
-<span class="op">in</span> 
-  <span class="dv">99</span></code></pre></div>
-<p>should print out:</p>
-<pre><code>0
-1
-2
-3
-4
-99</code></pre>
-<p>How shall we write it?</p>
+<ul>
+<li>(of course, we’ll get a run-time error if we try to get the fourth element of a pair…)</li>
+</ul>
 <div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="kw">def</span> get(t, i):
-  TODO<span class="op">-</span>IN<span class="op">-</span>CLASS</code></pre></div>
+  <span class="cf">if</span> (i <span class="op">==</span> <span class="dv">0</span>):
+    t[<span class="dv">0</span>]
+  <span class="cf">else</span>:
+    get(t[<span class="dv">1</span>], i<span class="dv">-1</span>)</code></pre></div>
 <h3 id="quiz">QUIZ</h3>
 <p>Using the above “library” we can write code like:</p>
 <div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="kw">let</span> quad <span class="fu">=</span> tup4(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>) <span class="kw">in</span>
-  get(quad, <span class="dv">0</span>) <span class="fu">+</span> get(quad, <span class="dv">1</span>) <span class="fu">+</span> get(quad, <span class="dv">2</span>) <span class="fu">+</span> get(quad, <span class="dv">3</span>)</code></pre></div>
+  get(quad, <span class="dv">1</span>) <span class="fu">+</span> get(quad, <span class="dv">2</span>) <span class="fu">+</span> get(quad, <span class="dv">3</span>) <span class="fu">+</span> get(quad, <span class="dv">4</span>)</code></pre></div>
 <p>What will be the result of compiling the above?</p>
 <ol style="list-style-type: decimal">
 <li>Compile error</li>
@@ -772,7 +761,7 @@ unsetTag r ty <span class="fu">=</span> <span class="dt">ISub</span> (<span clas
 <h3 id="quiz-1">QUIZ</h3>
 <p>Using the above “library” we can write code like:</p>
 <div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="kw">let</span> quad <span class="fu">=</span> tup4(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>) <span class="kw">in</span>
-  get(quad, <span class="dv">0</span>) <span class="fu">+</span> get(quad, <span class="dv">1</span>) <span class="fu">+</span> get(quad, <span class="dv">2</span>) <span class="fu">+</span> get(quad, <span class="dv">3</span>)</code></pre></div>
+  get(quad, <span class="dv">1</span>) <span class="fu">+</span> get(quad, <span class="dv">2</span>) <span class="fu">+</span> get(quad, <span class="dv">3</span>) <span class="fu">+</span> get(quad, <span class="dv">4</span>)</code></pre></div>
 <p>What will be the result of compiling the above?</p>
 <ol style="list-style-type: decimal">
 <li>Compile error</li>
