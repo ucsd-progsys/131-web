@@ -184,19 +184,19 @@ TypeError: add() takes exactly 2 arguments (1 given)
 
 ## Strategy Progression [FULL]
 
-1. Representation = Start-Label
+1. **Representation** = `Start-Label`
 
     - **Problem:** How to do run-time checks of valid args?
 
-2. Representation = (Start-Label, Arity)
+2. **Representation** = `(Arity, Start-Label)`
 
     - **Problem:** How to map function **names** to tuples?
 
-3. Lambda Terms: Make functions just another expression!
+3. **Lambda Terms** Make functions just another expression!
 
     - **Problem:** How to store local variables?
 
-3. Function Value = (Start-Label, Arity, Free-Vars)
+4. **Function Value** `(Start-Label, Arity, Free-Vars)`
 
     - **Ta Da!**
 
@@ -232,24 +232,6 @@ via the following strategy:
 2. **Check** that `e[0]` is equal to `n` (else arity mismatch error)
 3. **Call** the function at `e[1]`
 
-### Representation
-
-We can represent ``function tuples'' via a special tag:
-
-| Type       |   LSB |
-|-----------:|------:|
-| `number`   |  xx0  |
-| `boolean`  |  111  |
-| `pointer`  |  001  |
-| `function` |  101  |
-
-So, **Function Values** represented just like a tuples
-
-* padding, `ESI` etc.
-* but with tag `101`.
-
-Crucially, we can **get** `0`-th, or `1`-st elements from tuple.
-
 ### Example
 
 Lets see how we would compile this
@@ -278,18 +260,11 @@ But **where** will we store this information?
 
 ## Attempt 3: Lambda Terms
 
-Lets replace `def` with a new `lambda` construct:
+So far, we could only define functions at **top-level**
 
-```python
-let f    = (lambda (it): it(5))
-  , incr = (lambda  (x): x + 1)
-in
-  f(incr)
-```
+* First-class functions are like _any_ other expression,
 
-Here, `lambda (x1,...,xn): e` is a **function-expression**
-corresponding to a function that takes `n` arguments and
-returns the body `e`.
+* Can define a function, wherever you have any other expression.
 
 | **Language** | **Syntax**                    |
 |:-------------|:------------------------------|
@@ -299,61 +274,260 @@ returns the body `e`.
 | C++          | `[&](x1,...,xn){ return e }`  |
 
 
+### Example: Lambda Terms
 
-## Tags
-
-tuples    <address>001
-functions <instr-addr>101
-
-
-### Example: Global Names
-
-Using functions as parameters
+We can now replace `def` as:
 
 ```python
-def f(it):
-  it(5, 6)
-
-def g(a, b):
-  a + b
-
-def h(z):
-  z + 2
-
-f(g) # ok ==> 11
-
-f(h) # bad
-```
-
-
-### Functions as Expressions
-
-```python
-def f(x): x + 2
-def g(h): h(5)
-g(5)
-```
-
-Only define functions at "top-level" not _first class!_
-* First-class functions are like _any_ other expression,
-* Can define a function, wherever you have any other expression.
-
-Lets define a **anonymous function expression**
-
-```python
-lambda (x1,...,xn): e
-```
-
-an **nameless** function that takes arguments `x1...xn` and returns `e`.
-
-### Example: Closed Lambda
-
-```python
-let f = (lambda (x): x + 2)
-  , g = (lambda (h): h(5))
+let f    = (lambda (it): it(5))
+  , incr = (lambda  (x): x + 1)
 in
-    g(5)
+  f(incr)
 ```
+
+### Implementation
+
+As always, to the details! Lets figure out:
+
+**Representation**
+
+1. How to store function-tuples
+
+**Types:**
+
+1. Remove `Def`
+2. Add `lambda` to `Expr`
+
+**Transforms**
+
+1. Update `tag` and `ANF`
+2. Update `checker`
+3. Update `compile`
+
+### Implementation: Representation
+
+Represent ``lambda-tuples'' or ``function-tuples'' via a special tag:
+
+| Type       |   LSB |
+|-----------:|------:|
+| `number`   |  xx0  |
+| `boolean`  |  111  |
+| `pointer`  |  001  |
+| `function` |  101  |
+
+In our code:
+
+```haskell
+data Ty = ... | TClosure
+
+typeTag :: Ty -> Arg
+typeTag TTuple    = HexConst 0x00000001
+typeTag TClosure  = HexConst 0x00000005
+
+typeMask :: Ty -> Arg
+typeMask TTuple   = HexConst 0x00000007
+typeMask TClosure = HexConst 0x00000007
+```
+
+So, **Function Values** represented just like a tuples
+
+* padding, `ESI` etc.
+* but with tag `101`.
+
+Crucially, we can **get** `0`-th, or `1`-st elements from tuple.
+
+**Question:** Why not use _plain tuples_?
+
+### Implementation: Types
+
+First, lets look at the  new `Expr` type
+
+* No more `Def`
+
+```haskell
+data Expr a
+  = ...
+  | Lam               [Bind a]   !(Expr a) a      -- fun. definitions
+  | App     !(Expr a) [Expr a]             a      -- fun. calls
+```
+
+So we represent a **function-definition** as:
+
+```haskell
+Lam [x1,...,xn] e
+```
+
+and a **function call** as:
+
+```haskell
+App e [e1,...,en]
+```
+
+### Transforms: Tag
+
+This is pretty straight forward (do it yourself)
+
+### Transforms: ANF
+
+QUIZ:
+
+```haskell
+  (App e es)
+```
+
+Does `e` need to be
+
+* **A** Immediate  
+* **B** ANF
+* **C** None of the above
+
+
+### Transforms: ANF
+
+QUIZ:
+
+```haskell
+  (App e es)
+```
+
+Do `es` need to be
+
+* **A** Immediate  
+* **B** ANF
+* **C** None of the above
+
+
+### Transforms: ANF
+
+The `App` case, fun + args should be **immediate**
+
+* **Need the values to push on stack and make the call happen!**
+
+Just like function calls (in `diamondback`), except
+
+* Must also handle the **callee-expression** (named `e` below)
+
+```haskell
+anf i (App e es)   = (i', stitch bs (App v vs))
+  where
+    (i', bs, v:vs) = imms i (e:es)
+```
+
+
+### Transforms: ANF
+
+QUIZ:
+
+```haskell
+  (Lam xs e)
+```
+
+Does `e` need to be
+
+* **A** Immediate  
+* **B** ANF
+* **C** None of the above
+
+
+### Transforms: ANF
+
+The `Lam` case, the body will be **executed** (when called)
+
+* So we just need to make sure its in ANF (like all the code!)
+
+```haskell
+anf i (Lam xs e) = (i', Lam xs e')
+  where
+    (i', e')     = anf i e
+```
+
+### Transforms: Checker
+
+We just have `Expr` (no `Def`) so there is a single function:
+
+```haskell
+wellFormed :: BareExpr -> [UserError]
+wellFormed = go emptyEnv
+  where
+    gos                       = concatMap . go
+    go _    (Boolean {})      = ...
+    go _    (Number  n     l) = largeNumberErrors      n l
+    go vEnv (Id      x     l) = unboundVarErrors  vEnv x l
+    go vEnv (Prim1 _ e     _) = ...
+    go vEnv (Prim2 _ e1 e2 _) = ...
+    go vEnv (If   e1 e2 e3 _) = ...
+    go vEnv (Let x e1 e2   _) = ... ++ go vEnv e1 ++ go (addEnv x vEnv) e2
+    go vEnv (Tuple es      _) = ...
+    go vEnv (GetItem e1 e2 _) = ...
+    go vEnv (App e es      _) = ?1
+    go vEnv (Lam xs e      _) = ?2 ++ go ?3 e
+```
+
+* How shall we implement `?1` ?
+
+* How shall we implement `?2` ?
+
+* How shall we implement `?3` ?
+
+
+### Transforms: Compiler
+
+Finally, lets see how to convert `Expr` into `Asm`, two separate cases:
+
+* `Lam` : definitions
+
+* `App` : calls
+
+### Transforms: Compiler: `Lam`
+
+```haskell
+compileEnv :: Env -> AExp -> [Instruction]
+compileEnv env (Lam xs e l)
+  = IJmp   (LamEnd   l)             -- Why?
+  : ILabel (LamStart l)             -- Function start
+  : compileDecl l xs e              -- Function code (like Decl)
+ ++ ILabel (LamEnd   l)             -- Function end
+  : lamTuple l (length xs)   -- Compile fun-tuple into EAX
+```
+
+**QUESTION:** Why do we start with the `IJmp`?
+
+```haskell
+lamTuple :: Tag -> Arity -> [Instruction]
+lamTuple l arity
+  =  tupleAlloc  2                                  -- alloc tuple size = 2  
+  ++ tupleWrites [ILabel (LamStart l), repr arity]  -- fill in (code-ptr, arity)
+  ++ [ IOr  (Reg EAX) (typeTag TClosure) ]          -- set the tag bits
+```
+
+
+### Transforms: Compiler: `App`
+
+**Recall! IDEA:** Use a **tuple of** `(arity, label)`
+
+We can now compile a call
+
+```
+  e(x1,...,xn)
+```
+
+via the following strategy:
+
+1. **Evaluate** the tuple `e`
+2. **Check** that `e[0]` is equal to `n` (else arity mismatch error)
+3. **Call** the function at `e[1]`
+
+```haskell
+compileEnv env (App vE vXs)
+  = assertType     env vE TClosure                    -- check vE is a function
+ ++ assertArity    env vE (length vXs)                -- check vE arity
+ ++ tupleReadRaw   (immArg env vE) (repr (1 :: Int))  -- load vE[1] into EAX
+ ++ [IPush (param env vX) | vX <- reverse vXs]        -- push args
+ ++ [ICall (Reg EAX)]                                 -- call EAX
+ ++ [IAdd  (Reg ESP) (4 * n)]                         -- pop  args
+```
+
+**HEREHEREHERE**
 
 ### Example: Open Lambda
 
