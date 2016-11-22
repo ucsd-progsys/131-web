@@ -12,6 +12,7 @@ headerImg: books.jpg
 | 10/17      | Data Representation           | [html][lec5] [md][md5] | [pdf][pdf5] | [hs][cod5] | 
 | 10/26      | Functions                     | [html][lec6] [md][md6] | [pdf][pdf6] | [hs][cod6] | 
 | 11/4       | Heap Data                     | [html][lec7] [md][md7] |             |            | 
+| 11/14      | First-class Functions         | [html][lec8] [md][md8] |             |            | 
 
 ## Discussions 
 
@@ -19,14 +20,6 @@ headerImg: books.jpg
 |:----------:|:-------------------------|:-------------:|:----------:|
 | 9/28       | Running Haskell in Lab   | TBD           | TBD        | 
 
-<!-- 
-
-* [SPQR](lectures/spqr.html)
-* [Tu Quoque](lectures/2012-12-07-tu-quoque.html)
-* [Carpe Diem](posts/2012-11-28-carpe-diem.html)
-* [Rosa Rosam](posts/2012-10-07-rosa-rosa-rosam.html)
-
--->
 
 [lec1]: lectures/01-introduction.html
 [md1]: http://github.com/ucsd-progsys/131-web/blob/master/lectures/01-introduction.md 
@@ -57,6 +50,15 @@ headerImg: books.jpg
 
 [lec7]: lectures/07-egg-eater.html 
 [md7]: http://github.com/ucsd-progsys/131-web/blob/master/lectures/07-egg-eater.md 
+
+[lec8]: lectures/08-fer-de-lance.html 
+[md8]: http://github.com/ucsd-progsys/131-web/blob/master/lectures/08-fer-de-lance.md 
+
+[lec9]: lectures/09-garter.html 
+[md9]: http://github.com/ucsd-progsys/131-web/blob/master/lectures/09-garter.md 
+
+
+
 
 
 

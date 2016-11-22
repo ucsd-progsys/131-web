@@ -1,4 +1,8 @@
-# Fer-De-Lance: First Class Functions
+---
+title: First Class Functions 
+date: 2016-11-14
+headerImg: fer-de-lance.jpg 
+---
 
 
 ## Functions as Values
