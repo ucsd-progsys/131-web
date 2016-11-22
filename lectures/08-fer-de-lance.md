@@ -491,23 +491,27 @@ Finally, lets see how to convert `Expr` into `Asm`, two separate cases:
 ```haskell
 compileEnv :: Env -> AExp -> [Instruction]
 compileEnv env (Lam xs e l)
-  = IJmp   (LamEnd   l)             -- Why?
-  : ILabel (LamStart l)             -- Function start
-  : compileDecl l xs e              -- Function code (like Decl)
- ++ ILabel (LamEnd   l)             -- Function end
-  : lamTuple l (length xs)   -- Compile fun-tuple into EAX
+  = IJmp   end              -- Why?
+  : ILabel start            -- Function start
+  : compileDecl l xs e      -- Function code (like Decl)
+ ++ ILabel end              -- Function end
+  : lamTuple arity start    -- Compile fun-tuple into EAX
+  where
+    arity = length xs
+    start = LamStart l
+    end   = LamEnd   l
 ```
 
 **QUESTION:** Why do we start with the `IJmp`?
 
 ```haskell
-lamTuple :: Tag -> Arity -> [Instruction]
-lamTuple l arity
-  =  tupleAlloc  2                                  -- alloc tuple size = 2  
-  ++ tupleWrites [ILabel (LamStart l), repr arity]  -- fill in (code-ptr, arity)
-  ++ [ IOr  (Reg EAX) (typeTag TClosure) ]          -- set the tag bits
+lamTuple :: Int -> Label -> [Instruction]
+lamTuple arity start
+  =  tupleAlloc  2                           -- alloc tuple size = 2  
+  ++ tupleWrites [ repr arity                -- fill arity
+                 , CodePtr start ]           -- fill code-ptr
+  ++ [ IOr  (Reg EAX) (typeTag TClosure) ]   -- set the tag bits
 ```
-
 
 ### Transforms: Compiler: `App`
 
@@ -592,6 +596,27 @@ lambda (m):
 - `m`, `t` are  **bound** inside `e`, but,
 - `n` is **free** inside `e`
 
+## Computing Free Variables
+
+Lets write a function to **compute** the set of free variables.
+
+**Question** Why *Set* ?
+
+```haskell
+freeVars :: Expr -> [Id]
+freeVars e = S.toList (go e)
+  where
+    go :: Expr -> S.Set Id
+    go (Id x)          = ?1
+    go (Number _)      = ?2
+    go (Boolean _)     = ?2
+    go (If e e1 e2)    = ?3
+    go (App e es)      = ?4
+    go (Let x e1 e2)   = ?5
+    go (Lam xs e)      = ?6
+```
+
+**TODO-IN-CLASS**
 
 ## Free Variables and Lambdas
 
@@ -679,11 +704,34 @@ represent `plus20` as:
 (arity, code-label, [x := 7], [y := 13])
 ```
 
-TODO: show how to use above to eval `(f(plus1), f(plus10), plus10(20))`
+### Example
 
-## Closures: Strategy
+Lets see how to evaluate
 
-### Strategy
+```python
+let foo    = (lambda (x, y):
+                (lambda (z): x + y + z))
+  , plus10 = foo(4, 6)
+in
+  plus10(0)
+```
+
+TODO: PIC
+
+### Example
+
+Lets see how to evaluate
+
+```python
+let foo    = (lambda (x, y):
+                (lambda (z): x + y + z))
+  , plus10 = foo(4, 6)
+  , f      = (lambda (it): it(5))
+in
+  f(plus10)
+```
+
+TODO: PIC
 
 ### Implementation
 
@@ -706,18 +754,70 @@ TODO: show how to use above to eval `(f(plus1), f(plus10), plus10(20))`
 
 ### Representation
 
-TODO
+We can represent a **closure** as a tuple of
 
-### Checker
+```
+(arity, code-ptr, free-var-1, ... free-var-N)
+```
 
-TODO
+which means, following the convention for tuples, as:
 
-### Compile
+```
+-------------------------------------------------------------------------
+| N + 2 | arity | code-ptr | var1 | var2 | ... | varN | (maybe padding) |
+-------------------------------------------------------------------------
+```
+
+Where each cell represents 32-bits / 4-bytes / 1-word.
+
+**Note:** (As with all tuples) the first word contains the #elements of the tuple.
+
+* Which, in this case, it is `N + 2`
+
+
+### Transforms: Checker
+
+What environment should we use to check a `Lam` **body** ?
+
+```haskell
+wellFormed :: BareExpr -> [UserError]
+wellFormed = go emptyEnv
+  where
+    ...  
+    go vEnv (Lam xs e _) = errDupParams xs
+                        ++ go ?vEnv e
+
+addsEnv :: Env -> [BareBind] -> Env
+addsEnv env xs = foldr addEnv env xs
+```
+
+**QUIZ** How shall we implement `?vEnv` ?
+
+**A.** `addsEnv vEnv     []`
+
+**B.** `addsEnv vEnv     xs`
+
+**C.** `addsEnv emptyEnv xs`
+
+### Transforms: Compile
+
+**Question** How does the called function **know** the values of free vars?
+
+- Needs to **restore them** from closure tuple
+
+- Needs to **access** the closure tuple!
+
+... But how shall we give the called function **access** to the tuple?
+
+**By passing the tuple as an _extra parameter_**
+
+
+### Transforms: Compile
 
 **Calls** `App`
 
 1. **Push** parameters
-2. **Push** closure-pointer
+2. **Push** closure-pointer-parameter
 3. **Call** code-label
 4. **Pop**  params + pointer
 
@@ -725,61 +825,206 @@ TODO
 
 1. **Compute** *free-vars* `x1`,...,`xn`
 2. **Generate** code-block
+  - **Restore** free vars from closure-pointer-parameter
+  - **Execute** function body (as before)
 3. **Allocate** tuple `(arity, code-label, x1, ... , xn)`
 
-### Compile: Calls
+### Transforms: Compile Calls
 
 1. **Push** parameters
 2. **Push** closure-pointer
 3. **Call** code-label
 4. **Pop**  params + pointer
 
-TODO: CODE
+### Transforms: Compile Definitions
 
-### Compile: Definitions
-
-1. **Compute** *free-vars* `x1`,...,`xn`
+1. **Compute** *free-vars* `y1`,...,`yn`
 2. **Generate** code-block
-3. **Create**   tuple `(arity, code-label, x1, ... , xn)`
+  - **Restore** free vars from closure-pointer-parameter
+  - **Execute** function body (as before)
+3. **Allocate** tuple `(arity, code-label, y1, ... , yn)`
 
-TODO: CODE
+```haskell
+compileEnv :: Env -> AExp -> [Instruction]
+compileEnv env (Lam xs e l)
+  = IJmp   end                       -- Why?
+  : ILabel start                     -- Function start
+  : lambdaBody ys xs e               -- Function code (like Decl)
+ ++ ILabel end                       -- Function end
+  : lamTuple arity start env ys      -- Compile closure-tuple into EAX
+  where
+    ys    = freeVars (Lam xs e l)
+    arity = length xs
+    start = LamStart l
+    end   = LamEnd   l
+```
 
-### Compiling Definitions 1: Free Vars
+### Creating Closure Tuples
 
-TODO: CODE
+To create the actual closure-tuple we need
 
-### Compiling Definitions 2: Generating Code Block
+* the **free-variables** `ys`
+* the `env` from which to **values** of the free variables.
 
-TODO: CODE
+```haskell
+lamTuple :: Int -> Label -> Env -> [Id] -> [Instruction]
+lamTuple arity start env ys
+  =  tupleAlloc  (2 + length ys)                    -- alloc tuple 2 + |ys|  
+  ++ tupleWrites ( repr arity                       -- fill arity
+                 : CodePtr start                    -- fill code-ptr
+                 : [immArg env (Id y) | y <- ys] )  -- fill free-vars
+  ++ [ IOr  (Reg EAX) (typeTag TClosure) ]          -- set the tag bits
+```
 
-### Compiling Definitions 3: Creating Closure Tuple
+### Generating Code Block
 
-TODO: CODE
+
+```haskell
+lambdaBody :: [Id] -> [Id] -> AExp -> [Instruction]
+lambdaBody ys xs e = funInstrs maxStack
+                        ( restore ys           -- restore free vars from closure-ptr
+                       ++ compileEnv env e )   -- exec function-body as before
+  where
+    maxStack       = envMax env + countVars e  -- max stack size
+    env            = fromListEnv bs
+    bs             = zip xs  [-2,-3..]         -- put params    into env/stack
+                  ++ zip ys  [1..]             -- put free-vars into env/stack
+```
+
+To `restore ys` we use the closure-ptr passed
+in at `[EBP+8]` --  the special **first** parameter -- to
+copy the free-vars `ys` onto the stack.
+
+```haskell
+restore :: [Id] -> [Instruction]
+restore ys  = concat [ copy i | (y, i) <- zip ys [1..]]
+  where
+    closPtr = RegOffset 8 EBP
+    copy i  = tupleReadRaw closPtr (repr (i+1))  -- copy tuple-fld for y into EAX...
+           ++ [ IMov (stackVar i) (Reg EAX) ]    -- ...write EAX into stackVar for y
+```
 
 ## A Problem: Recursion
 
-TODO
+Oops, how do we write:
 
+```python
+def fac(n):
+  if (n > 1):
+    n * fac(n-1)
+  else:
+    1
 
-### Example: Open Lambda
-
-```haskell
-let x = 5
-  , w = 11
-  , y = 13
-  , f = lambda (z): x + y + z
-in
-  f(12)
+fac(5)  
 ```
 
-### Example: Currying
+If we try
+
+```python
+let fac = (lambda (n):
+             if (n < 1):
+               1
+             else:
+               n * fac(n-1))
+in fac(5)  
+```
+
+We get a variable unbound error!
+
+```
+Errors found!
+tests/input/fac-bad.fdl:5:20-23: Unbound variable 'fac'
+
+         5|                 n * fac(n-1))
+```
+
+We need to teach our compiler that its ok to use the name `fac` inside the body!
+
+### Solution: Named Functions
+
+We have a new form of **named functions**
+
+- Like Ocaml's `let rec`
+
+Which looks like this:
+
+```python
+def fac(n):
+  if (n < 1):
+    1
+  else:
+    n * fac(n - 1)
+in
+  fac(5)
+```
+
+### Representing Named Functions
+
+We extend `Expr` to handle such functions as:
 
 ```haskell
-let gt  = (lambda (m): (lambda (n): n > m))
-  , gt5 = gt(5)
-  , gt6 = gt(6)
-in
-  ( gt5(4)  -- ==> true
-  , gt5(6)  -- ==> false
-  )
+data Expr a
+  = ...
+  | Fun     (Bind a)      -- ^ name of function
+            [Bind a]      -- ^ list of parameters  
+            (Expr a) a    -- ^ body of function
 ```
+
+Note that we parse the code
+
+```python
+def f(x1,...,xn):
+  e
+in
+  e'
+```
+
+as the `Expr`  
+
+```haskell
+Let f (Fun f [x1,...,xn] e) e'
+```
+
+### Compiling Named Functions
+
+Mostly, this is left as an exercise to you.
+
+**Non-Recursive** functions
+
+- i.e. `f` *does not* appear inside `e` in `Fun f xs e`
+- Treat `Fun f xs e` as `Lam xs e` ...
+- ... Everything should _just work_.
+
+**Recursive**
+
+- i.e. `f` *does* appear inside `e` in `Fun f xs e`
+- Can you think of a simple tweak to the `Lam` strategy that works?
+
+
+## Recap: Functions as Values
+
+We have functions, but they are *second-class* entities
+in our languages: they don't have the same *abilities*
+as other values.
+
+1. **Representation** = `Start-Label`
+
+    - **Problem:** How to do run-time checks of valid args?
+
+2. **Representation** = `(Arity, Start-Label)`
+
+    - **Problem:** How to map function **names** to tuples?
+
+3. **Lambda Terms** Make functions just another expression!
+
+    - **Problem:** How to store local variables?
+
+4. **Function Value** `(Arity, Start-Label, Free_1, ... , Free_N)`
+
+    - **Ta Da!**
+
+
+**Next:** Adding **static type inference**
+
+- **Faster!** Gets rid of those annoying (and slow!) run-time checks
+- **Safer!** Catches problems at compile-time, when easiest to fix!
