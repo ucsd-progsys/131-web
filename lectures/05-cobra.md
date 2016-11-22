@@ -717,8 +717,6 @@ add esp, 4*M      ; now we are back: "clear" args by adding 4*numArgs
 
 Lets implement the above in a simple file `tests/output/int-check.s`
 
-TODO
-
 ```nasm
 section .text
 extern error

@@ -158,6 +158,12 @@ our_code_starts_here:
 | **D**  | `label_def_incr_start` | `labal_def_incr_start` |
 
 
+## Strategy Progression
+
+1. **Representation** = `Start-Label`
+
+    - **Problem:** How to do run-time checks of valid args?
+
 ## Yay, that was easy! How should the following behave?
 
 ```python
@@ -182,24 +188,6 @@ Traceback (most recent call last):
 TypeError: add() takes exactly 2 arguments (1 given)
 ```
 
-## Strategy Progression [FULL]
-
-1. **Representation** = `Start-Label`
-
-    - **Problem:** How to do run-time checks of valid args?
-
-2. **Representation** = `(Arity, Start-Label)`
-
-    - **Problem:** How to map function **names** to tuples?
-
-3. **Lambda Terms** Make functions just another expression!
-
-    - **Problem:** How to store local variables?
-
-4. **Function Value** `(Start-Label, Arity, Free-Vars)`
-
-    - **Ta Da!**
-
 ## Problem: Ensure Valid Number of Arguments?
 
 How to make sure
@@ -215,6 +203,16 @@ With **proper run-time error**?
 **Key:** Need to _also_ store the function's **arity**
 
 - The **number of arguments** required by the function
+
+
+## Strategy Progression
+
+1. **Representation** = `Start-Label`
+
+    - **Problem:** How to do run-time checks of valid args?
+
+2. **Representation** = `(Arity, Start-Label)`
+
 
 ## Attempt 2: What is the value of the parameter `it` ?
 
@@ -257,6 +255,16 @@ to **the tuple**
 But **where** will we store this information?
 
 ## Strategy Progression
+
+1. **Representation** = `Start-Label`
+
+    - **Problem:** How to do run-time checks of valid args?
+
+2. **Representation** = `(Arity, Start-Label)`
+
+    - **Problem:** How to map function **names** to tuples?
+
+3. **Lambda Terms** Make functions just another expression!
 
 ## Attempt 3: Lambda Terms
 
@@ -527,7 +535,231 @@ compileEnv env (App vE vXs)
  ++ [IAdd  (Reg ESP) (4 * n)]                         -- pop  args
 ```
 
-**HEREHEREHERE**
+## A Problem: Scope
+
+Consider the following program:
+
+```haskell
+let one = 1
+  , f   = (lambda (it): it(5))
+  , inc = (lambda (n): n + one)
+in
+  f(inc)
+```
+
+## A Problem Magnified: Dynamically Created Functions
+
+Will it work? How about this variant:
+
+```haskell
+let add    = (lambda (n): (lambda (m): n + m))
+  , f      = (lambda (it): it(5))
+  , plus1  = add(1)
+  , plus10 = add(10)
+in
+  (f(plus1), f(plus10))
+```
+
+* `add(1)` should evaluate to a **function-that-adds-1**
+* `add(10)` should evaluate to a **function-that-adds-10**
+
+Yet, its **the same code**
+
+- same arity
+- same start-label
+
+**Problem:** How can we represent _different behaviors?_
+
+## Free and Bound Variables
+
+A variable `x` is **bound** inside an expression `e` if
+
+- `x` is a let-bound variable inside `e`.
+- `x` is a formal parameter in `e`, OR
+
+A variable `x` is **free** inside an expression `e` if
+
+- `x` is **not bound** inside `e`
+
+For example consider the expression `e` :
+
+```python
+lambda (m):
+  let t = m in
+    n + t
+```
+
+- `m`, `t` are  **bound** inside `e`, but,
+- `n` is **free** inside `e`
+
+
+## Free Variables and Lambdas
+
+**Free Variables** of a `lambda`
+
+- Those whose values come from *outside*
+- Should use *the same* values whenever we "call" the `lambda`.
+
+For example:
+
+```haskell
+let add    = (lambda (n): (lambda (m): n + m))
+  , f      = (lambda (it): it(5))
+  , plus1  = add(1)
+  , plus10 = add(10)
+in
+  (f(plus1), f(plus10), plus10(20))
+```
+
+should evaluate to `(6, 15, 30)`
+
+- `plus1` be like `lambda (m): 1  + m`
+- `plus1` be like `lambda (m): 10 + m`
+
+## Achieving Closure
+
+(Recall from CSE 130)
+
+**Key Idea:**  Each function value must **store its free variables**
+
+represent `plus1` as:
+
+```
+(arity, code-label, [n := 1])
+```
+
+represent `plus10` as:
+
+```
+(arity, code-label, [n := 10])
+```
+
+Same code, but different free variables.
+
+## Strategy Progression
+
+1. **Representation** = `Start-Label`
+
+    - **Problem:** How to do run-time checks of valid args?
+
+2. **Representation** = `(Arity, Start-Label)`
+
+    - **Problem:** How to map function **names** to tuples?
+
+3. **Lambda Terms** Make functions just another expression!
+
+    - **Problem:** How to store local variables?
+
+4. **Function Value** `(Arity, Start-Label, Free_1, ... , Free_N)`
+
+    - **Ta Da!**
+
+## Closures: Strategy
+
+What if we have *multiple* free variables?
+
+```python
+let foo    = (lambda (x, y):
+                (lambda (z): x + y + z))
+  , plus10 = foo(4, 6)
+  , plus20 = foo(7, 13)
+in
+  (plus10(0), plus20(100))
+```
+
+represent `plus10` as:
+
+```
+(arity, code-label, [x := 4], [y := 6])
+```
+
+represent `plus20` as:
+
+```
+(arity, code-label, [x := 7], [y := 13])
+```
+
+TODO: show how to use above to eval `(f(plus1), f(plus10), plus10(20))`
+
+## Closures: Strategy
+
+### Strategy
+
+### Implementation
+
+**Representation**
+
+1. How to store closures
+
+**Types:**
+
+- Same as before
+
+**Transforms**
+
+1. Update `tag` and `ANF`
+    - as before
+
+2. Update `checker`       
+
+3. Update `compile`
+
+### Representation
+
+TODO
+
+### Checker
+
+TODO
+
+### Compile
+
+**Calls** `App`
+
+1. **Push** parameters
+2. **Push** closure-pointer
+3. **Call** code-label
+4. **Pop**  params + pointer
+
+**Definitions** `Lam`
+
+1. **Compute** *free-vars* `x1`,...,`xn`
+2. **Generate** code-block
+3. **Allocate** tuple `(arity, code-label, x1, ... , xn)`
+
+### Compile: Calls
+
+1. **Push** parameters
+2. **Push** closure-pointer
+3. **Call** code-label
+4. **Pop**  params + pointer
+
+TODO: CODE
+
+### Compile: Definitions
+
+1. **Compute** *free-vars* `x1`,...,`xn`
+2. **Generate** code-block
+3. **Create**   tuple `(arity, code-label, x1, ... , xn)`
+
+TODO: CODE
+
+### Compiling Definitions 1: Free Vars
+
+TODO: CODE
+
+### Compiling Definitions 2: Generating Code Block
+
+TODO: CODE
+
+### Compiling Definitions 3: Creating Closure Tuple
+
+TODO: CODE
+
+## A Problem: Recursion
+
+TODO
+
 
 ### Example: Open Lambda
 
@@ -551,7 +783,3 @@ in
   , gt5(6)  -- ==> false
   )
 ```
-
-* `freeVars`
-* `lambda` = closure creation
-* `apply`  = closure restoration
