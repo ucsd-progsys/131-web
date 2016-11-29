@@ -1,7 +1,7 @@
 ---
-title: First Class Functions 
+title: First Class Functions
 date: 2016-11-14
-headerImg: fer-de-lance.jpg 
+headerImg: fer-de-lance.jpg
 ---
 
 
@@ -539,8 +539,9 @@ compileEnv env (App vE vXs)
  ++ assertArity    env vE (length vXs)                -- check vE arity
  ++ tupleReadRaw   (immArg env vE) (repr (1 :: Int))  -- load vE[1] into EAX
  ++ [IPush (param env vX) | vX <- reverse vXs]        -- push args
+ ++ [IPush (param env vE)]                            -- push closure-ptr
  ++ [ICall (Reg EAX)]                                 -- call EAX
- ++ [IAdd  (Reg ESP) (4 * n)]                         -- pop  args
+ ++ [IAdd  (Reg ESP) (4 * (n + 1)]                    -- pop  args
 ```
 
 ## A Problem: Scope
@@ -611,14 +612,23 @@ freeVars :: Expr -> [Id]
 freeVars e = S.toList (go e)
   where
     go :: Expr -> S.Set Id
-    go (Id x)          = ?1
-    go (Number _)      = ?2
-    go (Boolean _)     = ?2
-    go (If e e1 e2)    = ?3
-    go (App e es)      = ?4
-    go (Let x e1 e2)   = ?5
-    go (Lam xs e)      = ?6
+    go (Id x)          = S.singleton x
+    go (Number _)      = S.empty
+    go (Boolean _)     = S.empty
+    go (If e e1 e2)    = S.unions (map go [e1, e2, e3])
+    go (App e es)      = S.unions (map go (e:es))
+    go (Let x e1 e2)   = S.union (go e1) (S.delete x (go e2))
+    go (Lam xs e)      = S.difference (go e) (S.fromList xs)=
 ```
+
+lambda (x1,x2,x3): e
+
+let x = y + 10 in
+  x + z
+
+A. {x}
+B. {}
+C. { gobble_gobble }
 
 **TODO-IN-CLASS**
 
