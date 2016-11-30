@@ -13,6 +13,7 @@ headerImg: books.jpg
 | 10/26      | Functions                     | [html][lec6] [md][md6] | [pdf][pdf6] | [hs][cod6] | 
 | 11/4       | Heap Data                     | [html][lec7] [md][md7] |             |            | 
 | 11/14      | First-class Functions         | [html][lec8] [md][md8] |             |            | 
+| 11/29      | Static Types & Inference      | [html][lec9] [md][md9] |             |            | 
 
 ## Discussions 
 
