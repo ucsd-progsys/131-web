@@ -1,0 +1,972 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+    
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+ <!--
+      loads the http over https ssl -
+      welcome to my website!
+
+	this theme is based off the Ice & Fire theme created by Lucas Gatsas
+      https://www.twitter.com/LucasGatsas
+      www.lucasgatsas.ch - switzerland.
+  -->
+
+
+<!-- Microsoft Internet Explorer documentMode compatMode setting IE Modus -->
+<script type="text/javascript">
+var IE = null;
+if (window.navigator.appName == "Microsoft Internet Explorer") {
+  if (document.documentMode) {
+
+    IE = document.documentMode;
+    } else {
+
+        IE = 5;
+          if (document.compatMode) {
+      if (document.compatMode == "CSS1Compat")
+      IE = 11;
+      }
+    }
+  }
+</script>
+
+    <meta charset="utf-8">
+    <!-- X-UA -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="X-UA-Compatible" content="IE=11" />
+    <link rel="author" title="Ranjit Jhala" href="http://ranjitjhala.github.io" />
+
+    <meta name="google" content="notranslate" />
+    <!-- Viewport -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- index ROBOTS follow -->
+    <meta name="robots" content="index, follow" />
+    <!-- Site Desciption -->
+    <meta name="description" content="UCSD CSE 131">
+    <!-- Site Desciption -->
+    <meta name="keywords" content="Ranjit Jhala, ranjitjhala, haskell, compilers, type systems">
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="https://ucsd-progsys.github.io/131-web/static/img/ico.jpg" type="image/x-icon" />
+    <!-- Blog Title -->
+    <title>cse131</title>
+
+    <!--     <title>{% if page.title %}{{ page.title }} - {{ site.title }}{% else %}{{ site.title }}{% endif %}</title>
+-->
+    <!-- Property Metas -->
+    <meta property="og:image" content="https://ucsd-progsys.github.io/131-web/static/img/ix.png" />
+    <meta property="og:title" content="UCSD CSE 131" />
+    <meta property="og:site_name" content="UCSD CSE 131" />
+    <!-- Canonical -->
+    <link rel="canonical" href="{{ page.url | replace:'index.html','' | prepend: site.baseurl | prepend: site.url }}">
+    <!-- StyleSheet -->
+    <link rel="stylesheet" href="https://ucsd-progsys.github.io/131-web/static/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://ucsd-progsys.github.io/131-web/static/css/spaceg.stylesheets.css">
+    <link rel="stylesheet" href="https://ucsd-progsys.github.io/131-web/static/css/syntax.css">
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic,900,900italic" rel="stylesheet" type="text/css">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Playfair+Display:400,700,900,400italic,700italic,900italic" rel="stylesheet" type="text/css">
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <style>
+	#preloader {position:fixed;top:0;left:0;right:0;bottom:0;background-color:#fff; /* change if the mask should have another color then white */z-index:99; /* makes sure it stays on top */}
+	#status {width:200px;height:200px;position:absolute;left:50%; /* centers the loading animation horizontally one the screen */top:50%; /* centers the loading animation vertically one the screen */background-image:url("/static/img/preloader.gif"); /* path to your loading animation */background-repeat:no-repeat;background-position:center;margin:-100px 0 0 -100px; /* is width and height divided by two */}
+	ul, ol {margin-top: 0;margin-bottom: 10px;}
+	.navbar-inverse {background-color: #FFF;border-color: #FFFFFF;}
+</style>
+<!--link rel="stylesheet" href="https://ucsd-progsys.github.io/131-web/static/css/prettify.css"-->
+<style>
+	header.intro-header {background: #6f5499;background: no-repeat center center;background-attachment: scroll;-webkit-background-size: cover;-moz-background-size: cover;background-size: cover;-o-background-size: cover;}
+	/* Preloader */#preloader {position:fixed;top:0;left:0;right:0;bottom:0;background-color:#fff; /* change if the mask should have another color then white */z-index:99; /* makes sure it stays on top */}
+	#status {width:200px;height:200px;position:absolute;left:50%; /* centers the loading animation horizontally one the screen */top:50%; /* centers the loading animation vertically one the screen */background-image:; /* path to your loading animation */background-repeat:no-repeat;background-position:center;margin:-100px 0 0 -100px; /* is width and height divided by two */}
+	li {list-style: none;}
+            body.modal-open
+            {overflow: hidden;padding-right: 0px;
+        }
+	article li {list-style: inherit;}
+	article .figure {text-align: center}
+    </style>
+    <!-- end Loading front stylesheet here -->
+    </head>
+
+    <body>
+	<div id="preloader">
+	    <div id="status">
+
+	    </div>
+
+	</div>  
+	<!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="https://ucsd-progsys.github.io/131-web" id="blog-title-left-top">cse131</a>
+        </div>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav navbar-right">
+                <!-- <li class="dropdown">
+                    <a href="#portfolioModal2" data-toggle="modal"><i class="fa fa-random" id="icon-top"></i></a>
+                <ul class="dropdown-menu"></ul>
+                </li>-->
+                
+                <li><a href="https://ucsd-progsys.github.io/131-web/calendar.html">Calendar</a></li>
+                <li><a href="https://ucsd-progsys.github.io/131-web/contact.html">Contact</a></li>
+                <li><a href="https://ucsd-progsys.github.io/131-web/grades.html">Grades</a></li>
+                <li><a href="https://ucsd-progsys.github.io/131-web/lectures.html">Lectures</a></li>
+                <li><a href="https://ucsd-progsys.github.io/131-web/assignments.html">Assignments</a></li>
+                <li><a href="https://ucsd-progsys.github.io/131-web/links.html">Links</a></li>
+                <li><a href="https://www.piazza.com/ucsd/fall2016/cse131/home" id="roundbutton" target="_blank"><i class="fa fa-twitter"></i>Piazza</a></li>
+                <!--
+                <li><a href="https://ucsd-progsys.github.io/131-web/archive.html">Archive</a></li>
+                <li><a href="https://www.twitter.com/ranjitjhala" id="roundbutton" target="_blank"><i class="fa fa-twitter"></i>RanjitJhala</a></li>
+                -->
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+<!-- Portfolio Modals -->
+    <div class="portfolio-modal modal fade" id="portfolioModal1" tabindex="-1" role="dialog" aria-hidden="true" style="padding-right:0px; overflow: hidden;">
+        <div class="modal-content">
+            <div class="close-modal" data-dismiss="modal">
+                <div class="lr">
+                    <div class="rl">
+                    </div>
+                </div>
+            </div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8 col-lg-offset-2">
+                        <div class="modal-body">
+                            <h1 class="font-style-inline-small-h1">Ranjit Jhala</h1>
+                            <hr class="star-primary">
+                            <img src="https://ucsd-progsys.github.io/131-web/static/img/kc.jpg" class="img-responsive img-centered" alt title>
+                            <p class="font-style-inline-small">
+                                <a href="https://www.twitter.com/ranjitjhala" target="_blank">follow me</a>. <br>
+                                <a href="https://www.github.com/ucsd-progsys/131-web" target="_blank">    <i class="fa fa-github" id="spaceg-social-modal"></i> </a>
+                                <a href="https://www.twitter.com/ranjitjhala" target="_blank"><i class="fa fa-twitter" id="spaceg-social-modal"></i> </a>
+                                <a href="https://plus.google.com/u/0/106612421534244742464" target="_blank"> <i class="fa fa-google-plus" id="spaceg-social-modal"></i></a>
+                            </p>
+                            <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times"></i> Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+<!-- Menu Modals Add New Sa.21.Feb.2015 03:22:25 -->
+    <div class="portfolio-modal modal fade" id="portfolioModal2" tabindex="-1" role="dialog" aria-hidden="true" style="padding-right:0px; overflow: hidden;">
+        <div class="modal-content">
+            <div class="close-modal" data-dismiss="modal">
+                <div class="lr">
+                    <div class="rl">
+                    </div>
+                </div>
+            </div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8 col-lg-offset-2">
+                        <div class="modal-body">
+                            <h1 class="font-style-inline-small-h1">Ranjit Jhala</h1>
+                            <hr class="star-primary">
+                            <p class="font-style-inline-small">
+                        <a href="https://www.twitter.com/ranjitjhala" target="_blank">follow</a>. <br>
+                        <a href="https://www.github.com/ucsd-progsys/131-web" target="_blank">    <i class="fa fa-github" id="spaceg-social-modal"></i> </a>
+                        <a href="https://www.twitter.com/ranjitjhala" target="_blank"><i class="fa fa-twitter" id="spaceg-social-modal"></i> </a>
+                        <a href="https://plus.google.com/u/0/106612421534244742464" target="_blank"> <i class="fa fa-google-plus" id="spaceg-social-modal"></i></a>  <br>
+                    <li><a href="https://ucsd-progsys.github.io/131-web/">Home</a></li>
+                    <li><a href="https://ucsd-progsys.github.io/131-web/about.html">About Me</a></li>
+                    <li><a href="https://ucsd-progsys.github.io/131-web/archive.html/">Archive</a></li>
+                            </p>
+
+                            <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times"></i> Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+        <div id="content">
+            <!-- Post Header -->
+<header class="intro-header" style="background-image: url('https://ucsd-progsys.github.io/131-web/static/img/garter-snake.jpg')" alt title>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <h1>Static Type Inference</h1>
+                    
+                    <span class="meta">
+		    
+		    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+			<h2 id="type-inference">Type Inference</h2>
+<p>Garter, aka <strong>G</strong>uaranteed <strong>T</strong>ype <strong>E</strong>nforced <strong>R</strong>eliability, is an extensnion of FDL with <strong>statically inferred types</strong>.</p>
+<p><code>garter</code> starts with <code>fer-de-lance</code> and makes one major addition and a minor deletion, in particular, we</p>
+<ul>
+<li>add <strong>static types</strong>,</li>
+<li>replace unbounded tuples, with <strong>pairs</strong>.</li>
+</ul>
+<p>That is, we now have a proper type system and the <code>Checker</code> is extended to <strong>infer</strong> types for all sub-expressions.</p>
+<p>The code proceeds to <code>compile</code> (i.e. <code>Asm</code> generation) <strong>only if it type checks</strong>.</p>
+<p>This lets us eliminate a whole bunch of the <strong>dynamic tests</strong></p>
+<ul>
+<li><code>assertType TNumber</code></li>
+<li><code>assertType TBool</code></li>
+<li><code>assertType TTuple</code></li>
+<li><code>assertBound</code></li>
+</ul>
+<p>etc. as code that typechecks is <em>guaranteed</em> to pass the checks at run time.</p>
+<h2 id="strategy">Strategy</h2>
+<p>Lets start with an informal overview of our strategy for type inference; as usual we will then formalize and implement this strategy.</p>
+<p>The core idea is this:</p>
+<ol style="list-style-type: decimal">
+<li><strong>Traverse</strong> the <code>Expr</code> …</li>
+<li><strong>Generating</strong> fresh variables for unknown types…</li>
+<li><strong>Unifying</strong> function input types with their arguments …</li>
+<li><strong>Substituting</strong> solutions for variables to infer types.</li>
+</ol>
+<p>Lets do the above procedure informally for a couple of examples!</p>
+<h3 id="example-1-inputs-and-outputs">Example 1: Inputs and Outputs</h3>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="kw">let</span> incr <span class="fu">=</span> (lambda(x)<span class="fu">:</span> add1(x)) <span class="kw">in</span>
+  incr(<span class="dv">7</span>)  </code></pre></div>
+<h3 id="example-2-polymorphism">Example 2: Polymorphism</h3>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="kw">let</span> id <span class="fu">=</span> (lambda(x)<span class="fu">:</span> x)
+  , a1 <span class="fu">=</span> id(<span class="dv">7</span>)
+  , a2 <span class="fu">=</span> id(true)
+<span class="kw">in</span>
+  true  </code></pre></div>
+<h3 id="example-3-higher-order-functions">Example 3: Higher-Order Functions</h3>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="kw">let</span> f    <span class="fu">=</span> (lambda(it, x)<span class="fu">:</span> it(x) <span class="fu">+</span> <span class="dv">1</span>)
+  , incr <span class="fu">=</span> lambda(z)<span class="fu">:</span> add1(z)
+<span class="kw">in</span>
+  f(incr, <span class="dv">10</span>)</code></pre></div>
+<h3 id="strategy-recap">Strategy Recap</h3>
+<ol style="list-style-type: decimal">
+<li><strong>Traverse</strong> the <code>Expr</code> …</li>
+<li><strong>Fresh</strong> variables for unknown types…</li>
+<li><strong>Unifying</strong> function input types with their arguments …</li>
+<li><strong>Substituting</strong> solutions for variables to infer types …</li>
+<li><strong>Generalizing</strong> types into polymorphic functions …</li>
+<li><strong>Instantiating</strong> polymorphic type variables at each use-site.</li>
+</ol>
+<h2 id="plan">Plan</h2>
+<ol style="list-style-type: decimal">
+<li><a href="#syntax-of-types"><strong>Types</strong></a></li>
+<li><a href="#syntax-of-expressions">Expressions</a></li>
+<li><a href="#substitutions">Variables &amp; Substitution</a></li>
+<li><a href="#unification">Unification</a></li>
+<li><a href="#generalize-and-instantiate">Generalize &amp; Instantiate</a></li>
+<li><a href="#inference">Inferring Types</a></li>
+<li><a href="#extensions">Extensions</a></li>
+</ol>
+<h2 id="syntax">Syntax</h2>
+<p>First, lets see how the syntax of our <code>garter</code> changes to enable static types.</p>
+<h3 id="syntax-of-types">Syntax of Types</h3>
+<p>A <code>Type</code> is one of:</p>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="kw">data</span> <span class="dt">Type</span>
+  <span class="fu">=</span> <span class="dt">TInt</span>               <span class="co">-- Int</span>
+  <span class="fu">|</span> <span class="dt">TBool</span>              <span class="co">-- Bool</span>
+  <span class="fu">|</span> [<span class="dt">Type</span>] <span class="fu">:=&gt;</span> <span class="dt">Type</span>    <span class="co">-- (t1,...,tn) =&gt; t</span>
+  <span class="fu">|</span> <span class="dt">TVar</span> <span class="dt">TVar</span>          <span class="co">-- a, b, c</span>
+  <span class="fu">|</span> <span class="dt">TPair</span> <span class="dt">Type</span> <span class="dt">Type</span>    <span class="co">-- (t0, t1)</span>
+  <span class="fu">|</span> <span class="dt">TCtor</span> <span class="dt">Ctor</span> [<span class="dt">Type</span>]  <span class="co">-- e.g. C[t1,...,tn]</span>
+  <span class="kw">deriving</span> (<span class="dt">Eq</span>, <span class="dt">Ord</span>)</code></pre></div>
+<p>here <code>Ctor</code> and <code>TVar</code> are just string names:</p>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="kw">newtype</span> <span class="dt">Ctor</span>
+  <span class="fu">=</span> <span class="dt">CT</span> <span class="dt">String</span>           <span class="co">-- e.g. &quot;List&quot;, &quot;Tree&quot;</span>
+  <span class="kw">deriving</span> (<span class="dt">Eq</span>, <span class="dt">Ord</span>)
+
+<span class="kw">newtype</span> <span class="dt">TVar</span>
+  <span class="fu">=</span> <span class="dt">TV</span> <span class="dt">String</span>           <span class="co">-- e.g. a, b, c</span>
+  <span class="kw">deriving</span> (<span class="dt">Eq</span>, <span class="dt">Ord</span>)</code></pre></div>
+<p>Finally, a <strong>polymorphic type</strong> is represented as:</p>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="kw">data</span> <span class="dt">Poly</span> <span class="fu">=</span> <span class="dt">Forall</span> [<span class="dt">TVar</span>] <span class="dt">Type</span> <span class="co">-- e.g. forall a. (a, a) =&gt; Bool</span></code></pre></div>
+<h3 id="example-monomorphic-types">Example: Monomorphic Types</h3>
+<p>A function that</p>
+<ul>
+<li>takes two input <code>Int</code></li>
+<li>returns an output <code>Int</code></li>
+</ul>
+<p>Has the <em>monomorphic</em> type <code>(Int, Int) =&gt; Int</code></p>
+<p>Which we would represent as a <code>Poly</code> value:</p>
+<pre><code>  (Forall [] ([TInt, TInt] :=&gt; TInt))          :: Poly</code></pre>
+<p><strong>Note:</strong> If a function is <strong>monomorphic</strong> (i.e. <em>not polymorphic</em>), we can just use the empty list of <code>TVar</code>.</p>
+<h3 id="example-polymorphic-types">Example: Polymorphic Types</h3>
+<p>Similarly, a function that</p>
+<ul>
+<li>takes a value of <strong>any</strong> type and</li>
+<li>returns a value of <strong>the same</strong> type</li>
+</ul>
+<p>Has the <em>polymorphic</em> type <code>forall a. (a) =&gt; a</code></p>
+<p>Which we would represent as a <code>Poly</code> value:</p>
+<pre><code>  Forall [TV &quot;a&quot;] ([TVar (TV &quot;a&quot;)] :=&gt; (TVar (TV &quot;a&quot;)))</code></pre>
+<p><strong>Note:</strong> Haskell allows <code>OverloadedStrings</code> which lets us treat <code>&quot;a&quot;</code> as both a <code>TVar</code> and a <code>Type</code> as needed. So we can rewrite the above as:</p>
+<pre><code>  Forall [&quot;a&quot;] ([&quot;a&quot;] :=&gt; &quot;a&quot;)</code></pre>
+<p>Similarly, a function that takes two values and returns the first, can be given a <code>Poly</code> type <code>forall a, b. (a, b) =&gt; a</code> which is represented as:</p>
+<pre><code>  Forall [&quot;a&quot;, &quot;b&quot;] ([&quot;a&quot;, &quot;b&quot;] :=&gt; &quot;a&quot;)</code></pre>
+<h3 id="syntax-of-expressions">Syntax of Expressions</h3>
+<p>To enable inference <code>garter</code> simplifies the language a little bit.</p>
+<ul>
+<li><p><em>Dynamic tests</em> <code>isNum</code> and <code>isBool</code> are removed,</p></li>
+<li><p><em>Tuples</em> always have exactly <em>two</em> elements; you can represent <code>(x, y, z)</code> as <code>(x, (y, z))</code>.</p></li>
+<li><p><em>Tuple</em> access is limited to the fields <code>Zero</code> and <code>One</code> (instead of arbitrary expressions).</p></li>
+</ul>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="kw">data</span> <span class="dt">Expr</span> a
+  <span class="fu">=</span> <span class="fu">...</span>
+  <span class="fu">|</span> <span class="dt">Tuple</span>   (<span class="dt">Expr</span> a) (<span class="dt">Expr</span> a)                    a <span class="co">-- Tuples have 2 elems</span>
+  <span class="fu">|</span> <span class="dt">GetItem</span> (<span class="dt">Expr</span> a) <span class="dt">Field</span>                       a <span class="co">-- Access 0-th or 1-st elem</span>
+  <span class="fu">|</span> <span class="dt">Fun</span>     (<span class="dt">Bind</span> a) <span class="dt">Sig</span>     [<span class="dt">Bind</span> a]  (<span class="dt">Expr</span> a)  a <span class="co">-- named functions</span>
+
+<span class="kw">data</span> <span class="dt">Field</span>
+  <span class="fu">=</span> <span class="dt">Zero</span>            <span class="co">-- 0-th field</span>
+  <span class="fu">|</span> <span class="dt">One</span>             <span class="co">-- 1-st field                     </span>
+
+<span class="kw">data</span> <span class="dt">Sig</span>
+  <span class="fu">=</span> <span class="dt">Infer</span>           <span class="co">-- no specification, infer scheme  </span>
+  <span class="fu">|</span> <span class="dt">Check</span>  <span class="dt">Poly</span>     <span class="co">-- check that function has given (poly-) type</span>
+  <span class="fu">|</span> <span class="dt">Assume</span> <span class="dt">Poly</span>     <span class="co">--  </span></code></pre></div>
+<h3 id="plan-1">Plan</h3>
+<ol style="list-style-type: decimal">
+<li><a href="#syntax-of-types">Types</a></li>
+<li><a href="#syntax-of-expressions">Expressions</a></li>
+<li><a href="#substitutions"><strong>Variables &amp; Substitution</strong></a></li>
+<li><a href="#unification">Unification</a></li>
+<li><a href="#generalize-and-instantiate">Generalize &amp; Instantiate</a></li>
+<li><a href="#inference">Inferring Types</a></li>
+<li><a href="#extensions">Extensions</a></li>
+</ol>
+<h2 id="substitutions">Substitutions</h2>
+<p>Our informal algorithm proceeds by</p>
+<ul>
+<li>Generating <strong>fresh type</strong> variables for unknown types,</li>
+<li>Traversing the <code>Expr</code> to <strong>unify</strong> the types of sub-expressions,</li>
+<li>By <strong>substituting</strong> a type <em>variable</em> with a whole <em>type</em>.</li>
+</ul>
+<p>Lets formalize <em>substitutions</em>, and use it to define <a href="#unification">unification</a>.</p>
+<h3 id="representing-substitutions">Representing Substitutions</h3>
+<p>We represent substitutions as a record with two fields:</p>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="kw">data</span> <span class="dt">Subst</span> <span class="fu">=</span> <span class="dt">Su</span>
+  {<span class="ot"> suMap ::</span> <span class="dt">M.Map</span> <span class="dt">TVar</span> <span class="dt">Type</span>    <span class="co">-- ^ hashmap from type-var := type</span>
+  ,<span class="ot"> suCnt ::</span> <span class="fu">!</span><span class="dt">Int</span>               <span class="co">-- ^ counter used to generate fresh type vars</span>
+  }</code></pre></div>
+<ul>
+<li><code>suMap</code> is a <strong>map</strong> from type variables to types,</li>
+<li><code>suCnt</code> is a <strong>counter</strong> used to generate <strong>new</strong> type variables.</li>
+</ul>
+<p>For example, <code>exSubst</code> is a substitution that maps <code>a</code>, <code>b</code> and <code>c</code> to <code>Int</code>, <code>Bool</code> and <code>(Int, Int) =&gt; Int</code> respectively.</p>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="ot">exSubst ::</span> <span class="dt">Subst</span>
+exSubst <span class="fu">=</span> <span class="dt">Su</span> m <span class="dv">0</span>
+  <span class="kw">where</span>
+    m   <span class="fu">=</span> (M.fromList [ (<span class="st">&quot;a&quot;</span>, <span class="dt">TInt</span>)
+                      , (<span class="st">&quot;b&quot;</span>, <span class="dt">TBool</span>)
+                      , (<span class="st">&quot;c&quot;</span>, [<span class="dt">TInt</span>, <span class="dt">TInt</span>] <span class="fu">:=&gt;</span> <span class="dt">TInt</span>) ])</code></pre></div>
+<h3 id="applying-substitutions">Applying Substitutions</h3>
+<p>The main <em>use</em> of a substition is to <strong>apply</strong> it to a type, which has the effect of <em>replacing</em> each occurrence of a type variable with its substituted value (or leaving it untouched if it is not mentioned in the substitution.)</p>
+<p>We define an interface for “things that can be substituted” as:</p>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="kw">class</span> <span class="dt">Substitutable</span> a <span class="kw">where</span>
+<span class="ot">  apply     ::</span> <span class="dt">Subst</span> <span class="ot">-&gt;</span> a <span class="ot">-&gt;</span> a</code></pre></div>
+<p>and then we define how to <code>apply</code> substitutions to <code>Type</code>, <code>Poly</code>, and lists and maps of <code>Type</code> and <code>Poly</code>.</p>
+<p>For example,</p>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell">apply exSubst ([<span class="st">&quot;a&quot;</span>, <span class="st">&quot;z&quot;</span>] <span class="fu">:=&gt;</span> <span class="st">&quot;b&quot;</span>)</code></pre></div>
+<p>returns</p>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell">[<span class="dt">TInt</span>, <span class="st">&quot;z&quot;</span>] <span class="fu">:=&gt;</span> <span class="dt">TBool</span></code></pre></div>
+<p>by replacing <code>&quot;a&quot;</code> and <code>&quot;b&quot;</code> with <code>TInt</code> and <code>TBool</code> and leaving “z” alone.</p>
+<h3 id="quiz">QUIZ</h3>
+<p>Recall that <code>exSubst = [&quot;a&quot; := TInt, &quot;b&quot; := TBool]</code>…</p>
+<p>What should be the result of</p>
+<pre><code>apply exSubst (Forall &quot;a&quot; ([&quot;a&quot;] :=&gt; &quot;a&quot;))</code></pre>
+<ol style="list-style-type: decimal">
+<li><code>Forall [&quot;a&quot;] ([TInt] :=&gt; TBool)</code></li>
+<li><code>Forall [&quot;a&quot;] ([&quot;a&quot; ] :=&gt; &quot;a&quot;  )</code></li>
+<li><code>Forall [&quot;a&quot;] ([&quot;a&quot;]  :=&gt; TBool)</code></li>
+<li><code>Forall [&quot;a&quot;] ([TInt] :=&gt; &quot;a&quot;)</code></li>
+<li><code>Forall [   ] ([TInt] :=&gt; TBool)</code></li>
+</ol>
+<h3 id="bound-vs.free-type-variables">Bound vs. Free Type Variables</h3>
+<p>Indeed, the type</p>
+<pre><code>forall a. (a) =&gt; a</code></pre>
+<p>is identical to</p>
+<pre><code>forall z. (z) =&gt; a</code></pre>
+<ul>
+<li><p>A <strong>bound</strong> type variable is one that appears under a <code>forall</code>.</p></li>
+<li><p>A <strong>free</strong> type variable is one that is <strong>not</strong> bound.</p></li>
+</ul>
+<p>We should only substitute <strong>free type variables</strong>.</p>
+<h3 id="applying-substitutions-1">Applying Substitutions</h3>
+<p>Thus, keeping the above in mind, we can define <code>apply</code> as a recursive traversal:</p>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell">  apply _  <span class="dt">TInt</span>          <span class="fu">=</span> <span class="dt">TInt</span>
+  apply _  <span class="dt">TBool</span>         <span class="fu">=</span> <span class="dt">TBool</span>
+  apply su (<span class="dt">TVar</span> a)      <span class="fu">=</span> M.findWithDefault (<span class="dt">TVar</span> a) a (suMap su)
+  apply su (ts <span class="fu">:=&gt;</span> t)    <span class="fu">=</span> apply su ts <span class="fu">:=&gt;</span> apply su t
+  apply su (<span class="dt">Forall</span> as t) <span class="fu">=</span> <span class="dt">Forall</span> as <span class="fu">$</span> apply (unSubst as su)  t</code></pre></div>
+<p>where <code>unSubst</code> <strong>removes</strong> the mappings for <code>as</code> from <code>su</code></p>
+<h3 id="creating-substitutions">Creating Substitutions</h3>
+<p>We can start with an <strong>empty substitution</strong> that maps no variables</p>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="ot">empSubst ::</span> <span class="dt">Subst</span>
+empSubst <span class="fu">=</span>  <span class="dt">Su</span> M.empty <span class="dv">0</span></code></pre></div>
+<h3 id="extending-substitutions">Extending Substitutions</h3>
+<p>we can <strong>extend</strong> the substitution by assigning a variable <code>a</code> to type <code>t</code></p>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="ot">extSubst ::</span> <span class="dt">Subst</span> <span class="ot">-&gt;</span> <span class="dt">TVar</span> <span class="ot">-&gt;</span> <span class="dt">Type</span> <span class="ot">-&gt;</span> <span class="dt">Subst</span>
+extSubst su a t <span class="fu">=</span> su { suMap <span class="fu">=</span> M.insert a t su' }
+  <span class="kw">where</span>
+     su'        <span class="fu">=</span> apply (mkSubst [(a, t)]) (suMap su)</code></pre></div>
+<p><strong>Telescoping</strong></p>
+<p>Note that when we extend <code>[b := a]</code> by assigning <code>a</code> to <code>Int</code> we must take care to also update <code>b</code> to now map to <code>Int</code>. That is why we:</p>
+<ol style="list-style-type: decimal">
+<li><code>apply [a := Int]</code> to update the old substitution to get <code>su'</code></li>
+<li><code>insert</code> the new assignment <code>a := Int</code> into <code>su'</code>.</li>
+</ol>
+<h3 id="plan-2">Plan</h3>
+<ol style="list-style-type: decimal">
+<li><a href="#syntax-of-types">Types</a></li>
+<li><a href="#syntax-of-expressions">Expressions</a></li>
+<li><a href="#substitutions">Variables &amp; Substitution</a></li>
+<li><a href="#unification"><strong>Unification</strong></a></li>
+<li><a href="#generalize-and-instantiate">Generalize &amp; Instantiate</a></li>
+<li><a href="#inference">Inferring Types</a></li>
+<li><a href="#extensions">Extensions</a></li>
+</ol>
+<h2 id="unification">Unification</h2>
+<p>Next, lets use <code>Subst</code> to implement a procedure to <code>unify</code> two types, i.e. to determine the conditions under which the two types are <em>the same</em>.</p>
+<table>
+<thead>
+<tr class="header">
+<th align="left"><strong>T1</strong></th>
+<th align="left"><strong>T2</strong></th>
+<th align="left"><strong>Unified</strong></th>
+<th align="left"><strong>Substitution</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left"><code>Int</code></td>
+<td align="left"><code>Int</code></td>
+<td align="left"><code>Int</code></td>
+<td align="left"><code>empSubst</code></td>
+</tr>
+<tr class="even">
+<td align="left"><code>a</code></td>
+<td align="left"><code>Int</code></td>
+<td align="left"><code>Int</code></td>
+<td align="left"><code>a := Int</code></td>
+</tr>
+<tr class="odd">
+<td align="left"><code>a</code></td>
+<td align="left"><code>b</code></td>
+<td align="left"><code>b</code></td>
+<td align="left"><code>a := b</code></td>
+</tr>
+<tr class="even">
+<td align="left"><code>a -&gt; b</code></td>
+<td align="left"><code>a -&gt; d</code></td>
+<td align="left"><code>a-&gt;d</code></td>
+<td align="left"><code>b := d</code></td>
+</tr>
+<tr class="odd">
+<td align="left"><code>a -&gt; Int</code></td>
+<td align="left"><code>Bool -&gt; b</code></td>
+<td align="left"><code>Bool-&gt;Int</code></td>
+<td align="left"><code>a := Bool, b:=Int</code></td>
+</tr>
+<tr class="even">
+<td align="left"><code>Int</code></td>
+<td align="left"><code>Bool</code></td>
+<td align="left"><em>Error</em></td>
+<td align="left"><em>Error</em></td>
+</tr>
+<tr class="odd">
+<td align="left"><code>Int</code></td>
+<td align="left"><code>a -&gt; b</code></td>
+<td align="left"><em>Error</em></td>
+<td align="left"><em>Error</em></td>
+</tr>
+<tr class="even">
+<td align="left"><code>a</code></td>
+<td align="left"><code>a -&gt; Int</code></td>
+<td align="left"><em>Error</em></td>
+<td align="left"><em>Error</em></td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>The first few cases: unification is possible,</li>
+<li>The last few cases: unification fails, i.e. type error in source!</li>
+</ul>
+<p><strong>Occurs Check</strong></p>
+<ul>
+<li><p>The very last failure: <code>a</code> in the first type <strong>occurs inside</strong> free inside the second type!</p></li>
+<li><p>If we try substituting <code>a</code> with <code>a -&gt; Int</code> we will just keep spinning forever! Hence, this also throws a unification failure.</p></li>
+</ul>
+<p><strong>Exercise</strong></p>
+<p>Can you think of a program that would trigger the <em>occurs check</em> failure? (You’ve probable written several such programs in 130 and 131!)</p>
+<h3 id="implementing-unification">Implementing Unification</h3>
+<p>We implement unification as a function:</p>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="ot">unify ::</span> <span class="dt">Subst</span> <span class="ot">-&gt;</span> <span class="dt">Type</span> <span class="ot">-&gt;</span> <span class="dt">Type</span> <span class="ot">-&gt;</span> <span class="dt">Subst</span></code></pre></div>
+<p>such that</p>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell">unify su t1 t2</code></pre></div>
+<p>returns a substitution <code>su'</code> that <strong>extends</strong> <code>su</code> with with the assignments needed to make <code>t1</code> the same as <code>t2</code>, i.e. such that <code>apply su' t1 == apply su' t2</code>.</p>
+<p>The code is pretty much the table above:</p>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="ot">unify ::</span> <span class="dt">SourceSpan</span> <span class="ot">-&gt;</span> <span class="dt">Subst</span> <span class="ot">-&gt;</span> <span class="dt">Type</span> <span class="ot">-&gt;</span> <span class="dt">Type</span> <span class="ot">-&gt;</span> <span class="dt">Subst</span>
+unify _  su <span class="dt">TInt</span>       <span class="dt">TInt</span>         <span class="fu">=</span> su
+unify _  su <span class="dt">TBool</span>      <span class="dt">TBool</span>        <span class="fu">=</span> su
+unify sp su (<span class="dt">TVar</span> a)   t            <span class="fu">=</span> varAsgn sp su a t
+unify sp su t          (<span class="dt">TVar</span> a)     <span class="fu">=</span> varAsgn sp su a t
+unify sp su (is <span class="fu">:=&gt;</span> o) (is' <span class="fu">:=&gt;</span> o') <span class="fu">=</span> unify (unifys sp su is is') (apply s1 o) (apply s1 o')
+unify sp _  t1 t2                   <span class="fu">=</span> abort (errUnify sp t1 t2)</code></pre></div>
+<p>The helpers</p>
+<ul>
+<li><code>unifys</code> recursively calls <code>unify</code> on <em>lists</em> of types:</li>
+<li><code>varAsgn</code> extends <code>su</code> with <code>[a := t]</code> if <strong>required</strong> and <strong>possible</strong>!</li>
+</ul>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="ot">varAsgn ::</span> <span class="dt">SourceSpan</span> <span class="ot">-&gt;</span> <span class="dt">Subst</span> <span class="ot">-&gt;</span> <span class="dt">TVar</span> <span class="ot">-&gt;</span> <span class="dt">Type</span> <span class="ot">-&gt;</span> <span class="dt">Subst</span>
+varAsgn sp su a t
+  <span class="fu">|</span> t <span class="fu">==</span> <span class="dt">TVar</span> a          <span class="fu">=</span> su                       <span class="co">-- assigned to itself, do nothing</span>
+  <span class="fu">|</span> a <span class="ot">`elem`</span> freeTvars t <span class="fu">=</span> abort (errOccurs sp a t) <span class="co">-- oops, fails occurs check!</span>
+  <span class="fu">|</span> otherwise            <span class="fu">=</span> extSubst su a t          <span class="co">-- extend su with [a := t]</span></code></pre></div>
+<p>We can test out the above table:</p>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell">λ<span class="fu">&gt;</span> <span class="fu">:</span>set <span class="fu">-</span><span class="dt">XOverloadedStrings</span>
+
+λ<span class="fu">&gt;</span> unify junkSpan empSubst <span class="dt">TInt</span> <span class="dt">TInt</span>
+(fromList [], <span class="dv">0</span>)
+
+λ<span class="fu">&gt;</span> unify junkSpan empSubst ([<span class="st">&quot;a&quot;</span>] <span class="fu">:=&gt;</span> <span class="dt">TInt</span>) ([<span class="dt">TBool</span>] <span class="fu">:=&gt;</span> <span class="st">&quot;b&quot;</span>)
+(fromList [(a,<span class="dt">Bool</span>), (b,<span class="dt">Int</span>)], <span class="dv">0</span>)
+
+λ<span class="fu">&gt;</span> unify junkSpan empSubst (<span class="st">&quot;a&quot;</span>) ([<span class="st">&quot;a&quot;</span>] <span class="fu">:=&gt;</span> <span class="dt">TInt</span>)
+<span class="fu">***</span> <span class="dt">Exception</span><span class="fu">:</span> <span class="st">&quot;Type error: occurs check fails: a occurs in (a) =&gt; Int&quot;</span><span class="fu">...</span>
+
+λ<span class="fu">&gt;</span> unify junkSpan empSubst <span class="dt">TInt</span> <span class="dt">TBool</span>
+<span class="fu">***</span> <span class="dt">Exception</span><span class="fu">:</span> <span class="st">&quot;Type error: cannot unify Int and Bool&quot;</span> <span class="fu">...</span></code></pre></div>
+<h3 id="plan-3">Plan</h3>
+<ol style="list-style-type: decimal">
+<li><a href="#syntax-of-types">Types</a></li>
+<li><a href="#syntax-of-expressions">Expressions</a></li>
+<li><a href="#substitutions">Variables &amp; Substitution</a></li>
+<li><a href="#unification">Unification</a></li>
+<li><a href="#generalize-and-instantiate"><strong>Generalize &amp; Instantiate</strong></a></li>
+<li><a href="#inference">Inferring Types</a></li>
+<li><a href="#extensions">Extensions</a></li>
+</ol>
+<h2 id="generalize-and-instantiate">Generalize and Instantiate</h2>
+<p>Ok, the next step is an easy one. Recall the example:</p>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="kw">let</span> id <span class="fu">=</span> (lambda(x)<span class="fu">:</span> x)
+  , a1 <span class="fu">=</span> id(<span class="dv">7</span>)
+  , a2 <span class="fu">=</span> id(true)
+<span class="kw">in</span>
+  true  </code></pre></div>
+<p>For the expression <code>lambda(x): x</code> we inferred the type <code>(a0) =&gt; a0</code></p>
+<p>We needed to <strong>generalize</strong> the above:</p>
+<ul>
+<li>to assign <code>id</code> the <code>Poly</code>-type: <code>forall a0. (a0) =&gt; a0</code></li>
+</ul>
+<p>We needed to <strong>instantiate</strong> the above <code>Poly</code>-type at each <em>use</em></p>
+<ul>
+<li>at <code>id(7)</code> the function <code>id</code> has <code>Type</code> <code>(Int)  =&gt; Int</code></li>
+<li>at <code>id(true)</code> the function <code>id</code> has <code>Type</code> <code>(Bool) =&gt; Int</code></li>
+</ul>
+<p>Lets see how to implement those two steps.</p>
+<h3 id="type-environments">Type Environments</h3>
+<p>To <code>generalize</code> a type, we</p>
+<ol style="list-style-type: decimal">
+<li>Compute its (free) type variables,</li>
+<li>Remove the ones that may still be constrained by <em>other</em> in-scope program variables.</li>
+</ol>
+<p>We represent the types of <strong>in scope</strong> program variables as <strong>type environment</strong></p>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="kw">data</span> <span class="dt">TypeEnv</span> <span class="fu">=</span> <span class="dt">TypeEnv</span> (<span class="dt">M.Map</span> <span class="dt">Id</span> <span class="dt">Poly</span>)</code></pre></div>
+<p>i.e. a <code>Map</code> from program variables <code>Id</code> to their (inferred) <code>Poly</code> type.</p>
+<h3 id="generalize">Generalize</h3>
+<p>We can now implement <code>generalize</code> as:</p>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="ot">generalize ::</span> <span class="dt">TypeEnv</span> <span class="ot">-&gt;</span> <span class="dt">Type</span> <span class="ot">-&gt;</span> <span class="dt">Poly</span>
+generalize env t <span class="fu">=</span> <span class="dt">Forall</span> as t           <span class="co">-- 4. slap a `Forall` on the unconstrained vars</span>
+  <span class="kw">where</span>
+    tvs          <span class="fu">=</span> freeTvars t           <span class="co">-- 1. compute tyVars of `t`</span>
+    evs          <span class="fu">=</span> freeTvars env         <span class="co">-- 2. compute tyVars of `env`</span>
+    as           <span class="fu">=</span> L.nub (tvs <span class="dt">L</span><span class="fu">.</span>\\ evs)  <span class="co">-- 3. compute unconstrained vars: (1) minus (2)</span></code></pre></div>
+<p>The helper <code>freeTvars</code> computes the set of variables that appear inside a <code>Type</code>, <code>Poly</code> and <code>TypeEnv</code>:</p>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell">  <span class="co">-- | type-vars of a Type</span>
+  freeTvars <span class="dt">TInt</span>          <span class="fu">=</span> []
+  freeTvars <span class="dt">TBool</span>         <span class="fu">=</span> []
+  freeTvars (<span class="dt">TVar</span> a)      <span class="fu">=</span> [a]
+  freeTvars (ts <span class="fu">:=&gt;</span> t)    <span class="fu">=</span> freeTvars ts <span class="fu">++</span> freeTvars t
+
+  <span class="co">-- | type-vars of a Poly (we remove the &quot;bound&quot; forall-vars)</span>
+  freeTvars (<span class="dt">Forall</span> as t) <span class="fu">=</span> freeTvars t <span class="dt">L</span><span class="fu">.</span>\\ as  
+
+  <span class="co">-- | type-vars of an TypeEnv</span>
+  freeTvars (<span class="dt">TypeEnv</span> m)   <span class="fu">=</span> freeTvars [s <span class="fu">|</span> (x, s) <span class="ot">&lt;-</span> M.toList m]  </code></pre></div>
+<h3 id="instantiate">Instantiate</h3>
+<p>Next, to <strong>instantiate</strong> a <code>Poly</code> of the form</p>
+<pre><code>   Forall [a1,...,an] t</code></pre>
+<p>we:</p>
+<ol style="list-style-type: decimal">
+<li>Generate <strong>fresh</strong> type variables, <code>b1,...,bn</code> for each “parameter” <code>a1...an</code></li>
+<li>Substitute <code>[a1 := b1,...,an := bn]</code> in the “body” <code>t</code>.</li>
+</ol>
+<p>For example, to instantiate</p>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell">   <span class="dt">Forall</span> [<span class="st">&quot;a&quot;</span>] ([<span class="st">&quot;a&quot;</span>] <span class="fu">:=&gt;</span> <span class="st">&quot;a&quot;</span>)</code></pre></div>
+<p>we</p>
+<ol style="list-style-type: decimal">
+<li>Generate a fresh variable e.g. <code>&quot;a66&quot;</code>,</li>
+<li>Substitute <code>[&quot;a&quot; := &quot;a66&quot;]</code> in the body <code>[&quot;a&quot;] :=&gt; &quot;a&quot;</code></li>
+</ol>
+<p>to get</p>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell">[<span class="st">&quot;a66&quot;</span>] <span class="fu">:=&gt;</span> <span class="st">&quot;a66&quot;</span></code></pre></div>
+<h3 id="implementing-instantiate">Implementing Instantiate</h3>
+<p>We implement the above as:</p>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="ot">instantiate ::</span> <span class="dt">Subst</span> <span class="ot">-&gt;</span> <span class="dt">Poly</span> <span class="ot">-&gt;</span> (<span class="dt">Subst</span>, <span class="dt">Type</span>)
+instantiate su (<span class="dt">Forall</span> as t) <span class="fu">=</span> (su', apply suInst t)
+  <span class="kw">where</span>
+    (su', as')               <span class="fu">=</span> freshTVars su n
+    suInst                   <span class="fu">=</span> mkSubst (zip as as')
+    n                        <span class="fu">=</span> length as</code></pre></div>
+<p><strong>Question</strong> Why does <code>instantiate</code> <strong>return</strong> a <code>Subst</code>?</p>
+<p>Lets run it and see what happens!</p>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell">λ<span class="fu">&gt;</span> <span class="fu">:</span>set <span class="fu">-</span><span class="dt">XOverloadedStrings</span>
+
+λ<span class="fu">&gt;</span> <span class="kw">let</span> tId <span class="fu">=</span> <span class="dt">Forall</span> [<span class="st">&quot;a&quot;</span>] ([<span class="st">&quot;a&quot;</span>] <span class="fu">:=&gt;</span> <span class="st">&quot;a&quot;</span>)
+
+λ<span class="fu">&gt;</span> <span class="kw">let</span> (su0, id0) <span class="fu">=</span> instantiate empSubst tId
+
+λ<span class="fu">&gt;</span> <span class="kw">let</span> (su1, id1) <span class="fu">=</span> instantiate su0      tId
+
+λ<span class="fu">&gt;</span> id0
+(a0) <span class="ot">=&gt;</span> a0
+
+λ<span class="fu">&gt;</span> id1
+(a1) <span class="ot">=&gt;</span> a1</code></pre></div>
+<p>As in <code>anf</code> and <code>label</code></p>
+<ul>
+<li>The <code>fresh</code> calls <strong>bump up</strong> the counter …</li>
+<li>But must use the <strong>returned</strong> <code>Subst</code> for future calls.</li>
+</ul>
+<h3 id="plan-4">Plan</h3>
+<ol style="list-style-type: decimal">
+<li><a href="#syntax-of-types">Types</a></li>
+<li><a href="#syntax-of-expressions">Expressions</a></li>
+<li><a href="#substitutions">Variables &amp; Substitution</a></li>
+<li><a href="#unification">Unification</a></li>
+<li><a href="#generalize-and-instantiate">Generalize &amp; Instantiate</a></li>
+<li><a href="#inference"><strong>Inferring Types</strong></a></li>
+<li><a href="#extensions">Extensions</a></li>
+</ol>
+<h2 id="inference">Inference</h2>
+<p>Finally, we have all the pieces to implement the actual <strong>type inference</strong> procedure <code>ti</code></p>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="ot">ti ::</span> <span class="dt">TypeEnv</span> <span class="ot">-&gt;</span> <span class="dt">Subst</span> <span class="ot">-&gt;</span> <span class="dt">Expr</span> a <span class="ot">-&gt;</span> (<span class="dt">Subst</span>, <span class="dt">Type</span>)</code></pre></div>
+<p>The function <code>ti</code> takes as <em>input</em>:</p>
+<ol style="list-style-type: decimal">
+<li>A <code>TypeEnv</code> mapping in-scope variables to their inferred (<code>Poly</code>)-types,</li>
+<li>A <code>Subst</code> containing the <em>current</em> substitutions and fresh-variable-counter,</li>
+<li>An <code>Expr</code> whose type we want to infer.</li>
+</ol>
+<p>and returns as output a pair of:</p>
+<ul>
+<li>The inferred type for the given <code>Expr</code> and</li>
+<li>The extended <code>Subst</code> resulting from
+<ul>
+<li>generating fresh type variables and</li>
+<li>doing the unification needed to check the <code>Expr</code>.</li>
+</ul></li>
+</ul>
+<p>Lets look at how <code>ti</code> is implemented for the different cases of expressions.</p>
+<h3 id="inference-literals">Inference: Literals</h3>
+<p>For numbers and booleans, we just return the respective type and the input <code>Subst</code> without any modifications.</p>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell">ti _ su   (<span class="dt">Number</span> {})      <span class="fu">=</span> (su, <span class="dt">TInt</span>)
+ti _ su   (<span class="dt">Boolean</span> {})     <span class="fu">=</span> (su, <span class="dt">TBool</span>)</code></pre></div>
+<h3 id="inference-variables">Inference: Variables</h3>
+<p>For identifiers, we</p>
+<ol style="list-style-type: decimal">
+<li><strong>lookup</strong> their type in the <code>env</code> and</li>
+<li><strong>instantiate</strong> type-variables to get <em>different types at different uses</em>.</li>
+</ol>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell">ti env su (<span class="dt">Id</span> x l) <span class="fu">=</span> instantiate su (lookupTypeEnv x env)</code></pre></div>
+<p>Why do we <em>instantiate</em>? Recall <a href="generalize-and-instantiate">the <code>id</code> example!</a></p>
+<h3 id="inference-let-bindings">Inference: Let-bindings</h3>
+<p>Next, lets look at let-bindings:</p>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell">ti env su (<span class="dt">Let</span> x e1 e2 _)  <span class="fu">=</span> ti env'' su1 e2         <span class="co">-- (5)</span>
+  <span class="kw">where</span>
+    (su1, t1)              <span class="fu">=</span> ti env su  e1           <span class="co">-- (1)</span>
+    env'                   <span class="fu">=</span> apply su1  env          <span class="co">-- (2)</span>
+    s1                     <span class="fu">=</span> generalize env' t1      <span class="co">-- (3)</span>
+    env''                  <span class="fu">=</span> extTypeEnv x s1 env'    <span class="co">-- (4)</span></code></pre></div>
+<p>In essence,</p>
+<ol style="list-style-type: decimal">
+<li><strong>Infer</strong> the type <code>t1</code> for <code>e1</code>,</li>
+<li><strong>Apply</strong> the substitutions from (1) to the <code>env</code>,</li>
+<li><strong>Generalize</strong> <code>t1</code> to make it a <code>Poly</code> type <code>s1</code>,
+<ul>
+<li>why? <a href="#generalize-and-instantiate">recall the id example</a></li>
+</ul></li>
+<li><strong>Extend</strong> the env to map <code>x</code> to <code>s1</code> and,</li>
+<li><strong>Infer</strong> the type of <code>e2</code> in the extended environment.</li>
+</ol>
+<h3 id="inference-function-definitions">Inference: Function Definitions</h3>
+<p>Next, lets see how to infer the type of a function i.e. <code>Lam</code></p>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell">ti env su (<span class="dt">Lam</span> xs body) <span class="fu">=</span> (su3, apply su3 (tXs <span class="fu">:=&gt;</span> tOut))   <span class="co">-- (5)</span>
+  <span class="kw">where</span>
+    (su1, tXs <span class="fu">:=&gt;</span> tOut) <span class="fu">=</span> freshFun su (length xs)           <span class="co">-- (1)</span>
+    env'                <span class="fu">=</span> extTypesEnv env (zip xs tXs)      <span class="co">-- (2)</span>
+    (su2, tBody)        <span class="fu">=</span> ti env' su1 body                  <span class="co">-- (3)</span>
+    su3                 <span class="fu">=</span> unify su2 tBody (apply su2 tOut)  <span class="co">-- (4)</span></code></pre></div>
+<p>Inference works as follows:</p>
+<ol style="list-style-type: decimal">
+<li>Generate a <em>function type</em> with fresh variables for the unknown inputs (<code>tXs</code>) and output (<code>tOut</code>),</li>
+<li>Extend the <code>env</code> so the parameters <code>xs</code> have types <code>tXs</code>,</li>
+<li>Infer the type of <code>body</code> under the extended <code>env'</code> as <code>tBody</code>,</li>
+<li>Unify the <em>expected</em> output <code>tOut</code> with the <em>actual</em> <code>tBody</code></li>
+<li>Apply the substitutions to infer the function’s type <code>tXs :=&gt; tOut</code>.</li>
+</ol>
+<h3 id="inference-function-calls">Inference: Function Calls</h3>
+<p>Finally, lets see how to infer the types of a call i.e. <code>App</code></p>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell">ti env su (<span class="dt">App</span> f es) <span class="fu">=</span> (su4, apply su4 tOut)          <span class="co">-- (6)</span>
+  <span class="kw">where</span>
+    (su1, tF)        <span class="fu">=</span> ti env su  f                   <span class="co">-- (1)</span>
+    env'             <span class="fu">=</span> apply  su1 env                 <span class="co">-- (2)</span>
+    (su2, tEs)       <span class="fu">=</span> L.mapAccumL (ti env') su1 es   <span class="co">-- (3)</span>
+    (su3, tOut)      <span class="fu">=</span> freshTVar su2                  <span class="co">-- (4)</span>
+    su4              <span class="fu">=</span> unify su3 tF (tEs <span class="fu">:=&gt;</span> tOut)    <span class="co">-- (5)</span></code></pre></div>
+<p>The code works as follows:</p>
+<ol style="list-style-type: decimal">
+<li>Infer the type of the function <code>f</code> as <code>tF</code>,</li>
+<li>Apply resulting substitutions to <code>env</code> (as before),</li>
+<li>Infer the types of the inputs <code>es</code> as <code>tEs</code>,</li>
+<li>Generate a variable for the unknown output type,</li>
+<li>Unify the <em>actual</em> input-output <code>tEs :=&gt; tOut</code> with the <em>expected</em> <code>tF</code></li>
+<li>Return the (substituted) <code>tOut</code> as the inferred type of the expression.</li>
+</ol>
+<p><strong>Note:</strong> In your starter code we <em>factor</em> out steps 3-6, i.e. the code that checks the arguments and infers the output type into <code>tiApp</code> to let us reuse it to <a href="#extensions">handle extensions</a></p>
+<h3 id="plan-5">Plan</h3>
+<ol style="list-style-type: decimal">
+<li><a href="#syntax-of-types">Types</a></li>
+<li><a href="#syntax-of-expressions">Expressions</a></li>
+<li><a href="#substitutions">Variables &amp; Substitution</a></li>
+<li><a href="#unification">Unification</a></li>
+<li><a href="#generalize-and-instantiate">Generalize &amp; Instantiate</a></li>
+<li><a href="#inference">Inferring Types</a></li>
+<li><a href="#extensions"><strong>Extensions</strong></a></li>
+</ol>
+<h2 id="extensions">Extensions</h2>
+<p>The above gives you the basic idea, now <em>you</em> will have to implement a bunch of extensions.</p>
+<ol style="list-style-type: decimal">
+<li>Primitives</li>
+<li>(Recursive) Functions</li>
+<li>Type Checking</li>
+</ol>
+<h3 id="extensions-primitives">Extensions: Primitives</h3>
+<p>What about <em>primitives</em> ?</p>
+<ul>
+<li><code>add1(e)</code>, <code>print(e)</code>, <code>e1 + e2</code> etc.</li>
+</ul>
+<p>What about <em>branches</em> ?</p>
+<ul>
+<li><code>if cond: e1 else: e2</code></li>
+</ul>
+<p>What about <em>tuples</em> ?</p>
+<ul>
+<li><code>(e1, e2)</code> and <code>e[0]</code> and <code>e[1]</code></li>
+</ul>
+<p>All of the above can be handled as <strong>applications</strong> to special functions.</p>
+<p>For example, you can handle <code>add1(e)</code> by treating it as passing a parameter <code>e</code> to a function with type:</p>
+<pre><code>  (Int) =&gt; Int</code></pre>
+<p>Similarly, handle <code>e1 + e2</code> by treating it as passing the parameters <code>[e1, e2]</code> to a function with type:</p>
+<pre><code>  (Int, Int) =&gt; Int</code></pre>
+<p>Can you figure out how to similarly account for branches, tuples, etc. by filling in suitable implementations of:</p>
+<ul>
+<li><code>prim2Poly</code></li>
+<li><code>ifPoly</code></li>
+<li><code>tupPoly</code>, <code>fieldPoly</code></li>
+</ul>
+<p><strong>HINT:</strong> Use the implementation for <code>prim1Poly</code> (and <code>instApp</code>, <code>tiApp</code>) in the starter code as a guide.</p>
+<h3 id="extensions-recursive-functions">Extensions: (Recursive) Functions</h3>
+<p>Extend or modify the code for handling <code>Lam xs e</code> so that you can handle <code>Fun f xs e</code>. This is mostly straightforward:</p>
+<ul>
+<li>You can basically reuse the code as is</li>
+<li><strong>Except</strong> if <code>f</code> appears in the body of <code>e</code></li>
+</ul>
+<p>Can you figure out how to modify the environment under which <code>e</code> is checked to handle the above case?</p>
+<h3 id="extensions-type-checking">Extensions: Type Checking</h3>
+<p>While inference is great, it is often useful to <em>specify</em> the types.</p>
+<p>While inference is great, it is often useful to <em>specify</em> the types.</p>
+<ul>
+<li>They can describe behavior of <em>untyped code</em></li>
+<li>They can be nice <em>documentation</em>, e.g. when we want a function to have a more <em>restrictive</em> type.</li>
+</ul>
+<h3 id="assuming-specifications-for-untyped-code">Assuming Specifications for Untyped Code</h3>
+<p>For example, we can <strong>implement</strong> lists as tuples and tell the type system to:</p>
+<ul>
+<li><strong>trust the implementation</strong> of the core list library API, but</li>
+<li><strong>verify the uses</strong> of the list library.</li>
+</ul>
+<p>We do this by:</p>
+<pre><code>def null() as forall a. () =&gt; List[a]:
+  false
+in
+
+def link(h, t) as forall a. (a, List[a]) =&gt; List[a]:
+  (h, t)
+in
+
+def tail(l) as forall a. (List[a]) =&gt; List[a]:
+  l[1]
+in
+
+def length(l):
+  if l == null():
+    0
+  else:
+    1 + length(tail(l))
+in
+
+let l0 = link(0, link(1, link(2, null())))
+in
+    length(l0)</code></pre>
+<p>The <code>as</code> keyword tells the system to <strong>trust</strong> the signature, i.e. to <strong>assume</strong> it is ok, and to <strong>not check</strong> the implementations of the function (see how <code>ti</code> works for <code>Assume</code>.)</p>
+<p>However, the signatures are <strong>used</strong> to ensure that <code>null</code>, <code>link</code> and <code>tail</code> are used properly, for example, if we tried <a href="tests/input/err-list.gtr">the following</a></p>
+<pre><code>    link(1, link(true, null()))</code></pre>
+<p>we should get an error:</p>
+<pre><code>tests/input/err-list.gtr:9:1-24: Type error: cannot unify Int and Bool
+
+         9|  link(1, link(true, null()))
+             ^^^^^^^^^^^^^^^^^^^^^^^</code></pre>
+<h3 id="checking-specifications">Checking Specifications</h3>
+<p>Finally, sometimes we may want to restrict a function be used to some more <em>specific</em> type than what would be inferred.</p>
+<p><code>garter</code> allows for specifications on functions using the <code>::</code> operator. For example, you may want a special function that just compares two <code>Int</code> for equality:</p>
+<pre><code>def eqInt(x, y) :: (Int, Int) =&gt; Bool :
+  x == y
+in
+  eqInt(17, 19)  </code></pre>
+<p>As another example, you might write a <code>swapList</code> function that swaps <strong>pairs of lists</strong> The same code would swap arbitrary pairs, but lets say you really want it work just for lists:</p>
+<pre><code>def null() as forall a. () =&gt; List[a]:
+  false
+in
+
+def link(h, t) as forall a. (a, List[a]) =&gt; List[a]:
+  (h, t)
+in
+
+def swapList(p) :: forall a.((List[a], List[b])) =&gt; (List[b], List[a]) :
+  (p[1], p[0])
+in
+
+let l0 = link(1, null())
+  , l1 = link(true, null())
+in
+  swapList((l0, l1))</code></pre>
+<p>Can you figure out how to extend the <code>ti</code> procedure to handle the case of <code>Fun f (Check s) xs e</code>, and thus allow for <strong>checking type specifications</strong>?</p>
+<p><strong>HINT:</strong> You may want to <em>factor</em> out steps 2-5 in the <code>ti</code> definition for <code>Lam xs body</code> — i.e. the code that checks the <code>body</code> has type <code>tOut</code> when <code>xs</code> have type <code>tXs</code> — into a separate function to implement the <code>ti</code> cases for</p>
+<ul>
+<li><code>Fun f (Infer) xs e</code></li>
+<li><code>Fun f (Check) xs e</code></li>
+</ul>
+<p>This is a bit tricky, and so am leaving it as <strong>Extra Extra Credit</strong>.</p>	
+                <hr>
+            </div>
+        </div>
+    </div>
+</article>
+
+        </div>
+        <div id="footer">
+        </div>
+      <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                    <li>
+                        <a href="https://ucsd-progsys.github.io/131-web/feed.xml" data-datatype="json" data-type="GET" data-target="#frame" class="reload" id="clickme">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="https://twitter.com/ranjitjhala" data-datatype="json" data-type="GET" data-target="#frame" class="reload" id="clickme" target="_blank">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li>
+                        <a href="https://plus.google.com/u/0/106612421534244742464" data-datatype="json" data-type="GET" data-target="#frame" class="reload" id="clickme" target="_blank">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-google-plus fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                     
+                     
+                    <li>
+                        <a href="https://github.com/ucsd-progsys/131-web" target="_blank">
+                            <span class="fa-stack fa-lg">
+
+                              <i class="fa fa-arrow-circle-o-down"></i>
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+		    
+                </ul>
+                <p class="copyright text-muted">Copyright &copy; Ranjit Jhala
+                2016. Please suggest fixes <a href="http://github.com/ucsd-progsys/131-web">here.</a><br><br> 
+                </p>
+<div class="col-md-12">
+     <p class="copyright text-muted">
+     Site generated by <a href="http://jaspervdj.be/hakyll">Hakyll</a>, using
+     a theme by <a href="http://katychuang.com/hakyll-cssgarden/gallery/" target="_blank">Katy Chuang.</a>
+     </p>
+</div>
+    
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="https://ucsd-progsys.github.io/131-web/static/js/jquery.min.js"></script>
+<script src="https://ucsd-progsys.github.io/131-web/static/js/spaceg.stylesheets.min.js"></script> 
+<script src="https://ucsd-progsys.github.io/131-web/static/js/bootstrap.min.js"></script>
+<script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js"></script>
+<script src="https://ucsd-progsys.github.io/131-web/static/js/scripts.js"></script>
+
+
+
+    </body>
+</html>
