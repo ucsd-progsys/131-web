@@ -669,8 +669,9 @@ lamTuple arity start
  <span class="fu">++</span> assertArity    env vE (length vXs)                <span class="co">-- check vE arity</span>
  <span class="fu">++</span> tupleReadRaw   (immArg env vE) (repr (<span class="dv">1</span><span class="ot"> ::</span> <span class="dt">Int</span>))  <span class="co">-- load vE[1] into EAX</span>
  <span class="fu">++</span> [<span class="dt">IPush</span> (param env vX) <span class="fu">|</span> vX <span class="ot">&lt;-</span> reverse vXs]        <span class="co">-- push args</span>
+ <span class="fu">++</span> [<span class="dt">IPush</span> (param env vE)]                            <span class="co">-- push closure-ptr</span>
  <span class="fu">++</span> [<span class="dt">ICall</span> (<span class="dt">Reg</span> <span class="dt">EAX</span>)]                                 <span class="co">-- call EAX</span>
- <span class="fu">++</span> [<span class="dt">IAdd</span>  (<span class="dt">Reg</span> <span class="dt">ESP</span>) (<span class="dv">4</span> <span class="fu">*</span> n)]                         <span class="co">-- pop  args</span></code></pre></div>
+ <span class="fu">++</span> [<span class="dt">IAdd</span>  (<span class="dt">Reg</span> <span class="dt">ESP</span>) (<span class="dv">4</span> <span class="fu">*</span> (n <span class="fu">+</span> <span class="dv">1</span>)]                    <span class="co">-- pop  args</span></code></pre></div>
 <h2 id="a-problem-scope">A Problem: Scope</h2>
 <p>Consider the following program:</p>
 <div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="kw">let</span> one <span class="fu">=</span> <span class="dv">1</span>
@@ -721,13 +722,16 @@ lamTuple arity start
 freeVars e <span class="fu">=</span> S.toList (go e)
   <span class="kw">where</span>
 <span class="ot">    go ::</span> <span class="dt">Expr</span> <span class="ot">-&gt;</span> <span class="dt">S.Set</span> <span class="dt">Id</span>
-    go (<span class="dt">Id</span> x)          <span class="fu">=</span> <span class="fu">?</span><span class="dv">1</span>
-    go (<span class="dt">Number</span> _)      <span class="fu">=</span> <span class="fu">?</span><span class="dv">2</span>
-    go (<span class="dt">Boolean</span> _)     <span class="fu">=</span> <span class="fu">?</span><span class="dv">2</span>
-    go (<span class="dt">If</span> e e1 e2)    <span class="fu">=</span> <span class="fu">?</span><span class="dv">3</span>
-    go (<span class="dt">App</span> e es)      <span class="fu">=</span> <span class="fu">?</span><span class="dv">4</span>
-    go (<span class="dt">Let</span> x e1 e2)   <span class="fu">=</span> <span class="fu">?</span><span class="dv">5</span>
-    go (<span class="dt">Lam</span> xs e)      <span class="fu">=</span> <span class="fu">?</span><span class="dv">6</span></code></pre></div>
+    go (<span class="dt">Id</span> x)          <span class="fu">=</span> S.singleton x
+    go (<span class="dt">Number</span> _)      <span class="fu">=</span> S.empty
+    go (<span class="dt">Boolean</span> _)     <span class="fu">=</span> S.empty
+    go (<span class="dt">If</span> e e1 e2)    <span class="fu">=</span> S.unions (map go [e1, e2, e3])
+    go (<span class="dt">App</span> e es)      <span class="fu">=</span> S.unions (map go (e<span class="fu">:</span>es))
+    go (<span class="dt">Let</span> x e1 e2)   <span class="fu">=</span> S.union (go e1) (S.delete x (go e2))
+    go (<span class="dt">Lam</span> xs e)      <span class="fu">=</span> S.difference (go e) (S.fromList xs)<span class="fu">=</span></code></pre></div>
+<p>lambda (x1,x2,x3): e</p>
+<p>let x = y + 10 in x + z</p>
+<p>A. {x} B. {} C. { gobble_gobble }</p>
 <p><strong>TODO-IN-CLASS</strong></p>
 <h2 id="free-variables-and-lambdas">Free Variables and Lambdas</h2>
 <p><strong>Free Variables</strong> of a <code>lambda</code></p>
