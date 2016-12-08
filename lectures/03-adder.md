@@ -618,14 +618,14 @@ The `i`-th _stack-variable_ lives at address `[ESP - 4 * i]`
 ### Example: Let-bindings and Stacks
 
 ```haskell
-let x = 10          -- []
+let x = 1           -- []
 in                  -- [ x |-> 1 ]
     x
 ```
 
 
 ```haskell
-let x = 10          -- []
+let x = 1           -- []
   , y = add1(x)     -- [x |-> 1]
   , z = add1(y)     -- [y |-> 2, x |-> 1]
 in
@@ -633,7 +633,7 @@ in
 ```
 
 ```haskell
-let a = 10                -- []
+let a = 1                 -- []
   , c = let b = add1(a)   -- [a |-> 1]
         in add1(b)        --    [b |-> 2, a |-> 1]
                           --    [a |-> 1]
