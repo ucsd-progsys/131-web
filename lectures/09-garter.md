@@ -1,10 +1,10 @@
 ---
-title: Static Type Inference 
+title: Static Type Inference
 date: 2016-11-30
-headerImg: garter-snake.jpg 
+headerImg: garter-snake.jpg
 ---
 
-## Type Inference 
+## Type Inference
 
 Garter, aka **G**uaranteed **T**ype **E**nforced **R**eliability, is an
 extensnion of FDL with **statically inferred types**.
@@ -251,6 +251,11 @@ exSubst = Su m 0
     m   = (M.fromList [ ("a", TInt)
                       , ("b", TBool)
                       , ("c", [TInt, TInt] :=> TInt) ])
+
+
+apply exSubst ([Int, "zong"] :=> Bool)
+
+
 ```
 
 ### Applying Substitutions
@@ -358,10 +363,23 @@ extSubst su a t = su { suMap = M.insert a t su' }
 **Telescoping**
 
 Note that when we extend `[b := a]` by assigning `a` to `Int` we must
-take care to also update `b` to now map to `Int`. That is why we:
+take care to also update `b` to now map to `Int`. That is, we want:
+
+```
+    extSubst [ "b" := "a" ] "a" TInt
+```
+
+to be
+
+```
+    [ "b" := TInt, "a" := TInt ]
+```
+
+That is why we:
 
 1. `apply [a := Int]` to update the old substitution to get `su'`
 2. `insert` the new assignment `a := Int` into `su'`.
+
 
 ### Plan
 
@@ -385,7 +403,7 @@ i.e. to determine the conditions under which the two types are *the same*.
 | `a`        | `Int`        | `Int`           | `a := Int`          |
 | `a`        | `b`          | `b`             | `a := b`            |
 | `a -> b`   | `a -> d`     | `a->d`          | `b := d`            |
-| `a -> Int` | `Bool -> b`  | `Bool->Int`     | `a := Bool, b:=Int` |
+| `a -> Int` | `Bool -> b`  | `Bool -> Int`   | `a := Bool, b:=Int` |
 | `Int`      | `Bool`       | *Error*         | *Error*             |
 | `Int`      | `a -> b`     | *Error*         | *Error*             |
 | `a`        | `a -> Int`   | *Error*         | *Error*             |
