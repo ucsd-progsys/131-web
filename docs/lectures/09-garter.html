@@ -388,7 +388,11 @@ exSubst <span class="fu">=</span> <span class="dt">Su</span> m <span class="dv">
   <span class="kw">where</span>
     m   <span class="fu">=</span> (M.fromList [ (<span class="st">&quot;a&quot;</span>, <span class="dt">TInt</span>)
                       , (<span class="st">&quot;b&quot;</span>, <span class="dt">TBool</span>)
-                      , (<span class="st">&quot;c&quot;</span>, [<span class="dt">TInt</span>, <span class="dt">TInt</span>] <span class="fu">:=&gt;</span> <span class="dt">TInt</span>) ])</code></pre></div>
+                      , (<span class="st">&quot;c&quot;</span>, [<span class="dt">TInt</span>, <span class="dt">TInt</span>] <span class="fu">:=&gt;</span> <span class="dt">TInt</span>) ])
+
+
+apply exSubst ([<span class="dt">Int</span>, <span class="st">&quot;zong&quot;</span>] <span class="fu">:=&gt;</span> <span class="dt">Bool</span>)
+</code></pre></div>
 <h3 id="applying-substitutions">Applying Substitutions</h3>
 <p>The main <em>use</em> of a substition is to <strong>apply</strong> it to a type, which has the effect of <em>replacing</em> each occurrence of a type variable with its substituted value (or leaving it untouched if it is not mentioned in the substitution.)</p>
 <p>We define an interface for “things that can be substituted” as:</p>
@@ -440,7 +444,11 @@ extSubst su a t <span class="fu">=</span> su { suMap <span class="fu">=</span> M
   <span class="kw">where</span>
      su'        <span class="fu">=</span> apply (mkSubst [(a, t)]) (suMap su)</code></pre></div>
 <p><strong>Telescoping</strong></p>
-<p>Note that when we extend <code>[b := a]</code> by assigning <code>a</code> to <code>Int</code> we must take care to also update <code>b</code> to now map to <code>Int</code>. That is why we:</p>
+<p>Note that when we extend <code>[b := a]</code> by assigning <code>a</code> to <code>Int</code> we must take care to also update <code>b</code> to now map to <code>Int</code>. That is, we want:</p>
+<pre><code>    extSubst [ &quot;b&quot; := &quot;a&quot; ] &quot;a&quot; TInt</code></pre>
+<p>to be</p>
+<pre><code>    [ &quot;b&quot; := TInt, &quot;a&quot; := TInt ]</code></pre>
+<p>That is why we:</p>
 <ol style="list-style-type: decimal">
 <li><code>apply [a := Int]</code> to update the old substitution to get <code>su'</code></li>
 <li><code>insert</code> the new assignment <code>a := Int</code> into <code>su'</code>.</li>
@@ -494,7 +502,7 @@ extSubst su a t <span class="fu">=</span> su { suMap <span class="fu">=</span> M
 <tr class="odd">
 <td align="left"><code>a -&gt; Int</code></td>
 <td align="left"><code>Bool -&gt; b</code></td>
-<td align="left"><code>Bool-&gt;Int</code></td>
+<td align="left"><code>Bool -&gt; Int</code></td>
 <td align="left"><code>a := Bool, b:=Int</code></td>
 </tr>
 <tr class="even">
