@@ -698,15 +698,15 @@ ret               ; return to caller
 
 #### In the Caller
 
-To call a function `target` that takes `M` parameters:
+To call a function `target` that takes `N` parameters:
 
 ```nasm
-push arg_M        ; push last arg first ...
+push arg_N        ; push last arg first ...
 ...
 push arg_2        ; then the second ...
 push arg_1        ; finally the first
 call target       ; make the call (which puts return addr on stack)
-add esp, 4*M      ; now we are back: "clear" args by adding 4*numArgs
+add esp, 4*N      ; now we are back: "clear" args by adding 4*numArgs
 ```
 
 **NOTE:** If you are compiling on MacOS, you must respect the
@@ -716,6 +716,8 @@ add esp, 4*M      ; now we are back: "clear" args by adding 4*numArgs
 ### Fixed Strategy By Example
 
 Lets implement the above in a simple file `tests/output/int-check.s`
+
+TODO
 
 ```nasm
 section .text
