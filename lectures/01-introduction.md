@@ -133,7 +133,7 @@ We will
 
 **(30%) Assignments**
 
-+ 7 assignments
++ 7 assignments, [first one is up, due 1/19](https://github.com/ucsd-cse131/00-warmup)
 + All programming
 + Groups of 2
 
