@@ -242,7 +242,7 @@ if (window.navigator.appName == "Microsoft Internet Explorer") {
 <h2 id="branches">Branches</h2>
 <p>Lets start first with branches (conditionals).</p>
 <p>We will stick to our recipe of:</p>
-<ol style="list-style-type: decimal">
+<ol type="1">
 <li>Build intuition with <strong>examples</strong>,</li>
 <li>Model problem with <strong>types</strong>,</li>
 <li>Implement with <strong>type-transforming-functions</strong>,</li>
@@ -254,32 +254,32 @@ if (window.navigator.appName == "Microsoft Internet Explorer") {
 <li>For now, lets treat <code>0</code> as “false” and non-zero as “true”</li>
 </ul>
 <h3 id="example-if1">Example: <code>If1</code></h3>
-<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="kw">if</span> <span class="dv">10</span><span class="fu">:</span>
-  <span class="dv">22</span>
-<span class="kw">else</span><span class="fu">:</span>
-  sub1(<span class="dv">0</span>)</code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw">if</span> <span class="dv">10</span><span class="fu">:</span></a>
+<a class="sourceLine" id="cb1-2" data-line-number="2">  <span class="dv">22</span></a>
+<a class="sourceLine" id="cb1-3" data-line-number="3"><span class="kw">else</span><span class="fu">:</span></a>
+<a class="sourceLine" id="cb1-4" data-line-number="4">  sub1(<span class="dv">0</span>)</a></code></pre></div>
 <ul>
 <li>Since <code>10</code> is <em>not</em> <code>0</code> we evaluate the “then” case to get <code>22</code></li>
 </ul>
 <h3 id="example-if2">Example: <code>If2</code></h3>
-<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="kw">if</span> sub(<span class="dv">1</span>)<span class="fu">:</span>
-  <span class="dv">22</span>
-<span class="kw">else</span><span class="fu">:</span>
-  sub1(<span class="dv">0</span>)</code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="kw">if</span> sub(<span class="dv">1</span>)<span class="fu">:</span></a>
+<a class="sourceLine" id="cb2-2" data-line-number="2">  <span class="dv">22</span></a>
+<a class="sourceLine" id="cb2-3" data-line-number="3"><span class="kw">else</span><span class="fu">:</span></a>
+<a class="sourceLine" id="cb2-4" data-line-number="4">  sub1(<span class="dv">0</span>)</a></code></pre></div>
 <ul>
 <li>Since <code>sub(1)</code> <em>is</em> <code>0</code> we evaluate the “else” case to get <code>-1</code></li>
 </ul>
 <h3 id="example-if3">Example: <code>If3</code></h3>
 <p><code>if-else</code> is also an <em>expression</em> so we can nest them:</p>
-<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="kw">let</span> x <span class="fu">=</span> <span class="kw">if</span> sub(<span class="dv">1</span>)<span class="fu">:</span>
-          <span class="dv">22</span>
-        <span class="kw">else</span><span class="fu">:</span>
-          sub1(<span class="dv">0</span>)
-<span class="kw">in</span>
-  <span class="kw">if</span> x<span class="fu">:</span>
-    add1(x)
-  <span class="kw">else</span><span class="fu">:</span>
-    <span class="dv">999</span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="kw">let</span> x <span class="fu">=</span> <span class="kw">if</span> sub(<span class="dv">1</span>)<span class="fu">:</span></a>
+<a class="sourceLine" id="cb3-2" data-line-number="2">          <span class="dv">22</span></a>
+<a class="sourceLine" id="cb3-3" data-line-number="3">        <span class="kw">else</span><span class="fu">:</span></a>
+<a class="sourceLine" id="cb3-4" data-line-number="4">          sub1(<span class="dv">0</span>)</a>
+<a class="sourceLine" id="cb3-5" data-line-number="5"><span class="kw">in</span></a>
+<a class="sourceLine" id="cb3-6" data-line-number="6">  <span class="kw">if</span> x<span class="fu">:</span></a>
+<a class="sourceLine" id="cb3-7" data-line-number="7">    add1(x)</a>
+<a class="sourceLine" id="cb3-8" data-line-number="8">  <span class="kw">else</span><span class="fu">:</span></a>
+<a class="sourceLine" id="cb3-9" data-line-number="9">    <span class="dv">999</span></a></code></pre></div>
 <ul>
 <li><code>x</code> is bound to <code>-1</code>…</li>
 <li>… which is <em>non-zero</em> so we evaluate <code>add1(x)</code> yielding <code>0</code></li>
@@ -289,39 +289,38 @@ if (window.navigator.appName == "Microsoft Internet Explorer") {
 <ul>
 <li><strong>labels</strong> of the form</li>
 </ul>
-<pre class="asm"><code>our_code_label:
-  ...</code></pre>
+<div class="sourceCode" id="cb4"><pre class="sourceCode asm"><code class="sourceCode fasm"><a class="sourceLine" id="cb4-1" data-line-number="1"><span class="fu">our_code_label:</span></a>
+<a class="sourceLine" id="cb4-2" data-line-number="2">  ...</a></code></pre></div>
 <p>are “landmark” from which execution (control-flow) can be started, or to which it can be diverted,</p>
 <ul>
 <li><strong>comparisons</strong> of the form</li>
 </ul>
-<pre class="asm"><code>cmp a1, a2</code></pre>
+<div class="sourceCode" id="cb5"><pre class="sourceCode asm"><code class="sourceCode fasm"><a class="sourceLine" id="cb5-1" data-line-number="1"><span class="bu">cmp</span> a1, a2</a></code></pre></div>
 <p>do a (numeric) comparison between the values referred to by <code>a1</code> and <code>a2</code>, storing the result in a special processor <strong>flag</strong>,</p>
 <ul>
 <li><strong>Jump</strong> operations of the form</li>
 </ul>
-<pre class="asm"><code>jmp LABEL     # jump unconditionally (i.e. always)
-je  LABEL     # jump if previous comparison result was EQUAL  
-jne LABEL     # jump if previous comparison result was NOT-EQUAL  </code></pre>
+<div class="sourceCode" id="cb6"><pre class="sourceCode asm"><code class="sourceCode fasm"><a class="sourceLine" id="cb6-1" data-line-number="1"><span class="bu">jmp</span> <span class="pp">LABEL</span>     # jump unconditionally (i.e. always)</a>
+<a class="sourceLine" id="cb6-2" data-line-number="2"><span class="bu">je</span>  <span class="pp">LABEL</span>     # jump <span class="pp">if</span> previous comparison result was EQUAL  </a>
+<a class="sourceLine" id="cb6-3" data-line-number="3"><span class="bu">jne</span> <span class="pp">LABEL</span>     # jump <span class="pp">if</span> previous comparison result was <span class="bu">NOT</span>-EQUAL  </a></code></pre></div>
 <p>use the result of the <em>flag</em> set by the most recent <code>cmp</code> to <em>transfer control flow</em> to the given <code>LABEL</code></p>
 <h3 id="quiz">QUIZ</h3>
 <p>Which of the following is a valid x86 encoding of</p>
-<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="cf">if</span> <span class="dv">10</span>:
-  <span class="dv">22</span>
-<span class="cf">else</span>
-  <span class="dv">33</span></code></pre></div>
-<div class="figure">
-<img src="../static/img/quiz-if-asm.png" alt="QUIZ: Compiling if-else" />
-<p class="caption">QUIZ: Compiling if-else</p>
-</div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb7-1" data-line-number="1"><span class="cf">if</span> <span class="dv">10</span>:</a>
+<a class="sourceLine" id="cb7-2" data-line-number="2">  <span class="dv">22</span></a>
+<a class="sourceLine" id="cb7-3" data-line-number="3"><span class="cf">else</span></a>
+<a class="sourceLine" id="cb7-4" data-line-number="4">  <span class="dv">33</span></a></code></pre></div>
+<figure>
+<img src="../static/img/quiz-if-asm.png" alt="QUIZ: Compiling if-else" /><figcaption>QUIZ: Compiling if-else</figcaption>
+</figure>
 <h3 id="strategy">Strategy</h3>
 <p>To compile an expression of the form</p>
-<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="kw">if</span> eCond<span class="fu">:</span>
-  eThen
-<span class="kw">else</span><span class="fu">:</span>
-  eElse</code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb8-1" data-line-number="1"><span class="kw">if</span> eCond<span class="fu">:</span></a>
+<a class="sourceLine" id="cb8-2" data-line-number="2">  eThen</a>
+<a class="sourceLine" id="cb8-3" data-line-number="3"><span class="kw">else</span><span class="fu">:</span></a>
+<a class="sourceLine" id="cb8-4" data-line-number="4">  eElse</a></code></pre></div>
 <p>We will:</p>
-<ol style="list-style-type: decimal">
+<ol type="1">
 <li>Evaluate <code>eCond</code></li>
 <li>Compare the result (in <code>eax</code>) against <code>0</code></li>
 <li>Jump if the result <em>is zero</em> to a <strong>special</strong> <code>&quot;IfFalse&quot;</code> label</li>
@@ -330,7 +329,7 @@ jne LABEL     # jump if previous comparison result was NOT-EQUAL  </code></pre>
 <li>At which we will evaluate <code>eElse</code>,</li>
 <li>Ending with a special <code>&quot;IfExit&quot;</code> label.</li>
 </ul>
-<ol start="4" style="list-style-type: decimal">
+<ol start="4" type="1">
 <li>(Otherwise) continue to evaluate <code>eTrue</code></li>
 </ol>
 <ul>
@@ -339,92 +338,88 @@ jne LABEL     # jump if previous comparison result was NOT-EQUAL  </code></pre>
 <h3 id="example-if-expressions-to-asm">Example: If-Expressions to <code>Asm</code></h3>
 <p>Lets see how our strategy works by example:</p>
 <h3 id="example-if1-1">Example: if1</h3>
-<div class="figure">
-<img src="../static/img/if-1-to-asm.png" alt="Example: if1" />
-<p class="caption">Example: if1</p>
-</div>
+<figure>
+<img src="../static/img/if-1-to-asm.png" alt="Example: if1" /><figcaption>Example: if1</figcaption>
+</figure>
 <h3 id="example-if2-1">Example: if2</h3>
-<div class="figure">
-<img src="../static/img/if-2-to-asm.png" alt="Example: if2" />
-<p class="caption">Example: if2</p>
-</div>
+<figure>
+<img src="../static/img/if-2-to-asm.png" alt="Example: if2" /><figcaption>Example: if2</figcaption>
+</figure>
 <h3 id="example-if3-1">Example: if3</h3>
-<div class="figure">
-<img src="../static/img/if-3-to-asm.png" alt="Example: if3" />
-<p class="caption">Example: if3</p>
-</div>
+<figure>
+<img src="../static/img/if-3-to-asm.png" alt="Example: if3" /><figcaption>Example: if3</figcaption>
+</figure>
 <p>Oops, <strong>cannot reuse labels</strong> across if-expressions!</p>
 <ul>
 <li>Can’t use same label in two places (invalid assembly)</li>
 </ul>
-<div class="figure">
-<img src="../static/img/if-3-to-asm-bad.png" alt="Example: if3 wrong" />
-<p class="caption">Example: if3 wrong</p>
-</div>
+<figure>
+<img src="../static/img/if-3-to-asm-bad.png" alt="Example: if3 wrong" /><figcaption>Example: if3 wrong</figcaption>
+</figure>
 <p>Oops, need <strong>distinct labels</strong> for each branch!</p>
 <ul>
 <li>Require <strong>distinct tags</strong> for each <code>if-else</code> expression</li>
 </ul>
-<div class="figure">
-<img src="../static/img/if-3-to-asm-tag.png" alt="Example: if3 tagged" />
-<p class="caption">Example: if3 tagged</p>
-</div>
+<figure>
+<img src="../static/img/if-3-to-asm-tag.png" alt="Example: if3 tagged" /><figcaption>Example: if3 tagged</figcaption>
+</figure>
 <h3 id="types-source">Types: Source</h3>
 <p>Lets modify the <em>Source Expression</em></p>
-<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="kw">data</span> <span class="dt">Expr</span> a
-  <span class="fu">=</span> <span class="dt">Number</span> <span class="dt">Int</span>                        a
-  <span class="fu">|</span> <span class="dt">Add1</span>   (<span class="dt">Expr</span> a)                   a
-  <span class="fu">|</span> <span class="dt">Sub1</span>   (<span class="dt">Expr</span> a)                   a
-  <span class="fu">|</span> <span class="dt">Let</span>    <span class="dt">Id</span> (<span class="dt">Expr</span> a) (<span class="dt">Expr</span> a)       a   
-  <span class="fu">|</span> <span class="dt">Var</span>    <span class="dt">Id</span>                         a
-  <span class="fu">|</span> <span class="dt">If</span>     (<span class="dt">Expr</span> a) (<span class="dt">Expr</span> a) (<span class="dt">Expr</span> a) a         </code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb9-1" data-line-number="1"><span class="kw">data</span> <span class="dt">Expr</span> a</a>
+<a class="sourceLine" id="cb9-2" data-line-number="2">  <span class="fu">=</span> <span class="dt">Number</span> <span class="dt">Int</span>                        a</a>
+<a class="sourceLine" id="cb9-3" data-line-number="3">  <span class="fu">|</span> <span class="dt">Add1</span>   (<span class="dt">Expr</span> a)                   a</a>
+<a class="sourceLine" id="cb9-4" data-line-number="4">  <span class="fu">|</span> <span class="dt">Sub1</span>   (<span class="dt">Expr</span> a)                   a</a>
+<a class="sourceLine" id="cb9-5" data-line-number="5">  <span class="fu">|</span> <span class="dt">Let</span>    <span class="dt">Id</span> (<span class="dt">Expr</span> a) (<span class="dt">Expr</span> a)       a   </a>
+<a class="sourceLine" id="cb9-6" data-line-number="6">  <span class="fu">|</span> <span class="dt">Var</span>    <span class="dt">Id</span>                         a</a>
+<a class="sourceLine" id="cb9-7" data-line-number="7">  <span class="fu">|</span> <span class="dt">If</span>     (<span class="dt">Expr</span> a) (<span class="dt">Expr</span> a) (<span class="dt">Expr</span> a) a         </a></code></pre></div>
 <ul>
 <li>Add <code>if-else</code> expressions and</li>
-<li>Add <strong>tags</strong> of type <code>a</code> for each sub-expression</li>
+<li>Add <strong>tags</strong> of type <code>a</code> for each sub-expression
+<ul>
 <li>Tags are polymorphic <code>a</code> so we can have <em>different types</em> of tags</li>
 <li>e.g. Source-Position information for error messages</li>
+</ul></li>
 </ul>
 <p>Lets define a name for <code>Tag</code> (just integers).</p>
-<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="kw">type</span> <span class="dt">Tag</span>   <span class="fu">=</span> <span class="dt">Int</span></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb10-1" data-line-number="1"><span class="kw">type</span> <span class="dt">Tag</span>   <span class="fu">=</span> <span class="dt">Int</span></a></code></pre></div>
 <p>We will now use:</p>
-<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="kw">type</span> <span class="dt">BareE</span> <span class="fu">=</span> <span class="dt">Bare</span> ()     <span class="co">-- AST after parsing   </span>
-<span class="kw">type</span> <span class="dt">TagE</span>  <span class="fu">=</span> <span class="dt">Expr</span> <span class="dt">Tag</span>    <span class="co">-- AST with distinct tags</span></code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb11-1" data-line-number="1"><span class="kw">type</span> <span class="dt">BareE</span> <span class="fu">=</span> <span class="dt">Bare</span> ()     <span class="co">-- AST after parsing   </span></a>
+<a class="sourceLine" id="cb11-2" data-line-number="2"><span class="kw">type</span> <span class="dt">TagE</span>  <span class="fu">=</span> <span class="dt">Expr</span> <span class="dt">Tag</span>    <span class="co">-- AST with distinct tags</span></a></code></pre></div>
 <h3 id="types-assembly">Types: Assembly</h3>
 <p>Now, lets extend the <em>Assembly</em> with labels, comparisons and jumps:</p>
-<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="kw">data</span> <span class="dt">Label</span>
-  <span class="fu">=</span> <span class="dt">BranchFalse</span> <span class="dt">Tag</span>
-  <span class="fu">|</span> <span class="dt">BranchExit</span>  <span class="dt">Tag</span>          
-
-<span class="kw">data</span> <span class="dt">Instruction</span>
-  <span class="fu">=</span> <span class="fu">...</span>
-  <span class="fu">|</span> <span class="dt">ICmp</span>   <span class="dt">Arg</span>   <span class="dt">Arg</span>  <span class="co">-- Compare two arguments</span>
-  <span class="fu">|</span> <span class="dt">ILabel</span> <span class="dt">Label</span>      <span class="co">-- Create a label</span>
-  <span class="fu">|</span> <span class="dt">IJmp</span>   <span class="dt">Label</span>      <span class="co">-- Jump always</span>
-  <span class="fu">|</span> <span class="dt">IJe</span>    <span class="dt">Label</span>      <span class="co">-- Jump if equal  </span>
-  <span class="fu">|</span> <span class="dt">IJne</span>   <span class="dt">Label</span>      <span class="co">-- Jump if not-equal</span></code></pre></div>
+<div class="sourceCode" id="cb12"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb12-1" data-line-number="1"><span class="kw">data</span> <span class="dt">Label</span></a>
+<a class="sourceLine" id="cb12-2" data-line-number="2">  <span class="fu">=</span> <span class="dt">BranchFalse</span> <span class="dt">Tag</span></a>
+<a class="sourceLine" id="cb12-3" data-line-number="3">  <span class="fu">|</span> <span class="dt">BranchExit</span>  <span class="dt">Tag</span>          </a>
+<a class="sourceLine" id="cb12-4" data-line-number="4"></a>
+<a class="sourceLine" id="cb12-5" data-line-number="5"><span class="kw">data</span> <span class="dt">Instruction</span></a>
+<a class="sourceLine" id="cb12-6" data-line-number="6">  <span class="fu">=</span> <span class="fu">...</span></a>
+<a class="sourceLine" id="cb12-7" data-line-number="7">  <span class="fu">|</span> <span class="dt">ICmp</span>   <span class="dt">Arg</span>   <span class="dt">Arg</span>  <span class="co">-- Compare two arguments</span></a>
+<a class="sourceLine" id="cb12-8" data-line-number="8">  <span class="fu">|</span> <span class="dt">ILabel</span> <span class="dt">Label</span>      <span class="co">-- Create a label</span></a>
+<a class="sourceLine" id="cb12-9" data-line-number="9">  <span class="fu">|</span> <span class="dt">IJmp</span>   <span class="dt">Label</span>      <span class="co">-- Jump always</span></a>
+<a class="sourceLine" id="cb12-10" data-line-number="10">  <span class="fu">|</span> <span class="dt">IJe</span>    <span class="dt">Label</span>      <span class="co">-- Jump if equal  </span></a>
+<a class="sourceLine" id="cb12-11" data-line-number="11">  <span class="fu">|</span> <span class="dt">IJne</span>   <span class="dt">Label</span>      <span class="co">-- Jump if not-equal</span></a></code></pre></div>
 <h3 id="transforms">Transforms</h3>
 <p>We can’t expect <em>programmer</em> to put in tags (yuck.)</p>
 <ul>
 <li>Lets squeeze in a <code>tagging</code> transform into our pipeline</li>
 </ul>
-<div class="figure">
-<img src="../static/img/compiler-pipeline-tag.png" alt="Adding Tagging to the Compiler Pipeline" />
-<p class="caption">Adding Tagging to the Compiler Pipeline</p>
-</div>
+<figure>
+<img src="../static/img/compiler-pipeline-tag.png" alt="Adding Tagging to the Compiler Pipeline" /><figcaption>Adding Tagging to the Compiler Pipeline</figcaption>
+</figure>
 <h3 id="transforms-parse">Transforms: Parse</h3>
 <p>Just as before, but now puts a dummy <code>()</code> into each position</p>
-<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell">ghci<span class="fu">&gt;</span> parse <span class="st">&quot;if 1: 22 else: 33&quot;</span>
-<span class="dt">If</span> (<span class="dt">Number</span> <span class="dv">1</span> ()) (<span class="dt">Number</span> <span class="dv">22</span> ()) (<span class="dt">Number</span> <span class="dv">33</span> ()) ()</code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb13-1" data-line-number="1">ghci<span class="fu">&gt;</span> parse <span class="st">&quot;if 1: 22 else: 33&quot;</span></a>
+<a class="sourceLine" id="cb13-2" data-line-number="2"><span class="dt">If</span> (<span class="dt">Number</span> <span class="dv">1</span> ()) (<span class="dt">Number</span> <span class="dv">22</span> ()) (<span class="dt">Number</span> <span class="dv">33</span> ()) ()</a></code></pre></div>
 <h3 id="transforms-tag">Transforms: Tag</h3>
 <p>The key work is done by <code>doTag i e</code> * Recursively walk over the <code>BareE</code> named <code>e</code> starting tagging at counter <code>i</code> * Returning a pair <code>(i', e')</code> of <em>updated counter</em> <code>i'</code> and tagged expr <code>e'</code></p>
 <p><strong>QUIZ</strong></p>
-<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="ot">doTag ::</span> <span class="dt">Int</span> <span class="ot">-&gt;</span> <span class="dt">BareE</span> <span class="ot">-&gt;</span> (<span class="dt">Int</span>, <span class="dt">TagE</span>)
-doTag i (<span class="dt">Number</span> n _)    <span class="fu">=</span> (i <span class="fu">+</span> <span class="dv">1</span> , <span class="dt">Number</span> n i)
-doTag i (<span class="dt">Var</span>    x _)    <span class="fu">=</span> (i <span class="fu">+</span> <span class="dv">1</span> , <span class="dt">Var</span>     x i)
-doTag i (<span class="dt">Let</span> x e1 e2 _) <span class="fu">=</span> (_2    , <span class="dt">Let</span> x e1' e2' i2)
-  <span class="kw">where</span>
-    (i1, e1')           <span class="fu">=</span> doTag i  e1
-    (i2, e2')           <span class="fu">=</span> doTag _1 e2</code></pre></div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb14-1" data-line-number="1"><span class="ot">doTag ::</span> <span class="dt">Int</span> <span class="ot">-&gt;</span> <span class="dt">BareE</span> <span class="ot">-&gt;</span> (<span class="dt">Int</span>, <span class="dt">TagE</span>)</a>
+<a class="sourceLine" id="cb14-2" data-line-number="2">doTag i (<span class="dt">Number</span> n _)    <span class="fu">=</span> (i <span class="fu">+</span> <span class="dv">1</span> , <span class="dt">Number</span> n i)</a>
+<a class="sourceLine" id="cb14-3" data-line-number="3">doTag i (<span class="dt">Var</span>    x _)    <span class="fu">=</span> (i <span class="fu">+</span> <span class="dv">1</span> , <span class="dt">Var</span>     x i)</a>
+<a class="sourceLine" id="cb14-4" data-line-number="4">doTag i (<span class="dt">Let</span> x e1 e2 _) <span class="fu">=</span> (_2    , <span class="dt">Let</span> x e1' e2' i2)</a>
+<a class="sourceLine" id="cb14-5" data-line-number="5">  <span class="kw">where</span></a>
+<a class="sourceLine" id="cb14-6" data-line-number="6">    (i1, e1')           <span class="fu">=</span> doTag i  e1</a>
+<a class="sourceLine" id="cb14-7" data-line-number="7">    (i2, e2')           <span class="fu">=</span> doTag _1 e2</a></code></pre></div>
 <p>What expressions shall we fill in for <code>_1</code> and <code>_2</code> ?</p>
 <pre><code>{- A -}   _1 = i
           _2 = i + 1
@@ -441,39 +436,39 @@ doTag i (<span class="dt">Let</span> x e1 e2 _) <span class="fu">=</span> (_2   
 {- E -}   _1 = i2
           _2 = i1 + 1</code></pre>
 <p>We can now fill in the complete version:</p>
-<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="ot">doTag ::</span> <span class="dt">Int</span> <span class="ot">-&gt;</span> <span class="dt">BareE</span> <span class="ot">-&gt;</span> (<span class="dt">Int</span>, <span class="dt">TagE</span>)
-
-doTag i (<span class="dt">Number</span> n _)    <span class="fu">=</span> (i <span class="fu">+</span> <span class="dv">1</span> , <span class="dt">Number</span> n i)
-
-doTag i (<span class="dt">Var</span>    x _)    <span class="fu">=</span> (i <span class="fu">+</span> <span class="dv">1</span> , <span class="dt">Var</span>     x i)
-
-doTag i (<span class="dt">Let</span> x e1 e2 i) <span class="fu">=</span> (i2 <span class="fu">+</span> <span class="dv">1</span>, <span class="dt">Let</span> x e1' e2' i2)
-  <span class="kw">where</span>
-    (i1, e1')           <span class="fu">=</span> doTag i  e1
-    (i2, e2')           <span class="fu">=</span> doTag i1 e2
-
-doTag i (<span class="dt">If</span> e1 e2 e3 i) <span class="fu">=</span> (i3 <span class="fu">+</span> <span class="dv">1</span>, <span class="dt">If</span> e1' e2' e3' i3)
-  <span class="kw">where</span>
-    (i1, e1')           <span class="fu">=</span> doTag i  e1
-    (i2, e2')           <span class="fu">=</span> doTag i1 e2
-    (i3, e3')           <span class="fu">=</span> doTag i2 e3</code></pre></div>
+<div class="sourceCode" id="cb16"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb16-1" data-line-number="1"><span class="ot">doTag ::</span> <span class="dt">Int</span> <span class="ot">-&gt;</span> <span class="dt">BareE</span> <span class="ot">-&gt;</span> (<span class="dt">Int</span>, <span class="dt">TagE</span>)</a>
+<a class="sourceLine" id="cb16-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb16-3" data-line-number="3">doTag i (<span class="dt">Number</span> n _)    <span class="fu">=</span> (i <span class="fu">+</span> <span class="dv">1</span> , <span class="dt">Number</span> n i)</a>
+<a class="sourceLine" id="cb16-4" data-line-number="4"></a>
+<a class="sourceLine" id="cb16-5" data-line-number="5">doTag i (<span class="dt">Var</span>    x _)    <span class="fu">=</span> (i <span class="fu">+</span> <span class="dv">1</span> , <span class="dt">Var</span>     x i)</a>
+<a class="sourceLine" id="cb16-6" data-line-number="6"></a>
+<a class="sourceLine" id="cb16-7" data-line-number="7">doTag i (<span class="dt">Let</span> x e1 e2 i) <span class="fu">=</span> (i2 <span class="fu">+</span> <span class="dv">1</span>, <span class="dt">Let</span> x e1' e2' i2)</a>
+<a class="sourceLine" id="cb16-8" data-line-number="8">  <span class="kw">where</span></a>
+<a class="sourceLine" id="cb16-9" data-line-number="9">    (i1, e1')           <span class="fu">=</span> doTag i  e1</a>
+<a class="sourceLine" id="cb16-10" data-line-number="10">    (i2, e2')           <span class="fu">=</span> doTag i1 e2</a>
+<a class="sourceLine" id="cb16-11" data-line-number="11"></a>
+<a class="sourceLine" id="cb16-12" data-line-number="12">doTag i (<span class="dt">If</span> e1 e2 e3 i) <span class="fu">=</span> (i3 <span class="fu">+</span> <span class="dv">1</span>, <span class="dt">If</span> e1' e2' e3' i3)</a>
+<a class="sourceLine" id="cb16-13" data-line-number="13">  <span class="kw">where</span></a>
+<a class="sourceLine" id="cb16-14" data-line-number="14">    (i1, e1')           <span class="fu">=</span> doTag i  e1</a>
+<a class="sourceLine" id="cb16-15" data-line-number="15">    (i2, e2')           <span class="fu">=</span> doTag i1 e2</a>
+<a class="sourceLine" id="cb16-16" data-line-number="16">    (i3, e3')           <span class="fu">=</span> doTag i2 e3</a></code></pre></div>
 <p>(<strong>ProTip:</strong> Use <code>mapAccumL</code>)</p>
 <p>We can now tag the whole program by * calling <code>doTag</code> with the initial counter (e.g. <code>0</code>), * throwing away the final counter.</p>
-<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="ot">tag ::</span> <span class="dt">BareE</span> <span class="ot">-&gt;</span> <span class="dt">TagE</span>
-tag e <span class="fu">=</span> e'  <span class="kw">where</span>  (_, e') <span class="fu">=</span> doTag <span class="dv">0</span> e</code></pre></div>
+<div class="sourceCode" id="cb17"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb17-1" data-line-number="1"><span class="ot">tag ::</span> <span class="dt">BareE</span> <span class="ot">-&gt;</span> <span class="dt">TagE</span></a>
+<a class="sourceLine" id="cb17-2" data-line-number="2">tag e <span class="fu">=</span> e'  <span class="kw">where</span>  (_, e') <span class="fu">=</span> doTag <span class="dv">0</span> e</a></code></pre></div>
 <h3 id="transforms-codegen">Transforms: CodeGen</h3>
 <p>Now that we have the tags we lets implement our <a href="#strategy">compilation strategy</a></p>
-<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell">compile env (<span class="dt">If</span> eCond eTrue eFalse i)    
-  <span class="fu">=</span>   compile env eCond <span class="fu">++</span>
-    [ <span class="dt">ICmp</span> (<span class="dt">Reg</span> <span class="dt">EAX</span>) (<span class="dt">Const</span> <span class="dv">0</span>)
-    , <span class="dt">IJe</span> (<span class="dt">BranchFalse</span> i)
-    ]
-   <span class="fu">++</span> compile env eTrue  <span class="fu">++</span>
-    [ <span class="dt">IJmp</span>   lExit
-    , <span class="dt">ILabel</span> (<span class="dt">BranchFalse</span> i)
-    ]
-   <span class="fu">++</span> compile env eFalse <span class="fu">++</span>
-    [ <span class="dt">ILabel</span> (<span class="dt">BranchExit</span> i) ]</code></pre></div>
+<div class="sourceCode" id="cb18"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb18-1" data-line-number="1">compile env (<span class="dt">If</span> eCond eTrue eFalse i)    </a>
+<a class="sourceLine" id="cb18-2" data-line-number="2">  <span class="fu">=</span>   compile env eCond <span class="fu">++</span></a>
+<a class="sourceLine" id="cb18-3" data-line-number="3">    [ <span class="dt">ICmp</span> (<span class="dt">Reg</span> <span class="dt">EAX</span>) (<span class="dt">Const</span> <span class="dv">0</span>)</a>
+<a class="sourceLine" id="cb18-4" data-line-number="4">    , <span class="dt">IJe</span> (<span class="dt">BranchFalse</span> i)</a>
+<a class="sourceLine" id="cb18-5" data-line-number="5">    ]</a>
+<a class="sourceLine" id="cb18-6" data-line-number="6">   <span class="fu">++</span> compile env eTrue  <span class="fu">++</span></a>
+<a class="sourceLine" id="cb18-7" data-line-number="7">    [ <span class="dt">IJmp</span>   lExit</a>
+<a class="sourceLine" id="cb18-8" data-line-number="8">    , <span class="dt">ILabel</span> (<span class="dt">BranchFalse</span> i)</a>
+<a class="sourceLine" id="cb18-9" data-line-number="9">    ]</a>
+<a class="sourceLine" id="cb18-10" data-line-number="10">   <span class="fu">++</span> compile env eFalse <span class="fu">++</span></a>
+<a class="sourceLine" id="cb18-11" data-line-number="11">    [ <span class="dt">ILabel</span> (<span class="dt">BranchExit</span> i) ]</a></code></pre></div>
 <h3 id="recap-branches">Recap: Branches</h3>
 <ul>
 <li><code>Tag</code> each sub-expression,</li>
@@ -485,7 +480,7 @@ tag e <span class="fu">=</span> e'  <span class="kw">where</span>  (_, e') <span
 </ul>
 <h2 id="binary-operations">Binary Operations</h2>
 <p>You know the drill.</p>
-<ol style="list-style-type: decimal">
+<ol type="1">
 <li>Build intuition with <strong>examples</strong>,</li>
 <li>Model problem with <strong>types</strong>,</li>
 <li>Implement with <strong>type-transforming-functions</strong>,</li>
@@ -498,8 +493,8 @@ tag e <span class="fu">=</span> e'  <span class="kw">where</span>  (_, e') <span
 </ul>
 <h4 id="quiz-1">QUIZ</h4>
 <p>What is the assembly corresponding to <code>33 - 10</code> ?</p>
-<div class="sourceCode"><pre class="sourceCode nasm"><code class="sourceCode nasm">?<span class="dv">1</span> <span class="kw">eax</span>, ?<span class="dv">2</span>
-?<span class="dv">3</span> <span class="kw">eax</span>, ?<span class="dv">4</span></code></pre></div>
+<div class="sourceCode" id="cb19"><pre class="sourceCode nasm"><code class="sourceCode nasm"><a class="sourceLine" id="cb19-1" data-line-number="1">?<span class="dv">1</span> <span class="kw">eax</span>, ?<span class="dv">2</span></a>
+<a class="sourceLine" id="cb19-2" data-line-number="2">?<span class="dv">3</span> <span class="kw">eax</span>, ?<span class="dv">4</span></a></code></pre></div>
 <ul>
 <li><p><strong>A.</strong> <code>?1 = sub</code>, <code>?2 = 33</code>, <code>?3 = mov</code>, <code>?4 = 10</code></p></li>
 <li><p><strong>B.</strong> <code>?1 = mov</code>, <code>?2 = 33</code>, <code>?3 = sub</code>, <code>?4 = 10</code></p></li>
@@ -508,10 +503,9 @@ tag e <span class="fu">=</span> e'  <span class="kw">where</span>  (_, e') <span
 </ul>
 <h4 id="example-bin1">Example: Bin1</h4>
 <p>Lets start with some easy ones. The source:</p>
-<div class="figure">
-<img src="../static/img/bin-1-to-asm.png" alt="Example: Bin 1" />
-<p class="caption">Example: Bin 1</p>
-</div>
+<figure>
+<img src="../static/img/bin-1-to-asm.png" alt="Example: Bin 1" /><figcaption>Example: Bin 1</figcaption>
+</figure>
 <p><strong>Strategy:</strong> Given <code>n1 + n2</code></p>
 <ul>
 <li>Move <code>n1</code> into <code>eax</code>,</li>
@@ -519,10 +513,9 @@ tag e <span class="fu">=</span> e'  <span class="kw">where</span>  (_, e') <span
 </ul>
 <h4 id="example-bin2">Example: Bin2</h4>
 <p>What if the first operand is a variable?</p>
-<div class="figure">
-<img src="../static/img/bin-2-to-asm.png" alt="Example: Bin 2" />
-<p class="caption">Example: Bin 2</p>
-</div>
+<figure>
+<img src="../static/img/bin-2-to-asm.png" alt="Example: Bin 2" /><figcaption>Example: Bin 2</figcaption>
+</figure>
 <p>Simple, just copy the variable off the stack into <code>eax</code></p>
 <p><strong>Strategy:</strong> Given <code>x + n</code></p>
 <ul>
@@ -531,10 +524,9 @@ tag e <span class="fu">=</span> e'  <span class="kw">where</span>  (_, e') <span
 </ul>
 <h4 id="example-bin3">Example: Bin3</h4>
 <p>Same thing works if the second operand is a variable.</p>
-<div class="figure">
-<img src="../static/img/bin-3-to-asm.png" alt="Example: Bin 3" />
-<p class="caption">Example: Bin 3</p>
-</div>
+<figure>
+<img src="../static/img/bin-3-to-asm.png" alt="Example: Bin 3" /><figcaption>Example: Bin 3</figcaption>
+</figure>
 <p>Strategy: Given <code>x + n</code></p>
 <ul>
 <li>Move <code>x</code> (from stack) into <code>eax</code>,</li>
@@ -542,9 +534,9 @@ tag e <span class="fu">=</span> e'  <span class="kw">where</span>  (_, e') <span
 </ul>
 <h3 id="quiz-2">QUIZ</h3>
 <p>What is the assembly corresponding to <code>(10 + 20) * 30</code> ?</p>
-<div class="sourceCode"><pre class="sourceCode nasm"><code class="sourceCode nasm"><span class="kw">mov</span> <span class="kw">eax</span>, <span class="dv">10</span>
-?<span class="dv">1</span>  <span class="kw">eax</span>, ?<span class="dv">2</span>
-?<span class="dv">3</span>  <span class="kw">eax</span>, ?<span class="dv">4</span></code></pre></div>
+<div class="sourceCode" id="cb20"><pre class="sourceCode nasm"><code class="sourceCode nasm"><a class="sourceLine" id="cb20-1" data-line-number="1"><span class="kw">mov</span> <span class="kw">eax</span>, <span class="dv">10</span></a>
+<a class="sourceLine" id="cb20-2" data-line-number="2">?<span class="dv">1</span>  <span class="kw">eax</span>, ?<span class="dv">2</span></a>
+<a class="sourceLine" id="cb20-3" data-line-number="3">?<span class="dv">3</span>  <span class="kw">eax</span>, ?<span class="dv">4</span></a></code></pre></div>
 <ul>
 <li><p><strong>A.</strong> <code>?1 = add</code>, <code>?2 = 30</code>, <code>?3 = mul</code>, <code>?4 = 20</code></p></li>
 <li><p><strong>B.</strong> <code>?1 = mul</code>, <code>?2 = 30</code>, <code>?3 = add</code>, <code>?4 = 20</code></p></li>
@@ -553,12 +545,12 @@ tag e <span class="fu">=</span> e'  <span class="kw">where</span>  (_, e') <span
 </ul>
 <h3 id="second-operand-is-constant">Second Operand is Constant</h3>
 <p>In general, to compile <code>e + n</code> we can do</p>
-<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell">     compile e      
-  <span class="fu">++</span>              <span class="co">-- result of e is in eax</span>
-     [add eax, n]</code></pre></div>
+<div class="sourceCode" id="cb21"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb21-1" data-line-number="1">     compile e      </a>
+<a class="sourceLine" id="cb21-2" data-line-number="2">  <span class="fu">++</span>              <span class="co">-- result of e is in eax</span></a>
+<a class="sourceLine" id="cb21-3" data-line-number="3">     [add eax, n]</a></code></pre></div>
 <h3 id="example-bin4">Example: Bin4</h3>
 <p>But what if we have <em>nested</em> expressions</p>
-<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell">(<span class="dv">1</span> <span class="fu">+</span> <span class="dv">2</span>) <span class="fu">*</span> (<span class="dv">3</span> <span class="fu">+</span> <span class="dv">4</span>)</code></pre></div>
+<div class="sourceCode" id="cb22"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb22-1" data-line-number="1">(<span class="dv">1</span> <span class="fu">+</span> <span class="dv">2</span>) <span class="fu">*</span> (<span class="dv">3</span> <span class="fu">+</span> <span class="dv">4</span>)</a></code></pre></div>
 <ul>
 <li>Can compile <code>1 + 2</code> with result in <code>eax</code> …</li>
 <li>.. but then need to <em>reuse</em> <code>eax</code> for <code>3 + 4</code></li>
@@ -590,24 +582,23 @@ tag e <span class="fu">=</span> e'  <span class="kw">where</span>  (_, e') <span
 </ul>
 <h3 id="compound-expressions">Compound Expressions</h3>
 <p>Unfortunately, the below is <em>not</em> in ANF</p>
-<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell">(<span class="dv">1</span> <span class="fu">+</span> <span class="dv">2</span>) <span class="fu">*</span> (<span class="dv">3</span> <span class="fu">+</span> <span class="dv">4</span>)</code></pre></div>
+<div class="sourceCode" id="cb23"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb23-1" data-line-number="1">(<span class="dv">1</span> <span class="fu">+</span> <span class="dv">2</span>) <span class="fu">*</span> (<span class="dv">3</span> <span class="fu">+</span> <span class="dv">4</span>)</a></code></pre></div>
 <ul>
 <li>As the <code>*</code> has <em>non-immediate</em> arguments.</li>
 </ul>
 <p>However, note the following variant <em>is in ANF</em></p>
-<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="kw">let</span> t1 <span class="fu">=</span> <span class="dv">1</span> <span class="fu">+</span> <span class="dv">2</span>
-  , t2 <span class="fu">=</span> <span class="dv">3</span> <span class="fu">+</span> <span class="dv">4</span>
-<span class="kw">in</span>  
-    t1 <span class="fu">*</span> t2</code></pre></div>
+<div class="sourceCode" id="cb24"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb24-1" data-line-number="1"><span class="kw">let</span> t1 <span class="fu">=</span> <span class="dv">1</span> <span class="fu">+</span> <span class="dv">2</span></a>
+<a class="sourceLine" id="cb24-2" data-line-number="2">  , t2 <span class="fu">=</span> <span class="dv">3</span> <span class="fu">+</span> <span class="dv">4</span></a>
+<a class="sourceLine" id="cb24-3" data-line-number="3"><span class="kw">in</span>  </a>
+<a class="sourceLine" id="cb24-4" data-line-number="4">    t1 <span class="fu">*</span> t2</a></code></pre></div>
 <h3 id="binary-operations-strategy">Binary Operations: Strategy</h3>
 <p>We can convert <em>any</em> expression to ANF</p>
 <ul>
 <li>By adding “temporary” variables for sub-expressions</li>
 </ul>
-<div class="figure">
-<img src="../static/img/compiler-pipeline-anf.png" alt="Compiler Pipeline with ANF" />
-<p class="caption">Compiler Pipeline with ANF</p>
-</div>
+<figure>
+<img src="../static/img/compiler-pipeline-anf.png" alt="Compiler Pipeline with ANF" /><figcaption>Compiler Pipeline with ANF</figcaption>
+</figure>
 <ul>
 <li><strong>Step 1:</strong> Compiling ANF into Assembly<br />
 </li>
@@ -615,39 +606,39 @@ tag e <span class="fu">=</span> e'  <span class="kw">where</span>  (_, e') <span
 </ul>
 <h3 id="types-source-1">Types: Source</h3>
 <p>Lets add binary primitive operators</p>
-<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="kw">data</span> <span class="dt">Prim2</span>
-  <span class="fu">=</span> <span class="dt">Plus</span> <span class="fu">|</span> <span class="dt">Minus</span> <span class="fu">|</span> <span class="dt">Times</span></code></pre></div>
+<div class="sourceCode" id="cb25"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb25-1" data-line-number="1"><span class="kw">data</span> <span class="dt">Prim2</span></a>
+<a class="sourceLine" id="cb25-2" data-line-number="2">  <span class="fu">=</span> <span class="dt">Plus</span> <span class="fu">|</span> <span class="dt">Minus</span> <span class="fu">|</span> <span class="dt">Times</span></a></code></pre></div>
 <p>and use them to extend the source language:</p>
-<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="kw">data</span> <span class="dt">Expr</span> a
-  <span class="fu">=</span> <span class="fu">...</span>
-  <span class="fu">|</span> <span class="dt">Prim2</span> <span class="dt">Prim2</span>  (<span class="dt">Expr</span> a) (<span class="dt">Expr</span> a) a</code></pre></div>
+<div class="sourceCode" id="cb26"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb26-1" data-line-number="1"><span class="kw">data</span> <span class="dt">Expr</span> a</a>
+<a class="sourceLine" id="cb26-2" data-line-number="2">  <span class="fu">=</span> <span class="fu">...</span></a>
+<a class="sourceLine" id="cb26-3" data-line-number="3">  <span class="fu">|</span> <span class="dt">Prim2</span> <span class="dt">Prim2</span>  (<span class="dt">Expr</span> a) (<span class="dt">Expr</span> a) a</a></code></pre></div>
 <p>So, for example, <code>2 + 3</code> would be parsed as:</p>
-<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="dt">Prim2</span> <span class="dt">Plus</span> (<span class="dt">Number</span> <span class="dv">2</span> ()) (<span class="dt">Number</span> <span class="dv">3</span> ()) ()</code></pre></div>
+<div class="sourceCode" id="cb27"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb27-1" data-line-number="1"><span class="dt">Prim2</span> <span class="dt">Plus</span> (<span class="dt">Number</span> <span class="dv">2</span> ()) (<span class="dt">Number</span> <span class="dv">3</span> ()) ()</a></code></pre></div>
 <h3 id="types-assembly-1">Types: Assembly</h3>
 <p>Need to add X86 instructions for primitive arithmetic:</p>
-<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="kw">data</span> <span class="dt">Instruction</span>
-  <span class="fu">=</span> <span class="fu">...</span>
-  <span class="fu">|</span> <span class="dt">IAdd</span> <span class="dt">Arg</span> <span class="dt">Arg</span>
-  <span class="fu">|</span> <span class="dt">ISub</span> <span class="dt">Arg</span> <span class="dt">Arg</span>
-  <span class="fu">|</span> <span class="dt">IMul</span> <span class="dt">Arg</span> <span class="dt">Arg</span></code></pre></div>
+<div class="sourceCode" id="cb28"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb28-1" data-line-number="1"><span class="kw">data</span> <span class="dt">Instruction</span></a>
+<a class="sourceLine" id="cb28-2" data-line-number="2">  <span class="fu">=</span> <span class="fu">...</span></a>
+<a class="sourceLine" id="cb28-3" data-line-number="3">  <span class="fu">|</span> <span class="dt">IAdd</span> <span class="dt">Arg</span> <span class="dt">Arg</span></a>
+<a class="sourceLine" id="cb28-4" data-line-number="4">  <span class="fu">|</span> <span class="dt">ISub</span> <span class="dt">Arg</span> <span class="dt">Arg</span></a>
+<a class="sourceLine" id="cb28-5" data-line-number="5">  <span class="fu">|</span> <span class="dt">IMul</span> <span class="dt">Arg</span> <span class="dt">Arg</span></a></code></pre></div>
 <h3 id="types-anf">Types: ANF</h3>
 <p>We <em>can</em> define a separate type for ANF (try it!) * but cumbersome as it requires duplicating a bunch of code.</p>
 <p>Instead, lets write a <em>function</em> that describes <strong>immediate expressions</strong></p>
-<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="ot">isImm ::</span> <span class="dt">Expr</span> a <span class="ot">-&gt;</span> <span class="dt">Bool</span>
-isImm (<span class="dt">Number</span> _ _) <span class="fu">=</span> <span class="dt">True</span>
-isImm (<span class="dt">Var</span>    _ _) <span class="fu">=</span> <span class="dt">True</span>
-isImm _            <span class="fu">=</span> <span class="dt">False</span></code></pre></div>
+<div class="sourceCode" id="cb29"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb29-1" data-line-number="1"><span class="ot">isImm ::</span> <span class="dt">Expr</span> a <span class="ot">-&gt;</span> <span class="dt">Bool</span></a>
+<a class="sourceLine" id="cb29-2" data-line-number="2">isImm (<span class="dt">Number</span> _ _) <span class="fu">=</span> <span class="dt">True</span></a>
+<a class="sourceLine" id="cb29-3" data-line-number="3">isImm (<span class="dt">Var</span>    _ _) <span class="fu">=</span> <span class="dt">True</span></a>
+<a class="sourceLine" id="cb29-4" data-line-number="4">isImm _            <span class="fu">=</span> <span class="dt">False</span></a></code></pre></div>
 <p>We can now think of <strong>immediate</strong> expressions as:</p>
 <blockquote>
 <p>The <em>subset</em> of <code>Expr</code> <em>such that</em> <code>isImm</code> returns <code>True</code></p>
 </blockquote>
 <p>Similarly, lets write a function that describes <strong>ANF</strong> expressions</p>
-<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="ot">isAnf ::</span> <span class="dt">Expr</span> a <span class="ot">-&gt;</span> <span class="dt">Bool</span>
-isAnf (<span class="dt">Number</span>  _     _) <span class="fu">=</span> <span class="dt">True</span>
-isAnf (<span class="dt">Var</span>     _     _) <span class="fu">=</span> <span class="dt">True</span>
-isAnf (<span class="dt">Prim2</span> _ e1 e2 _) <span class="fu">=</span> isImm e1 <span class="fu">&amp;&amp;</span> isImm e2
-isAnf (<span class="dt">If</span> e1 e2 e3   _) <span class="fu">=</span> isImm e1 <span class="fu">&amp;&amp;</span> isAnf e2 <span class="fu">&amp;&amp;</span> isAnf e3
-isAnf (<span class="dt">Let</span> x e1 e2   _) <span class="fu">=</span> isAnf e1 <span class="fu">&amp;&amp;</span> isAnf e2</code></pre></div>
+<div class="sourceCode" id="cb30"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb30-1" data-line-number="1"><span class="ot">isAnf ::</span> <span class="dt">Expr</span> a <span class="ot">-&gt;</span> <span class="dt">Bool</span></a>
+<a class="sourceLine" id="cb30-2" data-line-number="2">isAnf (<span class="dt">Number</span>  _     _) <span class="fu">=</span> <span class="dt">True</span></a>
+<a class="sourceLine" id="cb30-3" data-line-number="3">isAnf (<span class="dt">Var</span>     _     _) <span class="fu">=</span> <span class="dt">True</span></a>
+<a class="sourceLine" id="cb30-4" data-line-number="4">isAnf (<span class="dt">Prim2</span> _ e1 e2 _) <span class="fu">=</span> isImm e1 <span class="fu">&amp;&amp;</span> isImm e2</a>
+<a class="sourceLine" id="cb30-5" data-line-number="5">isAnf (<span class="dt">If</span> e1 e2 e3   _) <span class="fu">=</span> isImm e1 <span class="fu">&amp;&amp;</span> isAnf e2 <span class="fu">&amp;&amp;</span> isAnf e3</a>
+<a class="sourceLine" id="cb30-6" data-line-number="6">isAnf (<span class="dt">Let</span> x e1 e2   _) <span class="fu">=</span> isAnf e1 <span class="fu">&amp;&amp;</span> isAnf e2</a></code></pre></div>
 <p>We can now think of <strong>ANF</strong> expressions as:</p>
 <blockquote>
 <p>The <em>subset</em> of <code>Expr</code> <em>such that</em> <code>isAnf</code> returns <code>True</code></p>
@@ -655,60 +646,58 @@ isAnf (<span class="dt">Let</span> x e1 e2   _) <span class="fu">=</span> isAnf 
 <p>We can use the above to <strong>test</strong> our ANF conversion.</p>
 <h3 id="types-strategy">Types &amp; Strategy</h3>
 <p>Writing the type aliases:</p>
-<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="kw">type</span> <span class="dt">BareE</span>   <span class="fu">=</span> <span class="dt">Expr</span> ()
-<span class="kw">type</span> <span class="dt">AnfE</span>    <span class="fu">=</span> <span class="dt">Expr</span> ()  <span class="co">-- such that isAnf is True</span>
-<span class="kw">type</span> <span class="dt">AnfTagE</span> <span class="fu">=</span> <span class="dt">Expr</span> <span class="dt">Tag</span> <span class="co">-- such that isAnf is True</span>
-<span class="kw">type</span> <span class="dt">ImmTagE</span> <span class="fu">=</span> <span class="dt">Expr</span> <span class="dt">Tag</span> <span class="co">-- such that isImm is True</span></code></pre></div>
+<div class="sourceCode" id="cb31"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb31-1" data-line-number="1"><span class="kw">type</span> <span class="dt">BareE</span>   <span class="fu">=</span> <span class="dt">Expr</span> ()</a>
+<a class="sourceLine" id="cb31-2" data-line-number="2"><span class="kw">type</span> <span class="dt">AnfE</span>    <span class="fu">=</span> <span class="dt">Expr</span> ()  <span class="co">-- such that isAnf is True</span></a>
+<a class="sourceLine" id="cb31-3" data-line-number="3"><span class="kw">type</span> <span class="dt">AnfTagE</span> <span class="fu">=</span> <span class="dt">Expr</span> <span class="dt">Tag</span> <span class="co">-- such that isAnf is True</span></a>
+<a class="sourceLine" id="cb31-4" data-line-number="4"><span class="kw">type</span> <span class="dt">ImmTagE</span> <span class="fu">=</span> <span class="dt">Expr</span> <span class="dt">Tag</span> <span class="co">-- such that isImm is True</span></a></code></pre></div>
 <p>we get the overall pipeline:</p>
-<div class="figure">
-<img src="../static/img/compiler-pipeline-anf-types.png" alt="Compiler Pipeline with ANF: Types" />
-<p class="caption">Compiler Pipeline with ANF: Types</p>
-</div>
+<figure>
+<img src="../static/img/compiler-pipeline-anf-types.png" alt="Compiler Pipeline with ANF: Types" /><figcaption>Compiler Pipeline with ANF: Types</figcaption>
+</figure>
 <h3 id="transforms-compiling-anftage-to-asm">Transforms: Compiling <code>AnfTagE</code> to <code>Asm</code></h3>
-<div class="figure">
-<img src="../static/img/compiler-pipeline-anf-to-asm.png" alt="Compiler Pipeline: ANF to ASM" />
-<p class="caption">Compiler Pipeline: ANF to ASM</p>
-</div>
+<figure>
+<img src="../static/img/compiler-pipeline-anf-to-asm.png" alt="Compiler Pipeline: ANF to ASM" /><figcaption>Compiler Pipeline: ANF to ASM</figcaption>
+</figure>
 <p>The compilation from ANF is easy, lets recall our examples and strategy:</p>
 <p>Strategy: Given <code>v1 + v2</code> (where <code>v1</code> and <code>v2</code> are <strong>immediate expressions</strong>)</p>
 <ul>
 <li>Move <code>v1</code> into <code>eax</code>,</li>
 <li>Add <code>v2</code> to <code>eax</code>.</li>
 </ul>
-<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="ot">compile ::</span> <span class="dt">Env</span> <span class="ot">-&gt;</span> <span class="dt">TagE</span> <span class="ot">-&gt;</span> <span class="dt">Asm</span>
-compile env (<span class="dt">Prim2</span> o v1 v2)
-  <span class="fu">=</span> [ <span class="dt">IMov</span>      (<span class="dt">Reg</span> <span class="dt">EAX</span>) (immArg env v1)
-    , (prim2 o) (<span class="dt">Reg</span> <span class="dt">EAX</span>) (immArg env v2)
-    ]</code></pre></div>
+<div class="sourceCode" id="cb32"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb32-1" data-line-number="1"><span class="ot">compile ::</span> <span class="dt">Env</span> <span class="ot">-&gt;</span> <span class="dt">TagE</span> <span class="ot">-&gt;</span> <span class="dt">Asm</span></a>
+<a class="sourceLine" id="cb32-2" data-line-number="2">compile env (<span class="dt">Prim2</span> o v1 v2)</a>
+<a class="sourceLine" id="cb32-3" data-line-number="3">  <span class="fu">=</span> [ <span class="dt">IMov</span>      (<span class="dt">Reg</span> <span class="dt">EAX</span>) (immArg env v1)</a>
+<a class="sourceLine" id="cb32-4" data-line-number="4">    , (prim2 o) (<span class="dt">Reg</span> <span class="dt">EAX</span>) (immArg env v2)</a>
+<a class="sourceLine" id="cb32-5" data-line-number="5">    ]</a></code></pre></div>
 <p>where we have a helper to find the <code>Asm</code> variant of a <code>Prim2</code> operation</p>
-<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="ot">prim2 ::</span> <span class="dt">Prim2</span> <span class="ot">-&gt;</span> <span class="dt">Arg</span> <span class="ot">-&gt;</span> <span class="dt">Arg</span> <span class="ot">-&gt;</span> <span class="dt">Instruction</span>
-prim2 <span class="dt">Plus</span>  <span class="fu">=</span> <span class="dt">IAdd</span>
-prim2 <span class="dt">Minus</span> <span class="fu">=</span> <span class="dt">ISub</span>
-prim2 <span class="dt">Times</span> <span class="fu">=</span> <span class="dt">IMul</span></code></pre></div>
+<div class="sourceCode" id="cb33"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb33-1" data-line-number="1"><span class="ot">prim2 ::</span> <span class="dt">Prim2</span> <span class="ot">-&gt;</span> <span class="dt">Arg</span> <span class="ot">-&gt;</span> <span class="dt">Arg</span> <span class="ot">-&gt;</span> <span class="dt">Instruction</span></a>
+<a class="sourceLine" id="cb33-2" data-line-number="2">prim2 <span class="dt">Plus</span>  <span class="fu">=</span> <span class="dt">IAdd</span></a>
+<a class="sourceLine" id="cb33-3" data-line-number="3">prim2 <span class="dt">Minus</span> <span class="fu">=</span> <span class="dt">ISub</span></a>
+<a class="sourceLine" id="cb33-4" data-line-number="4">prim2 <span class="dt">Times</span> <span class="fu">=</span> <span class="dt">IMul</span></a></code></pre></div>
 <p>and another to convert an <em>immediate expression</em> to an x86 argument:</p>
-<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="ot">immArg ::</span> <span class="dt">Env</span> <span class="ot">-&gt;</span> <span class="dt">ImmTag</span> <span class="ot">-&gt;</span> <span class="dt">Arg</span>
-immArg _   (<span class="dt">Number</span> n _) <span class="fu">=</span> <span class="dt">Const</span> n
-immArg env (<span class="dt">Var</span>    x _) <span class="fu">=</span> <span class="dt">RegOffset</span> <span class="dt">ESP</span> i
-  <span class="kw">where</span>
-    i                   <span class="fu">=</span> fromMaybe err (lookup x env)
-    err                 <span class="fu">=</span> error (printf <span class="st">&quot;Error: Variable '%s' is unbound&quot;</span> x)</code></pre></div>
+<div class="sourceCode" id="cb34"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb34-1" data-line-number="1"><span class="ot">immArg ::</span> <span class="dt">Env</span> <span class="ot">-&gt;</span> <span class="dt">ImmTag</span> <span class="ot">-&gt;</span> <span class="dt">Arg</span></a>
+<a class="sourceLine" id="cb34-2" data-line-number="2">immArg _   (<span class="dt">Number</span> n _) <span class="fu">=</span> <span class="dt">Const</span> n</a>
+<a class="sourceLine" id="cb34-3" data-line-number="3">immArg env (<span class="dt">Var</span>    x _) <span class="fu">=</span> <span class="dt">RegOffset</span> <span class="dt">ESP</span> i</a>
+<a class="sourceLine" id="cb34-4" data-line-number="4">  <span class="kw">where</span></a>
+<a class="sourceLine" id="cb34-5" data-line-number="5">    i                   <span class="fu">=</span> fromMaybe err (lookup x env)</a>
+<a class="sourceLine" id="cb34-6" data-line-number="6">    err                 <span class="fu">=</span> error (printf <span class="st">&quot;Error: Variable '%s' is unbound&quot;</span> x)</a></code></pre></div>
 <h3 id="quiz-3">QUIZ</h3>
 <p>Which of the below are in ANF ?</p>
-<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="co">{- 1 -}</span> <span class="dv">2</span> <span class="fu">+</span> <span class="dv">3</span> <span class="fu">+</span> <span class="dv">4</span>
-
-<span class="co">{- 2 -}</span> <span class="kw">let</span> x <span class="fu">=</span> <span class="dv">12</span> <span class="kw">in</span>
-          x <span class="fu">+</span> <span class="dv">1</span>
-
-<span class="co">{- 3 -}</span> <span class="kw">let</span> x <span class="fu">=</span> <span class="dv">12</span>
-          , y <span class="fu">=</span> x <span class="fu">+</span> <span class="dv">6</span>
-        <span class="kw">in</span>
-          x <span class="fu">+</span> y
-
-<span class="co">{- 4 -}</span> <span class="kw">let</span> x <span class="fu">=</span> <span class="dv">12</span>
-          , y <span class="fu">=</span> <span class="dv">18</span>
-          , t <span class="fu">=</span> x <span class="fu">+</span> y <span class="fu">+</span> <span class="dv">1</span>
-        <span class="kw">in</span>
-          <span class="kw">if</span> t<span class="fu">:</span> <span class="dv">7</span> <span class="kw">else</span><span class="fu">:</span> <span class="dv">9</span></code></pre></div>
+<div class="sourceCode" id="cb35"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb35-1" data-line-number="1"><span class="co">{- 1 -}</span> <span class="dv">2</span> <span class="fu">+</span> <span class="dv">3</span> <span class="fu">+</span> <span class="dv">4</span></a>
+<a class="sourceLine" id="cb35-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb35-3" data-line-number="3"><span class="co">{- 2 -}</span> <span class="kw">let</span> x <span class="fu">=</span> <span class="dv">12</span> <span class="kw">in</span></a>
+<a class="sourceLine" id="cb35-4" data-line-number="4">          x <span class="fu">+</span> <span class="dv">1</span></a>
+<a class="sourceLine" id="cb35-5" data-line-number="5"></a>
+<a class="sourceLine" id="cb35-6" data-line-number="6"><span class="co">{- 3 -}</span> <span class="kw">let</span> x <span class="fu">=</span> <span class="dv">12</span></a>
+<a class="sourceLine" id="cb35-7" data-line-number="7">          , y <span class="fu">=</span> x <span class="fu">+</span> <span class="dv">6</span></a>
+<a class="sourceLine" id="cb35-8" data-line-number="8">        <span class="kw">in</span></a>
+<a class="sourceLine" id="cb35-9" data-line-number="9">          x <span class="fu">+</span> y</a>
+<a class="sourceLine" id="cb35-10" data-line-number="10"></a>
+<a class="sourceLine" id="cb35-11" data-line-number="11"><span class="co">{- 4 -}</span> <span class="kw">let</span> x <span class="fu">=</span> <span class="dv">12</span></a>
+<a class="sourceLine" id="cb35-12" data-line-number="12">          , y <span class="fu">=</span> <span class="dv">18</span></a>
+<a class="sourceLine" id="cb35-13" data-line-number="13">          , t <span class="fu">=</span> x <span class="fu">+</span> y <span class="fu">+</span> <span class="dv">1</span></a>
+<a class="sourceLine" id="cb35-14" data-line-number="14">        <span class="kw">in</span></a>
+<a class="sourceLine" id="cb35-15" data-line-number="15">          <span class="kw">if</span> t<span class="fu">:</span> <span class="dv">7</span> <span class="kw">else</span><span class="fu">:</span> <span class="dv">9</span></a></code></pre></div>
 <ul>
 <li><p><strong>A.</strong> <code>1, 2, 3, 4</code></p></li>
 <li><p><strong>B.</strong> <code>1, 2, 3</code></p></li>
@@ -718,177 +707,170 @@ immArg env (<span class="dt">Var</span>    x _) <span class="fu">=</span> <span 
 </ul>
 <h3 id="transforms-compiling-bare-to-anf">Transforms: Compiling <code>Bare</code> to <code>Anf</code></h3>
 <p>Next lets focus on <strong>A-Normalization</strong> i.e. transforming expressions into ANF</p>
-<div class="figure">
-<img src="../static/img/compiler-pipeline-bare-to-anf.png" alt="Compiler Pipeline: Bare to ANF" />
-<p class="caption">Compiler Pipeline: Bare to ANF</p>
-</div>
+<figure>
+<img src="../static/img/compiler-pipeline-bare-to-anf.png" alt="Compiler Pipeline: Bare to ANF" /><figcaption>Compiler Pipeline: Bare to ANF</figcaption>
+</figure>
 <h3 id="a-normalization">A-Normalization</h3>
 <p>We can fill in the base cases easily</p>
-<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell">anf (<span class="dt">Number</span> n)      <span class="fu">=</span> <span class="dt">Number</span> n
-anf (<span class="dt">Var</span> x)         <span class="fu">=</span> <span class="dt">Var</span> x</code></pre></div>
+<div class="sourceCode" id="cb36"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb36-1" data-line-number="1">anf (<span class="dt">Number</span> n)      <span class="fu">=</span> <span class="dt">Number</span> n</a>
+<a class="sourceLine" id="cb36-2" data-line-number="2">anf (<span class="dt">Var</span> x)         <span class="fu">=</span> <span class="dt">Var</span> x</a></code></pre></div>
 <p>Interesting cases are the binary operations</p>
 <h4 id="example-anf-1">Example: Anf-1</h4>
 <p>Left operand is not immediate</p>
-<div class="figure">
-<img src="../static/img/anf-1.png" alt="Example: ANF 1" />
-<p class="caption">Example: ANF 1</p>
-</div>
+<figure>
+<img src="../static/img/anf-1.png" alt="Example: ANF 1" /><figcaption>Example: ANF 1</figcaption>
+</figure>
 <p><strong>Key Idea: Helper Function</strong></p>
-<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="ot">imm ::</span> <span class="dt">BareE</span> <span class="ot">-&gt;</span> ([(<span class="dt">Id</span>, <span class="dt">AnfE</span>)], <span class="dt">ImmE</span>)</code></pre></div>
+<div class="sourceCode" id="cb37"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb37-1" data-line-number="1"><span class="ot">imm ::</span> <span class="dt">BareE</span> <span class="ot">-&gt;</span> ([(<span class="dt">Id</span>, <span class="dt">AnfE</span>)], <span class="dt">ImmE</span>)</a></code></pre></div>
 <p><code>imm e</code> returns <code>([(t1, a1),...,(tn, an)], v)</code> where</p>
 <ul>
 <li><code>ti, ai</code> are new temporary variables bound to ANF exprs,</li>
 <li><code>v</code> is an <strong>immediate value</strong> (either a constant or variable)</li>
 </ul>
 <p>Such that <code>e</code> is <em>equivalent to</em></p>
-<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="kw">let</span> t1 <span class="fu">=</span> a1
-  , <span class="fu">...</span>
-  , tn <span class="fu">=</span> an
-<span class="kw">in</span>
-   v</code></pre></div>
+<div class="sourceCode" id="cb38"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb38-1" data-line-number="1"><span class="kw">let</span> t1 <span class="fu">=</span> a1</a>
+<a class="sourceLine" id="cb38-2" data-line-number="2">  , <span class="fu">...</span></a>
+<a class="sourceLine" id="cb38-3" data-line-number="3">  , tn <span class="fu">=</span> an</a>
+<a class="sourceLine" id="cb38-4" data-line-number="4"><span class="kw">in</span></a>
+<a class="sourceLine" id="cb38-5" data-line-number="5">   v</a></code></pre></div>
 <p>Lets look at some more examples.</p>
 <h4 id="example-anf-2">Example: Anf-2</h4>
 <p>Left operand is not internally immediate</p>
-<div class="figure">
-<img src="../static/img/anf-2.png" alt="Example: ANF 2" />
-<p class="caption">Example: ANF 2</p>
-</div>
+<figure>
+<img src="../static/img/anf-2.png" alt="Example: ANF 2" /><figcaption>Example: ANF 2</figcaption>
+</figure>
 <h4 id="example-anf-3">Example: Anf-3</h4>
 <p>Both operands are not immediate</p>
-<div class="figure">
-<img src="../static/img/anf-3.png" alt="Example: ANF 3" />
-<p class="caption">Example: ANF 3</p>
-</div>
+<figure>
+<img src="../static/img/anf-3.png" alt="Example: ANF 3" /><figcaption>Example: ANF 3</figcaption>
+</figure>
 <h3 id="anf-general-strategy">ANF: General Strategy</h3>
-<div class="figure">
-<img src="../static/img/anf-strategy.png" alt="ANF Strategy" />
-<p class="caption">ANF Strategy</p>
-</div>
-<ol style="list-style-type: decimal">
+<figure>
+<img src="../static/img/anf-strategy.png" alt="ANF Strategy" /><figcaption>ANF Strategy</figcaption>
+</figure>
+<ol type="1">
 <li><strong>Invoke</strong> <code>imm</code> on both the operands</li>
 <li><strong>Concat</strong> the <code>let</code> bindings</li>
 <li><strong>Apply</strong> the binop to the immediate values</li>
 </ol>
 <h3 id="anf-implementation">ANF: Implementation</h3>
 <p>Lets implement the above strategy</p>
-<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell">anf (<span class="dt">Prim2</span> o e1 e2) <span class="fu">=</span> lets (b1s <span class="fu">++</span> b2s)
-                        (<span class="dt">Prim2</span> o (<span class="dt">Var</span> v1) (<span class="dt">Var</span> v2))
-  <span class="kw">where</span>
-    (b1s, v1)       <span class="fu">=</span> imm e1
-    (b2s, v2)       <span class="fu">=</span> imm e2
-
-<span class="ot">lets ::</span> [(<span class="dt">Id</span>, <span class="dt">AnfE</span>)] <span class="ot">-&gt;</span> <span class="dt">AnfE</span> <span class="ot">-&gt;</span> <span class="dt">AnfE</span>
-lets [] e'         <span class="fu">=</span> e
-lets ((x,e)<span class="fu">:</span>bs) e' <span class="fu">=</span> <span class="dt">Let</span> x e (lets bs e')</code></pre></div>
+<div class="sourceCode" id="cb39"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb39-1" data-line-number="1">anf (<span class="dt">Prim2</span> o e1 e2) <span class="fu">=</span> lets (b1s <span class="fu">++</span> b2s)</a>
+<a class="sourceLine" id="cb39-2" data-line-number="2">                        (<span class="dt">Prim2</span> o (<span class="dt">Var</span> v1) (<span class="dt">Var</span> v2))</a>
+<a class="sourceLine" id="cb39-3" data-line-number="3">  <span class="kw">where</span></a>
+<a class="sourceLine" id="cb39-4" data-line-number="4">    (b1s, v1)       <span class="fu">=</span> imm e1</a>
+<a class="sourceLine" id="cb39-5" data-line-number="5">    (b2s, v2)       <span class="fu">=</span> imm e2</a>
+<a class="sourceLine" id="cb39-6" data-line-number="6"></a>
+<a class="sourceLine" id="cb39-7" data-line-number="7"><span class="ot">lets ::</span> [(<span class="dt">Id</span>, <span class="dt">AnfE</span>)] <span class="ot">-&gt;</span> <span class="dt">AnfE</span> <span class="ot">-&gt;</span> <span class="dt">AnfE</span></a>
+<a class="sourceLine" id="cb39-8" data-line-number="8">lets [] e'         <span class="fu">=</span> e</a>
+<a class="sourceLine" id="cb39-9" data-line-number="9">lets ((x,e)<span class="fu">:</span>bs) e' <span class="fu">=</span> <span class="dt">Let</span> x e (lets bs e')</a></code></pre></div>
 <p>Same principle applies to <code>If</code></p>
 <ul>
 <li>use <code>imm</code> to make the condition <em>immediate</em></li>
 <li>use <code>anf</code> to recursively transform the branches.</li>
 </ul>
-<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell">anf (<span class="dt">If</span> e1 e2 e3)   <span class="fu">=</span> lets bs (<span class="dt">If</span> t e1' e2')  
-  <span class="kw">where</span>
-    (bs, t)         <span class="fu">=</span> imm e1
-    e1'             <span class="fu">=</span> anf e1
-    e2'             <span class="fu">=</span> anf e2</code></pre></div>
+<div class="sourceCode" id="cb40"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb40-1" data-line-number="1">anf (<span class="dt">If</span> e1 e2 e3)   <span class="fu">=</span> lets bs (<span class="dt">If</span> t e1' e2')  </a>
+<a class="sourceLine" id="cb40-2" data-line-number="2">  <span class="kw">where</span></a>
+<a class="sourceLine" id="cb40-3" data-line-number="3">    (bs, t)         <span class="fu">=</span> imm e1</a>
+<a class="sourceLine" id="cb40-4" data-line-number="4">    e1'             <span class="fu">=</span> anf e1</a>
+<a class="sourceLine" id="cb40-5" data-line-number="5">    e2'             <span class="fu">=</span> anf e2</a></code></pre></div>
 <p>Finally, for <code>Let</code> just make sure we recursively <code>anf</code> the sub-expressions.</p>
-<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell">anf (<span class="dt">Let</span> x e1 e2)   <span class="fu">=</span> <span class="dt">Let</span> x e1' e2'
-  <span class="kw">where</span>
-    e1'             <span class="fu">=</span> anf e1
-    e2'             <span class="fu">=</span> anf e2</code></pre></div>
+<div class="sourceCode" id="cb41"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb41-1" data-line-number="1">anf (<span class="dt">Let</span> x e1 e2)   <span class="fu">=</span> <span class="dt">Let</span> x e1' e2'</a>
+<a class="sourceLine" id="cb41-2" data-line-number="2">  <span class="kw">where</span></a>
+<a class="sourceLine" id="cb41-3" data-line-number="3">    e1'             <span class="fu">=</span> anf e1</a>
+<a class="sourceLine" id="cb41-4" data-line-number="4">    e2'             <span class="fu">=</span> anf e2</a></code></pre></div>
 <h3 id="anf-making-arguments-immediate-via-imm">ANF: Making Arguments Immediate via <code>imm</code></h3>
 <p>The workhorse is the function</p>
-<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="ot">imm ::</span> <span class="dt">BareE</span> <span class="ot">-&gt;</span> ([(<span class="dt">Id</span>, <span class="dt">AnfE</span>)], <span class="dt">ImmE</span>)</code></pre></div>
+<div class="sourceCode" id="cb42"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb42-1" data-line-number="1"><span class="ot">imm ::</span> <span class="dt">BareE</span> <span class="ot">-&gt;</span> ([(<span class="dt">Id</span>, <span class="dt">AnfE</span>)], <span class="dt">ImmE</span>)</a></code></pre></div>
 <p>which creates temporary variables to crunch an arbitrary <code>Bare</code> into an <em>immediate</em> value.</p>
 <p>No need to create an variables if the expression is <em>already</em> immediate:</p>
-<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell">imm v<span class="fu">@</span>(<span class="dt">Number</span> _)    <span class="fu">=</span> ( [], v )
-imm v<span class="fu">@</span>(<span class="dt">Id</span>     _)    <span class="fu">=</span> ( [], v )</code></pre></div>
+<div class="sourceCode" id="cb43"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb43-1" data-line-number="1">imm v<span class="fu">@</span>(<span class="dt">Number</span> _)    <span class="fu">=</span> ( [], v )</a>
+<a class="sourceLine" id="cb43-2" data-line-number="2">imm v<span class="fu">@</span>(<span class="dt">Id</span>     _)    <span class="fu">=</span> ( [], v )</a></code></pre></div>
 <p>The tricky case is when the expression has a primop:</p>
-<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell">imm (<span class="dt">Prim2</span> o e1 e2) <span class="fu">=</span> ( b1s <span class="fu">++</span> b2s <span class="fu">++</span> [(t,  <span class="dt">Prim2</span> o v1 v2)]
-                      , <span class="dt">Id</span> t  )
-  t                 <span class="fu">=</span> <span class="dt">FreshVar</span>
-  (b1s, v1)         <span class="fu">=</span> imm e1
-  (b2s, v2)         <span class="fu">=</span> imm e2  </code></pre></div>
+<div class="sourceCode" id="cb44"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb44-1" data-line-number="1">imm (<span class="dt">Prim2</span> o e1 e2) <span class="fu">=</span> ( b1s <span class="fu">++</span> b2s <span class="fu">++</span> [(t,  <span class="dt">Prim2</span> o v1 v2)]</a>
+<a class="sourceLine" id="cb44-2" data-line-number="2">                      , <span class="dt">Id</span> t  )</a>
+<a class="sourceLine" id="cb44-3" data-line-number="3">  t                 <span class="fu">=</span> <span class="dt">FreshVar</span></a>
+<a class="sourceLine" id="cb44-4" data-line-number="4">  (b1s, v1)         <span class="fu">=</span> imm e1</a>
+<a class="sourceLine" id="cb44-5" data-line-number="5">  (b2s, v2)         <span class="fu">=</span> imm e2  </a></code></pre></div>
 <p>Oh, what shall we do when:</p>
-<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell">imm (<span class="dt">If</span> e1 e2 e3)   <span class="fu">=</span> <span class="fu">???</span>
-imm (<span class="dt">Let</span> x e1 e2)   <span class="fu">=</span> <span class="fu">???</span></code></pre></div>
+<div class="sourceCode" id="cb45"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb45-1" data-line-number="1">imm (<span class="dt">If</span> e1 e2 e3)   <span class="fu">=</span> <span class="fu">???</span></a>
+<a class="sourceLine" id="cb45-2" data-line-number="2">imm (<span class="dt">Let</span> x e1 e2)   <span class="fu">=</span> <span class="fu">???</span></a></code></pre></div>
 <p>Lets look at an example for inspiration.</p>
-<div class="figure">
-<img src="../static/img/anf-4.png" alt="Example: ANF 4" />
-<p class="caption">Example: ANF 4</p>
-</div>
+<figure>
+<img src="../static/img/anf-4.png" alt="Example: ANF 4" /><figcaption>Example: ANF 4</figcaption>
+</figure>
 <p>That is, simply</p>
 <ul>
 <li><code>anf</code> the relevant expressions,</li>
 <li>bind them to a fresh variable.</li>
 </ul>
-<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell">imm e<span class="fu">@</span>(<span class="dt">If</span> _ _ _) <span class="fu">=</span> immExp e
-imm e<span class="fu">@</span>(<span class="dt">If</span> _ _ _) <span class="fu">=</span> immExp e
-
-<span class="ot">immExp ::</span> <span class="dt">AnfE</span> <span class="ot">-&gt;</span> ([(<span class="dt">Id</span>, <span class="dt">AnfE</span>)], <span class="dt">ImmE</span>)
-immExp e <span class="fu">=</span> ([(t, e')], t)
-  <span class="kw">where</span>
-    t    <span class="fu">=</span> <span class="dt">FreshVar</span>
-    e'   <span class="fu">=</span> anf e</code></pre></div>
+<div class="sourceCode" id="cb46"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb46-1" data-line-number="1">imm e<span class="fu">@</span>(<span class="dt">If</span> _ _ _) <span class="fu">=</span> immExp e</a>
+<a class="sourceLine" id="cb46-2" data-line-number="2">imm e<span class="fu">@</span>(<span class="dt">If</span> _ _ _) <span class="fu">=</span> immExp e</a>
+<a class="sourceLine" id="cb46-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb46-4" data-line-number="4"><span class="ot">immExp ::</span> <span class="dt">AnfE</span> <span class="ot">-&gt;</span> ([(<span class="dt">Id</span>, <span class="dt">AnfE</span>)], <span class="dt">ImmE</span>)</a>
+<a class="sourceLine" id="cb46-5" data-line-number="5">immExp e <span class="fu">=</span> ([(t, e')], t)</a>
+<a class="sourceLine" id="cb46-6" data-line-number="6">  <span class="kw">where</span></a>
+<a class="sourceLine" id="cb46-7" data-line-number="7">    t    <span class="fu">=</span> <span class="dt">FreshVar</span></a>
+<a class="sourceLine" id="cb46-8" data-line-number="8">    e'   <span class="fu">=</span> anf e</a></code></pre></div>
 <h3 id="one-last-thing-whats-up-with-freshvar">One last thing: Whats up with <code>FreshVar</code> ?</h3>
 <p>Wait a minute, what is this magic <strong>FRESH</strong> ?</p>
 <p>How can we create <strong>distinct</strong> names out of thin air?</p>
 <p>What’s that? Global variables? Increment a counter?</p>
-<div class="figure">
-<img src="../static/img/dr-evil.jpg" alt="Get thee behind me Satan!" />
-<p class="caption">Get thee behind me Satan!</p>
-</div>
+<figure>
+<img src="../static/img/dr-evil.jpg" alt="Get thee behind me Satan!" /><figcaption>Get thee behind me Satan!</figcaption>
+</figure>
 <p>We will use a counter, but will have to <strong>pass its value around</strong></p>
 <ul>
 <li>Just like <code>tag</code></li>
 </ul>
-<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="ot">anf ::</span> <span class="dt">Int</span> <span class="ot">-&gt;</span> <span class="dt">BareE</span> <span class="ot">-&gt;</span> (<span class="dt">Int</span>, <span class="dt">AnfE</span>)
-
-anf i (<span class="dt">Number</span> n l)      <span class="fu">=</span> (i, <span class="dt">Number</span> n l)
-
-anf i (<span class="dt">Id</span>     x l)      <span class="fu">=</span> (i, <span class="dt">Id</span>     x l)
-
-anf i (<span class="dt">Let</span> x e b l)     <span class="fu">=</span> (i'', <span class="dt">Let</span> x e' b' l)
-  <span class="kw">where</span>
-    (i',  e')           <span class="fu">=</span> anf i e
-    (i'', b')           <span class="fu">=</span> anf i' b
-
-anf i (<span class="dt">Prim2</span> o e1 e2 l) <span class="fu">=</span> (i'', lets (b1s <span class="fu">++</span> b2s) (<span class="dt">Prim2</span> o e1' e2' l))
-  <span class="kw">where</span>
-    (i' , b1s, e1')     <span class="fu">=</span> imm i  e1
-    (i'', b2s, e2')     <span class="fu">=</span> imm i' e2
-
-anf i (<span class="dt">If</span> c e1 e2 l)    <span class="fu">=</span> (i''', lets bs  (<span class="dt">If</span> c' e1' e2' l))
-  <span class="kw">where</span>
-    (i'  , bs, c')      <span class="fu">=</span> imm i   c
-    (i'' ,     e1')     <span class="fu">=</span> anf i'  e1
-    (i''',     e2')     <span class="fu">=</span> anf i'' e2</code></pre></div>
+<div class="sourceCode" id="cb47"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb47-1" data-line-number="1"><span class="ot">anf ::</span> <span class="dt">Int</span> <span class="ot">-&gt;</span> <span class="dt">BareE</span> <span class="ot">-&gt;</span> (<span class="dt">Int</span>, <span class="dt">AnfE</span>)</a>
+<a class="sourceLine" id="cb47-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb47-3" data-line-number="3">anf i (<span class="dt">Number</span> n l)      <span class="fu">=</span> (i, <span class="dt">Number</span> n l)</a>
+<a class="sourceLine" id="cb47-4" data-line-number="4"></a>
+<a class="sourceLine" id="cb47-5" data-line-number="5">anf i (<span class="dt">Id</span>     x l)      <span class="fu">=</span> (i, <span class="dt">Id</span>     x l)</a>
+<a class="sourceLine" id="cb47-6" data-line-number="6"></a>
+<a class="sourceLine" id="cb47-7" data-line-number="7">anf i (<span class="dt">Let</span> x e b l)     <span class="fu">=</span> (i'', <span class="dt">Let</span> x e' b' l)</a>
+<a class="sourceLine" id="cb47-8" data-line-number="8">  <span class="kw">where</span></a>
+<a class="sourceLine" id="cb47-9" data-line-number="9">    (i',  e')           <span class="fu">=</span> anf i e</a>
+<a class="sourceLine" id="cb47-10" data-line-number="10">    (i'', b')           <span class="fu">=</span> anf i' b</a>
+<a class="sourceLine" id="cb47-11" data-line-number="11"></a>
+<a class="sourceLine" id="cb47-12" data-line-number="12">anf i (<span class="dt">Prim2</span> o e1 e2 l) <span class="fu">=</span> (i'', lets (b1s <span class="fu">++</span> b2s) (<span class="dt">Prim2</span> o e1' e2' l))</a>
+<a class="sourceLine" id="cb47-13" data-line-number="13">  <span class="kw">where</span></a>
+<a class="sourceLine" id="cb47-14" data-line-number="14">    (i' , b1s, e1')     <span class="fu">=</span> imm i  e1</a>
+<a class="sourceLine" id="cb47-15" data-line-number="15">    (i'', b2s, e2')     <span class="fu">=</span> imm i' e2</a>
+<a class="sourceLine" id="cb47-16" data-line-number="16"></a>
+<a class="sourceLine" id="cb47-17" data-line-number="17">anf i (<span class="dt">If</span> c e1 e2 l)    <span class="fu">=</span> (i''', lets bs  (<span class="dt">If</span> c' e1' e2' l))</a>
+<a class="sourceLine" id="cb47-18" data-line-number="18">  <span class="kw">where</span></a>
+<a class="sourceLine" id="cb47-19" data-line-number="19">    (i'  , bs, c')      <span class="fu">=</span> imm i   c</a>
+<a class="sourceLine" id="cb47-20" data-line-number="20">    (i'' ,     e1')     <span class="fu">=</span> anf i'  e1</a>
+<a class="sourceLine" id="cb47-21" data-line-number="21">    (i''',     e2')     <span class="fu">=</span> anf i'' e2</a></code></pre></div>
 <p>and</p>
-<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="ot">imm ::</span> <span class="dt">Int</span> <span class="ot">-&gt;</span> <span class="dt">AnfE</span> <span class="ot">-&gt;</span> (<span class="dt">Int</span>, [(<span class="dt">Id</span>, <span class="dt">AnfE</span>)], <span class="dt">ImmE</span>)
-
-imm i (<span class="dt">Number</span> n l)        <span class="fu">=</span> (i  , [], <span class="dt">Number</span> n l)
-
-imm i (<span class="dt">Var</span> x l)           <span class="fu">=</span> (i  , [], <span class="dt">Var</span> x l)
-
-imm i (<span class="dt">Prim2</span> o e1 e2 l) <span class="fu">=</span> (i''', bs, <span class="dt">Var</span> v l)
-  <span class="kw">where</span>
-    (i'  , b1s, v1)     <span class="fu">=</span> imm i  e1
-    (i'' , b2s, v2)     <span class="fu">=</span> imm i' e2
-    (i''', v)           <span class="fu">=</span> fresh i''
-    bs                  <span class="fu">=</span> b1s <span class="fu">++</span> b2s <span class="fu">++</span> [(v, <span class="dt">Prim2</span> o v1 v2 l)]
-
-imm i e<span class="fu">@</span>(<span class="dt">If</span> _ _ _  l)   <span class="fu">=</span> immExp i e
-
-imm i e<span class="fu">@</span>(<span class="dt">Let</span> _ _ _ l)   <span class="fu">=</span> immExp i e
-
-<span class="ot">immExp ::</span> <span class="dt">Int</span> <span class="ot">-&gt;</span> <span class="dt">BareE</span> <span class="ot">-&gt;</span> (<span class="dt">Int</span>, [(<span class="dt">Id</span>, <span class="dt">AnfE</span>)], <span class="dt">ImmE</span>)
-immExp i e l  <span class="fu">=</span> (i'', bs, <span class="dt">Var</span> v ())
-  <span class="kw">where</span>
-    (i' , e') <span class="fu">=</span> anf i e
-    (i'', v)  <span class="fu">=</span> fresh i'
-    bs        <span class="fu">=</span> [(v, e')]</code></pre></div>
+<div class="sourceCode" id="cb48"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb48-1" data-line-number="1"><span class="ot">imm ::</span> <span class="dt">Int</span> <span class="ot">-&gt;</span> <span class="dt">AnfE</span> <span class="ot">-&gt;</span> (<span class="dt">Int</span>, [(<span class="dt">Id</span>, <span class="dt">AnfE</span>)], <span class="dt">ImmE</span>)</a>
+<a class="sourceLine" id="cb48-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb48-3" data-line-number="3">imm i (<span class="dt">Number</span> n l)        <span class="fu">=</span> (i  , [], <span class="dt">Number</span> n l)</a>
+<a class="sourceLine" id="cb48-4" data-line-number="4"></a>
+<a class="sourceLine" id="cb48-5" data-line-number="5">imm i (<span class="dt">Var</span> x l)           <span class="fu">=</span> (i  , [], <span class="dt">Var</span> x l)</a>
+<a class="sourceLine" id="cb48-6" data-line-number="6"></a>
+<a class="sourceLine" id="cb48-7" data-line-number="7">imm i (<span class="dt">Prim2</span> o e1 e2 l) <span class="fu">=</span> (i''', bs, <span class="dt">Var</span> v l)</a>
+<a class="sourceLine" id="cb48-8" data-line-number="8">  <span class="kw">where</span></a>
+<a class="sourceLine" id="cb48-9" data-line-number="9">    (i'  , b1s, v1)     <span class="fu">=</span> imm i  e1</a>
+<a class="sourceLine" id="cb48-10" data-line-number="10">    (i'' , b2s, v2)     <span class="fu">=</span> imm i' e2</a>
+<a class="sourceLine" id="cb48-11" data-line-number="11">    (i''', v)           <span class="fu">=</span> fresh i''</a>
+<a class="sourceLine" id="cb48-12" data-line-number="12">    bs                  <span class="fu">=</span> b1s <span class="fu">++</span> b2s <span class="fu">++</span> [(v, <span class="dt">Prim2</span> o v1 v2 l)]</a>
+<a class="sourceLine" id="cb48-13" data-line-number="13"></a>
+<a class="sourceLine" id="cb48-14" data-line-number="14">imm i e<span class="fu">@</span>(<span class="dt">If</span> _ _ _  l)   <span class="fu">=</span> immExp i e</a>
+<a class="sourceLine" id="cb48-15" data-line-number="15"></a>
+<a class="sourceLine" id="cb48-16" data-line-number="16">imm i e<span class="fu">@</span>(<span class="dt">Let</span> _ _ _ l)   <span class="fu">=</span> immExp i e</a>
+<a class="sourceLine" id="cb48-17" data-line-number="17"></a>
+<a class="sourceLine" id="cb48-18" data-line-number="18"><span class="ot">immExp ::</span> <span class="dt">Int</span> <span class="ot">-&gt;</span> <span class="dt">BareE</span> <span class="ot">-&gt;</span> (<span class="dt">Int</span>, [(<span class="dt">Id</span>, <span class="dt">AnfE</span>)], <span class="dt">ImmE</span>)</a>
+<a class="sourceLine" id="cb48-19" data-line-number="19">immExp i e l  <span class="fu">=</span> (i'', bs, <span class="dt">Var</span> v ())</a>
+<a class="sourceLine" id="cb48-20" data-line-number="20">  <span class="kw">where</span></a>
+<a class="sourceLine" id="cb48-21" data-line-number="21">    (i' , e') <span class="fu">=</span> anf i e</a>
+<a class="sourceLine" id="cb48-22" data-line-number="22">    (i'', v)  <span class="fu">=</span> fresh i'</a>
+<a class="sourceLine" id="cb48-23" data-line-number="23">    bs        <span class="fu">=</span> [(v, e')]</a></code></pre></div>
 <p>where now, the <code>fresh</code> function returns a <em>new counter</em> and a variable</p>
-<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="ot">fresh ::</span> <span class="dt">Int</span> <span class="ot">-&gt;</span> (<span class="dt">Int</span>, <span class="dt">Id</span>)
-fresh n <span class="fu">=</span> (n<span class="fu">+</span><span class="dv">1</span>, <span class="st">&quot;t&quot;</span> <span class="fu">++</span> show n)</code></pre></div>
+<div class="sourceCode" id="cb49"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb49-1" data-line-number="1"><span class="ot">fresh ::</span> <span class="dt">Int</span> <span class="ot">-&gt;</span> (<span class="dt">Int</span>, <span class="dt">Id</span>)</a>
+<a class="sourceLine" id="cb49-2" data-line-number="2">fresh n <span class="fu">=</span> (n<span class="fu">+</span><span class="dv">1</span>, <span class="st">&quot;t&quot;</span> <span class="fu">++</span> show n)</a></code></pre></div>
 <p><strong>Note</strong> this is super clunky. There <em>is</em> a really slick way to write the above code without the clutter of the <code>i</code> but thats too much of a digression, <a href="https://cseweb.ucsd.edu/classes/wi12/cse230-a/lectures/monads.html">but feel free to look it up yourself</a></p>
 <h2 id="recap-and-summary">Recap and Summary</h2>
 <p>Just created <code>Boa</code> with</p>
@@ -902,10 +884,9 @@ fresh n <span class="fu">=</span> (n<span class="fu">+</span><span class="dv">1<
 <li><strong>Normalization</strong></li>
 </ul>
 <p>Specifically,</p>
-<div class="figure">
-<img src="../static/img/compiler-pipeline-anf-types.png" alt="Compiler Pipeline with ANF" />
-<p class="caption">Compiler Pipeline with ANF</p>
-</div>	
+<figure>
+<img src="../static/img/compiler-pipeline-anf-types.png" alt="Compiler Pipeline with ANF" /><figcaption>Compiler Pipeline with ANF</figcaption>
+</figure>	
                 <hr>
             </div>
         </div>

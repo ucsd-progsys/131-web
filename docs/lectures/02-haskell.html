@@ -239,42 +239,42 @@ if (window.navigator.appName == "Microsoft Internet Explorer") {
 <ul>
 <li><code>e : t</code> means <code>e</code> has type <code>t</code></li>
 </ul>
-<div class="sourceCode"><pre class="sourceCode ocaml"><code class="sourceCode ocaml">(<span class="dv">12</span> : <span class="dt">int</span>)</code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode ocaml"><code class="sourceCode ocaml"><a class="sourceLine" id="cb1-1" data-line-number="1">(<span class="dv">12</span> : <span class="dt">int</span>)</a></code></pre></div>
 <p>vs.</p>
 <p><strong>Haskell</strong> uses <code>::</code> for type ascription</p>
 <ul>
 <li><code>e :: t</code> means <code>e</code> has type <code>t</code></li>
 </ul>
-<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell">(<span class="dv">12</span><span class="ot"> ::</span> <span class="dt">Int</span>)</code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb2-1" data-line-number="1">(<span class="dv">12</span><span class="ot"> ::</span> <span class="dt">Int</span>)</a></code></pre></div>
 <h2 id="function-definitions-and-calls">Function Definitions and Calls</h2>
 <p><strong>Ocaml</strong></p>
-<div class="sourceCode"><pre class="sourceCode ocaml"><code class="sourceCode ocaml"><span class="co">(* val incr : int -&gt; int *)</span>
-<span class="kw">let</span> incr x = x + <span class="dv">1</span>
-
-<span class="kw">let</span> eleven = incr <span class="dv">10</span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode ocaml"><code class="sourceCode ocaml"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="co">(* val incr : int -&gt; int *)</span></a>
+<a class="sourceLine" id="cb3-2" data-line-number="2"><span class="kw">let</span> <span class="dt">incr</span> x = x + <span class="dv">1</span></a>
+<a class="sourceLine" id="cb3-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb3-4" data-line-number="4"><span class="kw">let</span> eleven = <span class="dt">incr</span> <span class="dv">10</span></a></code></pre></div>
 <p>vs</p>
 <p><strong>Haskell</strong></p>
-<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="ot">incr ::</span> <span class="dt">Int</span> <span class="ot">-&gt;</span> <span class="dt">Int</span>
-incr x <span class="fu">=</span> x <span class="fu">+</span> <span class="dv">1</span>
-
-eleven <span class="fu">=</span> incr <span class="dv">10</span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb4-1" data-line-number="1"><span class="ot">incr ::</span> <span class="dt">Int</span> <span class="ot">-&gt;</span> <span class="dt">Int</span></a>
+<a class="sourceLine" id="cb4-2" data-line-number="2">incr x <span class="fu">=</span> x <span class="fu">+</span> <span class="dv">1</span></a>
+<a class="sourceLine" id="cb4-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb4-4" data-line-number="4">eleven <span class="fu">=</span> incr <span class="dv">10</span></a></code></pre></div>
 <p><code>let</code> not needed for top-level binding.</p>
 <h2 id="pattern-matching">Pattern Matching</h2>
 <p><strong>Ocaml</strong></p>
-<div class="sourceCode"><pre class="sourceCode ocaml"><code class="sourceCode ocaml"><span class="co">(* val listSum : int list -&gt; int list *)</span>
-<span class="kw">let</span> <span class="kw">rec</span> listSum xs = <span class="kw">match</span> xs <span class="kw">with</span>
-  | []       -&gt; <span class="dv">0</span>
-  | (x::xs') -&gt; x + listSum xs'</code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode ocaml"><code class="sourceCode ocaml"><a class="sourceLine" id="cb5-1" data-line-number="1"><span class="co">(* val listSum : int list -&gt; int list *)</span></a>
+<a class="sourceLine" id="cb5-2" data-line-number="2"><span class="kw">let</span> <span class="kw">rec</span> listSum xs = <span class="kw">match</span> xs <span class="kw">with</span></a>
+<a class="sourceLine" id="cb5-3" data-line-number="3">  | []       -&gt; <span class="dv">0</span></a>
+<a class="sourceLine" id="cb5-4" data-line-number="4">  | (x::xs') -&gt; x + listSum xs'</a></code></pre></div>
 <p>vs</p>
 <p><strong>Haskell</strong></p>
-<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="ot">listSum ::</span> [<span class="dt">Int</span>] <span class="ot">-&gt;</span> [<span class="dt">Int</span>]
-listSum xs <span class="fu">=</span> <span class="kw">case</span> xs <span class="kw">of</span>
-               []    <span class="ot">-&gt;</span> <span class="dv">0</span>
-               x<span class="fu">:</span>xs' <span class="ot">-&gt;</span> x <span class="fu">+</span> listSum xs'</code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb6-1" data-line-number="1"><span class="ot">listSum ::</span> [<span class="dt">Int</span>] <span class="ot">-&gt;</span> [<span class="dt">Int</span>]</a>
+<a class="sourceLine" id="cb6-2" data-line-number="2">listSum xs <span class="fu">=</span> <span class="kw">case</span> xs <span class="kw">of</span></a>
+<a class="sourceLine" id="cb6-3" data-line-number="3">               []    <span class="ot">-&gt;</span> <span class="dv">0</span></a>
+<a class="sourceLine" id="cb6-4" data-line-number="4">               x<span class="fu">:</span>xs' <span class="ot">-&gt;</span> x <span class="fu">+</span> listSum xs'</a></code></pre></div>
 <p>or better,</p>
-<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="ot">listSum ::</span> [<span class="dt">Int</span>] <span class="ot">-&gt;</span> [<span class="dt">Int</span>]
-listSum []     <span class="fu">=</span> <span class="dv">0</span>
-listSum (x<span class="fu">:</span>xs) <span class="fu">=</span> x <span class="fu">+</span> listSum xs</code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb7-1" data-line-number="1"><span class="ot">listSum ::</span> [<span class="dt">Int</span>] <span class="ot">-&gt;</span> [<span class="dt">Int</span>]</a>
+<a class="sourceLine" id="cb7-2" data-line-number="2">listSum []     <span class="fu">=</span> <span class="dv">0</span></a>
+<a class="sourceLine" id="cb7-3" data-line-number="3">listSum (x<span class="fu">:</span>xs) <span class="fu">=</span> x <span class="fu">+</span> listSum xs</a></code></pre></div>
 <p>Haskell allows <strong>different equations</strong> for different cases.</p>
 <h2 id="colon-vs.double-colon">Colon vs. Double-Colon</h2>
 <p><strong>Ocaml</strong></p>
@@ -292,77 +292,77 @@ listSum (x<span class="fu">:</span>xs) <span class="fu">=</span> x <span class="
 <table>
 <thead>
 <tr class="header">
-<th align="center">Operator</th>
-<th align="center">Ocaml</th>
-<th align="center">Haskell</th>
+<th style="text-align: center;">Operator</th>
+<th style="text-align: center;">Ocaml</th>
+<th style="text-align: center;">Haskell</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td align="center"><code>::</code></td>
-<td align="center">“cons”</td>
-<td align="center">“has type”</td>
+<td style="text-align: center;"><code>::</code></td>
+<td style="text-align: center;">“cons”</td>
+<td style="text-align: center;">“has type”</td>
 </tr>
 <tr class="even">
-<td align="center"><code>:</code></td>
-<td align="center">“has type”</td>
-<td align="center">“cons”</td>
+<td style="text-align: center;"><code>:</code></td>
+<td style="text-align: center;">“has type”</td>
+<td style="text-align: center;">“cons”</td>
 </tr>
 </tbody>
 </table>
 <h2 id="local-variables">Local Variables</h2>
 <p><strong>Ocaml</strong></p>
-<div class="sourceCode"><pre class="sourceCode ocaml"><code class="sourceCode ocaml"><span class="co">(* val filter : ('a -&gt; bool) -&gt; 'a list -&gt; 'a list *)</span>
-<span class="kw">let</span> filter f xs = <span class="kw">match</span> xs <span class="kw">with</span>
-  | []     -&gt; []
-  | x::xs' -&gt; <span class="kw">let</span> rest = filter f xs' <span class="kw">in</span>
-              <span class="kw">if</span> f x <span class="kw">then</span> x :: rest <span class="kw">else</span> rest</code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode ocaml"><code class="sourceCode ocaml"><a class="sourceLine" id="cb8-1" data-line-number="1"><span class="co">(* val filter : ('a -&gt; bool) -&gt; 'a list -&gt; 'a list *)</span></a>
+<a class="sourceLine" id="cb8-2" data-line-number="2"><span class="kw">let</span> filter f xs = <span class="kw">match</span> xs <span class="kw">with</span></a>
+<a class="sourceLine" id="cb8-3" data-line-number="3">  | []     -&gt; []</a>
+<a class="sourceLine" id="cb8-4" data-line-number="4">  | x::xs' -&gt; <span class="kw">let</span> rest = filter f xs' <span class="kw">in</span></a>
+<a class="sourceLine" id="cb8-5" data-line-number="5">              <span class="kw">if</span> f x <span class="kw">then</span> x :: rest <span class="kw">else</span> rest</a></code></pre></div>
 <p>vs</p>
 <p><strong>Haskell</strong></p>
-<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell">filter<span class="ot"> ::</span> (a <span class="ot">-&gt;</span> <span class="dt">Bool</span>) <span class="ot">-&gt;</span> [a] <span class="ot">-&gt;</span> [a]
-filter f []     <span class="fu">=</span> []
-filter f (x<span class="fu">:</span>xs) <span class="kw">let</span> rest <span class="fu">=</span> filter f xs' <span class="kw">in</span>
-                <span class="kw">if</span> f x <span class="kw">then</span> x<span class="fu">:</span>rest <span class="kw">else</span> rest</code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb9-1" data-line-number="1">filter<span class="ot"> ::</span> (a <span class="ot">-&gt;</span> <span class="dt">Bool</span>) <span class="ot">-&gt;</span> [a] <span class="ot">-&gt;</span> [a]</a>
+<a class="sourceLine" id="cb9-2" data-line-number="2">filter f []     <span class="fu">=</span> []</a>
+<a class="sourceLine" id="cb9-3" data-line-number="3">filter f (x<span class="fu">:</span>xs) <span class="kw">let</span> rest <span class="fu">=</span> filter f xs' <span class="kw">in</span></a>
+<a class="sourceLine" id="cb9-4" data-line-number="4">                <span class="kw">if</span> f x <span class="kw">then</span> x<span class="fu">:</span>rest <span class="kw">else</span> rest</a></code></pre></div>
 <h2 id="quiz-local-variables">QUIZ: Local Variables</h2>
-<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell">quiz    <span class="fu">=</span> x <span class="fu">+</span> y
-  <span class="kw">where</span>
-    x   <span class="fu">=</span> <span class="dv">0</span>
-    y   <span class="fu">=</span> <span class="dv">1</span></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb10-1" data-line-number="1">quiz    <span class="fu">=</span> x <span class="fu">+</span> y</a>
+<a class="sourceLine" id="cb10-2" data-line-number="2">  <span class="kw">where</span></a>
+<a class="sourceLine" id="cb10-3" data-line-number="3">    x   <span class="fu">=</span> <span class="dv">0</span></a>
+<a class="sourceLine" id="cb10-4" data-line-number="4">    y   <span class="fu">=</span> <span class="dv">1</span></a></code></pre></div>
 <p>What is the value of <code>quiz</code>?</p>
 <p>A. Syntax error B. Type Error C. <code>0</code> D. <code>1</code> E. Other</p>
 <h2 id="quiz-local-variables-1">QUIZ: Local Variables</h2>
-<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell">quiz    <span class="fu">=</span> x <span class="fu">+</span> y
-  <span class="kw">where</span>
-    x   <span class="fu">=</span> <span class="dv">0</span>
-    y   <span class="fu">=</span> x <span class="fu">+</span> <span class="dv">1</span></code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb11-1" data-line-number="1">quiz    <span class="fu">=</span> x <span class="fu">+</span> y</a>
+<a class="sourceLine" id="cb11-2" data-line-number="2">  <span class="kw">where</span></a>
+<a class="sourceLine" id="cb11-3" data-line-number="3">    x   <span class="fu">=</span> <span class="dv">0</span></a>
+<a class="sourceLine" id="cb11-4" data-line-number="4">    y   <span class="fu">=</span> x <span class="fu">+</span> <span class="dv">1</span></a></code></pre></div>
 <p>What is the value of <code>quiz</code>?</p>
 <p>A. Syntax error B. Type Error C. <code>0</code> D. <code>1</code> E. Other</p>
 <h2 id="quiz-local-variables-2">QUIZ: Local Variables</h2>
-<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell">quiz    <span class="fu">=</span> x <span class="fu">+</span> y
-  <span class="kw">where</span>
-    y   <span class="fu">=</span> x <span class="fu">+</span> <span class="dv">1</span>
-    x   <span class="fu">=</span> <span class="dv">0</span></code></pre></div>
+<div class="sourceCode" id="cb12"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb12-1" data-line-number="1">quiz    <span class="fu">=</span> x <span class="fu">+</span> y</a>
+<a class="sourceLine" id="cb12-2" data-line-number="2">  <span class="kw">where</span></a>
+<a class="sourceLine" id="cb12-3" data-line-number="3">    y   <span class="fu">=</span> x <span class="fu">+</span> <span class="dv">1</span></a>
+<a class="sourceLine" id="cb12-4" data-line-number="4">    x   <span class="fu">=</span> <span class="dv">0</span></a></code></pre></div>
 <p>What is the value of <code>quiz</code>?</p>
 <p>A. Syntax error B. Type Error C. <code>0</code> D. <code>1</code> E. Other</p>
 <h2 id="quiz-local-variables-3">QUIZ: Local Variables</h2>
-<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell">quiz    <span class="fu">=</span> x <span class="fu">+</span> y
-  <span class="kw">where</span>
-    y   <span class="fu">=</span> x <span class="fu">+</span> <span class="dv">1</span>
-    x   <span class="fu">=</span> y</code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb13-1" data-line-number="1">quiz    <span class="fu">=</span> x <span class="fu">+</span> y</a>
+<a class="sourceLine" id="cb13-2" data-line-number="2">  <span class="kw">where</span></a>
+<a class="sourceLine" id="cb13-3" data-line-number="3">    y   <span class="fu">=</span> x <span class="fu">+</span> <span class="dv">1</span></a>
+<a class="sourceLine" id="cb13-4" data-line-number="4">    x   <span class="fu">=</span> y</a></code></pre></div>
 <p>What is the value of <code>quiz</code>?</p>
 <p>A. Syntax error B. Type Error C. <code>0</code> D. <code>1</code> E. Other</p>
 <h2 id="local-variables-revisited">Local Variables (revisited)</h2>
 <p>So we can take</p>
-<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell">filter<span class="ot"> ::</span> (a <span class="ot">-&gt;</span> <span class="dt">Bool</span>) <span class="ot">-&gt;</span> [a] <span class="ot">-&gt;</span> [a]
-filter f []     <span class="fu">=</span> []
-filter f (x<span class="fu">:</span>xs) <span class="kw">let</span> rest <span class="fu">=</span> filter f xs' <span class="kw">in</span>
-                <span class="kw">if</span> f x <span class="kw">then</span> x<span class="fu">:</span>rest <span class="kw">else</span> rest</code></pre></div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb14-1" data-line-number="1">filter<span class="ot"> ::</span> (a <span class="ot">-&gt;</span> <span class="dt">Bool</span>) <span class="ot">-&gt;</span> [a] <span class="ot">-&gt;</span> [a]</a>
+<a class="sourceLine" id="cb14-2" data-line-number="2">filter f []     <span class="fu">=</span> []</a>
+<a class="sourceLine" id="cb14-3" data-line-number="3">filter f (x<span class="fu">:</span>xs) <span class="kw">let</span> rest <span class="fu">=</span> filter f xs' <span class="kw">in</span></a>
+<a class="sourceLine" id="cb14-4" data-line-number="4">                <span class="kw">if</span> f x <span class="kw">then</span> x<span class="fu">:</span>rest <span class="kw">else</span> rest</a></code></pre></div>
 <p>and write it better as</p>
-<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell">filter<span class="ot"> ::</span> (a <span class="ot">-&gt;</span> <span class="dt">Bool</span>) <span class="ot">-&gt;</span> [a] <span class="ot">-&gt;</span> [a]
-filter f []     <span class="fu">=</span> []
-filter f (x<span class="fu">:</span>xs) <span class="fu">=</span> <span class="kw">if</span> f x <span class="kw">then</span> x<span class="fu">:</span>rest <span class="kw">else</span> rest
-  <span class="kw">where</span>
-    rest        <span class="fu">=</span> filter f xs'</code></pre></div>
+<div class="sourceCode" id="cb15"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb15-1" data-line-number="1">filter<span class="ot"> ::</span> (a <span class="ot">-&gt;</span> <span class="dt">Bool</span>) <span class="ot">-&gt;</span> [a] <span class="ot">-&gt;</span> [a]</a>
+<a class="sourceLine" id="cb15-2" data-line-number="2">filter f []     <span class="fu">=</span> []</a>
+<a class="sourceLine" id="cb15-3" data-line-number="3">filter f (x<span class="fu">:</span>xs) <span class="fu">=</span> <span class="kw">if</span> f x <span class="kw">then</span> x<span class="fu">:</span>rest <span class="kw">else</span> rest</a>
+<a class="sourceLine" id="cb15-4" data-line-number="4">  <span class="kw">where</span></a>
+<a class="sourceLine" id="cb15-5" data-line-number="5">    rest        <span class="fu">=</span> filter f xs'</a></code></pre></div>
 <p><strong>where</strong> lets you pull local variables aside:</p>
 <ul>
 <li>meaning <em>exactly same as</em> <code>let</code>, but</li>
@@ -371,21 +371,21 @@ filter f (x<span class="fu">:</span>xs) <span class="fu">=</span> <span class="k
 <p>(Seems strange at first, but truly beautiful.)</p>
 <h2 id="anonymous-functions">Anonymous Functions</h2>
 <p><strong>Ocaml</strong></p>
-<div class="sourceCode"><pre class="sourceCode ocaml"><code class="sourceCode ocaml"><span class="co">(* val negate : ('a -&gt; bool) -&gt; 'a -&gt; bool *)</span>
-<span class="kw">let</span> negate f = <span class="kw">fun</span> x -&gt; not (f x)</code></pre></div>
+<div class="sourceCode" id="cb16"><pre class="sourceCode ocaml"><code class="sourceCode ocaml"><a class="sourceLine" id="cb16-1" data-line-number="1"><span class="co">(* val negate : ('a -&gt; bool) -&gt; 'a -&gt; bool *)</span></a>
+<a class="sourceLine" id="cb16-2" data-line-number="2"><span class="kw">let</span> negate f = <span class="kw">fun</span> x -&gt; <span class="dt">not</span> (f x)</a></code></pre></div>
 <p>vs</p>
 <p><strong>Haskell</strong></p>
-<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell">negate<span class="ot"> ::</span> (a <span class="ot">-&gt;</span> <span class="dt">Bool</span>) <span class="ot">-&gt;</span> a <span class="ot">-&gt;</span> <span class="dt">Bool</span>
-negate f <span class="fu">=</span> \x <span class="ot">-&gt;</span> not (f x)</code></pre></div>
+<div class="sourceCode" id="cb17"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb17-1" data-line-number="1">negate<span class="ot"> ::</span> (a <span class="ot">-&gt;</span> <span class="dt">Bool</span>) <span class="ot">-&gt;</span> a <span class="ot">-&gt;</span> <span class="dt">Bool</span></a>
+<a class="sourceLine" id="cb17-2" data-line-number="2">negate f <span class="fu">=</span> \x <span class="ot">-&gt;</span> not (f x)</a></code></pre></div>
 <p>Very similar: Ocaml’s <code>fun</code> is replaced with Haskell’s <code>\</code></p>
 <h2 id="tuples-and-lists">Tuples and Lists</h2>
 <p><strong>Ocaml</strong></p>
-<div class="sourceCode"><pre class="sourceCode ocaml"><code class="sourceCode ocaml"><span class="co">(* val partition: ('a -&gt; bool) -&gt; 'a list -&gt; ('a list * 'a list) *)</span>
-<span class="kw">let</span> partition f xs = (filter f xs, filter (negate f) xs)</code></pre></div>
+<div class="sourceCode" id="cb18"><pre class="sourceCode ocaml"><code class="sourceCode ocaml"><a class="sourceLine" id="cb18-1" data-line-number="1"><span class="co">(* val partition: ('a -&gt; bool) -&gt; 'a list -&gt; ('a list * 'a list) *)</span></a>
+<a class="sourceLine" id="cb18-2" data-line-number="2"><span class="kw">let</span> partition f xs = (filter f xs, filter (negate f) xs)</a></code></pre></div>
 <p>vs</p>
 <p><strong>Haskell</strong></p>
-<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="ot">partition ::</span> (a <span class="ot">-&gt;</span> <span class="dt">Bool</span>) <span class="ot">-&gt;</span> [a] <span class="ot">-&gt;</span> ([a], [a])
-partition f xs <span class="fu">=</span> (filter f xs, filter (negate f) xs)</code></pre></div>
+<div class="sourceCode" id="cb19"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb19-1" data-line-number="1"><span class="ot">partition ::</span> (a <span class="ot">-&gt;</span> <span class="dt">Bool</span>) <span class="ot">-&gt;</span> [a] <span class="ot">-&gt;</span> ([a], [a])</a>
+<a class="sourceLine" id="cb19-2" data-line-number="2">partition f xs <span class="fu">=</span> (filter f xs, filter (negate f) xs)</a></code></pre></div>
 <p><strong>Note</strong></p>
 <ul>
 <li>Haskell uses <code>(t1, t2)</code> vs Ocaml’s <code>(t1 * t2)</code></li>
@@ -393,97 +393,97 @@ partition f xs <span class="fu">=</span> (filter f xs, filter (negate f) xs)</co
 </ul>
 <h2 id="larger-example">Larger Example</h2>
 <p><strong>Ocaml</strong></p>
-<div class="sourceCode"><pre class="sourceCode ocaml"><code class="sourceCode ocaml"><span class="co">(* val sort : 'a list -&gt; 'a list *)</span>
-<span class="kw">let</span> <span class="kw">rec</span> sort xs = <span class="kw">match</span> xs <span class="kw">with</span>
-  | []     -&gt; []
-  | (h::t) -&gt; <span class="kw">let</span> (ls, rs) = partition (<span class="kw">fun</span> x -&gt; x &lt; h) t <span class="kw">in</span>
-              sort ls @ [h] @ sort rs</code></pre></div>
+<div class="sourceCode" id="cb20"><pre class="sourceCode ocaml"><code class="sourceCode ocaml"><a class="sourceLine" id="cb20-1" data-line-number="1"><span class="co">(* val sort : 'a list -&gt; 'a list *)</span></a>
+<a class="sourceLine" id="cb20-2" data-line-number="2"><span class="kw">let</span> <span class="kw">rec</span> sort xs = <span class="kw">match</span> xs <span class="kw">with</span></a>
+<a class="sourceLine" id="cb20-3" data-line-number="3">  | []     -&gt; []</a>
+<a class="sourceLine" id="cb20-4" data-line-number="4">  | (h::t) -&gt; <span class="kw">let</span> (ls, rs) = partition (<span class="kw">fun</span> x -&gt; x &lt; h) t <span class="kw">in</span></a>
+<a class="sourceLine" id="cb20-5" data-line-number="5">              sort ls @ [h] @ sort rs</a></code></pre></div>
 <p>vs</p>
 <p><strong>Haskell</strong></p>
-<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell">sort<span class="ot"> ::</span> (<span class="dt">Ord</span> a) <span class="ot">=&gt;</span> [a] <span class="ot">-&gt;</span> [a]
-sort []     <span class="fu">=</span> []
-sort (h<span class="fu">:</span>t)  <span class="fu">=</span> sort ls <span class="fu">++</span> [h] <span class="fu">++</span> sort rs
-  <span class="kw">where</span>
-    (ls,rs) <span class="fu">=</span> partition (\x <span class="ot">-&gt;</span> x <span class="fu">&lt;</span> h) t</code></pre></div>
+<div class="sourceCode" id="cb21"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb21-1" data-line-number="1">sort<span class="ot"> ::</span> (<span class="dt">Ord</span> a) <span class="ot">=&gt;</span> [a] <span class="ot">-&gt;</span> [a]</a>
+<a class="sourceLine" id="cb21-2" data-line-number="2">sort []     <span class="fu">=</span> []</a>
+<a class="sourceLine" id="cb21-3" data-line-number="3">sort (h<span class="fu">:</span>t)  <span class="fu">=</span> sort ls <span class="fu">++</span> [h] <span class="fu">++</span> sort rs</a>
+<a class="sourceLine" id="cb21-4" data-line-number="4">  <span class="kw">where</span></a>
+<a class="sourceLine" id="cb21-5" data-line-number="5">    (ls,rs) <span class="fu">=</span> partition (\x <span class="ot">-&gt;</span> x <span class="fu">&lt;</span> h) t</a></code></pre></div>
 <h2 id="quiz-list-comprehensions">QUIZ: List Comprehensions</h2>
 <p>What is the value of</p>
-<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell">quiz <span class="fu">=</span> [<span class="dv">0</span><span class="fu">..</span><span class="dv">5</span>]</code></pre></div>
+<div class="sourceCode" id="cb22"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb22-1" data-line-number="1">quiz <span class="fu">=</span> [<span class="dv">0</span><span class="fu">..</span><span class="dv">5</span>]</a></code></pre></div>
 <p>A. Syntax Error B. Type Error C. <code>[0, 5]</code> D. <code>[0, 1, 2, 3, 4]</code> E. <code>[0, 1, 2, 3, 4, 5]</code></p>
 <h2 id="quiz-list-comprehensions-1">QUIZ: List Comprehensions</h2>
 <p>What is the value of</p>
-<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell">quiz   <span class="fu">=</span> [x <span class="fu">*</span> <span class="dv">10</span> <span class="fu">|</span> x <span class="ot">&lt;-</span> xs]
-  <span class="kw">where</span>
-    xs <span class="fu">=</span> [<span class="dv">0</span><span class="fu">..</span><span class="dv">5</span>]</code></pre></div>
+<div class="sourceCode" id="cb23"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb23-1" data-line-number="1">quiz   <span class="fu">=</span> [x <span class="fu">*</span> <span class="dv">10</span> <span class="fu">|</span> x <span class="ot">&lt;-</span> xs]</a>
+<a class="sourceLine" id="cb23-2" data-line-number="2">  <span class="kw">where</span></a>
+<a class="sourceLine" id="cb23-3" data-line-number="3">    xs <span class="fu">=</span> [<span class="dv">0</span><span class="fu">..</span><span class="dv">5</span>]</a></code></pre></div>
 <p>A. Syntax Error B. Type Error C. <code>[0, 50]</code> D. <code>[0, 10, 20, 30, 40]</code> E. <code>[0, 10, 20, 30, 40, 50]</code></p>
 <h2 id="quiz-list-comprehensions-2">QUIZ: List Comprehensions</h2>
 <p>What is the value of</p>
-<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell">quiz   <span class="fu">=</span> [x <span class="fu">*</span> <span class="dv">10</span> <span class="fu">|</span> x <span class="ot">&lt;-</span> xs, x <span class="fu">&lt;</span> <span class="dv">3</span>]
-  <span class="kw">where</span>
-    xs <span class="fu">=</span> [<span class="dv">0</span><span class="fu">..</span><span class="dv">5</span>]</code></pre></div>
+<div class="sourceCode" id="cb24"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb24-1" data-line-number="1">quiz   <span class="fu">=</span> [x <span class="fu">*</span> <span class="dv">10</span> <span class="fu">|</span> x <span class="ot">&lt;-</span> xs, x <span class="fu">&lt;</span> <span class="dv">3</span>]</a>
+<a class="sourceLine" id="cb24-2" data-line-number="2">  <span class="kw">where</span></a>
+<a class="sourceLine" id="cb24-3" data-line-number="3">    xs <span class="fu">=</span> [<span class="dv">0</span><span class="fu">..</span><span class="dv">5</span>]</a></code></pre></div>
 <p>A. <code>[]</code> B. <code>[0]</code> C. <code>[0, 10]</code> D. <code>[0, 10, 20]</code> E. <code>[0, 10, 20, 30]</code></p>
 <h2 id="quiz-list-comprehensions-3">QUIZ: List Comprehensions</h2>
 <p>We can simplify the <code>sort</code> using list comprehensions, as in Python:</p>
-<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell">sort<span class="ot"> ::</span> (<span class="dt">Ord</span> a) <span class="ot">=&gt;</span> [a] <span class="ot">-&gt;</span> [a]
-sort []     <span class="fu">=</span> []
-sort (h<span class="fu">:</span>t)  <span class="fu">=</span> sort ls <span class="fu">++</span> [h] <span class="fu">++</span> sort rs
-  <span class="kw">where</span>
-    ls      <span class="fu">=</span> [x <span class="fu">|</span> x <span class="ot">&lt;-</span> t, x <span class="fu">&lt;=</span> h]
-    rs      <span class="fu">=</span> [x <span class="fu">|</span> x <span class="ot">&lt;-</span> t,  h <span class="fu">&lt;</span> x]</code></pre></div>
+<div class="sourceCode" id="cb25"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb25-1" data-line-number="1">sort<span class="ot"> ::</span> (<span class="dt">Ord</span> a) <span class="ot">=&gt;</span> [a] <span class="ot">-&gt;</span> [a]</a>
+<a class="sourceLine" id="cb25-2" data-line-number="2">sort []     <span class="fu">=</span> []</a>
+<a class="sourceLine" id="cb25-3" data-line-number="3">sort (h<span class="fu">:</span>t)  <span class="fu">=</span> sort ls <span class="fu">++</span> [h] <span class="fu">++</span> sort rs</a>
+<a class="sourceLine" id="cb25-4" data-line-number="4">  <span class="kw">where</span></a>
+<a class="sourceLine" id="cb25-5" data-line-number="5">    ls      <span class="fu">=</span> [x <span class="fu">|</span> x <span class="ot">&lt;-</span> t, x <span class="fu">&lt;=</span> h]</a>
+<a class="sourceLine" id="cb25-6" data-line-number="6">    rs      <span class="fu">=</span> [x <span class="fu">|</span> x <span class="ot">&lt;-</span> t,  h <span class="fu">&lt;</span> x]</a></code></pre></div>
 <h2 id="defining-data">Defining Data</h2>
 <p><strong>Ocaml</strong></p>
-<div class="sourceCode"><pre class="sourceCode ocaml"><code class="sourceCode ocaml"><span class="kw">type</span> expr
-  = <span class="dt">Number</span> <span class="kw">of</span> float
-  | <span class="dt">Plus</span>   <span class="kw">of</span> expr * expr
-  | <span class="dt">Minus</span>  <span class="kw">of</span> expr * expr
-  | <span class="dt">Times</span>  <span class="kw">of</span> expr * expr</code></pre></div>
+<div class="sourceCode" id="cb26"><pre class="sourceCode ocaml"><code class="sourceCode ocaml"><a class="sourceLine" id="cb26-1" data-line-number="1"><span class="kw">type</span> expr</a>
+<a class="sourceLine" id="cb26-2" data-line-number="2">  = Number <span class="kw">of</span> <span class="dt">float</span></a>
+<a class="sourceLine" id="cb26-3" data-line-number="3">  | Plus   <span class="kw">of</span> expr * expr</a>
+<a class="sourceLine" id="cb26-4" data-line-number="4">  | Minus  <span class="kw">of</span> expr * expr</a>
+<a class="sourceLine" id="cb26-5" data-line-number="5">  | Times  <span class="kw">of</span> expr * expr</a></code></pre></div>
 <p>vs</p>
 <p><strong>Haskell</strong></p>
-<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="kw">data</span> <span class="dt">Expr</span>
-  <span class="fu">=</span> <span class="dt">Number</span> <span class="dt">Double</span>
-  <span class="fu">|</span> <span class="dt">Plus</span>   <span class="dt">Expr</span> <span class="dt">Expr</span>
-  <span class="fu">|</span> <span class="dt">Minus</span>  <span class="dt">Expr</span> <span class="dt">Expr</span>
-  <span class="fu">|</span> <span class="dt">Times</span>  <span class="dt">Expr</span> <span class="dt">Expr</span></code></pre></div>
+<div class="sourceCode" id="cb27"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb27-1" data-line-number="1"><span class="kw">data</span> <span class="dt">Expr</span></a>
+<a class="sourceLine" id="cb27-2" data-line-number="2">  <span class="fu">=</span> <span class="dt">Number</span> <span class="dt">Double</span></a>
+<a class="sourceLine" id="cb27-3" data-line-number="3">  <span class="fu">|</span> <span class="dt">Plus</span>   <span class="dt">Expr</span> <span class="dt">Expr</span></a>
+<a class="sourceLine" id="cb27-4" data-line-number="4">  <span class="fu">|</span> <span class="dt">Minus</span>  <span class="dt">Expr</span> <span class="dt">Expr</span></a>
+<a class="sourceLine" id="cb27-5" data-line-number="5">  <span class="fu">|</span> <span class="dt">Times</span>  <span class="dt">Expr</span> <span class="dt">Expr</span></a></code></pre></div>
 <h2 id="constructing-data">Constructing Data</h2>
 <p><strong>Ocaml</strong></p>
-<div class="sourceCode"><pre class="sourceCode ocaml"><code class="sourceCode ocaml"><span class="kw">let</span> ex0 = <span class="dt">Number</span> <span class="fl">5.</span>
-<span class="kw">let</span> ex1 = <span class="dt">Plus</span>  (ex0, <span class="dt">Number</span> <span class="fl">7.</span>)
-<span class="kw">let</span> ex2 = <span class="dt">Minus</span> (<span class="dt">Number</span> <span class="fl">4.</span>, <span class="dt">Number</span> <span class="fl">2.</span>)
-<span class="kw">let</span> ex3 = <span class="dt">Times</span> (ex1, ex2)</code></pre></div>
+<div class="sourceCode" id="cb28"><pre class="sourceCode ocaml"><code class="sourceCode ocaml"><a class="sourceLine" id="cb28-1" data-line-number="1"><span class="kw">let</span> ex0 = Number <span class="dv">5</span>.</a>
+<a class="sourceLine" id="cb28-2" data-line-number="2"><span class="kw">let</span> ex1 = Plus  (ex0, Number <span class="dv">7</span>.)</a>
+<a class="sourceLine" id="cb28-3" data-line-number="3"><span class="kw">let</span> ex2 = Minus (Number <span class="dv">4</span>., Number <span class="dv">2</span>.)</a>
+<a class="sourceLine" id="cb28-4" data-line-number="4"><span class="kw">let</span> ex3 = Times (ex1, ex2)</a></code></pre></div>
 <p>vs</p>
 <p><strong>Haskell</strong></p>
-<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell">ex0 <span class="fu">=</span> <span class="dt">Number</span> <span class="dv">5</span>
-ex1 <span class="fu">=</span> <span class="dt">Plus</span>  ex0 (<span class="dt">Number</span> <span class="dv">7</span>)
-ex2 <span class="fu">=</span> <span class="dt">Minus</span> (<span class="dt">Number</span> <span class="dv">4</span>) (<span class="dt">Number</span> <span class="dv">2</span>)
-ex3 <span class="fu">=</span> <span class="dt">Times</span> ex1 ex2</code></pre></div>
+<div class="sourceCode" id="cb29"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb29-1" data-line-number="1">ex0 <span class="fu">=</span> <span class="dt">Number</span> <span class="dv">5</span></a>
+<a class="sourceLine" id="cb29-2" data-line-number="2">ex1 <span class="fu">=</span> <span class="dt">Plus</span>  ex0 (<span class="dt">Number</span> <span class="dv">7</span>)</a>
+<a class="sourceLine" id="cb29-3" data-line-number="3">ex2 <span class="fu">=</span> <span class="dt">Minus</span> (<span class="dt">Number</span> <span class="dv">4</span>) (<span class="dt">Number</span> <span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb29-4" data-line-number="4">ex3 <span class="fu">=</span> <span class="dt">Times</span> ex1 ex2</a></code></pre></div>
 <p><strong>Note</strong></p>
 <p>The <em>tags</em> <code>Plus</code>, <code>Number</code> etc. are (constructor) functions</p>
-<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="dt">Plus</span><span class="ot">   ::</span> <span class="dt">Expr</span> <span class="ot">-&gt;</span> <span class="dt">Expr</span> <span class="ot">-&gt;</span> <span class="dt">Expr</span>
-<span class="dt">Minus</span><span class="ot">  ::</span> <span class="dt">Expr</span> <span class="ot">-&gt;</span> <span class="dt">Expr</span> <span class="ot">-&gt;</span> <span class="dt">Expr</span>
-<span class="dt">Times</span><span class="ot">  ::</span> <span class="dt">Expr</span> <span class="ot">-&gt;</span> <span class="dt">Expr</span> <span class="ot">-&gt;</span> <span class="dt">Expr</span></code></pre></div>
+<div class="sourceCode" id="cb30"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb30-1" data-line-number="1"><span class="dt">Plus</span><span class="ot">   ::</span> <span class="dt">Expr</span> <span class="ot">-&gt;</span> <span class="dt">Expr</span> <span class="ot">-&gt;</span> <span class="dt">Expr</span></a>
+<a class="sourceLine" id="cb30-2" data-line-number="2"><span class="dt">Minus</span><span class="ot">  ::</span> <span class="dt">Expr</span> <span class="ot">-&gt;</span> <span class="dt">Expr</span> <span class="ot">-&gt;</span> <span class="dt">Expr</span></a>
+<a class="sourceLine" id="cb30-3" data-line-number="3"><span class="dt">Times</span><span class="ot">  ::</span> <span class="dt">Expr</span> <span class="ot">-&gt;</span> <span class="dt">Expr</span> <span class="ot">-&gt;</span> <span class="dt">Expr</span></a></code></pre></div>
 <h2 id="quiz-constructor-types">QUIZ: Constructor Types</h2>
 <p>Given</p>
-<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="kw">data</span> <span class="dt">Expr</span>
-  <span class="fu">=</span> <span class="dt">Number</span> <span class="dt">Double</span>
-  <span class="fu">|</span> <span class="dt">Plus</span>   <span class="dt">Expr</span> <span class="dt">Expr</span>
-  <span class="fu">|</span> <span class="dt">Minus</span>  <span class="dt">Expr</span> <span class="dt">Expr</span>
-  <span class="fu">|</span> <span class="dt">Times</span>  <span class="dt">Expr</span> <span class="dt">Expr</span></code></pre></div>
+<div class="sourceCode" id="cb31"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb31-1" data-line-number="1"><span class="kw">data</span> <span class="dt">Expr</span></a>
+<a class="sourceLine" id="cb31-2" data-line-number="2">  <span class="fu">=</span> <span class="dt">Number</span> <span class="dt">Double</span></a>
+<a class="sourceLine" id="cb31-3" data-line-number="3">  <span class="fu">|</span> <span class="dt">Plus</span>   <span class="dt">Expr</span> <span class="dt">Expr</span></a>
+<a class="sourceLine" id="cb31-4" data-line-number="4">  <span class="fu">|</span> <span class="dt">Minus</span>  <span class="dt">Expr</span> <span class="dt">Expr</span></a>
+<a class="sourceLine" id="cb31-5" data-line-number="5">  <span class="fu">|</span> <span class="dt">Times</span>  <span class="dt">Expr</span> <span class="dt">Expr</span></a></code></pre></div>
 <p>What is the <em>type of</em> <code>Number</code> ?</p>
 <p>A. <code>Expr</code> B. <code>Double</code> C. <code>Double -&gt; Expr</code> D. <code>Expr -&gt; Double</code> E. <code>Expr -&gt; Expr</code></p>
 <h2 id="destructing-accessing-data">Destructing (Accessing) Data</h2>
 <p><strong>Ocaml</strong></p>
-<div class="sourceCode"><pre class="sourceCode ocaml"><code class="sourceCode ocaml"><span class="co">(* val eval: expr -&gt; float *)</span>
-<span class="kw">let</span> <span class="kw">rec</span> eval e = <span class="kw">match</span> e <span class="kw">with</span>
-  | <span class="dt">Number</span> n       -&gt; n
-  | <span class="dt">Plus</span>  (e1, e2) -&gt; eval e1 +. eval e2
-  | <span class="dt">Minus</span> (e1, e2) -&gt; eval e1 -. eval e2
-  | <span class="dt">Times</span> (e1, e2) -&gt; eval e1 *. eval e2</code></pre></div>
+<div class="sourceCode" id="cb32"><pre class="sourceCode ocaml"><code class="sourceCode ocaml"><a class="sourceLine" id="cb32-1" data-line-number="1"><span class="co">(* val eval: expr -&gt; float *)</span></a>
+<a class="sourceLine" id="cb32-2" data-line-number="2"><span class="kw">let</span> <span class="kw">rec</span> eval e = <span class="kw">match</span> e <span class="kw">with</span></a>
+<a class="sourceLine" id="cb32-3" data-line-number="3">  | Number n       -&gt; n</a>
+<a class="sourceLine" id="cb32-4" data-line-number="4">  | Plus  (e1, e2) -&gt; eval e1 +. eval e2</a>
+<a class="sourceLine" id="cb32-5" data-line-number="5">  | Minus (e1, e2) -&gt; eval e1 -. eval e2</a>
+<a class="sourceLine" id="cb32-6" data-line-number="6">  | Times (e1, e2) -&gt; eval e1 *. eval e2</a></code></pre></div>
 <p>vs</p>
 <p><strong>Haskell</strong></p>
-<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="ot">eval ::</span> <span class="dt">Expr</span> <span class="ot">-&gt;</span> <span class="dt">Double</span>
-eval (<span class="dt">Number</span>    n) <span class="fu">=</span> n
-eval (<span class="dt">Plus</span>  e1 e2) <span class="fu">=</span> eval e1 <span class="fu">+</span> eval e2
-eval (<span class="dt">Minus</span> e1 e2) <span class="fu">=</span> eval e1 <span class="fu">-</span> eval e2
-eval (<span class="dt">Times</span> e1 e2) <span class="fu">=</span> eval e1 <span class="fu">*</span> eval e2</code></pre></div>
+<div class="sourceCode" id="cb33"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb33-1" data-line-number="1"><span class="ot">eval ::</span> <span class="dt">Expr</span> <span class="ot">-&gt;</span> <span class="dt">Double</span></a>
+<a class="sourceLine" id="cb33-2" data-line-number="2">eval (<span class="dt">Number</span>    n) <span class="fu">=</span> n</a>
+<a class="sourceLine" id="cb33-3" data-line-number="3">eval (<span class="dt">Plus</span>  e1 e2) <span class="fu">=</span> eval e1 <span class="fu">+</span> eval e2</a>
+<a class="sourceLine" id="cb33-4" data-line-number="4">eval (<span class="dt">Minus</span> e1 e2) <span class="fu">=</span> eval e1 <span class="fu">-</span> eval e2</a>
+<a class="sourceLine" id="cb33-5" data-line-number="5">eval (<span class="dt">Times</span> e1 e2) <span class="fu">=</span> eval e1 <span class="fu">*</span> eval e2</a></code></pre></div>
 <p>Oh look, we wrote a <em>compiler</em>!</p>
 <ul>
 <li>What’s the <em>source</em> language?</li>
@@ -491,46 +491,46 @@ eval (<span class="dt">Times</span> e1 e2) <span class="fu">=</span> eval e1 <sp
 </ul>
 <h2 id="recursive-functions">Recursive Functions</h2>
 <p><strong>Ocaml</strong></p>
-<div class="sourceCode"><pre class="sourceCode ocaml"><code class="sourceCode ocaml"><span class="kw">let</span> fact n = <span class="kw">if</span> n &lt;= <span class="dv">0</span> <span class="kw">then</span> <span class="dv">1</span> <span class="kw">else</span> n * fact (n<span class="dv">-1</span>)</code></pre></div>
+<div class="sourceCode" id="cb34"><pre class="sourceCode ocaml"><code class="sourceCode ocaml"><a class="sourceLine" id="cb34-1" data-line-number="1"><span class="kw">let</span> fact n = <span class="kw">if</span> n &lt;= <span class="dv">0</span> <span class="kw">then</span> <span class="dv">1</span> <span class="kw">else</span> n * fact (n<span class="dv">-1</span>)</a></code></pre></div>
 <p>vs.</p>
 <p><strong>Haskell</strong></p>
-<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell">fact n <span class="fu">=</span> <span class="kw">if</span> n <span class="fu">&lt;=</span> <span class="dv">0</span> <span class="kw">then</span> <span class="dv">1</span> <span class="kw">else</span> n <span class="fu">*</span> fact (n<span class="fu">-</span><span class="dv">1</span>)</code></pre></div>
+<div class="sourceCode" id="cb35"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb35-1" data-line-number="1">fact n <span class="fu">=</span> <span class="kw">if</span> n <span class="fu">&lt;=</span> <span class="dv">0</span> <span class="kw">then</span> <span class="dv">1</span> <span class="kw">else</span> n <span class="fu">*</span> fact (n<span class="fu">-</span><span class="dv">1</span>)</a></code></pre></div>
 <h2 id="printf-debugging">Printf Debugging</h2>
 <p><strong>Very Very Important</strong></p>
 <p>Q: How to <strong>print out</strong> each input-output pair for calls to <code>fact</code>?</p>
 <p><strong>Ocaml</strong></p>
 <p>(as in Java, C, Python…), just print it:</p>
-<div class="sourceCode"><pre class="sourceCode ocaml"><code class="sourceCode ocaml"><span class="kw">let</span> fact n =
-  <span class="kw">let</span> res = <span class="kw">if</span> n &lt;= <span class="dv">0</span> <span class="kw">then</span> <span class="dv">1</span> <span class="kw">else</span> n * fact (n<span class="dv">-1</span>)        <span class="kw">in</span>
-  <span class="kw">let</span> _   = Printf<span class="kw">.</span>printf <span class="st">&quot;fact n = %d, res = %d</span><span class="ch">\n</span><span class="st">&quot;</span> n d <span class="kw">in</span>
-  res</code></pre></div>
+<div class="sourceCode" id="cb36"><pre class="sourceCode ocaml"><code class="sourceCode ocaml"><a class="sourceLine" id="cb36-1" data-line-number="1"><span class="kw">let</span> fact n =</a>
+<a class="sourceLine" id="cb36-2" data-line-number="2">  <span class="kw">let</span> res = <span class="kw">if</span> n &lt;= <span class="dv">0</span> <span class="kw">then</span> <span class="dv">1</span> <span class="kw">else</span> n * fact (n<span class="dv">-1</span>)        <span class="kw">in</span></a>
+<a class="sourceLine" id="cb36-3" data-line-number="3">  <span class="kw">let</span> _   = <span class="dt">Printf</span>.printf <span class="st">&quot;fact n = %d, res = %d</span><span class="ch">\n</span><span class="st">&quot;</span> n d <span class="kw">in</span></a>
+<a class="sourceLine" id="cb36-4" data-line-number="4">  res</a></code></pre></div>
 <p>vs</p>
 <p><strong>Haskell</strong></p>
 <p>You can’t <em>just</em> print stuff (for very good reasons…)</p>
 <p>However, you <em>can</em> do this:</p>
-<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="kw">import </span><span class="dt">Text.Printf</span> (printf)
-<span class="kw">import </span><span class="dt">Debug.Trace</span> (trace)
-
-<span class="co">-- trace :: String -&gt; a -&gt; a</span>
-fact n  <span class="fu">=</span> trace msg res
-  <span class="kw">where</span>
-    msg <span class="fu">=</span> printf <span class="st">&quot;fact n = %d, res = %d\n&quot;</span> n res
-    res <span class="fu">=</span> <span class="kw">if</span> n <span class="fu">&lt;=</span> <span class="dv">0</span> <span class="kw">then</span> <span class="dv">1</span> <span class="kw">else</span> n <span class="fu">*</span> fact (n<span class="fu">-</span><span class="dv">1</span>)</code></pre></div>
+<div class="sourceCode" id="cb37"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb37-1" data-line-number="1"><span class="kw">import</span> <span class="dt">Text.Printf</span> (printf)</a>
+<a class="sourceLine" id="cb37-2" data-line-number="2"><span class="kw">import</span> <span class="dt">Debug.Trace</span> (trace)</a>
+<a class="sourceLine" id="cb37-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb37-4" data-line-number="4"><span class="co">-- trace :: String -&gt; a -&gt; a</span></a>
+<a class="sourceLine" id="cb37-5" data-line-number="5">fact n  <span class="fu">=</span> trace msg res</a>
+<a class="sourceLine" id="cb37-6" data-line-number="6">  <span class="kw">where</span></a>
+<a class="sourceLine" id="cb37-7" data-line-number="7">    msg <span class="fu">=</span> printf <span class="st">&quot;fact n = %d, res = %d\n&quot;</span> n res</a>
+<a class="sourceLine" id="cb37-8" data-line-number="8">    res <span class="fu">=</span> <span class="kw">if</span> n <span class="fu">&lt;=</span> <span class="dv">0</span> <span class="kw">then</span> <span class="dv">1</span> <span class="kw">else</span> n <span class="fu">*</span> fact (n<span class="fu">-</span><span class="dv">1</span>)</a></code></pre></div>
 <p>Which pretty much does what you want.</p>
-<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="fu">*</span><span class="dt">Foo</span><span class="fu">&gt;</span> fact <span class="dv">5</span>
-fact n <span class="fu">=</span> <span class="dv">0</span>, res <span class="fu">=</span> <span class="dv">1</span>
-
-fact n <span class="fu">=</span> <span class="dv">1</span>, res <span class="fu">=</span> <span class="dv">1</span>
-
-fact n <span class="fu">=</span> <span class="dv">2</span>, res <span class="fu">=</span> <span class="dv">2</span>
-
-fact n <span class="fu">=</span> <span class="dv">3</span>, res <span class="fu">=</span> <span class="dv">6</span>
-
-fact n <span class="fu">=</span> <span class="dv">4</span>, res <span class="fu">=</span> <span class="dv">24</span>
-
-fact n <span class="fu">=</span> <span class="dv">5</span>, res <span class="fu">=</span> <span class="dv">120</span>
-
-<span class="dv">120</span></code></pre></div>	
+<div class="sourceCode" id="cb38"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb38-1" data-line-number="1"><span class="fu">*</span><span class="dt">Foo</span><span class="fu">&gt;</span> fact <span class="dv">5</span></a>
+<a class="sourceLine" id="cb38-2" data-line-number="2">fact n <span class="fu">=</span> <span class="dv">0</span>, res <span class="fu">=</span> <span class="dv">1</span></a>
+<a class="sourceLine" id="cb38-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb38-4" data-line-number="4">fact n <span class="fu">=</span> <span class="dv">1</span>, res <span class="fu">=</span> <span class="dv">1</span></a>
+<a class="sourceLine" id="cb38-5" data-line-number="5"></a>
+<a class="sourceLine" id="cb38-6" data-line-number="6">fact n <span class="fu">=</span> <span class="dv">2</span>, res <span class="fu">=</span> <span class="dv">2</span></a>
+<a class="sourceLine" id="cb38-7" data-line-number="7"></a>
+<a class="sourceLine" id="cb38-8" data-line-number="8">fact n <span class="fu">=</span> <span class="dv">3</span>, res <span class="fu">=</span> <span class="dv">6</span></a>
+<a class="sourceLine" id="cb38-9" data-line-number="9"></a>
+<a class="sourceLine" id="cb38-10" data-line-number="10">fact n <span class="fu">=</span> <span class="dv">4</span>, res <span class="fu">=</span> <span class="dv">24</span></a>
+<a class="sourceLine" id="cb38-11" data-line-number="11"></a>
+<a class="sourceLine" id="cb38-12" data-line-number="12">fact n <span class="fu">=</span> <span class="dv">5</span>, res <span class="fu">=</span> <span class="dv">120</span></a>
+<a class="sourceLine" id="cb38-13" data-line-number="13"></a>
+<a class="sourceLine" id="cb38-14" data-line-number="14"><span class="dv">120</span></a></code></pre></div>	
                 <hr>
             </div>
         </div>

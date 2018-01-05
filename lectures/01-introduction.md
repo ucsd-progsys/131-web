@@ -1,7 +1,7 @@
 ---
 title: Hello, world! 
 headerImg: Eiffel.png
-date: 2016-09-23
+date: 2018-01-08
 ---
 
 
@@ -127,8 +127,7 @@ We will
 ### Who *are* we?
 
 * **Boss:** Ranjit Jhala
-* **TAs:** Alexander Bakst, Rami Gokhan, Panagiotis Vekris
-* **Tutors:** TBA
+* **TAs:** Rami Gokhan, Anish Tondwalkar, Madhuri Yoganatha 
 
 ### How will we *grade*?
 
@@ -139,13 +138,13 @@ We will
 + Groups of 2
 
 
-**(30%) Midterm**
+**(30%) Midterm (2/16)**
 
-+ In-class (TBA) 
++ In-class  
 + 2-sided printed "cheat sheet"
 
 
-**(35%) Final**
+**(35%) Final (3/21)**
 
 + 2-sided printed cheat sheet
 
@@ -153,7 +152,7 @@ We will
 **(05%) Clickers**
 
 + *Attempting to answer* > 75% questions
-
++ From next week, please sit in [the space](/static/img/center119.pdf) assigned to [your group](/static/img/groups.txt)
 
 **(05%) Piazza Extra Credit**
 
@@ -179,6 +178,7 @@ So we will write _many_ compilers:
 * Functions
 * Tuples and Structures
 * Lambdas and closures
+* Types and Inference
 * Garbage Collection
 
 ## What will *you learn* ?

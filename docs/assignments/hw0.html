@@ -229,8 +229,8 @@ if (window.navigator.appName == "Microsoft Internet Explorer") {
         <div class="row">
             <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
 			<h2 id="download">Download</h2>
-<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="kw">git</span> clone https://github.com/ucsd-cse131/00-warmup.git
-$ <span class="kw">cd</span> 00-warmup/</code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb1-1" data-line-number="1">$ <span class="fu">git</span> clone https://github.com/ucsd-cse131/00-warmup.git</a>
+<a class="sourceLine" id="cb1-2" data-line-number="2">$ <span class="bu">cd</span> 00-warmup/</a></code></pre></div>
 <h2 id="overview">Overview</h2>
 <p>This is a <em>warm up</em> assignment which will</p>
 <ul>
@@ -238,12 +238,12 @@ $ <span class="kw">cd</span> 00-warmup/</code></pre></div>
 <li>provide a quick introduction to Haskell.</li>
 </ul>
 <p>To this end, you will, reimplement certain problems from CSE 130 in Haskell. Recall that the problems require relatively little code ranging from 2 to 15 lines. If any function requires more than that, you can be sure that you need to rethink your solution.</p>
-<ol style="list-style-type: decimal">
+<ol type="1">
 <li><a href="../lib/Hw0.hs">lib/Hw0.hs</a> has skeleton functions with missing bodies that you will fill in,</li>
 <li><a href="../tests/Test.hs">tests/Test.hs</a> has some sample tests, and testing code that you will use to check your assignments before submitting.</li>
 </ol>
 <p>You should only need to modify the parts of the files which say:</p>
-<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell">error <span class="st">&quot;TBD: ...&quot;</span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb2-1" data-line-number="1">error <span class="st">&quot;TBD: ...&quot;</span></a></code></pre></div>
 <p>with suitable Haskell implementations.</p>
 <p><strong>Note:</strong> Start early, to avoid any unexpected shocks late in the day.</p>
 <h2 id="assignment-testing-and-evaluation">Assignment Testing and Evaluation</h2>
@@ -262,112 +262,112 @@ OVERALL SCORE = ... / ...</code></pre>
 <p>The other lines will give you a readout for each test. You are encouraged to try to understand the testing code, but you will not be graded on this.</p>
 <h2 id="submission-instructions">Submission Instructions</h2>
 <p>To submit your code, just do:</p>
-<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="kw">make</span> turnin </code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb6-1" data-line-number="1">$ <span class="fu">make</span> turnin </a></code></pre></div>
 <p><code>turnin</code> will provide you with a confirmation of the submission process; make sure that the size of the file indicated by <code>turnin</code> matches the size of your file. See the ACS Web page on <a href="https://acms.ucsd.edu/info/turnin.html">turnin</a> for more information on the operation of the program.</p>
 <h2 id="problem-1-roots-and-persistence">Problem 1: <a href="http://mathworld.wolfram.com/AdditivePersistence.html">Roots and Persistence</a></h2>
 <h3 id="a-10-points">(a) 10 points</h3>
 <p>Fill in the implementation of</p>
-<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="ot">sumList ::</span> [<span class="dt">Int</span>] <span class="ot">-&gt;</span> <span class="dt">Int</span>
-sumList xs <span class="fu">=</span> error <span class="st">&quot;TBD:sumList&quot;</span></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb7-1" data-line-number="1"><span class="ot">sumList ::</span> [<span class="dt">Int</span>] <span class="ot">-&gt;</span> <span class="dt">Int</span></a>
+<a class="sourceLine" id="cb7-2" data-line-number="2">sumList xs <span class="fu">=</span> error <span class="st">&quot;TBD:sumList&quot;</span></a></code></pre></div>
 <p>that such that <code>sumList xs</code> returns the sum of the integer elements of <code>xs</code>. Once you have implemented the function, you should get the following behavior at the prompt:</p>
-<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell">ghci<span class="fu">&gt;</span> sumList [<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>]
-<span class="dv">10</span>
-
-ghci<span class="fu">&gt;</span> sumList [<span class="dv">1</span>, <span class="fu">-</span><span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">5</span>]
-<span class="dv">7</span>
-
-ghci<span class="fu">&gt;</span> sumList [<span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">5</span>, <span class="dv">7</span>, <span class="dv">9</span>, <span class="dv">11</span>]
-<span class="dv">36</span></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb8-1" data-line-number="1">ghci<span class="fu">&gt;</span> sumList [<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>]</a>
+<a class="sourceLine" id="cb8-2" data-line-number="2"><span class="dv">10</span></a>
+<a class="sourceLine" id="cb8-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb8-4" data-line-number="4">ghci<span class="fu">&gt;</span> sumList [<span class="dv">1</span>, <span class="fu">-</span><span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">5</span>]</a>
+<a class="sourceLine" id="cb8-5" data-line-number="5"><span class="dv">7</span></a>
+<a class="sourceLine" id="cb8-6" data-line-number="6"></a>
+<a class="sourceLine" id="cb8-7" data-line-number="7">ghci<span class="fu">&gt;</span> sumList [<span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">5</span>, <span class="dv">7</span>, <span class="dv">9</span>, <span class="dv">11</span>]</a>
+<a class="sourceLine" id="cb8-8" data-line-number="8"><span class="dv">36</span></a></code></pre></div>
 <h2 id="b-10-points">(b) 10 points</h2>
 <p>Fill in the implementation of the function</p>
-<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="ot">digitsOfInt ::</span> <span class="dt">Int</span> <span class="ot">-&gt;</span> [<span class="dt">Int</span>]
-digitsOfInt n <span class="fu">=</span> error <span class="st">&quot;TBD:digitsOfInt&quot;</span></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb9-1" data-line-number="1"><span class="ot">digitsOfInt ::</span> <span class="dt">Int</span> <span class="ot">-&gt;</span> [<span class="dt">Int</span>]</a>
+<a class="sourceLine" id="cb9-2" data-line-number="2">digitsOfInt n <span class="fu">=</span> error <span class="st">&quot;TBD:digitsOfInt&quot;</span></a></code></pre></div>
 <p>such that <code>digitsOfInt n</code></p>
 <ul>
 <li>returns <code>[]</code> if <code>n</code> is not positive, and otherwise</li>
 <li>returns the list of digits of <code>n</code> in the order in which they appear in <code>n</code>.</li>
 </ul>
 <p>Once you have implemented the function, you should get the following:</p>
-<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell">ghci<span class="fu">&gt;</span> digitsOfInt <span class="dv">3124</span>
-[<span class="dv">3</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">4</span>]
-
-ghci<span class="fu">&gt;</span> digitsOfInt <span class="dv">352663</span>
-[<span class="dv">3</span>, <span class="dv">5</span>, <span class="dv">2</span>, <span class="dv">6</span>, <span class="dv">6</span>, <span class="dv">3</span>]</code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb10-1" data-line-number="1">ghci<span class="fu">&gt;</span> digitsOfInt <span class="dv">3124</span></a>
+<a class="sourceLine" id="cb10-2" data-line-number="2">[<span class="dv">3</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">4</span>]</a>
+<a class="sourceLine" id="cb10-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb10-4" data-line-number="4">ghci<span class="fu">&gt;</span> digitsOfInt <span class="dv">352663</span></a>
+<a class="sourceLine" id="cb10-5" data-line-number="5">[<span class="dv">3</span>, <span class="dv">5</span>, <span class="dv">2</span>, <span class="dv">6</span>, <span class="dv">6</span>, <span class="dv">3</span>]</a></code></pre></div>
 <h3 id="c-1010-points">(c) 10+10 points</h3>
 <p>Consider the process of taking a number, adding its digits, then adding the digits of the number derived from it, etc., until the remaining number has only one digit. The number of additions required to obtain a single digit from a number <code>n</code> is called the <em>additive persistence</em> of <code>n</code>, and the digit obtained is called the <em>digital root</em> of <code>n</code>.</p>
 <p>For example, the sequence obtained from the starting number <code>9876</code> is <code>9876</code>, <code>30</code>, <code>3</code>, so <code>9876</code> has an additive persistence of <code>2</code> and a digital root of <code>3</code>.</p>
 <p>Write two functions</p>
-<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="ot">additivePersistence ::</span> <span class="dt">Int</span> <span class="ot">-&gt;</span> <span class="dt">Int</span>
-additivePersistence n <span class="fu">=</span> error <span class="st">&quot;TBD:additivePersistence&quot;</span>
-
-<span class="ot">digitalRoot ::</span> <span class="dt">Int</span> <span class="ot">-&gt;</span> <span class="dt">Int</span>
-digitalRoot n <span class="fu">=</span> error <span class="st">&quot;TBD:digitalRoot&quot;</span></code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb11-1" data-line-number="1"><span class="ot">additivePersistence ::</span> <span class="dt">Int</span> <span class="ot">-&gt;</span> <span class="dt">Int</span></a>
+<a class="sourceLine" id="cb11-2" data-line-number="2">additivePersistence n <span class="fu">=</span> error <span class="st">&quot;TBD:additivePersistence&quot;</span></a>
+<a class="sourceLine" id="cb11-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb11-4" data-line-number="4"><span class="ot">digitalRoot ::</span> <span class="dt">Int</span> <span class="ot">-&gt;</span> <span class="dt">Int</span></a>
+<a class="sourceLine" id="cb11-5" data-line-number="5">digitalRoot n <span class="fu">=</span> error <span class="st">&quot;TBD:digitalRoot&quot;</span></a></code></pre></div>
 <p>that take positive integer arguments <code>n</code> and return respectively the additive persistence and the digital root of <code>n</code>. Once you have implemented the functions, you should get the following behavior at the prompt:</p>
-<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell">ghci<span class="fu">&gt;</span> additivePersistence <span class="dv">9876</span>
-<span class="dv">2</span>
-
-ghci<span class="fu">&gt;</span> digitalRoot <span class="dv">9876</span>
-<span class="dv">3</span></code></pre></div>
+<div class="sourceCode" id="cb12"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb12-1" data-line-number="1">ghci<span class="fu">&gt;</span> additivePersistence <span class="dv">9876</span></a>
+<a class="sourceLine" id="cb12-2" data-line-number="2"><span class="dv">2</span></a>
+<a class="sourceLine" id="cb12-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb12-4" data-line-number="4">ghci<span class="fu">&gt;</span> digitalRoot <span class="dv">9876</span></a>
+<a class="sourceLine" id="cb12-5" data-line-number="5"><span class="dv">3</span></a></code></pre></div>
 <h2 id="problem-2-palindromes">Problem 2: Palindromes</h2>
 <h3 id="a-15-points">(a) 15 points</h3>
 <p>Without using any built-in functions (e.g. <code>reverse</code>), write an function:</p>
-<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="ot">listReverse ::</span> [a] <span class="ot">-&gt;</span> [a]
-listReverse xs <span class="fu">=</span> error <span class="st">&quot;TBD:listReverse&quot;</span></code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb13-1" data-line-number="1"><span class="ot">listReverse ::</span> [a] <span class="ot">-&gt;</span> [a]</a>
+<a class="sourceLine" id="cb13-2" data-line-number="2">listReverse xs <span class="fu">=</span> error <span class="st">&quot;TBD:listReverse&quot;</span></a></code></pre></div>
 <p>such that <code>listReverse [x1,x2,...,xn]</code> returns the list <code>[xn,...,x2,x1]</code> i.e. the input list but with the values in reversed order. You should get the following behavior:</p>
-<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell">ghci<span class="fu">&gt;</span> listReverse [<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>]
-[<span class="dv">4</span>, <span class="dv">3</span>, <span class="dv">2</span>, <span class="dv">1</span>]
-
-ghci<span class="fu">&gt;</span> listReverse [<span class="st">&quot;a&quot;</span>, <span class="st">&quot;b&quot;</span>, <span class="st">&quot;c&quot;</span>, <span class="st">&quot;d&quot;</span>]
-[<span class="st">&quot;d&quot;</span>, <span class="st">&quot;c&quot;</span>, <span class="st">&quot;b&quot;</span>, <span class="st">&quot;a&quot;</span>]</code></pre></div>
-<h3 id="b-10-points-1">(b) 10 points</h3>
+<div class="sourceCode" id="cb14"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb14-1" data-line-number="1">ghci<span class="fu">&gt;</span> listReverse [<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>]</a>
+<a class="sourceLine" id="cb14-2" data-line-number="2">[<span class="dv">4</span>, <span class="dv">3</span>, <span class="dv">2</span>, <span class="dv">1</span>]</a>
+<a class="sourceLine" id="cb14-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb14-4" data-line-number="4">ghci<span class="fu">&gt;</span> listReverse [<span class="st">&quot;a&quot;</span>, <span class="st">&quot;b&quot;</span>, <span class="st">&quot;c&quot;</span>, <span class="st">&quot;d&quot;</span>]</a>
+<a class="sourceLine" id="cb14-5" data-line-number="5">[<span class="st">&quot;d&quot;</span>, <span class="st">&quot;c&quot;</span>, <span class="st">&quot;b&quot;</span>, <span class="st">&quot;a&quot;</span>]</a></code></pre></div>
+<p>###(b) 10 points</p>
 <p>A <em>palindrome</em> is a word that reads the same from left-to-right and right-to-left. Write a function</p>
-<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="ot">palindrome ::</span> <span class="dt">String</span> <span class="ot">-&gt;</span> <span class="dt">Bool</span>
-palindrome w <span class="fu">=</span> error <span class="st">&quot;TBD:palindrome&quot;</span></code></pre></div>
+<div class="sourceCode" id="cb15"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb15-1" data-line-number="1"><span class="ot">palindrome ::</span> <span class="dt">String</span> <span class="ot">-&gt;</span> <span class="dt">Bool</span></a>
+<a class="sourceLine" id="cb15-2" data-line-number="2">palindrome w <span class="fu">=</span> error <span class="st">&quot;TBD:palindrome&quot;</span></a></code></pre></div>
 <p>such that <code>palindrome w</code> returns <code>True</code> if the string is a palindrome and <code>False</code> otherwise. You should get the following behavior:</p>
-<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell">ghci<span class="fu">&gt;</span> palindrome <span class="st">&quot;malayalam&quot;</span>
-<span class="dt">True</span>
-ghci<span class="fu">&gt;</span> palindrome <span class="st">&quot;myxomatosis&quot;</span>
-<span class="dt">False</span></code></pre></div>
+<div class="sourceCode" id="cb16"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb16-1" data-line-number="1">ghci<span class="fu">&gt;</span> palindrome <span class="st">&quot;malayalam&quot;</span></a>
+<a class="sourceLine" id="cb16-2" data-line-number="2"><span class="dt">True</span></a>
+<a class="sourceLine" id="cb16-3" data-line-number="3">ghci<span class="fu">&gt;</span> palindrome <span class="st">&quot;myxomatosis&quot;</span></a>
+<a class="sourceLine" id="cb16-4" data-line-number="4"><span class="dt">False</span></a></code></pre></div>
 <h2 id="problem-3-folding-warm-up">Problem 3: Folding Warm-Up</h2>
 <h3 id="a-15-points-1">(a) 15 points</h3>
 <p>Fill in the skeleton given for <code>sqsum</code>, which uses <code>foldl'</code> (the equivalent of Ocaml’s <code>List.fold_left</code>) to get a function</p>
-<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="ot">sqSum ::</span> [<span class="dt">Int</span>] <span class="ot">-&gt;</span> <span class="dt">Int</span></code></pre></div>
+<div class="sourceCode" id="cb17"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb17-1" data-line-number="1"><span class="ot">sqSum ::</span> [<span class="dt">Int</span>] <span class="ot">-&gt;</span> <span class="dt">Int</span></a></code></pre></div>
 <p>such that <code>sqSum [x1,...,xn]</code> returns the integer <code>x1^2 + ... + xn^2</code></p>
 <p>Your task is to fill in the appropriate values for</p>
-<ol style="list-style-type: decimal">
+<ol type="1">
 <li>the folding function <code>f</code> and</li>
 <li>the base case <code>base</code>.</li>
 </ol>
 <p>Once you have implemented the function, you should get the following behavior:</p>
-<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell">ghci<span class="fu">&gt;</span> sqSum []
-<span class="dv">0</span>
-
-ghci<span class="fu">&gt;</span> sqSum [<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>]
-<span class="dv">30</span>
-
-ghci<span class="fu">&gt;</span> sqSum [(<span class="fu">-</span><span class="dv">1</span>), (<span class="fu">-</span><span class="dv">2</span>), (<span class="fu">-</span><span class="dv">3</span>), (<span class="fu">-</span><span class="dv">4</span>)]
-<span class="dv">30</span></code></pre></div>
+<div class="sourceCode" id="cb18"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb18-1" data-line-number="1">ghci<span class="fu">&gt;</span> sqSum []</a>
+<a class="sourceLine" id="cb18-2" data-line-number="2"><span class="dv">0</span></a>
+<a class="sourceLine" id="cb18-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb18-4" data-line-number="4">ghci<span class="fu">&gt;</span> sqSum [<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>]</a>
+<a class="sourceLine" id="cb18-5" data-line-number="5"><span class="dv">30</span></a>
+<a class="sourceLine" id="cb18-6" data-line-number="6"></a>
+<a class="sourceLine" id="cb18-7" data-line-number="7">ghci<span class="fu">&gt;</span> sqSum [(<span class="fu">-</span><span class="dv">1</span>), (<span class="fu">-</span><span class="dv">2</span>), (<span class="fu">-</span><span class="dv">3</span>), (<span class="fu">-</span><span class="dv">4</span>)]</a>
+<a class="sourceLine" id="cb18-8" data-line-number="8"><span class="dv">30</span></a></code></pre></div>
 <h3 id="b-30-points">(b) 30 points</h3>
 <p>Fill in the skeleton given for <code>pipe</code> which uses <code>foldl'</code> to get a function</p>
-<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="ot">pipe ::</span> [(a <span class="ot">-&gt;</span> a)] <span class="ot">-&gt;</span> (a <span class="ot">-&gt;</span> a)</code></pre></div>
+<div class="sourceCode" id="cb19"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb19-1" data-line-number="1"><span class="ot">pipe ::</span> [(a <span class="ot">-&gt;</span> a)] <span class="ot">-&gt;</span> (a <span class="ot">-&gt;</span> a)</a></code></pre></div>
 <p>such that <code>pipe [f1,...,fn] x</code> (where <code>f1,...,fn</code> are functions!) should return <code>f1(f2(...(fn x)))</code>.</p>
 <p>Again, your task is to fill in the appropriate values for</p>
-<ol style="list-style-type: decimal">
+<ol type="1">
 <li>the folding function <code>f</code> and</li>
 <li>the base case <code>base</code>.</li>
 </ol>
 <p>Once you have implemented the function, you should get the following behavior:</p>
-<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell">ghci<span class="fu">&gt;</span> pipe [] <span class="dv">3</span>
-<span class="dv">3</span>
-
-ghci<span class="fu">&gt;</span> pipe [(\x <span class="ot">-&gt;</span> x<span class="fu">+</span>x), (\x <span class="ot">-&gt;</span> x <span class="fu">+</span> <span class="dv">3</span>)] <span class="dv">3</span>
-<span class="dv">12</span>
-
-ghci<span class="fu">&gt;</span> pipe [(\x <span class="ot">-&gt;</span> x <span class="fu">*</span> <span class="dv">4</span>), (\x <span class="ot">-&gt;</span> x <span class="fu">+</span> x)] <span class="dv">3</span>
-<span class="dv">24</span></code></pre></div>
+<div class="sourceCode" id="cb20"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb20-1" data-line-number="1">ghci<span class="fu">&gt;</span> pipe [] <span class="dv">3</span></a>
+<a class="sourceLine" id="cb20-2" data-line-number="2"><span class="dv">3</span></a>
+<a class="sourceLine" id="cb20-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb20-4" data-line-number="4">ghci<span class="fu">&gt;</span> pipe [(\x <span class="ot">-&gt;</span> x<span class="fu">+</span>x), (\x <span class="ot">-&gt;</span> x <span class="fu">+</span> <span class="dv">3</span>)] <span class="dv">3</span></a>
+<a class="sourceLine" id="cb20-5" data-line-number="5"><span class="dv">12</span></a>
+<a class="sourceLine" id="cb20-6" data-line-number="6"></a>
+<a class="sourceLine" id="cb20-7" data-line-number="7">ghci<span class="fu">&gt;</span> pipe [(\x <span class="ot">-&gt;</span> x <span class="fu">*</span> <span class="dv">4</span>), (\x <span class="ot">-&gt;</span> x <span class="fu">+</span> x)] <span class="dv">3</span></a>
+<a class="sourceLine" id="cb20-8" data-line-number="8"><span class="dv">24</span></a></code></pre></div>
 <h3 id="c-20-points">(c) 20 points</h3>
 <p>Fill in the skeleton given for <code>sepConcat</code>, which uses <code>foldl'</code> to get a function</p>
-<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="ot">sepConcat ::</span> <span class="dt">String</span> <span class="ot">-&gt;</span> [<span class="dt">String</span>] <span class="ot">-&gt;</span> <span class="dt">String</span></code></pre></div>
+<div class="sourceCode" id="cb21"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb21-1" data-line-number="1"><span class="ot">sepConcat ::</span> <span class="dt">String</span> <span class="ot">-&gt;</span> [<span class="dt">String</span>] <span class="ot">-&gt;</span> <span class="dt">String</span></a></code></pre></div>
 <p>Intuitively, the call <code>sepConcat sep [s1,...,sn]</code> where</p>
 <ul>
 <li><code>sep</code> is a string to be used as a separator, and</li>
@@ -381,93 +381,93 @@ ghci<span class="fu">&gt;</span> pipe [(\x <span class="ot">-&gt;</span> x <span
 </ul>
 <p>You should only modify the parts of the skeleton consisting of <code>error &quot;TBD&quot; &quot;</code>. You will need to define the function <code>f</code>, and give values for <code>base</code> and <code>l</code>.</p>
 <p>Once done, you should get the following behavior:</p>
-<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell">ghci<span class="fu">&gt;</span> sepConcat <span class="st">&quot;, &quot;</span> [<span class="st">&quot;foo&quot;</span>, <span class="st">&quot;bar&quot;</span>, <span class="st">&quot;baz&quot;</span>]
-<span class="st">&quot;foo, bar, baz&quot;</span>
-
-ghci<span class="fu">&gt;</span> sepConcat <span class="st">&quot;---&quot;</span> []
-<span class="st">&quot;&quot;</span>
-
-ghci<span class="fu">&gt;</span> sepConcat <span class="st">&quot;&quot;</span> [<span class="st">&quot;a&quot;</span>, <span class="st">&quot;b&quot;</span>, <span class="st">&quot;c&quot;</span>, <span class="st">&quot;d&quot;</span>, <span class="st">&quot;e&quot;</span>]
-<span class="st">&quot;abcde&quot;</span>
-
-ghci<span class="fu">&gt;</span> sepConcat <span class="st">&quot;X&quot;</span> [<span class="st">&quot;hello&quot;</span>]
-<span class="st">&quot;hello&quot;</span></code></pre></div>
+<div class="sourceCode" id="cb22"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb22-1" data-line-number="1">ghci<span class="fu">&gt;</span> sepConcat <span class="st">&quot;, &quot;</span> [<span class="st">&quot;foo&quot;</span>, <span class="st">&quot;bar&quot;</span>, <span class="st">&quot;baz&quot;</span>]</a>
+<a class="sourceLine" id="cb22-2" data-line-number="2"><span class="st">&quot;foo, bar, baz&quot;</span></a>
+<a class="sourceLine" id="cb22-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb22-4" data-line-number="4">ghci<span class="fu">&gt;</span> sepConcat <span class="st">&quot;---&quot;</span> []</a>
+<a class="sourceLine" id="cb22-5" data-line-number="5"><span class="st">&quot;&quot;</span></a>
+<a class="sourceLine" id="cb22-6" data-line-number="6"></a>
+<a class="sourceLine" id="cb22-7" data-line-number="7">ghci<span class="fu">&gt;</span> sepConcat <span class="st">&quot;&quot;</span> [<span class="st">&quot;a&quot;</span>, <span class="st">&quot;b&quot;</span>, <span class="st">&quot;c&quot;</span>, <span class="st">&quot;d&quot;</span>, <span class="st">&quot;e&quot;</span>]</a>
+<a class="sourceLine" id="cb22-8" data-line-number="8"><span class="st">&quot;abcde&quot;</span></a>
+<a class="sourceLine" id="cb22-9" data-line-number="9"></a>
+<a class="sourceLine" id="cb22-10" data-line-number="10">ghci<span class="fu">&gt;</span> sepConcat <span class="st">&quot;X&quot;</span> [<span class="st">&quot;hello&quot;</span>]</a>
+<a class="sourceLine" id="cb22-11" data-line-number="11"><span class="st">&quot;hello&quot;</span></a></code></pre></div>
 <h3 id="d-10-points">(d) 10 points</h3>
 <p>Implement the function</p>
-<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="ot">stringOfList ::</span> (a <span class="ot">-&gt;</span> <span class="dt">String</span>) <span class="ot">-&gt;</span> [a] <span class="ot">-&gt;</span> <span class="dt">String</span></code></pre></div>
+<div class="sourceCode" id="cb23"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb23-1" data-line-number="1"><span class="ot">stringOfList ::</span> (a <span class="ot">-&gt;</span> <span class="dt">String</span>) <span class="ot">-&gt;</span> [a] <span class="ot">-&gt;</span> <span class="dt">String</span></a></code></pre></div>
 <p>such that <code>stringOfList f [x1,...,xn]</code> should return the string <code>&quot;[&quot; ++ (f x1) ++ &quot;, &quot; ++ ... ++ (f xn) ++ &quot;]&quot;</code></p>
 <p>This function can be implemented on one line, <strong>without using any recursion</strong> by calling <code>map</code> and <code>sepConcat</code> with appropriate inputs.</p>
 <p>You should get the following behavior:</p>
-<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell">ghci<span class="fu">&gt;</span> stringOfList show [<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">6</span>]
-<span class="st">&quot;[1, 2, 3, 4, 5, 6]&quot;</span>
-
-ghci<span class="fu">&gt;</span> stringOfList (fun x <span class="ot">-&gt;</span> x) [<span class="st">&quot;foo&quot;</span>]
-<span class="st">&quot;[foo]&quot;</span>
-
-ghci<span class="fu">&gt;</span> stringOfList (stringOfList show) [[<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>], [<span class="dv">4</span>, <span class="dv">5</span>], [<span class="dv">6</span>], []]
-<span class="st">&quot;[[1, 2, 3], [4, 5], [6], []]&quot;</span></code></pre></div>
+<div class="sourceCode" id="cb24"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb24-1" data-line-number="1">ghci<span class="fu">&gt;</span> stringOfList show [<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">6</span>]</a>
+<a class="sourceLine" id="cb24-2" data-line-number="2"><span class="st">&quot;[1, 2, 3, 4, 5, 6]&quot;</span></a>
+<a class="sourceLine" id="cb24-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb24-4" data-line-number="4">ghci<span class="fu">&gt;</span> stringOfList (fun x <span class="ot">-&gt;</span> x) [<span class="st">&quot;foo&quot;</span>]</a>
+<a class="sourceLine" id="cb24-5" data-line-number="5"><span class="st">&quot;[foo]&quot;</span></a>
+<a class="sourceLine" id="cb24-6" data-line-number="6"></a>
+<a class="sourceLine" id="cb24-7" data-line-number="7">ghci<span class="fu">&gt;</span> stringOfList (stringOfList show) [[<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>], [<span class="dv">4</span>, <span class="dv">5</span>], [<span class="dv">6</span>], []]</a>
+<a class="sourceLine" id="cb24-8" data-line-number="8"><span class="st">&quot;[[1, 2, 3], [4, 5], [6], []]&quot;</span></a></code></pre></div>
 <h2 id="problem-4-big-numbers">Problem 4: Big Numbers</h2>
 <p>The Haskell type <code>Int</code> only contains values up to a certain size (for reasons that will become clear as we implement our own compiler). For example,</p>
-<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell">ghci<span class="fu">&gt;</span> <span class="kw">let</span> x <span class="fu">=</span> <span class="dv">99999999999999999999999999999999999999999999999</span><span class="ot"> ::</span> <span class="dt">Int</span>
-
-<span class="fu">&lt;</span>interactive<span class="fu">&gt;:</span><span class="dv">3</span><span class="fu">:</span><span class="dv">9</span><span class="fu">:</span> <span class="dt">Warning</span><span class="fu">:</span>
-    <span class="dt">Literal</span> <span class="dv">99999999999999999999999999999999999999999999999</span> is out <span class="kw">of</span> the <span class="dt">Int</span> range <span class="fu">-</span><span class="dv">9223372036854775808</span><span class="fu">..</span><span class="dv">9223372036854775807</span></code></pre></div>
+<div class="sourceCode" id="cb25"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb25-1" data-line-number="1">ghci<span class="fu">&gt;</span> <span class="kw">let</span> x <span class="fu">=</span> <span class="dv">99999999999999999999999999999999999999999999999</span><span class="ot"> ::</span> <span class="dt">Int</span></a>
+<a class="sourceLine" id="cb25-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb25-3" data-line-number="3"><span class="fu">&lt;</span>interactive<span class="fu">&gt;:</span><span class="dv">3</span><span class="fu">:</span><span class="dv">9</span><span class="fu">:</span> <span class="dt">Warning</span><span class="fu">:</span></a>
+<a class="sourceLine" id="cb25-4" data-line-number="4">    <span class="dt">Literal</span> <span class="dv">99999999999999999999999999999999999999999999999</span> is out <span class="kw">of</span> the <span class="dt">Int</span> range <span class="fu">-</span><span class="dv">9223372036854775808</span><span class="fu">..</span><span class="dv">9223372036854775807</span></a></code></pre></div>
 <p>You will now implement functions to manipulate arbitrarily large numbers represented as <code>[Int]</code>, i.e. lists of <code>Int</code>.</p>
 <h3 id="a-10-5-10-points">(a) 10 + 5 + 10 points</h3>
 <p>Write a function</p>
-<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="ot">clone ::</span> a <span class="ot">-&gt;</span> <span class="dt">Int</span> <span class="ot">-&gt;</span> [a]</code></pre></div>
+<div class="sourceCode" id="cb26"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb26-1" data-line-number="1"><span class="ot">clone ::</span> a <span class="ot">-&gt;</span> <span class="dt">Int</span> <span class="ot">-&gt;</span> [a]</a></code></pre></div>
 <p>such that <code>clone x n</code> returns a list of <code>n</code> copies of the value <code>x</code>. If the integer <code>n</code> is <code>0</code> or negative, then <code>clone</code> should return the empty list. You should get the following behavior:</p>
-<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell">ghci<span class="fu">&gt;</span> clone <span class="dv">3</span> <span class="dv">5</span>
-[<span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">3</span>]
-
-ghci<span class="fu">&gt;</span> clone <span class="st">&quot;foo&quot;</span> <span class="dv">2</span>
-[<span class="st">&quot;foo&quot;</span>, <span class="st">&quot;foo&quot;</span>]</code></pre></div>
+<div class="sourceCode" id="cb27"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb27-1" data-line-number="1">ghci<span class="fu">&gt;</span> clone <span class="dv">3</span> <span class="dv">5</span></a>
+<a class="sourceLine" id="cb27-2" data-line-number="2">[<span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">3</span>]</a>
+<a class="sourceLine" id="cb27-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb27-4" data-line-number="4">ghci<span class="fu">&gt;</span> clone <span class="st">&quot;foo&quot;</span> <span class="dv">2</span></a>
+<a class="sourceLine" id="cb27-5" data-line-number="5">[<span class="st">&quot;foo&quot;</span>, <span class="st">&quot;foo&quot;</span>]</a></code></pre></div>
 <p>Use <code>clone</code> to write a function</p>
-<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="ot">padZero ::</span> [<span class="dt">Int</span>] <span class="ot">-&gt;</span> [<span class="dt">Int</span>] <span class="ot">-&gt;</span> ([<span class="dt">Int</span>], [<span class="dt">Int</span>])</code></pre></div>
+<div class="sourceCode" id="cb28"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb28-1" data-line-number="1"><span class="ot">padZero ::</span> [<span class="dt">Int</span>] <span class="ot">-&gt;</span> [<span class="dt">Int</span>] <span class="ot">-&gt;</span> ([<span class="dt">Int</span>], [<span class="dt">Int</span>])</a></code></pre></div>
 <p>which takes two lists: <code>[x1,...,xn]</code> <code>[y1,...,ym]</code> and adds zeros in front of the <em>shorter</em> list to make the lists equal.</p>
 <p>Your implementation should *not** be recursive.</p>
 <p>You should get the following behavior:</p>
-<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell">ghci<span class="fu">&gt;</span> padZero [<span class="dv">9</span>, <span class="dv">9</span>] [<span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">2</span>]
-([<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">9</span>, <span class="dv">9</span>], [<span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">2</span>])
-
-ghci<span class="fu">&gt;</span> padZero [<span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">2</span>] [<span class="dv">9</span>, <span class="dv">9</span>]
-([<span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">2</span>], [<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">9</span>, <span class="dv">9</span>])</code></pre></div>
+<div class="sourceCode" id="cb29"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb29-1" data-line-number="1">ghci<span class="fu">&gt;</span> padZero [<span class="dv">9</span>, <span class="dv">9</span>] [<span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">2</span>]</a>
+<a class="sourceLine" id="cb29-2" data-line-number="2">([<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">9</span>, <span class="dv">9</span>], [<span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">2</span>])</a>
+<a class="sourceLine" id="cb29-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb29-4" data-line-number="4">ghci<span class="fu">&gt;</span> padZero [<span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">2</span>] [<span class="dv">9</span>, <span class="dv">9</span>]</a>
+<a class="sourceLine" id="cb29-5" data-line-number="5">([<span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">2</span>], [<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">9</span>, <span class="dv">9</span>])</a></code></pre></div>
 <p>Next, write a function</p>
-<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="ot">removeZero ::</span> [<span class="dt">Int</span>] <span class="ot">-&gt;</span> [<span class="dt">Int</span>]</code></pre></div>
+<div class="sourceCode" id="cb30"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb30-1" data-line-number="1"><span class="ot">removeZero ::</span> [<span class="dt">Int</span>] <span class="ot">-&gt;</span> [<span class="dt">Int</span>]</a></code></pre></div>
 <p>that takes a list and removes a prefix of leading zeros, yielding the following behavior:</p>
-<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell">ghci<span class="fu">&gt;</span> removeZero [<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">2</span>]
-[<span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">2</span>]
-
-ghci<span class="fu">&gt;</span> removeZero [<span class="dv">9</span>, <span class="dv">9</span>]
-[<span class="dv">9</span>, <span class="dv">9</span>]
-
-ghci<span class="fu">&gt;</span> removeZero [<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>]
-[]</code></pre></div>
+<div class="sourceCode" id="cb31"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb31-1" data-line-number="1">ghci<span class="fu">&gt;</span> removeZero [<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">2</span>]</a>
+<a class="sourceLine" id="cb31-2" data-line-number="2">[<span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">2</span>]</a>
+<a class="sourceLine" id="cb31-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb31-4" data-line-number="4">ghci<span class="fu">&gt;</span> removeZero [<span class="dv">9</span>, <span class="dv">9</span>]</a>
+<a class="sourceLine" id="cb31-5" data-line-number="5">[<span class="dv">9</span>, <span class="dv">9</span>]</a>
+<a class="sourceLine" id="cb31-6" data-line-number="6"></a>
+<a class="sourceLine" id="cb31-7" data-line-number="7">ghci<span class="fu">&gt;</span> removeZero [<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>]</a>
+<a class="sourceLine" id="cb31-8" data-line-number="8">[]</a></code></pre></div>
 <h3 id="b-25-points">(b) 25 points</h3>
 <p>Let us use the list <code>[d1, d2, ..., dn]</code>, where each <code>di</code> is between <code>0</code> and <code>9</code>, to represent the (positive) <strong>big-integer</strong> <code>d1d2...dn</code>.</p>
-<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="kw">type</span> <span class="dt">BigInt</span> <span class="fu">=</span> [<span class="dt">Int</span>]</code></pre></div>
+<div class="sourceCode" id="cb32"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb32-1" data-line-number="1"><span class="kw">type</span> <span class="dt">BigInt</span> <span class="fu">=</span> [<span class="dt">Int</span>]</a></code></pre></div>
 <p>For example, <code>[9, 9, 9, 9, 9, 9, 9, 9, 9, 8]</code> represents the big-integer <code>9999999998</code>. Fill out the implementation for</p>
-<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="ot">bigAdd ::</span> <span class="dt">BigInt</span> <span class="ot">-&gt;</span> <span class="dt">BigInt</span> <span class="ot">-&gt;</span> <span class="dt">BigInt</span></code></pre></div>
+<div class="sourceCode" id="cb33"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb33-1" data-line-number="1"><span class="ot">bigAdd ::</span> <span class="dt">BigInt</span> <span class="ot">-&gt;</span> <span class="dt">BigInt</span> <span class="ot">-&gt;</span> <span class="dt">BigInt</span></a></code></pre></div>
 <p>so that it takes two integer lists, where each integer is between <code>0</code> and <code>9</code> and returns the list corresponding to the addition of the two big-integers. Again, you have to fill in the implementation to supply the appropriate values to <code>f</code>, <code>base</code>, <code>args</code>. You should get the following behavior:</p>
-<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell">ghci<span class="fu">&gt;</span> bigAdd [<span class="dv">9</span>, <span class="dv">9</span>] [<span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">2</span>]
-[<span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">1</span>]
-
-ghci<span class="fu">&gt;</span> bigAdd [<span class="dv">9</span>, <span class="dv">9</span>, <span class="dv">9</span>, <span class="dv">9</span>] [<span class="dv">9</span>, <span class="dv">9</span>, <span class="dv">9</span>]
-[<span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">9</span>, <span class="dv">9</span>, <span class="dv">8</span>]</code></pre></div>
+<div class="sourceCode" id="cb34"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb34-1" data-line-number="1">ghci<span class="fu">&gt;</span> bigAdd [<span class="dv">9</span>, <span class="dv">9</span>] [<span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">2</span>]</a>
+<a class="sourceLine" id="cb34-2" data-line-number="2">[<span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">1</span>]</a>
+<a class="sourceLine" id="cb34-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb34-4" data-line-number="4">ghci<span class="fu">&gt;</span> bigAdd [<span class="dv">9</span>, <span class="dv">9</span>, <span class="dv">9</span>, <span class="dv">9</span>] [<span class="dv">9</span>, <span class="dv">9</span>, <span class="dv">9</span>]</a>
+<a class="sourceLine" id="cb34-5" data-line-number="5">[<span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">9</span>, <span class="dv">9</span>, <span class="dv">8</span>]</a></code></pre></div>
 <h3 id="c-15-20-points">(c) 15 + 20 points</h3>
 <p>Next you will write functions to multiply two big integers. First write a function</p>
-<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="ot">mulByDigit ::</span> <span class="dt">Int</span> <span class="ot">-&gt;</span> <span class="dt">BigInt</span> <span class="ot">-&gt;</span> <span class="dt">BigInt</span></code></pre></div>
+<div class="sourceCode" id="cb35"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb35-1" data-line-number="1"><span class="ot">mulByDigit ::</span> <span class="dt">Int</span> <span class="ot">-&gt;</span> <span class="dt">BigInt</span> <span class="ot">-&gt;</span> <span class="dt">BigInt</span></a></code></pre></div>
 <p>which takes an integer digit and a big integer, and returns the big integer list which is the result of multiplying the big integer with the digit. You should get the following behavior:</p>
-<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell">ghci<span class="fu">&gt;</span> mulByDigit <span class="dv">9</span> [<span class="dv">9</span>,<span class="dv">9</span>,<span class="dv">9</span>,<span class="dv">9</span>]
-[<span class="dv">8</span>,<span class="dv">9</span>,<span class="dv">9</span>,<span class="dv">9</span>,<span class="dv">1</span>]</code></pre></div>
+<div class="sourceCode" id="cb36"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb36-1" data-line-number="1">ghci<span class="fu">&gt;</span> mulByDigit <span class="dv">9</span> [<span class="dv">9</span>,<span class="dv">9</span>,<span class="dv">9</span>,<span class="dv">9</span>]</a>
+<a class="sourceLine" id="cb36-2" data-line-number="2">[<span class="dv">8</span>,<span class="dv">9</span>,<span class="dv">9</span>,<span class="dv">9</span>,<span class="dv">1</span>]</a></code></pre></div>
 <p>Now, using <code>mulByDigit</code>, fill in the implementation of</p>
-<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="ot">bigMul ::</span> <span class="dt">BigInt</span> <span class="ot">-&gt;</span> <span class="dt">BigInt</span> <span class="ot">-&gt;</span> <span class="dt">BigInt</span></code></pre></div>
+<div class="sourceCode" id="cb37"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb37-1" data-line-number="1"><span class="ot">bigMul ::</span> <span class="dt">BigInt</span> <span class="ot">-&gt;</span> <span class="dt">BigInt</span> <span class="ot">-&gt;</span> <span class="dt">BigInt</span></a></code></pre></div>
 <p>Again, you have to fill in implementations for <code>f</code> , <code>base</code> , <code>args</code> only. Once you are done, you should get the following behavior at the prompt:</p>
-<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell">ghci<span class="fu">&gt;</span> bigMul [<span class="dv">9</span>,<span class="dv">9</span>,<span class="dv">9</span>,<span class="dv">9</span>] [<span class="dv">9</span>,<span class="dv">9</span>,<span class="dv">9</span>,<span class="dv">9</span>]
-[<span class="dv">9</span>,<span class="dv">9</span>,<span class="dv">9</span>,<span class="dv">8</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">1</span>]
-
-ghci<span class="fu">&gt;</span> bigMul [<span class="dv">9</span>,<span class="dv">9</span>,<span class="dv">9</span>,<span class="dv">9</span>,<span class="dv">9</span>] [<span class="dv">9</span>,<span class="dv">9</span>,<span class="dv">9</span>,<span class="dv">9</span>,<span class="dv">9</span>]
-[<span class="dv">9</span>,<span class="dv">9</span>,<span class="dv">9</span>,<span class="dv">9</span>,<span class="dv">8</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">1</span>]</code></pre></div>	
+<div class="sourceCode" id="cb38"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb38-1" data-line-number="1">ghci<span class="fu">&gt;</span> bigMul [<span class="dv">9</span>,<span class="dv">9</span>,<span class="dv">9</span>,<span class="dv">9</span>] [<span class="dv">9</span>,<span class="dv">9</span>,<span class="dv">9</span>,<span class="dv">9</span>]</a>
+<a class="sourceLine" id="cb38-2" data-line-number="2">[<span class="dv">9</span>,<span class="dv">9</span>,<span class="dv">9</span>,<span class="dv">8</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">1</span>]</a>
+<a class="sourceLine" id="cb38-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb38-4" data-line-number="4">ghci<span class="fu">&gt;</span> bigMul [<span class="dv">9</span>,<span class="dv">9</span>,<span class="dv">9</span>,<span class="dv">9</span>,<span class="dv">9</span>] [<span class="dv">9</span>,<span class="dv">9</span>,<span class="dv">9</span>,<span class="dv">9</span>,<span class="dv">9</span>]</a>
+<a class="sourceLine" id="cb38-5" data-line-number="5">[<span class="dv">9</span>,<span class="dv">9</span>,<span class="dv">9</span>,<span class="dv">9</span>,<span class="dv">8</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">1</span>]</a></code></pre></div>	
                 <hr>
             </div>
         </div>

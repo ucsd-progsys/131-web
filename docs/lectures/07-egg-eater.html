@@ -239,9 +239,9 @@ if (window.navigator.appName == "Microsoft Internet Explorer") {
 </ul>
 <h2 id="creating-heap-data-structures">Creating Heap Data Structures</h2>
 <p>We have already support for <em>two</em> primitive data types</p>
-<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="kw">data</span> <span class="dt">Ty</span>
-  <span class="fu">=</span> <span class="dt">TNumber</span>     <span class="co">-- e.g. 0,1,2,3,...</span>
-  <span class="fu">|</span> <span class="dt">TBoolean</span>    <span class="co">-- e.g. true, false</span></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw">data</span> <span class="dt">Ty</span></a>
+<a class="sourceLine" id="cb1-2" data-line-number="2">  <span class="fu">=</span> <span class="dt">TNumber</span>     <span class="co">-- e.g. 0,1,2,3,...</span></a>
+<a class="sourceLine" id="cb1-3" data-line-number="3">  <span class="fu">|</span> <span class="dt">TBoolean</span>    <span class="co">-- e.g. true, false</span></a></code></pre></div>
 <p>we could add several more of course, e.g.</p>
 <ul>
 <li><code>Char</code></li>
@@ -259,10 +259,9 @@ if (window.navigator.appName == "Microsoft Internet Explorer") {
 <li>Trees</li>
 </ul>
 <p>which require us to put data on the <strong>heap</strong> (not just the <em>stack</em>) that we’ve used so far.</p>
-<div class="figure">
-<img src="../static/img/memory-layout.png" alt="Stack vs. Heap" />
-<p class="caption">Stack vs. Heap</p>
-</div>
+<figure>
+<img src="../static/img/memory-layout.png" alt="Stack vs. Heap" /><figcaption>Stack vs. Heap</figcaption>
+</figure>
 <h2 id="pairs">Pairs</h2>
 <p>While our <em>goal</em> is to get to lists and trees, the journey of a thousand miles, etc., and so, we will <em>begin</em> with the humble <strong>pair</strong>.</p>
 <h3 id="semantics-behavior">Semantics (Behavior)</h3>
@@ -272,12 +271,12 @@ if (window.navigator.appName == "Microsoft Internet Explorer") {
 <li><p><strong>Accessing</strong> pairs, with new expressions of the form <code>e[0]</code> and <code>e[1]</code> which evaluate to the first and second element of the tuple <code>e</code> respectively.</p></li>
 </ul>
 <p>For example,</p>
-<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="kw">let</span> t <span class="fu">=</span> (<span class="dv">2</span>, <span class="dv">3</span>) <span class="kw">in</span>  
-  t[<span class="dv">0</span>] <span class="fu">+</span> t[<span class="dv">1</span>]</code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="kw">let</span> t <span class="fu">=</span> (<span class="dv">2</span>, <span class="dv">3</span>) <span class="kw">in</span>  </a>
+<a class="sourceLine" id="cb2-2" data-line-number="2">  t[<span class="dv">0</span>] <span class="fu">+</span> t[<span class="dv">1</span>]</a></code></pre></div>
 <p>should evaluate to <code>5</code>.</p>
 <h2 id="strategy">Strategy</h2>
 <p>Next, lets informally develop a strategy for extending our language with pairs, implementing the above semantics. We need to work out strategies for:</p>
-<ol style="list-style-type: decimal">
+<ol type="1">
 <li><strong>Representing</strong> pairs in the machine’s memore,</li>
 <li><strong>Constructing</strong> pairs (i.e. implementing <code>(e0, e1)</code> in assembly),</li>
 <li><strong>Accessing</strong> pairs (i.e. implementing <code>e[0]</code> and <code>e[1]</code> in assembly).</li>
@@ -316,10 +315,9 @@ if (window.navigator.appName == "Microsoft Internet Explorer") {
 <p>Every problem in computing can be solved by adding a level of indirection.</p>
 </blockquote>
 <p>We will <strong>represent a pair</strong> by a <strong>pointer</strong> to a block of <strong>two adjacent words</strong> of memory.</p>
-<div class="figure">
-<img src="../static/img/heap-pairs.png" alt="Pairs on the heap" />
-<p class="caption">Pairs on the heap</p>
-</div>
+<figure>
+<img src="../static/img/heap-pairs.png" alt="Pairs on the heap" /><figcaption>Pairs on the heap</figcaption>
+</figure>
 <p>The above shows how the pair <code>(2, (3, (4, 5)))</code> and its sub-pairs can be stored in the <strong>heap</strong> using pointers.</p>
 <p><code>(4,5)</code> is stored by adjacent words storing</p>
 <ul>
@@ -339,12 +337,12 @@ if (window.navigator.appName == "Microsoft Internet Explorer") {
 <h3 id="a-problem-numbers-vs.pointers">A Problem: Numbers vs. Pointers?</h3>
 <p>How will we tell the difference between <em>numbers</em> and <em>pointers</em>?</p>
 <p>That is, how can we tell the difference between</p>
-<ol style="list-style-type: decimal">
+<ol type="1">
 <li>the <em>number</em> 5 and</li>
 <li>a <em>pointer</em> to a block of memory (with address <code>5</code>)?</li>
 </ol>
 <p>Each of the above corresponds to a <em>different</em> tuple</p>
-<ol style="list-style-type: decimal">
+<ol type="1">
 <li><code>(4, 5)</code> or</li>
 <li><code>(4, (...))</code>.</li>
 </ol>
@@ -354,22 +352,22 @@ if (window.navigator.appName == "Microsoft Internet Explorer") {
 <table>
 <thead>
 <tr class="header">
-<th align="right">Type</th>
-<th align="right">LSB</th>
+<th style="text-align: right;">Type</th>
+<th style="text-align: right;">LSB</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td align="right"><code>number</code></td>
-<td align="right">xx0</td>
+<td style="text-align: right;"><code>number</code></td>
+<td style="text-align: right;">xx0</td>
 </tr>
 <tr class="even">
-<td align="right"><code>boolean</code></td>
-<td align="right">111</td>
+<td style="text-align: right;"><code>boolean</code></td>
+<td style="text-align: right;">111</td>
 </tr>
 <tr class="odd">
-<td align="right"><code>pointer</code></td>
-<td align="right">001</td>
+<td style="text-align: right;"><code>pointer</code></td>
+<td style="text-align: right;">001</td>
 </tr>
 </tbody>
 </table>
@@ -385,43 +383,43 @@ if (window.navigator.appName == "Microsoft Internet Explorer") {
 <table>
 <thead>
 <tr class="header">
-<th align="right">Binary</th>
-<th align="right">Decimal</th>
+<th style="text-align: right;">Binary</th>
+<th style="text-align: right;">Decimal</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td align="right">0b00000000</td>
-<td align="right">0</td>
+<td style="text-align: right;">0b00000000</td>
+<td style="text-align: right;">0</td>
 </tr>
 <tr class="even">
-<td align="right">0b00001000</td>
-<td align="right">8</td>
+<td style="text-align: right;">0b00001000</td>
+<td style="text-align: right;">8</td>
 </tr>
 <tr class="odd">
-<td align="right">0b00010000</td>
-<td align="right">16</td>
+<td style="text-align: right;">0b00010000</td>
+<td style="text-align: right;">16</td>
 </tr>
 <tr class="even">
-<td align="right">0b00011000</td>
-<td align="right">24</td>
+<td style="text-align: right;">0b00011000</td>
+<td style="text-align: right;">24</td>
 </tr>
 <tr class="odd">
-<td align="right">0b00100000</td>
-<td align="right">32</td>
+<td style="text-align: right;">0b00100000</td>
+<td style="text-align: right;">32</td>
 </tr>
 <tr class="even">
-<td align="right">…</td>
-<td align="right"></td>
+<td style="text-align: right;">…</td>
+<td style="text-align: right;"></td>
 </tr>
 </tbody>
 </table>
 <p>That is, the addresses are <strong>8-byte aligned</strong>. Which is great because at each address, we have a pair, i.e. a <strong>2-word = 8-byte block</strong>, so the <em>next</em> allocated address will also fall on an 8-byte boundary.</p>
 <h3 id="construction">2. Construction</h3>
 <p>Next, lets look at how to implement pair <strong>construction</strong> that is, generate the assembly for expressions like:</p>
-<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">(e1, e2)</code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb4-1" data-line-number="1">(e1, e2)</a></code></pre></div>
 <p>To <strong>construct</strong> a pair <code>(e1, e2)</code> we</p>
-<ol style="list-style-type: decimal">
+<ol type="1">
 <li><strong>Allocate</strong> a new 2-word block, and getting the starting address at <code>eax</code>,</li>
 <li><strong>Copy</strong> the value of <code>e1</code> (resp. <code>e2</code>) into <code>[eax]</code> (resp. <code>[eax + 4]</code>).</li>
 <li><strong>Tag</strong> the last bit of <code>eax</code> with <code>1</code>.</li>
@@ -434,14 +432,14 @@ if (window.navigator.appName == "Microsoft Internet Explorer") {
 <p><strong>EXERCISE</strong> How will we do ANF conversion for <code>(e1, e2)</code>?</p>
 <h3 id="allocating-addresses">Allocating Addresses</h3>
 <p>We will use a <strong>global</strong> register <code>esi</code> to maintain the address of the <strong>next free block</strong> on the heap. Every time we need a new block, we will:</p>
-<ol style="list-style-type: decimal">
+<ol type="1">
 <li><strong>Copy</strong> the current <code>esi</code> into <code>eax</code></li>
 </ol>
 <ul>
 <li>set the last bit to <code>1</code> to ensure proper tagging.</li>
 <li><code>eax</code> will be used to fill in the values</li>
 </ul>
-<ol start="2" style="list-style-type: decimal">
+<ol start="2" type="1">
 <li><strong>Increment</strong> the value of <code>esi</code> by <code>8</code></li>
 </ol>
 <ul>
@@ -464,18 +462,16 @@ if (window.navigator.appName == "Microsoft Internet Explorer") {
 <li>a source program on the left,</li>
 <li>the ANF equivalent next to it.</li>
 </ul>
-<div class="figure">
-<img src="../static/img/example-pair-code.png" alt="Example of Pairs" />
-<p class="caption">Example of Pairs</p>
-</div>
+<figure>
+<img src="../static/img/example-pair-code.png" alt="Example of Pairs" /><figcaption>Example of Pairs</figcaption>
+</figure>
 <p>The figure below shows the how the heap and <code>esi</code> evolve at points 1, 2 and 3:</p>
-<div class="figure">
-<img src="../static/img/example-pair-heaps.png" alt="Allocating Pairs on the Heap" />
-<p class="caption">Allocating Pairs on the Heap</p>
-</div>
+<figure>
+<img src="../static/img/example-pair-heaps.png" alt="Allocating Pairs on the Heap" /><figcaption>Allocating Pairs on the Heap</figcaption>
+</figure>
 <p><strong>QUIZ</strong></p>
 <p>In the ANF version, <code>p</code> is the <em>second (local) variable</em> stored in the stack frame. What <em>value</em> gets moved into the <em>second stack slot</em> when evaluating the above program?</p>
-<ol style="list-style-type: decimal">
+<ol type="1">
 <li><code>0x3</code></li>
 <li><code>(3, (4, 5))</code></li>
 <li><code>0x6</code></li>
@@ -484,7 +480,7 @@ if (window.navigator.appName == "Microsoft Internet Explorer") {
 </ol>
 <h3 id="accessing">3. Accessing</h3>
 <p>Finally, to <strong>access</strong> the elements of a pair, i.e. compiling expressions like <code>e[0]</code> (resp. <code>e[1]</code>)</p>
-<ol style="list-style-type: decimal">
+<ol type="1">
 <li><strong>Check</strong> that immediate value <code>e</code> is a pointer</li>
 <li><strong>Load</strong> <code>e</code> into <code>eax</code></li>
 <li><strong>Remove</strong> the tag bit from <code>eax</code></li>
@@ -492,66 +488,65 @@ if (window.navigator.appName == "Microsoft Internet Explorer") {
 </ol>
 <h3 id="example-access">Example: Access</h3>
 <p>Here is a snapshot of the heap after the pair(s) are allocated.</p>
-<div class="figure">
-<img src="../static/img/example-pair-heap.png" alt="Allocating Pairs on the Heap" />
-<p class="caption">Allocating Pairs on the Heap</p>
-</div>
+<figure>
+<img src="../static/img/example-pair-heap.png" alt="Allocating Pairs on the Heap" /><figcaption>Allocating Pairs on the Heap</figcaption>
+</figure>
 <p>Lets work out how the values corresponding to <code>x</code>, <code>y</code> and <code>z</code> in the example above get stored on the stack frame in the course of evaluation.</p>
 <table>
 <thead>
 <tr class="header">
-<th align="right">Variable</th>
-<th align="right">Hex Value</th>
-<th align="right">Value</th>
+<th style="text-align: right;">Variable</th>
+<th style="text-align: right;">Hex Value</th>
+<th style="text-align: right;">Value</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td align="right"><code>anf0</code></td>
-<td align="right"><code>0x001</code></td>
-<td align="right"><code>ptr 0</code></td>
+<td style="text-align: right;"><code>anf0</code></td>
+<td style="text-align: right;"><code>0x001</code></td>
+<td style="text-align: right;"><code>ptr 0</code></td>
 </tr>
 <tr class="even">
-<td align="right"><code>p</code></td>
-<td align="right"><code>0x009</code></td>
-<td align="right"><code>ptr 8</code></td>
+<td style="text-align: right;"><code>p</code></td>
+<td style="text-align: right;"><code>0x009</code></td>
+<td style="text-align: right;"><code>ptr 8</code></td>
 </tr>
 <tr class="odd">
-<td align="right"><code>x</code></td>
-<td align="right"><code>0x006</code></td>
-<td align="right"><code>num 3</code></td>
+<td style="text-align: right;"><code>x</code></td>
+<td style="text-align: right;"><code>0x006</code></td>
+<td style="text-align: right;"><code>num 3</code></td>
 </tr>
 <tr class="even">
-<td align="right"><code>anf1</code></td>
-<td align="right"><code>0x001</code></td>
-<td align="right"><code>ptr 0</code></td>
+<td style="text-align: right;"><code>anf1</code></td>
+<td style="text-align: right;"><code>0x001</code></td>
+<td style="text-align: right;"><code>ptr 0</code></td>
 </tr>
 <tr class="odd">
-<td align="right"><code>y</code></td>
-<td align="right"><code>0x008</code></td>
-<td align="right"><code>num 4</code></td>
+<td style="text-align: right;"><code>y</code></td>
+<td style="text-align: right;"><code>0x008</code></td>
+<td style="text-align: right;"><code>num 4</code></td>
 </tr>
 <tr class="even">
-<td align="right"><code>z</code></td>
-<td align="right"><code>0x00A</code></td>
-<td align="right"><code>num 5</code></td>
+<td style="text-align: right;"><code>z</code></td>
+<td style="text-align: right;"><code>0x00A</code></td>
+<td style="text-align: right;"><code>num 5</code></td>
 </tr>
 <tr class="odd">
-<td align="right"><code>anf2</code></td>
-<td align="right"><code>0x00E</code></td>
-<td align="right"><code>num 7</code></td>
+<td style="text-align: right;"><code>anf2</code></td>
+<td style="text-align: right;"><code>0x00E</code></td>
+<td style="text-align: right;"><code>num 7</code></td>
 </tr>
 <tr class="even">
-<td align="right">result</td>
-<td align="right"><code>0x018</code></td>
-<td align="right"><code>num 12</code></td>
+<td style="text-align: right;">result</td>
+<td style="text-align: right;"><code>0x018</code></td>
+<td style="text-align: right;"><code>num 12</code></td>
 </tr>
 </tbody>
 </table>
 <h2 id="plan">Plan</h2>
 <p>Pretty pictures are well and good, time to build stuff!</p>
 <p>As usual, lets continue with our recipe:</p>
-<ol style="list-style-type: decimal">
+<ol type="1">
 <li>Run-time</li>
 <li>Types</li>
 <li>Transforms</li>
@@ -559,20 +554,20 @@ if (window.navigator.appName == "Microsoft Internet Explorer") {
 <p>We’ve already built up intuition of the <em>strategy</em> for implementing tuples. Next, lets look at how to implement each of the above.</p>
 <h2 id="run-time">Run-Time</h2>
 <p>We need to extend the run-time (<code>c-bits/main.c</code>) in two ways.</p>
-<ol style="list-style-type: decimal">
+<ol type="1">
 <li><p><strong>Allocate</strong> a chunk of space on the heap and pass in start address to <code>our_code</code>.</p></li>
 <li><p><strong>Print</strong> pairs properly.</p></li>
 </ol>
 <h3 id="allocation">Allocation</h3>
 <p>The first step is quite easy we can use <code>calloc</code> as follows:</p>
-<div class="sourceCode"><pre class="sourceCode c"><code class="sourceCode c"><span class="dt">int</span> main(<span class="dt">int</span> argc, <span class="dt">char</span>** argv) {
-  <span class="dt">int</span>* HEAP = calloc(HEAP_SIZE, <span class="kw">sizeof</span> (<span class="dt">int</span>));
-  <span class="dt">int</span> result = our_code_starts_here(HEAP);
-  print(result);
-  <span class="kw">return</span> <span class="dv">0</span>;
-}</code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode c"><code class="sourceCode c"><a class="sourceLine" id="cb5-1" data-line-number="1"><span class="dt">int</span> main(<span class="dt">int</span> argc, <span class="dt">char</span>** argv) {</a>
+<a class="sourceLine" id="cb5-2" data-line-number="2">  <span class="dt">int</span>* HEAP = calloc(HEAP_SIZE, <span class="kw">sizeof</span> (<span class="dt">int</span>));</a>
+<a class="sourceLine" id="cb5-3" data-line-number="3">  <span class="dt">int</span> result = our_code_starts_here(HEAP);</a>
+<a class="sourceLine" id="cb5-4" data-line-number="4">  print(result);</a>
+<a class="sourceLine" id="cb5-5" data-line-number="5">  <span class="cf">return</span> <span class="dv">0</span>;</a>
+<a class="sourceLine" id="cb5-6" data-line-number="6">}</a></code></pre></div>
 <p>The above code,</p>
-<ol style="list-style-type: decimal">
+<ol type="1">
 <li><strong>Allocates</strong> a big block of contiguous memory (starting at <code>HEAP</code>), and</li>
 <li><strong>Passes</strong> this address in to <code>our_code</code>.</li>
 </ol>
@@ -580,44 +575,44 @@ if (window.navigator.appName == "Microsoft Internet Explorer") {
 <h3 id="printing">Printing</h3>
 <p>To print pairs, we must recursively traverse the pointers until we hit <code>number</code> or <code>boolean</code>.</p>
 <p>We can check if a value is a pair by looking at its last 3 bits:</p>
-<div class="sourceCode"><pre class="sourceCode c"><code class="sourceCode c"><span class="dt">int</span> isPair(<span class="dt">int</span> p) {
-  <span class="kw">return</span> (p &amp; <span class="bn">0x00000007</span>) == <span class="bn">0x00000001</span>;
-}</code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode c"><code class="sourceCode c"><a class="sourceLine" id="cb6-1" data-line-number="1"><span class="dt">int</span> isPair(<span class="dt">int</span> p) {</a>
+<a class="sourceLine" id="cb6-2" data-line-number="2">  <span class="cf">return</span> (p &amp; <span class="bn">0x00000007</span>) == <span class="bn">0x00000001</span>;</a>
+<a class="sourceLine" id="cb6-3" data-line-number="3">}</a></code></pre></div>
 <p>We can use the above test to recursively print (word)-values:</p>
-<div class="sourceCode"><pre class="sourceCode c"><code class="sourceCode c"><span class="dt">void</span> printRec(<span class="dt">int</span> val) {
-  <span class="kw">if</span>(val &amp; <span class="bn">0x00000001</span> ^ <span class="bn">0x00000001</span>) { <span class="co">// val is a number</span>
-    printf(<span class="st">&quot;%d&quot;</span>, val &gt;&gt; <span class="dv">1</span>);
-  }
-  <span class="kw">else</span> <span class="kw">if</span>(val == <span class="bn">0xFFFFFFFF</span>) {       <span class="co">// val is true</span>
-    printf(<span class="st">&quot;true&quot;</span>);
-  }
-  <span class="kw">else</span> <span class="kw">if</span>(val == <span class="bn">0x7FFFFFFF</span>) {       <span class="co">// val is false</span>
-    printf(<span class="st">&quot;false&quot;</span>);
-  }
-  <span class="kw">else</span> <span class="kw">if</span>(isPair(val)) {            
-    <span class="dt">int</span>* valp = (<span class="dt">int</span>*) (val - <span class="dv">1</span>);    <span class="co">// extract address  </span>
-    printf(<span class="st">&quot;(&quot;</span>);
-    printRec(*valp);                 <span class="co">// print first element</span>
-    printf(<span class="st">&quot;, &quot;</span>);
-    printRec(*(valp + <span class="dv">1</span>));           <span class="co">// print second element</span>
-    printf(<span class="st">&quot;)&quot;</span>);
-  }
-  <span class="kw">else</span> {
-    printf(<span class="st">&quot;Unknown value: %#010x&quot;</span>, val);
-  }
-}</code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode c"><code class="sourceCode c"><a class="sourceLine" id="cb7-1" data-line-number="1"><span class="dt">void</span> printRec(<span class="dt">int</span> val) {</a>
+<a class="sourceLine" id="cb7-2" data-line-number="2">  <span class="cf">if</span>(val &amp; <span class="bn">0x00000001</span> ^ <span class="bn">0x00000001</span>) { <span class="co">// val is a number</span></a>
+<a class="sourceLine" id="cb7-3" data-line-number="3">    printf(<span class="st">&quot;%d&quot;</span>, val &gt;&gt; <span class="dv">1</span>);</a>
+<a class="sourceLine" id="cb7-4" data-line-number="4">  }</a>
+<a class="sourceLine" id="cb7-5" data-line-number="5">  <span class="cf">else</span> <span class="cf">if</span>(val == <span class="bn">0xFFFFFFFF</span>) {       <span class="co">// val is true</span></a>
+<a class="sourceLine" id="cb7-6" data-line-number="6">    printf(<span class="st">&quot;true&quot;</span>);</a>
+<a class="sourceLine" id="cb7-7" data-line-number="7">  }</a>
+<a class="sourceLine" id="cb7-8" data-line-number="8">  <span class="cf">else</span> <span class="cf">if</span>(val == <span class="bn">0x7FFFFFFF</span>) {       <span class="co">// val is false</span></a>
+<a class="sourceLine" id="cb7-9" data-line-number="9">    printf(<span class="st">&quot;false&quot;</span>);</a>
+<a class="sourceLine" id="cb7-10" data-line-number="10">  }</a>
+<a class="sourceLine" id="cb7-11" data-line-number="11">  <span class="cf">else</span> <span class="cf">if</span>(isPair(val)) {            </a>
+<a class="sourceLine" id="cb7-12" data-line-number="12">    <span class="dt">int</span>* valp = (<span class="dt">int</span>*) (val - <span class="dv">1</span>);    <span class="co">// extract address  </span></a>
+<a class="sourceLine" id="cb7-13" data-line-number="13">    printf(<span class="st">&quot;(&quot;</span>);</a>
+<a class="sourceLine" id="cb7-14" data-line-number="14">    printRec(*valp);                 <span class="co">// print first element</span></a>
+<a class="sourceLine" id="cb7-15" data-line-number="15">    printf(<span class="st">&quot;, &quot;</span>);</a>
+<a class="sourceLine" id="cb7-16" data-line-number="16">    printRec(*(valp + <span class="dv">1</span>));           <span class="co">// print second element</span></a>
+<a class="sourceLine" id="cb7-17" data-line-number="17">    printf(<span class="st">&quot;)&quot;</span>);</a>
+<a class="sourceLine" id="cb7-18" data-line-number="18">  }</a>
+<a class="sourceLine" id="cb7-19" data-line-number="19">  <span class="cf">else</span> {</a>
+<a class="sourceLine" id="cb7-20" data-line-number="20">    printf(<span class="st">&quot;Unknown value: %#010x&quot;</span>, val);</a>
+<a class="sourceLine" id="cb7-21" data-line-number="21">  }</a>
+<a class="sourceLine" id="cb7-22" data-line-number="22">}</a></code></pre></div>
 <h2 id="types">Types</h2>
 <p>Next, lets move into our compiler, and see how the <strong>core types</strong> need to be extended.</p>
 <h3 id="source">Source</h3>
 <p>We need to extend the <em>source</em> <code>Expr</code> with support for tuples</p>
-<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="kw">data</span> <span class="dt">Expr</span> a
-  <span class="fu">=</span> <span class="fu">...</span>
-  <span class="fu">|</span> <span class="dt">Pair</span>    (<span class="dt">Expr</span> a) (<span class="dt">Expr</span> a) a   <span class="co">-- ^ construct a pair</span>
-  <span class="fu">|</span> <span class="dt">GetItem</span> (<span class="dt">Expr</span> a) <span class="dt">Field</span>    a   <span class="co">-- ^ access a pair's element</span></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb8-1" data-line-number="1"><span class="kw">data</span> <span class="dt">Expr</span> a</a>
+<a class="sourceLine" id="cb8-2" data-line-number="2">  <span class="fu">=</span> <span class="fu">...</span></a>
+<a class="sourceLine" id="cb8-3" data-line-number="3">  <span class="fu">|</span> <span class="dt">Pair</span>    (<span class="dt">Expr</span> a) (<span class="dt">Expr</span> a) a   <span class="co">-- ^ construct a pair</span></a>
+<a class="sourceLine" id="cb8-4" data-line-number="4">  <span class="fu">|</span> <span class="dt">GetItem</span> (<span class="dt">Expr</span> a) <span class="dt">Field</span>    a   <span class="co">-- ^ access a pair's element</span></a></code></pre></div>
 <p>In the above, <code>Field</code> is</p>
-<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="kw">data</span> <span class="dt">Field</span>
-  <span class="fu">=</span> <span class="dt">First</span>     <span class="co">-- ^ access first element of pair</span>
-  <span class="fu">|</span> <span class="dt">Second</span>    <span class="co">-- ^ access second element of pair</span></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb9-1" data-line-number="1"><span class="kw">data</span> <span class="dt">Field</span></a>
+<a class="sourceLine" id="cb9-2" data-line-number="2">  <span class="fu">=</span> <span class="dt">First</span>     <span class="co">-- ^ access first element of pair</span></a>
+<a class="sourceLine" id="cb9-3" data-line-number="3">  <span class="fu">|</span> <span class="dt">Second</span>    <span class="co">-- ^ access second element of pair</span></a></code></pre></div>
 <p><strong>NOTE:</strong> Your assignment will generalize pairs to <strong>n-ary tuples</strong> using</p>
 <ul>
 <li><code>Tuple [Expr a]</code> representing <code>(e1,...,en)</code></li>
@@ -625,15 +620,15 @@ if (window.navigator.appName == "Microsoft Internet Explorer") {
 </ul>
 <h3 id="dynamic-types">Dynamic Types</h3>
 <p>Let us extend our <strong>dynamic types</strong> <code>Ty</code> <a href="05-cobra.md/#types">see</a> to include pairs:</p>
-<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="kw">data</span> <span class="dt">Ty</span> <span class="fu">=</span> <span class="dt">TNumber</span> <span class="fu">|</span> <span class="dt">TBoolean</span> <span class="fu">|</span> <span class="dt">TPair</span></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb10-1" data-line-number="1"><span class="kw">data</span> <span class="dt">Ty</span> <span class="fu">=</span> <span class="dt">TNumber</span> <span class="fu">|</span> <span class="dt">TBoolean</span> <span class="fu">|</span> <span class="dt">TPair</span></a></code></pre></div>
 <h3 id="assembly">Assembly</h3>
 <p>The assembly <code>Instruction</code> are changed minimally; we just need access to <code>esi</code> which will hold the value of the <em>next</em> available memory block:</p>
-<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="kw">data</span> <span class="dt">Register</span>
-  <span class="fu">=</span> <span class="fu">...</span>
-  <span class="fu">|</span> <span class="dt">ESI</span></code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb11-1" data-line-number="1"><span class="kw">data</span> <span class="dt">Register</span></a>
+<a class="sourceLine" id="cb11-2" data-line-number="2">  <span class="fu">=</span> <span class="fu">...</span></a>
+<a class="sourceLine" id="cb11-3" data-line-number="3">  <span class="fu">|</span> <span class="dt">ESI</span></a></code></pre></div>
 <h2 id="transforms">Transforms</h2>
 <p>Our code must take care of three things:</p>
-<ol style="list-style-type: decimal">
+<ol type="1">
 <li><strong>Initialize</strong> <code>esi</code> to allow heap allocation,</li>
 <li><strong>Construct</strong> pairs,</li>
 <li><strong>Access</strong> pairs.</li>
@@ -643,19 +638,19 @@ if (window.navigator.appName == "Microsoft Internet Explorer") {
 <p>We need to <strong>initialize</strong> <code>esi</code> with the <strong>start position</strong> of the heap, that is <a href="#fixme">passed in by the run-time</a>.</p>
 <p>How shall we get a hold of this position?</p>
 <p>To do so, <code>our_code</code> starts off with a <code>prelude</code></p>
-<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="ot">prelude ::</span> [<span class="dt">Instruction</span>]
-prelude <span class="fu">=</span>
-  [ <span class="dt">IMov</span> (<span class="dt">Reg</span> <span class="dt">ESI</span>) (<span class="dt">RegOffset</span> <span class="dv">4</span> <span class="dt">ESP</span>)        <span class="co">-- copy param (HEAP) off stack</span>
-  , <span class="dt">IAdd</span> (<span class="dt">Reg</span> <span class="dt">ESI</span>) (<span class="dt">Const</span> <span class="dv">8</span>)                <span class="co">-- adjust to ensure 8-byte aligned</span>
-  , <span class="dt">IAnd</span> (<span class="dt">Reg</span> <span class="dt">ESI</span>) (<span class="dt">HexConst</span> <span class="bn">0xFFFFFFF8</span>)    <span class="co">-- add 8 and set last 3 bits to 0</span>
-  ]</code></pre></div>
-<ol style="list-style-type: decimal">
+<div class="sourceCode" id="cb12"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb12-1" data-line-number="1"><span class="ot">prelude ::</span> [<span class="dt">Instruction</span>]</a>
+<a class="sourceLine" id="cb12-2" data-line-number="2">prelude <span class="fu">=</span></a>
+<a class="sourceLine" id="cb12-3" data-line-number="3">  [ <span class="dt">IMov</span> (<span class="dt">Reg</span> <span class="dt">ESI</span>) (<span class="dt">RegOffset</span> <span class="dv">4</span> <span class="dt">ESP</span>)        <span class="co">-- copy param (HEAP) off stack</span></a>
+<a class="sourceLine" id="cb12-4" data-line-number="4">  , <span class="dt">IAdd</span> (<span class="dt">Reg</span> <span class="dt">ESI</span>) (<span class="dt">Const</span> <span class="dv">8</span>)                <span class="co">-- adjust to ensure 8-byte aligned</span></a>
+<a class="sourceLine" id="cb12-5" data-line-number="5">  , <span class="dt">IAnd</span> (<span class="dt">Reg</span> <span class="dt">ESI</span>) (<span class="dt">HexConst</span> <span class="bn">0xFFFFFFF8</span>)    <span class="co">-- add 8 and set last 3 bits to 0</span></a>
+<a class="sourceLine" id="cb12-6" data-line-number="6">  ]</a></code></pre></div>
+<ol type="1">
 <li><strong>Copy</strong> the value off the (parameter) stack, and</li>
 <li><strong>Adjust</strong> the value to ensure the value is <em>8-byte aligned</em>.</li>
 </ol>
 <p><strong>QUIZ</strong></p>
 <p>Why add <code>8</code> to <code>esi</code>? What would happen if we <em>removed</em> that operation?</p>
-<ol style="list-style-type: decimal">
+<ol type="1">
 <li><code>esi</code> would not be 8-byte aligned?</li>
 <li><code>esi</code> would point into the stack?</li>
 <li><code>esi</code> would not point into the heap?</li>
@@ -663,55 +658,55 @@ prelude <span class="fu">=</span>
 </ol>
 <h3 id="construct">Construct</h3>
 <p>To <em>construct</em> a pair <code>(v1, v2)</code> we directly implement the <a href="07-egg-eater.md/#2-construction">above strategy</a>:</p>
-<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell">compileExpr env (<span class="dt">Pair</span> v1 v2)
-  <span class="fu">=</span> pairAlloc                        <span class="co">-- 1. allocate pair, resulting addr in `eax`</span>
- <span class="fu">++</span> pairCopy <span class="dt">First</span>  (immArg env v1)  <span class="co">-- 2. copy values into slots</span>
- <span class="fu">++</span> pairCopy <span class="dt">Second</span> (immArg env v2)  
- <span class="fu">++</span> setTag   <span class="dt">EAX</span>     <span class="dt">TPair</span>           <span class="co">-- 3. set the tag-bits of `eax`</span></code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb13-1" data-line-number="1">compileExpr env (<span class="dt">Pair</span> v1 v2)</a>
+<a class="sourceLine" id="cb13-2" data-line-number="2">  <span class="fu">=</span> pairAlloc                        <span class="co">-- 1. allocate pair, resulting addr in `eax`</span></a>
+<a class="sourceLine" id="cb13-3" data-line-number="3"> <span class="fu">++</span> pairCopy <span class="dt">First</span>  (immArg env v1)  <span class="co">-- 2. copy values into slots</span></a>
+<a class="sourceLine" id="cb13-4" data-line-number="4"> <span class="fu">++</span> pairCopy <span class="dt">Second</span> (immArg env v2)  </a>
+<a class="sourceLine" id="cb13-5" data-line-number="5"> <span class="fu">++</span> setTag   <span class="dt">EAX</span>     <span class="dt">TPair</span>           <span class="co">-- 3. set the tag-bits of `eax`</span></a></code></pre></div>
 <p>Lets look at each step in turn.</p>
 <h4 id="allocate">Allocate</h4>
 <p>To allocate, we just copy the current pointer <code>esi</code> and increment by <code>8</code> bytes,</p>
 <ul>
 <li>accounting for two 4-byte (word) blocks for each pair element.</li>
 </ul>
-<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="ot">pairAlloc ::</span> <span class="dt">Asm</span>
-pairAlloc
-  <span class="fu">=</span> [ <span class="dt">IMov</span> (<span class="dt">Reg</span> <span class="dt">EAX</span>) (<span class="dt">Reg</span> <span class="dt">ESI</span>)   <span class="co">-- copy current &quot;free address&quot; `esi` into `eax`</span>
-    , <span class="dt">IAdd</span> (<span class="dt">Reg</span> <span class="dt">ESI</span>) (<span class="dt">Const</span> <span class="dv">8</span>)   <span class="co">-- increment `esi` by 8</span>
-    ]</code></pre></div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb14-1" data-line-number="1"><span class="ot">pairAlloc ::</span> <span class="dt">Asm</span></a>
+<a class="sourceLine" id="cb14-2" data-line-number="2">pairAlloc</a>
+<a class="sourceLine" id="cb14-3" data-line-number="3">  <span class="fu">=</span> [ <span class="dt">IMov</span> (<span class="dt">Reg</span> <span class="dt">EAX</span>) (<span class="dt">Reg</span> <span class="dt">ESI</span>)   <span class="co">-- copy current &quot;free address&quot; `esi` into `eax`</span></a>
+<a class="sourceLine" id="cb14-4" data-line-number="4">    , <span class="dt">IAdd</span> (<span class="dt">Reg</span> <span class="dt">ESI</span>) (<span class="dt">Const</span> <span class="dv">8</span>)   <span class="co">-- increment `esi` by 8</span></a>
+<a class="sourceLine" id="cb14-5" data-line-number="5">    ]</a></code></pre></div>
 <h4 id="copy">Copy</h4>
 <p>We copy an <code>Arg</code> into a <code>Field</code> by * saving the <code>Arg</code> into a helper register <code>ebx</code>, * copying <code>ebx</code> into the field’s slot on the heap.</p>
-<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="ot">pairCopy ::</span> <span class="dt">Field</span> <span class="ot">-&gt;</span> <span class="dt">Arg</span> <span class="ot">-&gt;</span> <span class="dt">Asm</span>
-pairCopy fld a
-  <span class="fu">=</span> [ <span class="dt">IMov</span> (<span class="dt">Reg</span> <span class="dt">EBX</span>)    a
-    , <span class="dt">IMov</span> (pairAddr f) (<span class="dt">Reg</span> <span class="dt">EBX</span>)
-    ]</code></pre></div>
+<div class="sourceCode" id="cb15"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb15-1" data-line-number="1"><span class="ot">pairCopy ::</span> <span class="dt">Field</span> <span class="ot">-&gt;</span> <span class="dt">Arg</span> <span class="ot">-&gt;</span> <span class="dt">Asm</span></a>
+<a class="sourceLine" id="cb15-2" data-line-number="2">pairCopy fld a</a>
+<a class="sourceLine" id="cb15-3" data-line-number="3">  <span class="fu">=</span> [ <span class="dt">IMov</span> (<span class="dt">Reg</span> <span class="dt">EBX</span>)    a</a>
+<a class="sourceLine" id="cb15-4" data-line-number="4">    , <span class="dt">IMov</span> (pairAddr f) (<span class="dt">Reg</span> <span class="dt">EBX</span>)</a>
+<a class="sourceLine" id="cb15-5" data-line-number="5">    ]</a></code></pre></div>
 <p>The field’s slot is either <code>[eax]</code> or <code>[eax + 4]</code> depending on whether the field is <code>First</code> or <code>Second</code>.</p>
-<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="ot">pairAddr ::</span> <span class="dt">Field</span> <span class="ot">-&gt;</span> <span class="dt">Arg</span>
-pairAddr fld <span class="fu">=</span> <span class="dt">Sized</span> <span class="dt">DWordPtr</span> (<span class="dt">RegOffset</span> (<span class="dv">4</span> <span class="fu">*</span> fieldOffset fld) <span class="dt">EAX</span>)
-
-<span class="ot">fieldOffset ::</span> <span class="dt">Field</span> <span class="ot">-&gt;</span> <span class="dt">Int</span>
-fieldOffset <span class="dt">First</span>  <span class="fu">=</span> <span class="dv">0</span>
-fieldOffset <span class="dt">Second</span> <span class="fu">=</span> <span class="dv">1</span></code></pre></div>
+<div class="sourceCode" id="cb16"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb16-1" data-line-number="1"><span class="ot">pairAddr ::</span> <span class="dt">Field</span> <span class="ot">-&gt;</span> <span class="dt">Arg</span></a>
+<a class="sourceLine" id="cb16-2" data-line-number="2">pairAddr fld <span class="fu">=</span> <span class="dt">Sized</span> <span class="dt">DWordPtr</span> (<span class="dt">RegOffset</span> (<span class="dv">4</span> <span class="fu">*</span> fieldOffset fld) <span class="dt">EAX</span>)</a>
+<a class="sourceLine" id="cb16-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb16-4" data-line-number="4"><span class="ot">fieldOffset ::</span> <span class="dt">Field</span> <span class="ot">-&gt;</span> <span class="dt">Int</span></a>
+<a class="sourceLine" id="cb16-5" data-line-number="5">fieldOffset <span class="dt">First</span>  <span class="fu">=</span> <span class="dv">0</span></a>
+<a class="sourceLine" id="cb16-6" data-line-number="6">fieldOffset <span class="dt">Second</span> <span class="fu">=</span> <span class="dv">1</span></a></code></pre></div>
 <h4 id="tag">Tag</h4>
 <p>Finally, we set the tag bits of <code>eax</code> by using <code>typeTag TPair</code> which is defined</p>
-<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="ot">setTag ::</span> <span class="dt">Register</span> <span class="ot">-&gt;</span> <span class="dt">Ty</span> <span class="ot">-&gt;</span> <span class="dt">Asm</span>
-setTag r ty <span class="fu">=</span> [ <span class="dt">IAdd</span> (<span class="dt">Reg</span> r) (typeTag ty) ]
-
-<span class="ot">typeTag ::</span> <span class="dt">Ty</span> <span class="ot">-&gt;</span> <span class="dt">Arg</span>
-typeTag <span class="dt">TNumber</span>  <span class="fu">=</span> <span class="dt">HexConst</span> <span class="bn">0x00000000</span>    <span class="co">-- last 1 bit  is  0</span>
-typeTag <span class="dt">TBoolean</span> <span class="fu">=</span> <span class="dt">HexConst</span> <span class="bn">0x00000007</span>    <span class="co">-- last 3 bits are 111</span>
-typeTag <span class="dt">TPair</span>    <span class="fu">=</span> <span class="dt">HexConst</span> <span class="bn">0x00000001</span>    <span class="co">-- last 1 bits is  1</span></code></pre></div>
+<div class="sourceCode" id="cb17"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb17-1" data-line-number="1"><span class="ot">setTag ::</span> <span class="dt">Register</span> <span class="ot">-&gt;</span> <span class="dt">Ty</span> <span class="ot">-&gt;</span> <span class="dt">Asm</span></a>
+<a class="sourceLine" id="cb17-2" data-line-number="2">setTag r ty <span class="fu">=</span> [ <span class="dt">IAdd</span> (<span class="dt">Reg</span> r) (typeTag ty) ]</a>
+<a class="sourceLine" id="cb17-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb17-4" data-line-number="4"><span class="ot">typeTag ::</span> <span class="dt">Ty</span> <span class="ot">-&gt;</span> <span class="dt">Arg</span></a>
+<a class="sourceLine" id="cb17-5" data-line-number="5">typeTag <span class="dt">TNumber</span>  <span class="fu">=</span> <span class="dt">HexConst</span> <span class="bn">0x00000000</span>    <span class="co">-- last 1 bit  is  0</span></a>
+<a class="sourceLine" id="cb17-6" data-line-number="6">typeTag <span class="dt">TBoolean</span> <span class="fu">=</span> <span class="dt">HexConst</span> <span class="bn">0x00000007</span>    <span class="co">-- last 3 bits are 111</span></a>
+<a class="sourceLine" id="cb17-7" data-line-number="7">typeTag <span class="dt">TPair</span>    <span class="fu">=</span> <span class="dt">HexConst</span> <span class="bn">0x00000001</span>    <span class="co">-- last 1 bits is  1</span></a></code></pre></div>
 <h3 id="access">Access</h3>
 <p>To access tuples, lets update <code>compileExpr</code> with the <a href="#3-accessing">strategy above</a>:</p>
-<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell">compileExpr env (<span class="dt">GetItem</span> e fld)
-  <span class="fu">=</span> assertType env e <span class="dt">TPair</span>              <span class="co">-- 1. check that e is a (pair) pointer</span>
- <span class="fu">++</span> [ <span class="dt">IMov</span> (<span class="dt">Reg</span> <span class="dt">EAX</span>) (immArg env e) ]   <span class="co">-- 2. load pointer into eax</span>
- <span class="fu">++</span> unsetTag <span class="dt">EAX</span> <span class="dt">TPair</span>                  <span class="co">-- 3. remove tag bit to get address</span>
- <span class="fu">++</span> [ <span class="dt">IMov</span> (<span class="dt">Reg</span> <span class="dt">EAX</span>) (pairAddr fld) ]   <span class="co">-- 4. copy value from resp. slot to eax</span></code></pre></div>
+<div class="sourceCode" id="cb18"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb18-1" data-line-number="1">compileExpr env (<span class="dt">GetItem</span> e fld)</a>
+<a class="sourceLine" id="cb18-2" data-line-number="2">  <span class="fu">=</span> assertType env e <span class="dt">TPair</span>              <span class="co">-- 1. check that e is a (pair) pointer</span></a>
+<a class="sourceLine" id="cb18-3" data-line-number="3"> <span class="fu">++</span> [ <span class="dt">IMov</span> (<span class="dt">Reg</span> <span class="dt">EAX</span>) (immArg env e) ]   <span class="co">-- 2. load pointer into eax</span></a>
+<a class="sourceLine" id="cb18-4" data-line-number="4"> <span class="fu">++</span> unsetTag <span class="dt">EAX</span> <span class="dt">TPair</span>                  <span class="co">-- 3. remove tag bit to get address</span></a>
+<a class="sourceLine" id="cb18-5" data-line-number="5"> <span class="fu">++</span> [ <span class="dt">IMov</span> (<span class="dt">Reg</span> <span class="dt">EAX</span>) (pairAddr fld) ]   <span class="co">-- 4. copy value from resp. slot to eax</span></a></code></pre></div>
 <p>we remove the tag bits by doing the opposite of <code>setTag</code> namely:</p>
-<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="ot">unsetTag ::</span> <span class="dt">Register</span> <span class="ot">-&gt;</span> <span class="dt">Ty</span> <span class="ot">-&gt;</span> <span class="dt">Asm</span>
-unsetTag r ty <span class="fu">=</span> <span class="dt">ISub</span> (<span class="dt">Reg</span> <span class="dt">EAX</span>) (typeTag ty)</code></pre></div>
+<div class="sourceCode" id="cb19"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb19-1" data-line-number="1"><span class="ot">unsetTag ::</span> <span class="dt">Register</span> <span class="ot">-&gt;</span> <span class="dt">Ty</span> <span class="ot">-&gt;</span> <span class="dt">Asm</span></a>
+<a class="sourceLine" id="cb19-2" data-line-number="2">unsetTag r ty <span class="fu">=</span> <span class="dt">ISub</span> (<span class="dt">Reg</span> <span class="dt">EAX</span>) (typeTag ty)</a></code></pre></div>
 <h2 id="n-ary-tuples">N-ary Tuples</h2>
 <p>Thats it! Lets take our compiler out for a spin, by using it to write some interesting programs!</p>
 <p>First, lets see how to generalize pairs to allow for</p>
@@ -728,25 +723,25 @@ unsetTag r ty <span class="fu">=</span> <span class="dt">ISub</span> (<span clas
 </ul>
 <h3 id="constructing-tuples">Constructing Tuples</h3>
 <p>We can write a small set of functions to <strong>construct</strong> tuples (upto some given size):</p>
-<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="kw">def</span> tup3(x1, x2, x3):
-  (x1, (x2, x3))
-
-<span class="kw">def</span> tup4(x1, x2, x3, x4):
-  (x1, (x2, (x3, x4)))
-
-<span class="kw">def</span> tup5(x1, x2, x3, x4, x5):
-  (x1, (x2, (x3, (x4, x5))))</code></pre></div>
+<div class="sourceCode" id="cb20"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb20-1" data-line-number="1"><span class="kw">def</span> tup3(x1, x2, x3):</a>
+<a class="sourceLine" id="cb20-2" data-line-number="2">  (x1, (x2, x3))</a>
+<a class="sourceLine" id="cb20-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb20-4" data-line-number="4"><span class="kw">def</span> tup4(x1, x2, x3, x4):</a>
+<a class="sourceLine" id="cb20-5" data-line-number="5">  (x1, (x2, (x3, x4)))</a>
+<a class="sourceLine" id="cb20-6" data-line-number="6"></a>
+<a class="sourceLine" id="cb20-7" data-line-number="7"><span class="kw">def</span> tup5(x1, x2, x3, x4, x5):</a>
+<a class="sourceLine" id="cb20-8" data-line-number="8">  (x1, (x2, (x3, (x4, x5))))</a></code></pre></div>
 <h3 id="accessing-tuples">Accessing Tuples</h3>
 <p>We can write a single function to access tuples of any size.</p>
 <p>So the below code</p>
-<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">let t  <span class="op">=</span> tup5( <span class="dv">1</span>, <span class="dv">2</span> , <span class="dv">3</span> , <span class="dv">4</span> , <span class="dv">5</span>) <span class="op">in</span> 
-  , x0 <span class="op">=</span> <span class="bu">print</span>(get(t, <span class="dv">0</span>)) 
-  , x1 <span class="op">=</span> <span class="bu">print</span>(get(t, <span class="dv">1</span>)) 
-  , x2 <span class="op">=</span> <span class="bu">print</span>(get(t, <span class="dv">2</span>)) 
-  , x3 <span class="op">=</span> <span class="bu">print</span>(get(t, <span class="dv">3</span>)) 
-  , x4 <span class="op">=</span> <span class="bu">print</span>(get(t, <span class="dv">4</span>)) 
-<span class="op">in</span> 
-  <span class="dv">99</span></code></pre></div>
+<div class="sourceCode" id="cb21"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb21-1" data-line-number="1">let t  <span class="op">=</span> tup5( <span class="dv">1</span>, <span class="dv">2</span> , <span class="dv">3</span> , <span class="dv">4</span> , <span class="dv">5</span>) <span class="kw">in</span> </a>
+<a class="sourceLine" id="cb21-2" data-line-number="2">  , x0 <span class="op">=</span> <span class="bu">print</span>(get(t, <span class="dv">0</span>)) </a>
+<a class="sourceLine" id="cb21-3" data-line-number="3">  , x1 <span class="op">=</span> <span class="bu">print</span>(get(t, <span class="dv">1</span>)) </a>
+<a class="sourceLine" id="cb21-4" data-line-number="4">  , x2 <span class="op">=</span> <span class="bu">print</span>(get(t, <span class="dv">2</span>)) </a>
+<a class="sourceLine" id="cb21-5" data-line-number="5">  , x3 <span class="op">=</span> <span class="bu">print</span>(get(t, <span class="dv">3</span>)) </a>
+<a class="sourceLine" id="cb21-6" data-line-number="6">  , x4 <span class="op">=</span> <span class="bu">print</span>(get(t, <span class="dv">4</span>)) </a>
+<a class="sourceLine" id="cb21-7" data-line-number="7"><span class="kw">in</span> </a>
+<a class="sourceLine" id="cb21-8" data-line-number="8">  <span class="dv">99</span></a></code></pre></div>
 <p>should print out:</p>
 <pre><code>0
 1
@@ -755,42 +750,42 @@ unsetTag r ty <span class="fu">=</span> <span class="dt">ISub</span> (<span clas
 4
 99</code></pre>
 <p>How shall we write it?</p>
-<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="kw">def</span> get(t, i):
-  TODO<span class="op">-</span>IN<span class="op">-</span>CLASS</code></pre></div>
+<div class="sourceCode" id="cb23"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb23-1" data-line-number="1"><span class="kw">def</span> get(t, i):</a>
+<a class="sourceLine" id="cb23-2" data-line-number="2">  TODO<span class="op">-</span>IN<span class="op">-</span>CLASS</a></code></pre></div>
 <h3 id="quiz">QUIZ</h3>
 <p>Using the above “library” we can write code like:</p>
-<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell">def tup4(x1, x2, x3, x4)<span class="fu">:</span>
-  (x1, (x2, (x3, (x4, false)))
-
-def head(e)<span class="fu">:</span>
-  e[<span class="dv">0</span>]
-
-def tail(e)<span class="fu">:</span>
-  e[<span class="dv">1</span>]
-
-def get(e, i)<span class="fu">:</span>
-  <span class="kw">if</span> (i <span class="fu">==</span> <span class="dv">0</span>)<span class="fu">:</span>
-      head(e) 
-  <span class="kw">else</span><span class="fu">:</span>
-    get(tail(e), i<span class="fu">-</span><span class="dv">1</span>)
-
-<span class="kw">let</span> quad <span class="fu">=</span> tup4(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>) <span class="kw">in</span>
-  get(quad, <span class="dv">0</span>) <span class="fu">+</span> get(quad, <span class="dv">1</span>) <span class="fu">+</span> get(quad, <span class="dv">2</span>) <span class="fu">+</span> get(quad, <span class="dv">3</span>)
-
-q <span class="fu">=</span> (<span class="dv">1</span>, (<span class="dv">2</span>, (<span class="dv">3</span>, (<span class="dv">4</span>, false))))
-
-get(q, <span class="dv">0</span>) <span class="fu">=</span> q[<span class="dv">0</span>] <span class="fu">=</span> <span class="dv">1</span> 
-get(q, <span class="dv">1</span>) <span class="fu">=</span> get(q[<span class="dv">1</span>], <span class="dv">0</span>) <span class="fu">=</span> <span class="dv">2</span>   
-get(q, <span class="dv">2</span>) <span class="fu">=</span> get(q[<span class="dv">1</span>], <span class="dv">1</span>) <span class="fu">=</span> get(q[<span class="dv">1</span>][<span class="dv">1</span>], <span class="dv">0</span>) <span class="fu">=</span> <span class="dv">3</span> 
-get(q, <span class="dv">3</span>) <span class="fu">=</span> get(q[<span class="dv">1</span>], <span class="dv">2</span>) <span class="fu">=</span> get(q[<span class="dv">1</span>][<span class="dv">1</span>], <span class="dv">1</span>) <span class="fu">=</span> get(q[<span class="dv">1</span>][<span class="dv">1</span>][<span class="dv">1</span>], <span class="dv">0</span>) <span class="fu">=</span> get(<span class="dv">4</span>, <span class="dv">0</span>)
-          <span class="fu">=</span> <span class="dv">4</span>[<span class="dv">0</span>]
-
-
-
-
-  </code></pre></div>
+<div class="sourceCode" id="cb24"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb24-1" data-line-number="1">def tup4(x1, x2, x3, x4)<span class="fu">:</span></a>
+<a class="sourceLine" id="cb24-2" data-line-number="2">  (x1, (x2, (x3, (x4, false)))</a>
+<a class="sourceLine" id="cb24-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb24-4" data-line-number="4">def head(e)<span class="fu">:</span></a>
+<a class="sourceLine" id="cb24-5" data-line-number="5">  e[<span class="dv">0</span>]</a>
+<a class="sourceLine" id="cb24-6" data-line-number="6"></a>
+<a class="sourceLine" id="cb24-7" data-line-number="7">def tail(e)<span class="fu">:</span></a>
+<a class="sourceLine" id="cb24-8" data-line-number="8">  e[<span class="dv">1</span>]</a>
+<a class="sourceLine" id="cb24-9" data-line-number="9"></a>
+<a class="sourceLine" id="cb24-10" data-line-number="10">def get(e, i)<span class="fu">:</span></a>
+<a class="sourceLine" id="cb24-11" data-line-number="11">  <span class="kw">if</span> (i <span class="fu">==</span> <span class="dv">0</span>)<span class="fu">:</span></a>
+<a class="sourceLine" id="cb24-12" data-line-number="12">      head(e) </a>
+<a class="sourceLine" id="cb24-13" data-line-number="13">  <span class="kw">else</span><span class="fu">:</span></a>
+<a class="sourceLine" id="cb24-14" data-line-number="14">    get(tail(e), i<span class="fu">-</span><span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb24-15" data-line-number="15"></a>
+<a class="sourceLine" id="cb24-16" data-line-number="16"><span class="kw">let</span> quad <span class="fu">=</span> tup4(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>) <span class="kw">in</span></a>
+<a class="sourceLine" id="cb24-17" data-line-number="17">  get(quad, <span class="dv">0</span>) <span class="fu">+</span> get(quad, <span class="dv">1</span>) <span class="fu">+</span> get(quad, <span class="dv">2</span>) <span class="fu">+</span> get(quad, <span class="dv">3</span>)</a>
+<a class="sourceLine" id="cb24-18" data-line-number="18"></a>
+<a class="sourceLine" id="cb24-19" data-line-number="19">q <span class="fu">=</span> (<span class="dv">1</span>, (<span class="dv">2</span>, (<span class="dv">3</span>, (<span class="dv">4</span>, false))))</a>
+<a class="sourceLine" id="cb24-20" data-line-number="20"></a>
+<a class="sourceLine" id="cb24-21" data-line-number="21">get(q, <span class="dv">0</span>) <span class="fu">=</span> q[<span class="dv">0</span>] <span class="fu">=</span> <span class="dv">1</span> </a>
+<a class="sourceLine" id="cb24-22" data-line-number="22">get(q, <span class="dv">1</span>) <span class="fu">=</span> get(q[<span class="dv">1</span>], <span class="dv">0</span>) <span class="fu">=</span> <span class="dv">2</span>   </a>
+<a class="sourceLine" id="cb24-23" data-line-number="23">get(q, <span class="dv">2</span>) <span class="fu">=</span> get(q[<span class="dv">1</span>], <span class="dv">1</span>) <span class="fu">=</span> get(q[<span class="dv">1</span>][<span class="dv">1</span>], <span class="dv">0</span>) <span class="fu">=</span> <span class="dv">3</span> </a>
+<a class="sourceLine" id="cb24-24" data-line-number="24">get(q, <span class="dv">3</span>) <span class="fu">=</span> get(q[<span class="dv">1</span>], <span class="dv">2</span>) <span class="fu">=</span> get(q[<span class="dv">1</span>][<span class="dv">1</span>], <span class="dv">1</span>) <span class="fu">=</span> get(q[<span class="dv">1</span>][<span class="dv">1</span>][<span class="dv">1</span>], <span class="dv">0</span>) <span class="fu">=</span> get(<span class="dv">4</span>, <span class="dv">0</span>)</a>
+<a class="sourceLine" id="cb24-25" data-line-number="25">          <span class="fu">=</span> <span class="dv">4</span>[<span class="dv">0</span>]</a>
+<a class="sourceLine" id="cb24-26" data-line-number="26"></a>
+<a class="sourceLine" id="cb24-27" data-line-number="27"></a>
+<a class="sourceLine" id="cb24-28" data-line-number="28"></a>
+<a class="sourceLine" id="cb24-29" data-line-number="29"></a>
+<a class="sourceLine" id="cb24-30" data-line-number="30">  </a></code></pre></div>
 <p>What will be the result of compiling the above?</p>
-<ol style="list-style-type: decimal">
+<ol type="1">
 <li>Compile error</li>
 <li>Segmentation fault</li>
 <li>Other run-time error</li>
@@ -799,10 +794,10 @@ get(q, <span class="dv">3</span>) <span class="fu">=</span> get(q[<span class="d
 </ol>
 <h3 id="quiz-1">QUIZ</h3>
 <p>Using the above “library” we can write code like:</p>
-<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="kw">let</span> quad <span class="fu">=</span> tup4(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>) <span class="kw">in</span>
-  get(quad, <span class="dv">0</span>) <span class="fu">+</span> get(quad, <span class="dv">1</span>) <span class="fu">+</span> get(quad, <span class="dv">2</span>) <span class="fu">+</span> get(quad, <span class="dv">3</span>)</code></pre></div>
+<div class="sourceCode" id="cb25"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb25-1" data-line-number="1"><span class="kw">let</span> quad <span class="fu">=</span> tup4(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>) <span class="kw">in</span></a>
+<a class="sourceLine" id="cb25-2" data-line-number="2">  get(quad, <span class="dv">0</span>) <span class="fu">+</span> get(quad, <span class="dv">1</span>) <span class="fu">+</span> get(quad, <span class="dv">2</span>) <span class="fu">+</span> get(quad, <span class="dv">3</span>)</a></code></pre></div>
 <p>What will be the result of compiling the above?</p>
-<ol style="list-style-type: decimal">
+<ol type="1">
 <li>Compile error</li>
 <li>Segmentation fault</li>
 <li>Other run-time error</li>
@@ -816,40 +811,40 @@ get(q, <span class="dv">3</span>) <span class="fu">=</span> get(q[<span class="d
 <p>```python def empty(): false</p>
 <p>def cons(h, t): (h, t) ``</p>
 <p>We can now encode lists as:</p>
-<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">cons(<span class="dv">1</span>, cons(<span class="dv">2</span>, cons(<span class="dv">3</span>, cons(<span class="dv">4</span>, empty()))))</code></pre></div>
+<div class="sourceCode" id="cb26"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb26-1" data-line-number="1">cons(<span class="dv">1</span>, cons(<span class="dv">2</span>, cons(<span class="dv">3</span>, cons(<span class="dv">4</span>, empty()))))</a></code></pre></div>
 <h3 id="access-1">Access</h3>
 <p>To <strong>access</strong> a list, we need to know</p>
-<ol style="list-style-type: decimal">
+<ol type="1">
 <li>Whether the list <code>isEmpty</code>, and</li>
 <li>A way to access the <code>head</code> and the <code>tail</code> of a non-empty list.</li>
 </ol>
-<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell">def isEmpty(l)<span class="fu">:</span>
-  l <span class="fu">==</span> empty()
-
-def head(l)<span class="fu">:</span>
-  l[<span class="dv">0</span>]
-
-def tail(l)<span class="fu">:</span>
-  l[<span class="dv">1</span>]</code></pre></div>
+<div class="sourceCode" id="cb27"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb27-1" data-line-number="1">def isEmpty(l)<span class="fu">:</span></a>
+<a class="sourceLine" id="cb27-2" data-line-number="2">  l <span class="fu">==</span> empty()</a>
+<a class="sourceLine" id="cb27-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb27-4" data-line-number="4">def head(l)<span class="fu">:</span></a>
+<a class="sourceLine" id="cb27-5" data-line-number="5">  l[<span class="dv">0</span>]</a>
+<a class="sourceLine" id="cb27-6" data-line-number="6"></a>
+<a class="sourceLine" id="cb27-7" data-line-number="7">def tail(l)<span class="fu">:</span></a>
+<a class="sourceLine" id="cb27-8" data-line-number="8">  l[<span class="dv">1</span>]</a></code></pre></div>
 <h3 id="examples">Examples</h3>
 <p>We can now write various functions that build and operate on lists, for example, a function to generate the list of numbers between <code>i</code> and <code>j</code></p>
-<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="kw">def</span> <span class="bu">range</span>(i, j):
-  <span class="cf">if</span> (i <span class="op">&lt;</span> j):
-    cons(i, <span class="bu">range</span>(i<span class="dv">+1</span>, j))
-  <span class="cf">else</span>:
-    emp()
-
-<span class="bu">range</span>(<span class="dv">1</span>, <span class="dv">5</span>)</code></pre></div>
+<div class="sourceCode" id="cb28"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb28-1" data-line-number="1"><span class="kw">def</span> <span class="bu">range</span>(i, j):</a>
+<a class="sourceLine" id="cb28-2" data-line-number="2">  <span class="cf">if</span> (i <span class="op">&lt;</span> j):</a>
+<a class="sourceLine" id="cb28-3" data-line-number="3">    cons(i, <span class="bu">range</span>(i<span class="op">+</span><span class="dv">1</span>, j))</a>
+<a class="sourceLine" id="cb28-4" data-line-number="4">  <span class="cf">else</span>:</a>
+<a class="sourceLine" id="cb28-5" data-line-number="5">    emp()</a>
+<a class="sourceLine" id="cb28-6" data-line-number="6"></a>
+<a class="sourceLine" id="cb28-7" data-line-number="7"><span class="bu">range</span>(<span class="dv">1</span>, <span class="dv">5</span>)</a></code></pre></div>
 <p>which should produce the result</p>
 <p><code>(1,(2,(3,(4,false))))</code></p>
 <p>and a function to sum up the elements of a list:</p>
-<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="kw">def</span> <span class="bu">sum</span>(xs):
-  <span class="cf">if</span> (isEmpty(xs)):
-    <span class="dv">0</span>
-  <span class="cf">else</span>:
-    head(xs) <span class="op">+</span> <span class="bu">sum</span>(tail(xs))
-
-<span class="bu">sum</span>(<span class="bu">range</span>(<span class="dv">1</span>, <span class="dv">5</span>))</code></pre></div>
+<div class="sourceCode" id="cb29"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb29-1" data-line-number="1"><span class="kw">def</span> <span class="bu">sum</span>(xs):</a>
+<a class="sourceLine" id="cb29-2" data-line-number="2">  <span class="cf">if</span> (isEmpty(xs)):</a>
+<a class="sourceLine" id="cb29-3" data-line-number="3">    <span class="dv">0</span></a>
+<a class="sourceLine" id="cb29-4" data-line-number="4">  <span class="cf">else</span>:</a>
+<a class="sourceLine" id="cb29-5" data-line-number="5">    head(xs) <span class="op">+</span> <span class="bu">sum</span>(tail(xs))</a>
+<a class="sourceLine" id="cb29-6" data-line-number="6"></a>
+<a class="sourceLine" id="cb29-7" data-line-number="7"><span class="bu">sum</span>(<span class="bu">range</span>(<span class="dv">1</span>, <span class="dv">5</span>))</a></code></pre></div>
 <p>which should produce the result <code>10</code>.</p>
 <h2 id="recap">Recap</h2>
 <p>We have a pretty serious language now, with:</p>
@@ -866,9 +861,9 @@ def tail(l)<span class="fu">:</span>
 <li>runtime and compiler</li>
 </ul>
 <p>In your assignment, you will add <em>native</em> support for n-ary tuples, letting the programmer write code like:</p>
-<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">(e1, e2, e3, ..., en)  <span class="co"># constructing tuples of arbitrary arity</span>
-
-e1[e2]                 <span class="co"># allowing expressions to be used as fields</span></code></pre></div>
+<div class="sourceCode" id="cb30"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb30-1" data-line-number="1">(e1, e2, e3, ..., en)  <span class="co"># constructing tuples of arbitrary arity</span></a>
+<a class="sourceLine" id="cb30-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb30-3" data-line-number="3">e1[e2]                 <span class="co"># allowing expressions to be used as fields</span></a></code></pre></div>
 <p>Next, we’ll see how to</p>
 <ul>
 <li>use the “pair” mechanism to add support for <strong>higher-order functions</strong> and</li>

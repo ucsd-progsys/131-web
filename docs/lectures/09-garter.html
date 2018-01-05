@@ -248,7 +248,7 @@ if (window.navigator.appName == "Microsoft Internet Explorer") {
 <h2 id="strategy">Strategy</h2>
 <p>Lets start with an informal overview of our strategy for type inference; as usual we will then formalize and implement this strategy.</p>
 <p>The core idea is this:</p>
-<ol style="list-style-type: decimal">
+<ol type="1">
 <li><strong>Traverse</strong> the <code>Expr</code> …</li>
 <li><strong>Generating</strong> fresh variables for unknown types…</li>
 <li><strong>Unifying</strong> function input types with their arguments …</li>
@@ -256,21 +256,21 @@ if (window.navigator.appName == "Microsoft Internet Explorer") {
 </ol>
 <p>Lets do the above procedure informally for a couple of examples!</p>
 <h3 id="example-1-inputs-and-outputs">Example 1: Inputs and Outputs</h3>
-<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="kw">let</span> incr <span class="fu">=</span> (lambda(x)<span class="fu">:</span> add1(x)) <span class="kw">in</span>
-  incr(<span class="dv">7</span>)  </code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw">let</span> incr <span class="fu">=</span> (lambda(x)<span class="fu">:</span> add1(x)) <span class="kw">in</span></a>
+<a class="sourceLine" id="cb1-2" data-line-number="2">  incr(<span class="dv">7</span>)  </a></code></pre></div>
 <h3 id="example-2-polymorphism">Example 2: Polymorphism</h3>
-<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="kw">let</span> id <span class="fu">=</span> (lambda(x)<span class="fu">:</span> x)
-  , a1 <span class="fu">=</span> id(<span class="dv">7</span>)
-  , a2 <span class="fu">=</span> id(true)
-<span class="kw">in</span>
-  true  </code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="kw">let</span> id <span class="fu">=</span> (lambda(x)<span class="fu">:</span> x)</a>
+<a class="sourceLine" id="cb2-2" data-line-number="2">  , a1 <span class="fu">=</span> id(<span class="dv">7</span>)</a>
+<a class="sourceLine" id="cb2-3" data-line-number="3">  , a2 <span class="fu">=</span> id(true)</a>
+<a class="sourceLine" id="cb2-4" data-line-number="4"><span class="kw">in</span></a>
+<a class="sourceLine" id="cb2-5" data-line-number="5">  true  </a></code></pre></div>
 <h3 id="example-3-higher-order-functions">Example 3: Higher-Order Functions</h3>
-<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="kw">let</span> f    <span class="fu">=</span> (lambda(it, x)<span class="fu">:</span> it(x) <span class="fu">+</span> <span class="dv">1</span>)
-  , incr <span class="fu">=</span> lambda(z)<span class="fu">:</span> add1(z)
-<span class="kw">in</span>
-  f(incr, <span class="dv">10</span>)</code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="kw">let</span> f    <span class="fu">=</span> (lambda(it, x)<span class="fu">:</span> it(x) <span class="fu">+</span> <span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb3-2" data-line-number="2">  , incr <span class="fu">=</span> lambda(z)<span class="fu">:</span> add1(z)</a>
+<a class="sourceLine" id="cb3-3" data-line-number="3"><span class="kw">in</span></a>
+<a class="sourceLine" id="cb3-4" data-line-number="4">  f(incr, <span class="dv">10</span>)</a></code></pre></div>
 <h3 id="strategy-recap">Strategy Recap</h3>
-<ol style="list-style-type: decimal">
+<ol type="1">
 <li><strong>Traverse</strong> the <code>Expr</code> …</li>
 <li><strong>Fresh</strong> variables for unknown types…</li>
 <li><strong>Unifying</strong> function input types with their arguments …</li>
@@ -279,7 +279,7 @@ if (window.navigator.appName == "Microsoft Internet Explorer") {
 <li><strong>Instantiating</strong> polymorphic type variables at each use-site.</li>
 </ol>
 <h2 id="plan">Plan</h2>
-<ol style="list-style-type: decimal">
+<ol type="1">
 <li><a href="#syntax-of-types"><strong>Types</strong></a></li>
 <li><a href="#syntax-of-expressions">Expressions</a></li>
 <li><a href="#substitutions">Variables &amp; Substitution</a></li>
@@ -292,24 +292,24 @@ if (window.navigator.appName == "Microsoft Internet Explorer") {
 <p>First, lets see how the syntax of our <code>garter</code> changes to enable static types.</p>
 <h3 id="syntax-of-types">Syntax of Types</h3>
 <p>A <code>Type</code> is one of:</p>
-<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="kw">data</span> <span class="dt">Type</span>
-  <span class="fu">=</span> <span class="dt">TInt</span>               <span class="co">-- Int</span>
-  <span class="fu">|</span> <span class="dt">TBool</span>              <span class="co">-- Bool</span>
-  <span class="fu">|</span> [<span class="dt">Type</span>] <span class="fu">:=&gt;</span> <span class="dt">Type</span>    <span class="co">-- (t1,...,tn) =&gt; t</span>
-  <span class="fu">|</span> <span class="dt">TVar</span> <span class="dt">TVar</span>          <span class="co">-- a, b, c</span>
-  <span class="fu">|</span> <span class="dt">TPair</span> <span class="dt">Type</span> <span class="dt">Type</span>    <span class="co">-- (t0, t1)</span>
-  <span class="fu">|</span> <span class="dt">TCtor</span> <span class="dt">Ctor</span> [<span class="dt">Type</span>]  <span class="co">-- e.g. C[t1,...,tn]</span>
-  <span class="kw">deriving</span> (<span class="dt">Eq</span>, <span class="dt">Ord</span>)</code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb4-1" data-line-number="1"><span class="kw">data</span> <span class="dt">Type</span></a>
+<a class="sourceLine" id="cb4-2" data-line-number="2">  <span class="fu">=</span> <span class="dt">TInt</span>               <span class="co">-- Int</span></a>
+<a class="sourceLine" id="cb4-3" data-line-number="3">  <span class="fu">|</span> <span class="dt">TBool</span>              <span class="co">-- Bool</span></a>
+<a class="sourceLine" id="cb4-4" data-line-number="4">  <span class="fu">|</span> [<span class="dt">Type</span>] <span class="fu">:=&gt;</span> <span class="dt">Type</span>    <span class="co">-- (t1,...,tn) =&gt; t</span></a>
+<a class="sourceLine" id="cb4-5" data-line-number="5">  <span class="fu">|</span> <span class="dt">TVar</span> <span class="dt">TVar</span>          <span class="co">-- a, b, c</span></a>
+<a class="sourceLine" id="cb4-6" data-line-number="6">  <span class="fu">|</span> <span class="dt">TPair</span> <span class="dt">Type</span> <span class="dt">Type</span>    <span class="co">-- (t0, t1)</span></a>
+<a class="sourceLine" id="cb4-7" data-line-number="7">  <span class="fu">|</span> <span class="dt">TCtor</span> <span class="dt">Ctor</span> [<span class="dt">Type</span>]  <span class="co">-- e.g. C[t1,...,tn]</span></a>
+<a class="sourceLine" id="cb4-8" data-line-number="8">  <span class="kw">deriving</span> (<span class="dt">Eq</span>, <span class="dt">Ord</span>)</a></code></pre></div>
 <p>here <code>Ctor</code> and <code>TVar</code> are just string names:</p>
-<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="kw">newtype</span> <span class="dt">Ctor</span>
-  <span class="fu">=</span> <span class="dt">CT</span> <span class="dt">String</span>           <span class="co">-- e.g. &quot;List&quot;, &quot;Tree&quot;</span>
-  <span class="kw">deriving</span> (<span class="dt">Eq</span>, <span class="dt">Ord</span>)
-
-<span class="kw">newtype</span> <span class="dt">TVar</span>
-  <span class="fu">=</span> <span class="dt">TV</span> <span class="dt">String</span>           <span class="co">-- e.g. a, b, c</span>
-  <span class="kw">deriving</span> (<span class="dt">Eq</span>, <span class="dt">Ord</span>)</code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb5-1" data-line-number="1"><span class="kw">newtype</span> <span class="dt">Ctor</span></a>
+<a class="sourceLine" id="cb5-2" data-line-number="2">  <span class="fu">=</span> <span class="dt">CT</span> <span class="dt">String</span>           <span class="co">-- e.g. &quot;List&quot;, &quot;Tree&quot;</span></a>
+<a class="sourceLine" id="cb5-3" data-line-number="3">  <span class="kw">deriving</span> (<span class="dt">Eq</span>, <span class="dt">Ord</span>)</a>
+<a class="sourceLine" id="cb5-4" data-line-number="4"></a>
+<a class="sourceLine" id="cb5-5" data-line-number="5"><span class="kw">newtype</span> <span class="dt">TVar</span></a>
+<a class="sourceLine" id="cb5-6" data-line-number="6">  <span class="fu">=</span> <span class="dt">TV</span> <span class="dt">String</span>           <span class="co">-- e.g. a, b, c</span></a>
+<a class="sourceLine" id="cb5-7" data-line-number="7">  <span class="kw">deriving</span> (<span class="dt">Eq</span>, <span class="dt">Ord</span>)</a></code></pre></div>
 <p>Finally, a <strong>polymorphic type</strong> is represented as:</p>
-<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="kw">data</span> <span class="dt">Poly</span> <span class="fu">=</span> <span class="dt">Forall</span> [<span class="dt">TVar</span>] <span class="dt">Type</span> <span class="co">-- e.g. forall a. (a, a) =&gt; Bool</span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb6-1" data-line-number="1"><span class="kw">data</span> <span class="dt">Poly</span> <span class="fu">=</span> <span class="dt">Forall</span> [<span class="dt">TVar</span>] <span class="dt">Type</span> <span class="co">-- e.g. forall a. (a, a) =&gt; Bool</span></a></code></pre></div>
 <h3 id="example-monomorphic-types">Example: Monomorphic Types</h3>
 <p>A function that</p>
 <ul>
@@ -340,22 +340,22 @@ if (window.navigator.appName == "Microsoft Internet Explorer") {
 <li><p><em>Tuples</em> always have exactly <em>two</em> elements; you can represent <code>(x, y, z)</code> as <code>(x, (y, z))</code>.</p></li>
 <li><p><em>Tuple</em> access is limited to the fields <code>Zero</code> and <code>One</code> (instead of arbitrary expressions).</p></li>
 </ul>
-<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="kw">data</span> <span class="dt">Expr</span> a
-  <span class="fu">=</span> <span class="fu">...</span>
-  <span class="fu">|</span> <span class="dt">Tuple</span>   (<span class="dt">Expr</span> a) (<span class="dt">Expr</span> a)                    a <span class="co">-- Tuples have 2 elems</span>
-  <span class="fu">|</span> <span class="dt">GetItem</span> (<span class="dt">Expr</span> a) <span class="dt">Field</span>                       a <span class="co">-- Access 0-th or 1-st elem</span>
-  <span class="fu">|</span> <span class="dt">Fun</span>     (<span class="dt">Bind</span> a) <span class="dt">Sig</span>     [<span class="dt">Bind</span> a]  (<span class="dt">Expr</span> a)  a <span class="co">-- named functions</span>
-
-<span class="kw">data</span> <span class="dt">Field</span>
-  <span class="fu">=</span> <span class="dt">Zero</span>            <span class="co">-- 0-th field</span>
-  <span class="fu">|</span> <span class="dt">One</span>             <span class="co">-- 1-st field                     </span>
-
-<span class="kw">data</span> <span class="dt">Sig</span>
-  <span class="fu">=</span> <span class="dt">Infer</span>           <span class="co">-- no specification, infer scheme  </span>
-  <span class="fu">|</span> <span class="dt">Check</span>  <span class="dt">Poly</span>     <span class="co">-- check that function has given (poly-) type</span>
-  <span class="fu">|</span> <span class="dt">Assume</span> <span class="dt">Poly</span>     <span class="co">--  </span></code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb11-1" data-line-number="1"><span class="kw">data</span> <span class="dt">Expr</span> a</a>
+<a class="sourceLine" id="cb11-2" data-line-number="2">  <span class="fu">=</span> <span class="fu">...</span></a>
+<a class="sourceLine" id="cb11-3" data-line-number="3">  <span class="fu">|</span> <span class="dt">Tuple</span>   (<span class="dt">Expr</span> a) (<span class="dt">Expr</span> a)                    a <span class="co">-- Tuples have 2 elems</span></a>
+<a class="sourceLine" id="cb11-4" data-line-number="4">  <span class="fu">|</span> <span class="dt">GetItem</span> (<span class="dt">Expr</span> a) <span class="dt">Field</span>                       a <span class="co">-- Access 0-th or 1-st elem</span></a>
+<a class="sourceLine" id="cb11-5" data-line-number="5">  <span class="fu">|</span> <span class="dt">Fun</span>     (<span class="dt">Bind</span> a) <span class="dt">Sig</span>     [<span class="dt">Bind</span> a]  (<span class="dt">Expr</span> a)  a <span class="co">-- named functions</span></a>
+<a class="sourceLine" id="cb11-6" data-line-number="6"></a>
+<a class="sourceLine" id="cb11-7" data-line-number="7"><span class="kw">data</span> <span class="dt">Field</span></a>
+<a class="sourceLine" id="cb11-8" data-line-number="8">  <span class="fu">=</span> <span class="dt">Zero</span>            <span class="co">-- 0-th field</span></a>
+<a class="sourceLine" id="cb11-9" data-line-number="9">  <span class="fu">|</span> <span class="dt">One</span>             <span class="co">-- 1-st field                     </span></a>
+<a class="sourceLine" id="cb11-10" data-line-number="10"></a>
+<a class="sourceLine" id="cb11-11" data-line-number="11"><span class="kw">data</span> <span class="dt">Sig</span></a>
+<a class="sourceLine" id="cb11-12" data-line-number="12">  <span class="fu">=</span> <span class="dt">Infer</span>           <span class="co">-- no specification, infer scheme  </span></a>
+<a class="sourceLine" id="cb11-13" data-line-number="13">  <span class="fu">|</span> <span class="dt">Check</span>  <span class="dt">Poly</span>     <span class="co">-- check that function has given (poly-) type</span></a>
+<a class="sourceLine" id="cb11-14" data-line-number="14">  <span class="fu">|</span> <span class="dt">Assume</span> <span class="dt">Poly</span>     <span class="co">--  </span></a></code></pre></div>
 <h3 id="plan-1">Plan</h3>
-<ol style="list-style-type: decimal">
+<ol type="1">
 <li><a href="#syntax-of-types">Types</a></li>
 <li><a href="#syntax-of-expressions">Expressions</a></li>
 <li><a href="#substitutions"><strong>Variables &amp; Substitution</strong></a></li>
@@ -374,41 +374,41 @@ if (window.navigator.appName == "Microsoft Internet Explorer") {
 <p>Lets formalize <em>substitutions</em>, and use it to define <a href="#unification">unification</a>.</p>
 <h3 id="representing-substitutions">Representing Substitutions</h3>
 <p>We represent substitutions as a record with two fields:</p>
-<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="kw">data</span> <span class="dt">Subst</span> <span class="fu">=</span> <span class="dt">Su</span>
-  {<span class="ot"> suMap ::</span> <span class="dt">M.Map</span> <span class="dt">TVar</span> <span class="dt">Type</span>    <span class="co">-- ^ hashmap from type-var := type</span>
-  ,<span class="ot"> suCnt ::</span> <span class="fu">!</span><span class="dt">Int</span>               <span class="co">-- ^ counter used to generate fresh type vars</span>
-  }</code></pre></div>
+<div class="sourceCode" id="cb12"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb12-1" data-line-number="1"><span class="kw">data</span> <span class="dt">Subst</span> <span class="fu">=</span> <span class="dt">Su</span></a>
+<a class="sourceLine" id="cb12-2" data-line-number="2">  {<span class="ot"> suMap ::</span> <span class="dt">M.Map</span> <span class="dt">TVar</span> <span class="dt">Type</span>    <span class="co">-- ^ hashmap from type-var := type</span></a>
+<a class="sourceLine" id="cb12-3" data-line-number="3">  ,<span class="ot"> suCnt ::</span> <span class="fu">!</span><span class="dt">Int</span>               <span class="co">-- ^ counter used to generate fresh type vars</span></a>
+<a class="sourceLine" id="cb12-4" data-line-number="4">  }</a></code></pre></div>
 <ul>
 <li><code>suMap</code> is a <strong>map</strong> from type variables to types,</li>
 <li><code>suCnt</code> is a <strong>counter</strong> used to generate <strong>new</strong> type variables.</li>
 </ul>
 <p>For example, <code>exSubst</code> is a substitution that maps <code>a</code>, <code>b</code> and <code>c</code> to <code>Int</code>, <code>Bool</code> and <code>(Int, Int) =&gt; Int</code> respectively.</p>
-<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="ot">exSubst ::</span> <span class="dt">Subst</span>
-exSubst <span class="fu">=</span> <span class="dt">Su</span> m <span class="dv">0</span>
-  <span class="kw">where</span>
-    m   <span class="fu">=</span> (M.fromList [ (<span class="st">&quot;a&quot;</span>, <span class="dt">TInt</span>)
-                      , (<span class="st">&quot;b&quot;</span>, <span class="dt">TBool</span>)
-                      , (<span class="st">&quot;c&quot;</span>, [<span class="dt">TInt</span>, <span class="dt">TInt</span>] <span class="fu">:=&gt;</span> <span class="dt">TInt</span>) ])
-
-
-apply exSubst ([<span class="dt">Int</span>, <span class="st">&quot;zong&quot;</span>] <span class="fu">:=&gt;</span> <span class="dt">Bool</span>)
-</code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb13-1" data-line-number="1"><span class="ot">exSubst ::</span> <span class="dt">Subst</span></a>
+<a class="sourceLine" id="cb13-2" data-line-number="2">exSubst <span class="fu">=</span> <span class="dt">Su</span> m <span class="dv">0</span></a>
+<a class="sourceLine" id="cb13-3" data-line-number="3">  <span class="kw">where</span></a>
+<a class="sourceLine" id="cb13-4" data-line-number="4">    m   <span class="fu">=</span> (M.fromList [ (<span class="st">&quot;a&quot;</span>, <span class="dt">TInt</span>)</a>
+<a class="sourceLine" id="cb13-5" data-line-number="5">                      , (<span class="st">&quot;b&quot;</span>, <span class="dt">TBool</span>)</a>
+<a class="sourceLine" id="cb13-6" data-line-number="6">                      , (<span class="st">&quot;c&quot;</span>, [<span class="dt">TInt</span>, <span class="dt">TInt</span>] <span class="fu">:=&gt;</span> <span class="dt">TInt</span>) ])</a>
+<a class="sourceLine" id="cb13-7" data-line-number="7"></a>
+<a class="sourceLine" id="cb13-8" data-line-number="8"></a>
+<a class="sourceLine" id="cb13-9" data-line-number="9">apply exSubst ([<span class="dt">Int</span>, <span class="st">&quot;zong&quot;</span>] <span class="fu">:=&gt;</span> <span class="dt">Bool</span>)</a>
+<a class="sourceLine" id="cb13-10" data-line-number="10"></a></code></pre></div>
 <h3 id="applying-substitutions">Applying Substitutions</h3>
 <p>The main <em>use</em> of a substition is to <strong>apply</strong> it to a type, which has the effect of <em>replacing</em> each occurrence of a type variable with its substituted value (or leaving it untouched if it is not mentioned in the substitution.)</p>
 <p>We define an interface for “things that can be substituted” as:</p>
-<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="kw">class</span> <span class="dt">Substitutable</span> a <span class="kw">where</span>
-<span class="ot">  apply     ::</span> <span class="dt">Subst</span> <span class="ot">-&gt;</span> a <span class="ot">-&gt;</span> a</code></pre></div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb14-1" data-line-number="1"><span class="kw">class</span> <span class="dt">Substitutable</span> a <span class="kw">where</span></a>
+<a class="sourceLine" id="cb14-2" data-line-number="2"><span class="ot">  apply     ::</span> <span class="dt">Subst</span> <span class="ot">-&gt;</span> a <span class="ot">-&gt;</span> a</a></code></pre></div>
 <p>and then we define how to <code>apply</code> substitutions to <code>Type</code>, <code>Poly</code>, and lists and maps of <code>Type</code> and <code>Poly</code>.</p>
 <p>For example,</p>
-<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell">apply exSubst ([<span class="st">&quot;a&quot;</span>, <span class="st">&quot;z&quot;</span>] <span class="fu">:=&gt;</span> <span class="st">&quot;b&quot;</span>)</code></pre></div>
+<div class="sourceCode" id="cb15"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb15-1" data-line-number="1">apply exSubst ([<span class="st">&quot;a&quot;</span>, <span class="st">&quot;z&quot;</span>] <span class="fu">:=&gt;</span> <span class="st">&quot;b&quot;</span>)</a></code></pre></div>
 <p>returns</p>
-<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell">[<span class="dt">TInt</span>, <span class="st">&quot;z&quot;</span>] <span class="fu">:=&gt;</span> <span class="dt">TBool</span></code></pre></div>
+<div class="sourceCode" id="cb16"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb16-1" data-line-number="1">[<span class="dt">TInt</span>, <span class="st">&quot;z&quot;</span>] <span class="fu">:=&gt;</span> <span class="dt">TBool</span></a></code></pre></div>
 <p>by replacing <code>&quot;a&quot;</code> and <code>&quot;b&quot;</code> with <code>TInt</code> and <code>TBool</code> and leaving “z” alone.</p>
 <h3 id="quiz">QUIZ</h3>
 <p>Recall that <code>exSubst = [&quot;a&quot; := TInt, &quot;b&quot; := TBool]</code>…</p>
 <p>What should be the result of</p>
 <pre><code>apply exSubst (Forall &quot;a&quot; ([&quot;a&quot;] :=&gt; &quot;a&quot;))</code></pre>
-<ol style="list-style-type: decimal">
+<ol type="1">
 <li><code>Forall [&quot;a&quot;] ([TInt] :=&gt; TBool)</code></li>
 <li><code>Forall [&quot;a&quot;] ([&quot;a&quot; ] :=&gt; &quot;a&quot;  )</code></li>
 <li><code>Forall [&quot;a&quot;] ([&quot;a&quot;]  :=&gt; TBool)</code></li>
@@ -427,34 +427,34 @@ apply exSubst ([<span class="dt">Int</span>, <span class="st">&quot;zong&quot;</
 <p>We should only substitute <strong>free type variables</strong>.</p>
 <h3 id="applying-substitutions-1">Applying Substitutions</h3>
 <p>Thus, keeping the above in mind, we can define <code>apply</code> as a recursive traversal:</p>
-<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell">  apply _  <span class="dt">TInt</span>          <span class="fu">=</span> <span class="dt">TInt</span>
-  apply _  <span class="dt">TBool</span>         <span class="fu">=</span> <span class="dt">TBool</span>
-  apply su (<span class="dt">TVar</span> a)      <span class="fu">=</span> M.findWithDefault (<span class="dt">TVar</span> a) a (suMap su)
-  apply su (ts <span class="fu">:=&gt;</span> t)    <span class="fu">=</span> apply su ts <span class="fu">:=&gt;</span> apply su t
-  apply su (<span class="dt">Forall</span> as t) <span class="fu">=</span> <span class="dt">Forall</span> as <span class="fu">$</span> apply (unSubst as su)  t</code></pre></div>
+<div class="sourceCode" id="cb20"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb20-1" data-line-number="1">  apply _  <span class="dt">TInt</span>          <span class="fu">=</span> <span class="dt">TInt</span></a>
+<a class="sourceLine" id="cb20-2" data-line-number="2">  apply _  <span class="dt">TBool</span>         <span class="fu">=</span> <span class="dt">TBool</span></a>
+<a class="sourceLine" id="cb20-3" data-line-number="3">  apply su (<span class="dt">TVar</span> a)      <span class="fu">=</span> M.findWithDefault (<span class="dt">TVar</span> a) a (suMap su)</a>
+<a class="sourceLine" id="cb20-4" data-line-number="4">  apply su (ts <span class="fu">:=&gt;</span> t)    <span class="fu">=</span> apply su ts <span class="fu">:=&gt;</span> apply su t</a>
+<a class="sourceLine" id="cb20-5" data-line-number="5">  apply su (<span class="dt">Forall</span> as t) <span class="fu">=</span> <span class="dt">Forall</span> as <span class="fu">$</span> apply (unSubst as su)  t</a></code></pre></div>
 <p>where <code>unSubst</code> <strong>removes</strong> the mappings for <code>as</code> from <code>su</code></p>
 <h3 id="creating-substitutions">Creating Substitutions</h3>
 <p>We can start with an <strong>empty substitution</strong> that maps no variables</p>
-<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="ot">empSubst ::</span> <span class="dt">Subst</span>
-empSubst <span class="fu">=</span>  <span class="dt">Su</span> M.empty <span class="dv">0</span></code></pre></div>
+<div class="sourceCode" id="cb21"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb21-1" data-line-number="1"><span class="ot">empSubst ::</span> <span class="dt">Subst</span></a>
+<a class="sourceLine" id="cb21-2" data-line-number="2">empSubst <span class="fu">=</span>  <span class="dt">Su</span> M.empty <span class="dv">0</span></a></code></pre></div>
 <h3 id="extending-substitutions">Extending Substitutions</h3>
 <p>we can <strong>extend</strong> the substitution by assigning a variable <code>a</code> to type <code>t</code></p>
-<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="ot">extSubst ::</span> <span class="dt">Subst</span> <span class="ot">-&gt;</span> <span class="dt">TVar</span> <span class="ot">-&gt;</span> <span class="dt">Type</span> <span class="ot">-&gt;</span> <span class="dt">Subst</span>
-extSubst su a t <span class="fu">=</span> su { suMap <span class="fu">=</span> M.insert a t su' }
-  <span class="kw">where</span>
-     su'        <span class="fu">=</span> apply (mkSubst [(a, t)]) (suMap su)</code></pre></div>
+<div class="sourceCode" id="cb22"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb22-1" data-line-number="1"><span class="ot">extSubst ::</span> <span class="dt">Subst</span> <span class="ot">-&gt;</span> <span class="dt">TVar</span> <span class="ot">-&gt;</span> <span class="dt">Type</span> <span class="ot">-&gt;</span> <span class="dt">Subst</span></a>
+<a class="sourceLine" id="cb22-2" data-line-number="2">extSubst su a t <span class="fu">=</span> su { suMap <span class="fu">=</span> M.insert a t su' }</a>
+<a class="sourceLine" id="cb22-3" data-line-number="3">  <span class="kw">where</span></a>
+<a class="sourceLine" id="cb22-4" data-line-number="4">     su'        <span class="fu">=</span> apply (mkSubst [(a, t)]) (suMap su)</a></code></pre></div>
 <p><strong>Telescoping</strong></p>
 <p>Note that when we extend <code>[b := a]</code> by assigning <code>a</code> to <code>Int</code> we must take care to also update <code>b</code> to now map to <code>Int</code>. That is, we want:</p>
 <pre><code>    extSubst [ &quot;b&quot; := &quot;a&quot; ] &quot;a&quot; TInt</code></pre>
 <p>to be</p>
 <pre><code>    [ &quot;b&quot; := TInt, &quot;a&quot; := TInt ]</code></pre>
 <p>That is why we:</p>
-<ol style="list-style-type: decimal">
+<ol type="1">
 <li><code>apply [a := Int]</code> to update the old substitution to get <code>su'</code></li>
 <li><code>insert</code> the new assignment <code>a := Int</code> into <code>su'</code>.</li>
 </ol>
 <h3 id="plan-2">Plan</h3>
-<ol style="list-style-type: decimal">
+<ol type="1">
 <li><a href="#syntax-of-types">Types</a></li>
 <li><a href="#syntax-of-expressions">Expressions</a></li>
 <li><a href="#substitutions">Variables &amp; Substitution</a></li>
@@ -468,60 +468,60 @@ extSubst su a t <span class="fu">=</span> su { suMap <span class="fu">=</span> M
 <table>
 <thead>
 <tr class="header">
-<th align="left"><strong>T1</strong></th>
-<th align="left"><strong>T2</strong></th>
-<th align="left"><strong>Unified</strong></th>
-<th align="left"><strong>Substitution</strong></th>
+<th style="text-align: left;"><strong>T1</strong></th>
+<th style="text-align: left;"><strong>T2</strong></th>
+<th style="text-align: left;"><strong>Unified</strong></th>
+<th style="text-align: left;"><strong>Substitution</strong></th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td align="left"><code>Int</code></td>
-<td align="left"><code>Int</code></td>
-<td align="left"><code>Int</code></td>
-<td align="left"><code>empSubst</code></td>
+<td style="text-align: left;"><code>Int</code></td>
+<td style="text-align: left;"><code>Int</code></td>
+<td style="text-align: left;"><code>Int</code></td>
+<td style="text-align: left;"><code>empSubst</code></td>
 </tr>
 <tr class="even">
-<td align="left"><code>a</code></td>
-<td align="left"><code>Int</code></td>
-<td align="left"><code>Int</code></td>
-<td align="left"><code>a := Int</code></td>
+<td style="text-align: left;"><code>a</code></td>
+<td style="text-align: left;"><code>Int</code></td>
+<td style="text-align: left;"><code>Int</code></td>
+<td style="text-align: left;"><code>a := Int</code></td>
 </tr>
 <tr class="odd">
-<td align="left"><code>a</code></td>
-<td align="left"><code>b</code></td>
-<td align="left"><code>b</code></td>
-<td align="left"><code>a := b</code></td>
+<td style="text-align: left;"><code>a</code></td>
+<td style="text-align: left;"><code>b</code></td>
+<td style="text-align: left;"><code>b</code></td>
+<td style="text-align: left;"><code>a := b</code></td>
 </tr>
 <tr class="even">
-<td align="left"><code>a -&gt; b</code></td>
-<td align="left"><code>a -&gt; d</code></td>
-<td align="left"><code>a-&gt;d</code></td>
-<td align="left"><code>b := d</code></td>
+<td style="text-align: left;"><code>a -&gt; b</code></td>
+<td style="text-align: left;"><code>a -&gt; d</code></td>
+<td style="text-align: left;"><code>a-&gt;d</code></td>
+<td style="text-align: left;"><code>b := d</code></td>
 </tr>
 <tr class="odd">
-<td align="left"><code>a -&gt; Int</code></td>
-<td align="left"><code>Bool -&gt; b</code></td>
-<td align="left"><code>Bool -&gt; Int</code></td>
-<td align="left"><code>a := Bool, b:=Int</code></td>
+<td style="text-align: left;"><code>a -&gt; Int</code></td>
+<td style="text-align: left;"><code>Bool -&gt; b</code></td>
+<td style="text-align: left;"><code>Bool -&gt; Int</code></td>
+<td style="text-align: left;"><code>a := Bool, b:=Int</code></td>
 </tr>
 <tr class="even">
-<td align="left"><code>Int</code></td>
-<td align="left"><code>Bool</code></td>
-<td align="left"><em>Error</em></td>
-<td align="left"><em>Error</em></td>
+<td style="text-align: left;"><code>Int</code></td>
+<td style="text-align: left;"><code>Bool</code></td>
+<td style="text-align: left;"><em>Error</em></td>
+<td style="text-align: left;"><em>Error</em></td>
 </tr>
 <tr class="odd">
-<td align="left"><code>Int</code></td>
-<td align="left"><code>a -&gt; b</code></td>
-<td align="left"><em>Error</em></td>
-<td align="left"><em>Error</em></td>
+<td style="text-align: left;"><code>Int</code></td>
+<td style="text-align: left;"><code>a -&gt; b</code></td>
+<td style="text-align: left;"><em>Error</em></td>
+<td style="text-align: left;"><em>Error</em></td>
 </tr>
 <tr class="even">
-<td align="left"><code>a</code></td>
-<td align="left"><code>a -&gt; Int</code></td>
-<td align="left"><em>Error</em></td>
-<td align="left"><em>Error</em></td>
+<td style="text-align: left;"><code>a</code></td>
+<td style="text-align: left;"><code>a -&gt; Int</code></td>
+<td style="text-align: left;"><em>Error</em></td>
+<td style="text-align: left;"><em>Error</em></td>
 </tr>
 </tbody>
 </table>
@@ -538,44 +538,44 @@ extSubst su a t <span class="fu">=</span> su { suMap <span class="fu">=</span> M
 <p>Can you think of a program that would trigger the <em>occurs check</em> failure? (You’ve probable written several such programs in 130 and 131!)</p>
 <h3 id="implementing-unification">Implementing Unification</h3>
 <p>We implement unification as a function:</p>
-<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="ot">unify ::</span> <span class="dt">Subst</span> <span class="ot">-&gt;</span> <span class="dt">Type</span> <span class="ot">-&gt;</span> <span class="dt">Type</span> <span class="ot">-&gt;</span> <span class="dt">Subst</span></code></pre></div>
+<div class="sourceCode" id="cb25"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb25-1" data-line-number="1"><span class="ot">unify ::</span> <span class="dt">Subst</span> <span class="ot">-&gt;</span> <span class="dt">Type</span> <span class="ot">-&gt;</span> <span class="dt">Type</span> <span class="ot">-&gt;</span> <span class="dt">Subst</span></a></code></pre></div>
 <p>such that</p>
-<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell">unify su t1 t2</code></pre></div>
+<div class="sourceCode" id="cb26"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb26-1" data-line-number="1">unify su t1 t2</a></code></pre></div>
 <p>returns a substitution <code>su'</code> that <strong>extends</strong> <code>su</code> with with the assignments needed to make <code>t1</code> the same as <code>t2</code>, i.e. such that <code>apply su' t1 == apply su' t2</code>.</p>
 <p>The code is pretty much the table above:</p>
-<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="ot">unify ::</span> <span class="dt">SourceSpan</span> <span class="ot">-&gt;</span> <span class="dt">Subst</span> <span class="ot">-&gt;</span> <span class="dt">Type</span> <span class="ot">-&gt;</span> <span class="dt">Type</span> <span class="ot">-&gt;</span> <span class="dt">Subst</span>
-unify _  su <span class="dt">TInt</span>       <span class="dt">TInt</span>         <span class="fu">=</span> su
-unify _  su <span class="dt">TBool</span>      <span class="dt">TBool</span>        <span class="fu">=</span> su
-unify sp su (<span class="dt">TVar</span> a)   t            <span class="fu">=</span> varAsgn sp su a t
-unify sp su t          (<span class="dt">TVar</span> a)     <span class="fu">=</span> varAsgn sp su a t
-unify sp su (is <span class="fu">:=&gt;</span> o) (is' <span class="fu">:=&gt;</span> o') <span class="fu">=</span> unify (unifys sp su is is') (apply s1 o) (apply s1 o')
-unify sp _  t1 t2                   <span class="fu">=</span> abort (errUnify sp t1 t2)</code></pre></div>
+<div class="sourceCode" id="cb27"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb27-1" data-line-number="1"><span class="ot">unify ::</span> <span class="dt">SourceSpan</span> <span class="ot">-&gt;</span> <span class="dt">Subst</span> <span class="ot">-&gt;</span> <span class="dt">Type</span> <span class="ot">-&gt;</span> <span class="dt">Type</span> <span class="ot">-&gt;</span> <span class="dt">Subst</span></a>
+<a class="sourceLine" id="cb27-2" data-line-number="2">unify _  su <span class="dt">TInt</span>       <span class="dt">TInt</span>         <span class="fu">=</span> su</a>
+<a class="sourceLine" id="cb27-3" data-line-number="3">unify _  su <span class="dt">TBool</span>      <span class="dt">TBool</span>        <span class="fu">=</span> su</a>
+<a class="sourceLine" id="cb27-4" data-line-number="4">unify sp su (<span class="dt">TVar</span> a)   t            <span class="fu">=</span> varAsgn sp su a t</a>
+<a class="sourceLine" id="cb27-5" data-line-number="5">unify sp su t          (<span class="dt">TVar</span> a)     <span class="fu">=</span> varAsgn sp su a t</a>
+<a class="sourceLine" id="cb27-6" data-line-number="6">unify sp su (is <span class="fu">:=&gt;</span> o) (is' <span class="fu">:=&gt;</span> o') <span class="fu">=</span> unify (unifys sp su is is') (apply s1 o) (apply s1 o')</a>
+<a class="sourceLine" id="cb27-7" data-line-number="7">unify sp _  t1 t2                   <span class="fu">=</span> abort (errUnify sp t1 t2)</a></code></pre></div>
 <p>The helpers</p>
 <ul>
 <li><code>unifys</code> recursively calls <code>unify</code> on <em>lists</em> of types:</li>
 <li><code>varAsgn</code> extends <code>su</code> with <code>[a := t]</code> if <strong>required</strong> and <strong>possible</strong>!</li>
 </ul>
-<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="ot">varAsgn ::</span> <span class="dt">SourceSpan</span> <span class="ot">-&gt;</span> <span class="dt">Subst</span> <span class="ot">-&gt;</span> <span class="dt">TVar</span> <span class="ot">-&gt;</span> <span class="dt">Type</span> <span class="ot">-&gt;</span> <span class="dt">Subst</span>
-varAsgn sp su a t
-  <span class="fu">|</span> t <span class="fu">==</span> <span class="dt">TVar</span> a          <span class="fu">=</span> su                       <span class="co">-- assigned to itself, do nothing</span>
-  <span class="fu">|</span> a <span class="ot">`elem`</span> freeTvars t <span class="fu">=</span> abort (errOccurs sp a t) <span class="co">-- oops, fails occurs check!</span>
-  <span class="fu">|</span> otherwise            <span class="fu">=</span> extSubst su a t          <span class="co">-- extend su with [a := t]</span></code></pre></div>
+<div class="sourceCode" id="cb28"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb28-1" data-line-number="1"><span class="ot">varAsgn ::</span> <span class="dt">SourceSpan</span> <span class="ot">-&gt;</span> <span class="dt">Subst</span> <span class="ot">-&gt;</span> <span class="dt">TVar</span> <span class="ot">-&gt;</span> <span class="dt">Type</span> <span class="ot">-&gt;</span> <span class="dt">Subst</span></a>
+<a class="sourceLine" id="cb28-2" data-line-number="2">varAsgn sp su a t</a>
+<a class="sourceLine" id="cb28-3" data-line-number="3">  <span class="fu">|</span> t <span class="fu">==</span> <span class="dt">TVar</span> a          <span class="fu">=</span> su                       <span class="co">-- assigned to itself, do nothing</span></a>
+<a class="sourceLine" id="cb28-4" data-line-number="4">  <span class="fu">|</span> a <span class="ot">`elem`</span> freeTvars t <span class="fu">=</span> abort (errOccurs sp a t) <span class="co">-- oops, fails occurs check!</span></a>
+<a class="sourceLine" id="cb28-5" data-line-number="5">  <span class="fu">|</span> otherwise            <span class="fu">=</span> extSubst su a t          <span class="co">-- extend su with [a := t]</span></a></code></pre></div>
 <p>We can test out the above table:</p>
-<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell">λ<span class="fu">&gt;</span> <span class="fu">:</span>set <span class="fu">-</span><span class="dt">XOverloadedStrings</span>
-
-λ<span class="fu">&gt;</span> unify junkSpan empSubst <span class="dt">TInt</span> <span class="dt">TInt</span>
-(fromList [], <span class="dv">0</span>)
-
-λ<span class="fu">&gt;</span> unify junkSpan empSubst ([<span class="st">&quot;a&quot;</span>] <span class="fu">:=&gt;</span> <span class="dt">TInt</span>) ([<span class="dt">TBool</span>] <span class="fu">:=&gt;</span> <span class="st">&quot;b&quot;</span>)
-(fromList [(a,<span class="dt">Bool</span>), (b,<span class="dt">Int</span>)], <span class="dv">0</span>)
-
-λ<span class="fu">&gt;</span> unify junkSpan empSubst (<span class="st">&quot;a&quot;</span>) ([<span class="st">&quot;a&quot;</span>] <span class="fu">:=&gt;</span> <span class="dt">TInt</span>)
-<span class="fu">***</span> <span class="dt">Exception</span><span class="fu">:</span> <span class="st">&quot;Type error: occurs check fails: a occurs in (a) =&gt; Int&quot;</span><span class="fu">...</span>
-
-λ<span class="fu">&gt;</span> unify junkSpan empSubst <span class="dt">TInt</span> <span class="dt">TBool</span>
-<span class="fu">***</span> <span class="dt">Exception</span><span class="fu">:</span> <span class="st">&quot;Type error: cannot unify Int and Bool&quot;</span> <span class="fu">...</span></code></pre></div>
+<div class="sourceCode" id="cb29"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb29-1" data-line-number="1">λ<span class="fu">&gt;</span> <span class="fu">:</span>set <span class="fu">-</span><span class="dt">XOverloadedStrings</span></a>
+<a class="sourceLine" id="cb29-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb29-3" data-line-number="3">λ<span class="fu">&gt;</span> unify junkSpan empSubst <span class="dt">TInt</span> <span class="dt">TInt</span></a>
+<a class="sourceLine" id="cb29-4" data-line-number="4">(fromList [], <span class="dv">0</span>)</a>
+<a class="sourceLine" id="cb29-5" data-line-number="5"></a>
+<a class="sourceLine" id="cb29-6" data-line-number="6">λ<span class="fu">&gt;</span> unify junkSpan empSubst ([<span class="st">&quot;a&quot;</span>] <span class="fu">:=&gt;</span> <span class="dt">TInt</span>) ([<span class="dt">TBool</span>] <span class="fu">:=&gt;</span> <span class="st">&quot;b&quot;</span>)</a>
+<a class="sourceLine" id="cb29-7" data-line-number="7">(fromList [(a,<span class="dt">Bool</span>), (b,<span class="dt">Int</span>)], <span class="dv">0</span>)</a>
+<a class="sourceLine" id="cb29-8" data-line-number="8"></a>
+<a class="sourceLine" id="cb29-9" data-line-number="9">λ<span class="fu">&gt;</span> unify junkSpan empSubst (<span class="st">&quot;a&quot;</span>) ([<span class="st">&quot;a&quot;</span>] <span class="fu">:=&gt;</span> <span class="dt">TInt</span>)</a>
+<a class="sourceLine" id="cb29-10" data-line-number="10"><span class="fu">***</span> <span class="dt">Exception</span><span class="fu">:</span> <span class="st">&quot;Type error: occurs check fails: a occurs in (a) =&gt; Int&quot;</span><span class="fu">...</span></a>
+<a class="sourceLine" id="cb29-11" data-line-number="11"></a>
+<a class="sourceLine" id="cb29-12" data-line-number="12">λ<span class="fu">&gt;</span> unify junkSpan empSubst <span class="dt">TInt</span> <span class="dt">TBool</span></a>
+<a class="sourceLine" id="cb29-13" data-line-number="13"><span class="fu">***</span> <span class="dt">Exception</span><span class="fu">:</span> <span class="st">&quot;Type error: cannot unify Int and Bool&quot;</span> <span class="fu">...</span></a></code></pre></div>
 <h3 id="plan-3">Plan</h3>
-<ol style="list-style-type: decimal">
+<ol type="1">
 <li><a href="#syntax-of-types">Types</a></li>
 <li><a href="#syntax-of-expressions">Expressions</a></li>
 <li><a href="#substitutions">Variables &amp; Substitution</a></li>
@@ -586,11 +586,11 @@ varAsgn sp su a t
 </ol>
 <h2 id="generalize-and-instantiate">Generalize and Instantiate</h2>
 <p>Ok, the next step is an easy one. Recall the example:</p>
-<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="kw">let</span> id <span class="fu">=</span> (lambda(x)<span class="fu">:</span> x)
-  , a1 <span class="fu">=</span> id(<span class="dv">7</span>)
-  , a2 <span class="fu">=</span> id(true)
-<span class="kw">in</span>
-  true  </code></pre></div>
+<div class="sourceCode" id="cb30"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb30-1" data-line-number="1"><span class="kw">let</span> id <span class="fu">=</span> (lambda(x)<span class="fu">:</span> x)</a>
+<a class="sourceLine" id="cb30-2" data-line-number="2">  , a1 <span class="fu">=</span> id(<span class="dv">7</span>)</a>
+<a class="sourceLine" id="cb30-3" data-line-number="3">  , a2 <span class="fu">=</span> id(true)</a>
+<a class="sourceLine" id="cb30-4" data-line-number="4"><span class="kw">in</span></a>
+<a class="sourceLine" id="cb30-5" data-line-number="5">  true  </a></code></pre></div>
 <p>For the expression <code>lambda(x): x</code> we inferred the type <code>(a0) =&gt; a0</code></p>
 <p>We needed to <strong>generalize</strong> the above:</p>
 <ul>
@@ -604,80 +604,80 @@ varAsgn sp su a t
 <p>Lets see how to implement those two steps.</p>
 <h3 id="type-environments">Type Environments</h3>
 <p>To <code>generalize</code> a type, we</p>
-<ol style="list-style-type: decimal">
+<ol type="1">
 <li>Compute its (free) type variables,</li>
 <li>Remove the ones that may still be constrained by <em>other</em> in-scope program variables.</li>
 </ol>
 <p>We represent the types of <strong>in scope</strong> program variables as <strong>type environment</strong></p>
-<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="kw">data</span> <span class="dt">TypeEnv</span> <span class="fu">=</span> <span class="dt">TypeEnv</span> (<span class="dt">M.Map</span> <span class="dt">Id</span> <span class="dt">Poly</span>)</code></pre></div>
+<div class="sourceCode" id="cb31"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb31-1" data-line-number="1"><span class="kw">data</span> <span class="dt">TypeEnv</span> <span class="fu">=</span> <span class="dt">TypeEnv</span> (<span class="dt">M.Map</span> <span class="dt">Id</span> <span class="dt">Poly</span>)</a></code></pre></div>
 <p>i.e. a <code>Map</code> from program variables <code>Id</code> to their (inferred) <code>Poly</code> type.</p>
 <h3 id="generalize">Generalize</h3>
 <p>We can now implement <code>generalize</code> as:</p>
-<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="ot">generalize ::</span> <span class="dt">TypeEnv</span> <span class="ot">-&gt;</span> <span class="dt">Type</span> <span class="ot">-&gt;</span> <span class="dt">Poly</span>
-generalize env t <span class="fu">=</span> <span class="dt">Forall</span> as t           <span class="co">-- 4. slap a `Forall` on the unconstrained vars</span>
-  <span class="kw">where</span>
-    tvs          <span class="fu">=</span> freeTvars t           <span class="co">-- 1. compute tyVars of `t`</span>
-    evs          <span class="fu">=</span> freeTvars env         <span class="co">-- 2. compute tyVars of `env`</span>
-    as           <span class="fu">=</span> L.nub (tvs <span class="dt">L</span><span class="fu">.</span>\\ evs)  <span class="co">-- 3. compute unconstrained vars: (1) minus (2)</span></code></pre></div>
+<div class="sourceCode" id="cb32"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb32-1" data-line-number="1"><span class="ot">generalize ::</span> <span class="dt">TypeEnv</span> <span class="ot">-&gt;</span> <span class="dt">Type</span> <span class="ot">-&gt;</span> <span class="dt">Poly</span></a>
+<a class="sourceLine" id="cb32-2" data-line-number="2">generalize env t <span class="fu">=</span> <span class="dt">Forall</span> as t           <span class="co">-- 4. slap a `Forall` on the unconstrained vars</span></a>
+<a class="sourceLine" id="cb32-3" data-line-number="3">  <span class="kw">where</span></a>
+<a class="sourceLine" id="cb32-4" data-line-number="4">    tvs          <span class="fu">=</span> freeTvars t           <span class="co">-- 1. compute tyVars of `t`</span></a>
+<a class="sourceLine" id="cb32-5" data-line-number="5">    evs          <span class="fu">=</span> freeTvars env         <span class="co">-- 2. compute tyVars of `env`</span></a>
+<a class="sourceLine" id="cb32-6" data-line-number="6">    as           <span class="fu">=</span> L.nub (tvs <span class="dt">L</span><span class="fu">.</span>\\ evs)  <span class="co">-- 3. compute unconstrained vars: (1) minus (2)</span></a></code></pre></div>
 <p>The helper <code>freeTvars</code> computes the set of variables that appear inside a <code>Type</code>, <code>Poly</code> and <code>TypeEnv</code>:</p>
-<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell">  <span class="co">-- | type-vars of a Type</span>
-  freeTvars <span class="dt">TInt</span>          <span class="fu">=</span> []
-  freeTvars <span class="dt">TBool</span>         <span class="fu">=</span> []
-  freeTvars (<span class="dt">TVar</span> a)      <span class="fu">=</span> [a]
-  freeTvars (ts <span class="fu">:=&gt;</span> t)    <span class="fu">=</span> freeTvars ts <span class="fu">++</span> freeTvars t
-
-  <span class="co">-- | type-vars of a Poly (we remove the &quot;bound&quot; forall-vars)</span>
-  freeTvars (<span class="dt">Forall</span> as t) <span class="fu">=</span> freeTvars t <span class="dt">L</span><span class="fu">.</span>\\ as  
-
-  <span class="co">-- | type-vars of an TypeEnv</span>
-  freeTvars (<span class="dt">TypeEnv</span> m)   <span class="fu">=</span> freeTvars [s <span class="fu">|</span> (x, s) <span class="ot">&lt;-</span> M.toList m]  </code></pre></div>
+<div class="sourceCode" id="cb33"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb33-1" data-line-number="1">  <span class="co">-- | type-vars of a Type</span></a>
+<a class="sourceLine" id="cb33-2" data-line-number="2">  freeTvars <span class="dt">TInt</span>          <span class="fu">=</span> []</a>
+<a class="sourceLine" id="cb33-3" data-line-number="3">  freeTvars <span class="dt">TBool</span>         <span class="fu">=</span> []</a>
+<a class="sourceLine" id="cb33-4" data-line-number="4">  freeTvars (<span class="dt">TVar</span> a)      <span class="fu">=</span> [a]</a>
+<a class="sourceLine" id="cb33-5" data-line-number="5">  freeTvars (ts <span class="fu">:=&gt;</span> t)    <span class="fu">=</span> freeTvars ts <span class="fu">++</span> freeTvars t</a>
+<a class="sourceLine" id="cb33-6" data-line-number="6"></a>
+<a class="sourceLine" id="cb33-7" data-line-number="7">  <span class="co">-- | type-vars of a Poly (we remove the &quot;bound&quot; forall-vars)</span></a>
+<a class="sourceLine" id="cb33-8" data-line-number="8">  freeTvars (<span class="dt">Forall</span> as t) <span class="fu">=</span> freeTvars t <span class="dt">L</span><span class="fu">.</span>\\ as  </a>
+<a class="sourceLine" id="cb33-9" data-line-number="9"></a>
+<a class="sourceLine" id="cb33-10" data-line-number="10">  <span class="co">-- | type-vars of an TypeEnv</span></a>
+<a class="sourceLine" id="cb33-11" data-line-number="11">  freeTvars (<span class="dt">TypeEnv</span> m)   <span class="fu">=</span> freeTvars [s <span class="fu">|</span> (x, s) <span class="ot">&lt;-</span> M.toList m]  </a></code></pre></div>
 <h3 id="instantiate">Instantiate</h3>
 <p>Next, to <strong>instantiate</strong> a <code>Poly</code> of the form</p>
 <pre><code>   Forall [a1,...,an] t</code></pre>
 <p>we:</p>
-<ol style="list-style-type: decimal">
+<ol type="1">
 <li>Generate <strong>fresh</strong> type variables, <code>b1,...,bn</code> for each “parameter” <code>a1...an</code></li>
 <li>Substitute <code>[a1 := b1,...,an := bn]</code> in the “body” <code>t</code>.</li>
 </ol>
 <p>For example, to instantiate</p>
-<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell">   <span class="dt">Forall</span> [<span class="st">&quot;a&quot;</span>] ([<span class="st">&quot;a&quot;</span>] <span class="fu">:=&gt;</span> <span class="st">&quot;a&quot;</span>)</code></pre></div>
+<div class="sourceCode" id="cb35"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb35-1" data-line-number="1">   <span class="dt">Forall</span> [<span class="st">&quot;a&quot;</span>] ([<span class="st">&quot;a&quot;</span>] <span class="fu">:=&gt;</span> <span class="st">&quot;a&quot;</span>)</a></code></pre></div>
 <p>we</p>
-<ol style="list-style-type: decimal">
+<ol type="1">
 <li>Generate a fresh variable e.g. <code>&quot;a66&quot;</code>,</li>
 <li>Substitute <code>[&quot;a&quot; := &quot;a66&quot;]</code> in the body <code>[&quot;a&quot;] :=&gt; &quot;a&quot;</code></li>
 </ol>
 <p>to get</p>
-<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell">[<span class="st">&quot;a66&quot;</span>] <span class="fu">:=&gt;</span> <span class="st">&quot;a66&quot;</span></code></pre></div>
+<div class="sourceCode" id="cb36"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb36-1" data-line-number="1">[<span class="st">&quot;a66&quot;</span>] <span class="fu">:=&gt;</span> <span class="st">&quot;a66&quot;</span></a></code></pre></div>
 <h3 id="implementing-instantiate">Implementing Instantiate</h3>
 <p>We implement the above as:</p>
-<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="ot">instantiate ::</span> <span class="dt">Subst</span> <span class="ot">-&gt;</span> <span class="dt">Poly</span> <span class="ot">-&gt;</span> (<span class="dt">Subst</span>, <span class="dt">Type</span>)
-instantiate su (<span class="dt">Forall</span> as t) <span class="fu">=</span> (su', apply suInst t)
-  <span class="kw">where</span>
-    (su', as')               <span class="fu">=</span> freshTVars su n
-    suInst                   <span class="fu">=</span> mkSubst (zip as as')
-    n                        <span class="fu">=</span> length as</code></pre></div>
+<div class="sourceCode" id="cb37"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb37-1" data-line-number="1"><span class="ot">instantiate ::</span> <span class="dt">Subst</span> <span class="ot">-&gt;</span> <span class="dt">Poly</span> <span class="ot">-&gt;</span> (<span class="dt">Subst</span>, <span class="dt">Type</span>)</a>
+<a class="sourceLine" id="cb37-2" data-line-number="2">instantiate su (<span class="dt">Forall</span> as t) <span class="fu">=</span> (su', apply suInst t)</a>
+<a class="sourceLine" id="cb37-3" data-line-number="3">  <span class="kw">where</span></a>
+<a class="sourceLine" id="cb37-4" data-line-number="4">    (su', as')               <span class="fu">=</span> freshTVars su n</a>
+<a class="sourceLine" id="cb37-5" data-line-number="5">    suInst                   <span class="fu">=</span> mkSubst (zip as as')</a>
+<a class="sourceLine" id="cb37-6" data-line-number="6">    n                        <span class="fu">=</span> length as</a></code></pre></div>
 <p><strong>Question</strong> Why does <code>instantiate</code> <strong>return</strong> a <code>Subst</code>?</p>
 <p>Lets run it and see what happens!</p>
-<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell">λ<span class="fu">&gt;</span> <span class="fu">:</span>set <span class="fu">-</span><span class="dt">XOverloadedStrings</span>
-
-λ<span class="fu">&gt;</span> <span class="kw">let</span> tId <span class="fu">=</span> <span class="dt">Forall</span> [<span class="st">&quot;a&quot;</span>] ([<span class="st">&quot;a&quot;</span>] <span class="fu">:=&gt;</span> <span class="st">&quot;a&quot;</span>)
-
-λ<span class="fu">&gt;</span> <span class="kw">let</span> (su0, id0) <span class="fu">=</span> instantiate empSubst tId
-
-λ<span class="fu">&gt;</span> <span class="kw">let</span> (su1, id1) <span class="fu">=</span> instantiate su0      tId
-
-λ<span class="fu">&gt;</span> id0
-(a0) <span class="ot">=&gt;</span> a0
-
-λ<span class="fu">&gt;</span> id1
-(a1) <span class="ot">=&gt;</span> a1</code></pre></div>
+<div class="sourceCode" id="cb38"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb38-1" data-line-number="1">λ<span class="fu">&gt;</span> <span class="fu">:</span>set <span class="fu">-</span><span class="dt">XOverloadedStrings</span></a>
+<a class="sourceLine" id="cb38-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb38-3" data-line-number="3">λ<span class="fu">&gt;</span> <span class="kw">let</span> tId <span class="fu">=</span> <span class="dt">Forall</span> [<span class="st">&quot;a&quot;</span>] ([<span class="st">&quot;a&quot;</span>] <span class="fu">:=&gt;</span> <span class="st">&quot;a&quot;</span>)</a>
+<a class="sourceLine" id="cb38-4" data-line-number="4"></a>
+<a class="sourceLine" id="cb38-5" data-line-number="5">λ<span class="fu">&gt;</span> <span class="kw">let</span> (su0, id0) <span class="fu">=</span> instantiate empSubst tId</a>
+<a class="sourceLine" id="cb38-6" data-line-number="6"></a>
+<a class="sourceLine" id="cb38-7" data-line-number="7">λ<span class="fu">&gt;</span> <span class="kw">let</span> (su1, id1) <span class="fu">=</span> instantiate su0      tId</a>
+<a class="sourceLine" id="cb38-8" data-line-number="8"></a>
+<a class="sourceLine" id="cb38-9" data-line-number="9">λ<span class="fu">&gt;</span> id0</a>
+<a class="sourceLine" id="cb38-10" data-line-number="10">(a0) <span class="ot">=&gt;</span> a0</a>
+<a class="sourceLine" id="cb38-11" data-line-number="11"></a>
+<a class="sourceLine" id="cb38-12" data-line-number="12">λ<span class="fu">&gt;</span> id1</a>
+<a class="sourceLine" id="cb38-13" data-line-number="13">(a1) <span class="ot">=&gt;</span> a1</a></code></pre></div>
 <p>As in <code>anf</code> and <code>label</code></p>
 <ul>
 <li>The <code>fresh</code> calls <strong>bump up</strong> the counter …</li>
 <li>But must use the <strong>returned</strong> <code>Subst</code> for future calls.</li>
 </ul>
 <h3 id="plan-4">Plan</h3>
-<ol style="list-style-type: decimal">
+<ol type="1">
 <li><a href="#syntax-of-types">Types</a></li>
 <li><a href="#syntax-of-expressions">Expressions</a></li>
 <li><a href="#substitutions">Variables &amp; Substitution</a></li>
@@ -688,9 +688,9 @@ instantiate su (<span class="dt">Forall</span> as t) <span class="fu">=</span> (
 </ol>
 <h2 id="inference">Inference</h2>
 <p>Finally, we have all the pieces to implement the actual <strong>type inference</strong> procedure <code>ti</code></p>
-<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="ot">ti ::</span> <span class="dt">TypeEnv</span> <span class="ot">-&gt;</span> <span class="dt">Subst</span> <span class="ot">-&gt;</span> <span class="dt">Expr</span> a <span class="ot">-&gt;</span> (<span class="dt">Subst</span>, <span class="dt">Type</span>)</code></pre></div>
+<div class="sourceCode" id="cb39"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb39-1" data-line-number="1"><span class="ot">ti ::</span> <span class="dt">TypeEnv</span> <span class="ot">-&gt;</span> <span class="dt">Subst</span> <span class="ot">-&gt;</span> <span class="dt">Expr</span> a <span class="ot">-&gt;</span> (<span class="dt">Subst</span>, <span class="dt">Type</span>)</a></code></pre></div>
 <p>The function <code>ti</code> takes as <em>input</em>:</p>
-<ol style="list-style-type: decimal">
+<ol type="1">
 <li>A <code>TypeEnv</code> mapping in-scope variables to their inferred (<code>Poly</code>)-types,</li>
 <li>A <code>Subst</code> containing the <em>current</em> substitutions and fresh-variable-counter,</li>
 <li>An <code>Expr</code> whose type we want to infer.</li>
@@ -707,26 +707,26 @@ instantiate su (<span class="dt">Forall</span> as t) <span class="fu">=</span> (
 <p>Lets look at how <code>ti</code> is implemented for the different cases of expressions.</p>
 <h3 id="inference-literals">Inference: Literals</h3>
 <p>For numbers and booleans, we just return the respective type and the input <code>Subst</code> without any modifications.</p>
-<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell">ti _ su   (<span class="dt">Number</span> {})      <span class="fu">=</span> (su, <span class="dt">TInt</span>)
-ti _ su   (<span class="dt">Boolean</span> {})     <span class="fu">=</span> (su, <span class="dt">TBool</span>)</code></pre></div>
+<div class="sourceCode" id="cb40"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb40-1" data-line-number="1">ti _ su   (<span class="dt">Number</span> {})      <span class="fu">=</span> (su, <span class="dt">TInt</span>)</a>
+<a class="sourceLine" id="cb40-2" data-line-number="2">ti _ su   (<span class="dt">Boolean</span> {})     <span class="fu">=</span> (su, <span class="dt">TBool</span>)</a></code></pre></div>
 <h3 id="inference-variables">Inference: Variables</h3>
 <p>For identifiers, we</p>
-<ol style="list-style-type: decimal">
+<ol type="1">
 <li><strong>lookup</strong> their type in the <code>env</code> and</li>
 <li><strong>instantiate</strong> type-variables to get <em>different types at different uses</em>.</li>
 </ol>
-<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell">ti env su (<span class="dt">Id</span> x l) <span class="fu">=</span> instantiate su (lookupTypeEnv x env)</code></pre></div>
+<div class="sourceCode" id="cb41"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb41-1" data-line-number="1">ti env su (<span class="dt">Id</span> x l) <span class="fu">=</span> instantiate su (lookupTypeEnv x env)</a></code></pre></div>
 <p>Why do we <em>instantiate</em>? Recall <a href="generalize-and-instantiate">the <code>id</code> example!</a></p>
 <h3 id="inference-let-bindings">Inference: Let-bindings</h3>
 <p>Next, lets look at let-bindings:</p>
-<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell">ti env su (<span class="dt">Let</span> x e1 e2 _)  <span class="fu">=</span> ti env'' su1 e2         <span class="co">-- (5)</span>
-  <span class="kw">where</span>
-    (su1, t1)              <span class="fu">=</span> ti env su  e1           <span class="co">-- (1)</span>
-    env'                   <span class="fu">=</span> apply su1  env          <span class="co">-- (2)</span>
-    s1                     <span class="fu">=</span> generalize env' t1      <span class="co">-- (3)</span>
-    env''                  <span class="fu">=</span> extTypeEnv x s1 env'    <span class="co">-- (4)</span></code></pre></div>
+<div class="sourceCode" id="cb42"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb42-1" data-line-number="1">ti env su (<span class="dt">Let</span> x e1 e2 _)  <span class="fu">=</span> ti env'' su1 e2         <span class="co">-- (5)</span></a>
+<a class="sourceLine" id="cb42-2" data-line-number="2">  <span class="kw">where</span></a>
+<a class="sourceLine" id="cb42-3" data-line-number="3">    (su1, t1)              <span class="fu">=</span> ti env su  e1           <span class="co">-- (1)</span></a>
+<a class="sourceLine" id="cb42-4" data-line-number="4">    env'                   <span class="fu">=</span> apply su1  env          <span class="co">-- (2)</span></a>
+<a class="sourceLine" id="cb42-5" data-line-number="5">    s1                     <span class="fu">=</span> generalize env' t1      <span class="co">-- (3)</span></a>
+<a class="sourceLine" id="cb42-6" data-line-number="6">    env''                  <span class="fu">=</span> extTypeEnv x s1 env'    <span class="co">-- (4)</span></a></code></pre></div>
 <p>In essence,</p>
-<ol style="list-style-type: decimal">
+<ol type="1">
 <li><strong>Infer</strong> the type <code>t1</code> for <code>e1</code>,</li>
 <li><strong>Apply</strong> the substitutions from (1) to the <code>env</code>,</li>
 <li><strong>Generalize</strong> <code>t1</code> to make it a <code>Poly</code> type <code>s1</code>,
@@ -738,14 +738,14 @@ ti _ su   (<span class="dt">Boolean</span> {})     <span class="fu">=</span> (su
 </ol>
 <h3 id="inference-function-definitions">Inference: Function Definitions</h3>
 <p>Next, lets see how to infer the type of a function i.e. <code>Lam</code></p>
-<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell">ti env su (<span class="dt">Lam</span> xs body) <span class="fu">=</span> (su3, apply su3 (tXs <span class="fu">:=&gt;</span> tOut))   <span class="co">-- (5)</span>
-  <span class="kw">where</span>
-    (su1, tXs <span class="fu">:=&gt;</span> tOut) <span class="fu">=</span> freshFun su (length xs)           <span class="co">-- (1)</span>
-    env'                <span class="fu">=</span> extTypesEnv env (zip xs tXs)      <span class="co">-- (2)</span>
-    (su2, tBody)        <span class="fu">=</span> ti env' su1 body                  <span class="co">-- (3)</span>
-    su3                 <span class="fu">=</span> unify su2 tBody (apply su2 tOut)  <span class="co">-- (4)</span></code></pre></div>
+<div class="sourceCode" id="cb43"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb43-1" data-line-number="1">ti env su (<span class="dt">Lam</span> xs body) <span class="fu">=</span> (su3, apply su3 (tXs <span class="fu">:=&gt;</span> tOut))   <span class="co">-- (5)</span></a>
+<a class="sourceLine" id="cb43-2" data-line-number="2">  <span class="kw">where</span></a>
+<a class="sourceLine" id="cb43-3" data-line-number="3">    (su1, tXs <span class="fu">:=&gt;</span> tOut) <span class="fu">=</span> freshFun su (length xs)           <span class="co">-- (1)</span></a>
+<a class="sourceLine" id="cb43-4" data-line-number="4">    env'                <span class="fu">=</span> extTypesEnv env (zip xs tXs)      <span class="co">-- (2)</span></a>
+<a class="sourceLine" id="cb43-5" data-line-number="5">    (su2, tBody)        <span class="fu">=</span> ti env' su1 body                  <span class="co">-- (3)</span></a>
+<a class="sourceLine" id="cb43-6" data-line-number="6">    su3                 <span class="fu">=</span> unify su2 tBody (apply su2 tOut)  <span class="co">-- (4)</span></a></code></pre></div>
 <p>Inference works as follows:</p>
-<ol style="list-style-type: decimal">
+<ol type="1">
 <li>Generate a <em>function type</em> with fresh variables for the unknown inputs (<code>tXs</code>) and output (<code>tOut</code>),</li>
 <li>Extend the <code>env</code> so the parameters <code>xs</code> have types <code>tXs</code>,</li>
 <li>Infer the type of <code>body</code> under the extended <code>env'</code> as <code>tBody</code>,</li>
@@ -754,15 +754,15 @@ ti _ su   (<span class="dt">Boolean</span> {})     <span class="fu">=</span> (su
 </ol>
 <h3 id="inference-function-calls">Inference: Function Calls</h3>
 <p>Finally, lets see how to infer the types of a call i.e. <code>App</code></p>
-<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell">ti env su (<span class="dt">App</span> f es) <span class="fu">=</span> (su4, apply su4 tOut)          <span class="co">-- (6)</span>
-  <span class="kw">where</span>
-    (su1, tF)        <span class="fu">=</span> ti env su  f                   <span class="co">-- (1)</span>
-    env'             <span class="fu">=</span> apply  su1 env                 <span class="co">-- (2)</span>
-    (su2, tEs)       <span class="fu">=</span> L.mapAccumL (ti env') su1 es   <span class="co">-- (3)</span>
-    (su3, tOut)      <span class="fu">=</span> freshTVar su2                  <span class="co">-- (4)</span>
-    su4              <span class="fu">=</span> unify su3 tF (tEs <span class="fu">:=&gt;</span> tOut)    <span class="co">-- (5)</span></code></pre></div>
+<div class="sourceCode" id="cb44"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb44-1" data-line-number="1">ti env su (<span class="dt">App</span> f es) <span class="fu">=</span> (su4, apply su4 tOut)          <span class="co">-- (6)</span></a>
+<a class="sourceLine" id="cb44-2" data-line-number="2">  <span class="kw">where</span></a>
+<a class="sourceLine" id="cb44-3" data-line-number="3">    (su1, tF)        <span class="fu">=</span> ti env su  f                   <span class="co">-- (1)</span></a>
+<a class="sourceLine" id="cb44-4" data-line-number="4">    env'             <span class="fu">=</span> apply  su1 env                 <span class="co">-- (2)</span></a>
+<a class="sourceLine" id="cb44-5" data-line-number="5">    (su2, tEs)       <span class="fu">=</span> L.mapAccumL (ti env') su1 es   <span class="co">-- (3)</span></a>
+<a class="sourceLine" id="cb44-6" data-line-number="6">    (su3, tOut)      <span class="fu">=</span> freshTVar su2                  <span class="co">-- (4)</span></a>
+<a class="sourceLine" id="cb44-7" data-line-number="7">    su4              <span class="fu">=</span> unify su3 tF (tEs <span class="fu">:=&gt;</span> tOut)    <span class="co">-- (5)</span></a></code></pre></div>
 <p>The code works as follows:</p>
-<ol style="list-style-type: decimal">
+<ol type="1">
 <li>Infer the type of the function <code>f</code> as <code>tF</code>,</li>
 <li>Apply resulting substitutions to <code>env</code> (as before),</li>
 <li>Infer the types of the inputs <code>es</code> as <code>tEs</code>,</li>
@@ -772,7 +772,7 @@ ti _ su   (<span class="dt">Boolean</span> {})     <span class="fu">=</span> (su
 </ol>
 <p><strong>Note:</strong> In your starter code we <em>factor</em> out steps 3-6, i.e. the code that checks the arguments and infers the output type into <code>tiApp</code> to let us reuse it to <a href="#extensions">handle extensions</a></p>
 <h3 id="plan-5">Plan</h3>
-<ol style="list-style-type: decimal">
+<ol type="1">
 <li><a href="#syntax-of-types">Types</a></li>
 <li><a href="#syntax-of-expressions">Expressions</a></li>
 <li><a href="#substitutions">Variables &amp; Substitution</a></li>
@@ -783,7 +783,7 @@ ti _ su   (<span class="dt">Boolean</span> {})     <span class="fu">=</span> (su
 </ol>
 <h2 id="extensions">Extensions</h2>
 <p>The above gives you the basic idea, now <em>you</em> will have to implement a bunch of extensions.</p>
-<ol style="list-style-type: decimal">
+<ol type="1">
 <li>Primitives</li>
 <li>(Recursive) Functions</li>
 <li>Type Checking</li>

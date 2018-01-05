@@ -18,7 +18,7 @@ readings and material covered in class and section, and so
 paying attention during lectures and section is exceptionally
 important.
 
-## X86 
+## X86
 
 * [x86 interpreter](http://carlosrafaelgn.com.br/Asm86/)
 * [UVa x86 Assembly Guide](http://www.cs.virginia.edu/~evans/cs216/guides/x86.html)
@@ -35,22 +35,22 @@ important.
 * [Haskell Pitfalls](http://users.jyu.fi/~sapekiis/haskell-pitfalls/)
 
 
-## Books on Haskell 
+## Books on Haskell
 
 - [Haskell Programming from First Principles](http://haskellbook.com) by Christopher Allen and Julie Moronuki
 - [Programming in Haskell](http://www.cs.nott.ac.uk/~gmh/book.html) by Graham Hutton
 - [Real World Haskell](http://www.realworldhaskell.org) by Bryan O' Sullivan, John Goerzen, and Don Stewart
 - [The Haskell School of Expression](http://haskell.cs.yale.edu/soe) by Paul Hudak
 - [Learn You a Haskell](http://learnyouahaskell.com/) by Miran Lipovača
-- [Haskell Wiki Book](http://en.wikibooks.org/wiki/Haskell) 
+- [Haskell Wiki Book](http://en.wikibooks.org/wiki/Haskell)
 
 ## Miscellaneous
 
 - A Simple editor-independent [mini-ide](https://github.com/ndmitchell/ghcid#readme)
-- API Search Engines: 
-  [Hoogle](http://haskell.org/hoogle) 
+- API Search Engines:
+  [Hoogle](http://haskell.org/hoogle)
   [Hayoo](http://holumbus.fh-wedel.de/hayoo/hayoo.html)
-- Haskell modes: 
+- Haskell modes:
   [Emacs](https://commercialhaskell.github.io/intero/)
   [Atom](https://atom.io/packages/ide-haskell)
-  [Vim](http://projects.haskell.org/haskellmode-vim/) 
+  [Vim](http://projects.haskell.org/haskellmode-vim/)

@@ -230,32 +230,31 @@ if (window.navigator.appName == "Microsoft Internet Explorer") {
             <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
 			<h2 id="what-is-a-compiler">What <em>is</em> a Compiler?</h2>
 <p>A function that maps an <em>input</em> string to an <em>output</em> string.</p>
-<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="ot">compiler ::</span> <span class="dt">String</span> <span class="ot">-&gt;</span> <span class="dt">String</span></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="ot">compiler ::</span> <span class="dt">String</span> <span class="ot">-&gt;</span> <span class="dt">String</span></a></code></pre></div>
 <p>Typically, the <em>input</em> and <em>output</em> strings are <em>“programs”</em></p>
-<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="ot">compiler ::</span> <span class="dt">SourceProgram</span> <span class="ot">-&gt;</span> <span class="dt">TargetProgram</span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="ot">compiler ::</span> <span class="dt">SourceProgram</span> <span class="ot">-&gt;</span> <span class="dt">TargetProgram</span></a></code></pre></div>
 <p>For example, here are some well-known <em>compilers</em></p>
-<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell">gcc,<span class="ot"> clang ::</span> <span class="dt">C</span>          <span class="ot">-&gt;</span> <span class="dt">Binary</span>          <span class="co">-- a.out, .exe</span>
-<span class="ot">ghc        ::</span> <span class="dt">Haskell</span>    <span class="ot">-&gt;</span> <span class="dt">Binary</span>                 
-<span class="ot">javac      ::</span> <span class="dt">Java</span>       <span class="ot">-&gt;</span> <span class="dt">JvmByteCode</span>     <span class="co">-- .class</span>
-<span class="ot">scalac     ::</span> <span class="dt">Scala</span>      <span class="ot">-&gt;</span> <span class="dt">JvmByteCode</span>      
-<span class="ot">ocamlc     ::</span> <span class="dt">Ocaml</span>      <span class="ot">-&gt;</span> <span class="dt">OcamlByteCode</span>   <span class="co">-- .cmo</span>
-<span class="ot">ocamlopt   ::</span> <span class="dt">Ocaml</span>      <span class="ot">-&gt;</span> <span class="dt">Binary</span>               
-<span class="ot">gwt        ::</span> <span class="dt">Java</span>       <span class="ot">-&gt;</span> <span class="dt">JavaScript</span>      <span class="co">-- .js</span>
-<span class="ot">v8         ::</span> <span class="dt">JavaScript</span> <span class="ot">-&gt;</span> <span class="dt">Binary</span>
-<span class="ot">nasm       ::</span> <span class="dt">X86</span>        <span class="ot">-&gt;</span> <span class="dt">Binary</span>    
-<span class="ot">pdftex     ::</span> <span class="dt">LaTeX</span>      <span class="ot">-&gt;</span> <span class="dt">PDF</span>
-<span class="ot">pandoc     ::</span> <span class="dt">Markdown</span>   <span class="ot">-&gt;</span> <span class="dt">PDF</span> <span class="fu">|</span> <span class="dt">Html</span> <span class="fu">|</span> <span class="dt">Doc</span>  </code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb3-1" data-line-number="1">gcc,<span class="ot"> clang ::</span> <span class="dt">C</span>          <span class="ot">-&gt;</span> <span class="dt">Binary</span>          <span class="co">-- a.out, .exe</span></a>
+<a class="sourceLine" id="cb3-2" data-line-number="2"><span class="ot">ghc        ::</span> <span class="dt">Haskell</span>    <span class="ot">-&gt;</span> <span class="dt">Binary</span>                 </a>
+<a class="sourceLine" id="cb3-3" data-line-number="3"><span class="ot">javac      ::</span> <span class="dt">Java</span>       <span class="ot">-&gt;</span> <span class="dt">JvmByteCode</span>     <span class="co">-- .class</span></a>
+<a class="sourceLine" id="cb3-4" data-line-number="4"><span class="ot">scalac     ::</span> <span class="dt">Scala</span>      <span class="ot">-&gt;</span> <span class="dt">JvmByteCode</span>      </a>
+<a class="sourceLine" id="cb3-5" data-line-number="5"><span class="ot">ocamlc     ::</span> <span class="dt">Ocaml</span>      <span class="ot">-&gt;</span> <span class="dt">OcamlByteCode</span>   <span class="co">-- .cmo</span></a>
+<a class="sourceLine" id="cb3-6" data-line-number="6"><span class="ot">ocamlopt   ::</span> <span class="dt">Ocaml</span>      <span class="ot">-&gt;</span> <span class="dt">Binary</span>               </a>
+<a class="sourceLine" id="cb3-7" data-line-number="7"><span class="ot">gwt        ::</span> <span class="dt">Java</span>       <span class="ot">-&gt;</span> <span class="dt">JavaScript</span>      <span class="co">-- .js</span></a>
+<a class="sourceLine" id="cb3-8" data-line-number="8"><span class="ot">v8         ::</span> <span class="dt">JavaScript</span> <span class="ot">-&gt;</span> <span class="dt">Binary</span></a>
+<a class="sourceLine" id="cb3-9" data-line-number="9"><span class="ot">nasm       ::</span> <span class="dt">X86</span>        <span class="ot">-&gt;</span> <span class="dt">Binary</span>    </a>
+<a class="sourceLine" id="cb3-10" data-line-number="10"><span class="ot">pdftex     ::</span> <span class="dt">LaTeX</span>      <span class="ot">-&gt;</span> <span class="dt">PDF</span></a>
+<a class="sourceLine" id="cb3-11" data-line-number="11"><span class="ot">pandoc     ::</span> <span class="dt">Markdown</span>   <span class="ot">-&gt;</span> <span class="dt">PDF</span> <span class="fu">|</span> <span class="dt">Html</span> <span class="fu">|</span> <span class="dt">Doc</span>  </a></code></pre></div>
 <p>Key Requirements on output program:</p>
-<ol style="list-style-type: decimal">
+<ol type="1">
 <li>Has the <em>same meaning</em> (“semantics”) as input,</li>
 <li>Is <em>executable</em> in relevant <em>context</em> (VM, microprocessor, web browser).</li>
 </ol>
 <h3 id="a-bit-of-history">A Bit of History</h3>
 <p>Compilers were invented to <a href="http://worrydream.com/dbx/">avoid writing machine code by hand</a></p>
-<div class="figure">
-<img src="../static/img/binary-soap-fortran.png" alt="From Binary to FORTRAN" />
-<p class="caption">From Binary to FORTRAN</p>
-</div>
+<figure>
+<img src="../static/img/binary-soap-fortran.png" alt="From Binary to FORTRAN" /><figcaption>From Binary to FORTRAN</figcaption>
+</figure>
 <p>Richard Hamming – The Art of Doing Science and Engineering, p25:</p>
 <blockquote>
 <p>In the beginning we programmed in absolute binary… Finally, a Symbolic Assembly Program was devised – after more years than you are apt to believe during which most programmers continued their heroic absolute binary programming. At the time [the assembler] first appeared I would guess about 1% of the older programmers were interested in it – using [assembly] was “sissy stuff”, and a real programmer would not stoop to wasting machine capacity to do the assembly.</p>
@@ -265,10 +264,9 @@ if (window.navigator.appName == "Microsoft Internet Explorer") {
 <p>One of von Neumann’s students at Princeton recalled that graduate students were being used to hand assemble programs into binary for their early machine. This student took time out to build an assembler, but when von Neumann found out about it he was very angry, saying that it was a waste of a valuable scientific computing instrument to use it to do clerical work.</p>
 </blockquote>
 <h3 id="what-does-a-compiler-look-like">What does a Compiler <em>look like</em>?</h3>
-<div class="figure">
-<img src="../static/img/compiler-pipeline.png" alt="Compiler Pipeline" />
-<p class="caption">Compiler Pipeline</p>
-</div>
+<figure>
+<img src="../static/img/compiler-pipeline.png" alt="Compiler Pipeline" /><figcaption>Compiler Pipeline</figcaption>
+</figure>
 <p>An input source program is converted to an executable binary in many stages:</p>
 <ul>
 <li><strong>Parsed</strong> into a data structure called an <strong>Abstract Syntax Tree</strong></li>
@@ -280,37 +278,37 @@ if (window.navigator.appName == "Microsoft Internet Explorer") {
 </ul>
 <h3 id="what-is-cse-131">What is CSE 131 ?</h3>
 <ul>
-<li><p>A <em>bridge</em> between two worlds</p></li>
+<li><p>A <em>bridge</em> between two worlds</p>
+<ul>
 <li><em>High-level:</em> ML (<strong>CSE 130</strong>)</li>
-<li><p><em>Machine Code:</em> X86/ARM (<strong>CSE 30</strong>)</p></li>
+<li><em>Machine Code:</em> X86/ARM (<strong>CSE 30</strong>)</li>
+</ul></li>
 </ul>
 <p>A sequel to both those classes.</p>
 <ul>
-<li>How to write <strong>a compiler</strong> for <code>NanoML -&gt; X86</code></li>
-</ul>
-<ol style="list-style-type: decimal">
+<li><p>How to write <strong>a compiler</strong> for <code>NanoML -&gt; X86</code></p>
+<ol type="1">
 <li>Parsing</li>
 <li>Checking &amp; Validation</li>
 <li>Simplification &amp; Normalizing</li>
 <li>Optimization</li>
 <li>Code Generation</li>
-</ol>
-<ul>
-<li>But also, how to write <strong>complex programs</strong></li>
-</ul>
-<ol style="list-style-type: decimal">
+</ol></li>
+<li><p>But also, how to write <strong>complex programs</strong></p>
+<ol type="1">
 <li>Design</li>
 <li>Implement</li>
 <li>Test</li>
 <li><strong>Iterate</strong></li>
-</ol>
+</ol></li>
+</ul>
 <h3 id="how-write-a-compiler">How write a Compiler?</h3>
 <p>General recipe, applies to any large system</p>
 <ul>
 <li><em>gradually, one feature at a time!</em></li>
 </ul>
 <p>We will</p>
-<ol style="list-style-type: decimal">
+<ol type="1">
 <li>Start with a teeny tiny language,</li>
 <li>Build a full compiler for it,</li>
 <li>Add a few features,</li>
@@ -321,8 +319,7 @@ if (window.navigator.appName == "Microsoft Internet Explorer") {
 <h3 id="who-are-we">Who <em>are</em> we?</h3>
 <ul>
 <li><strong>Boss:</strong> Ranjit Jhala</li>
-<li><strong>TAs:</strong> Alexander Bakst, Rami Gokhan, Panagiotis Vekris</li>
-<li><strong>Tutors:</strong> TBA</li>
+<li><strong>TAs:</strong> Rami Gokhan, Anish Tondwalkar, Madhuri Yoganatha</li>
 </ul>
 <h3 id="how-will-we-grade">How will we <em>grade</em>?</h3>
 <p><strong>(30%) Assignments</strong></p>
@@ -331,18 +328,20 @@ if (window.navigator.appName == "Microsoft Internet Explorer") {
 <li>All programming</li>
 <li>Groups of 2</li>
 </ul>
-<p><strong>(30%) Midterm</strong></p>
+<p><strong>(30%) Midterm (2/16)</strong></p>
 <ul>
-<li>In-class (TBA)</li>
+<li>In-class<br />
+</li>
 <li>2-sided printed “cheat sheet”</li>
 </ul>
-<p><strong>(35%) Final</strong></p>
+<p><strong>(35%) Final (3/21)</strong></p>
 <ul>
 <li>2-sided printed cheat sheet</li>
 </ul>
 <p><strong>(05%) Clickers</strong></p>
 <ul>
 <li><em>Attempting to answer</em> &gt; 75% questions</li>
+<li>From next week, please sit in <a href="../static/img/center119.pdf">the space</a> assigned to <a href="../static/img/groups.txt">your group</a></li>
 </ul>
 <p><strong>(05%) Piazza Extra Credit</strong></p>
 <ul>
@@ -352,10 +351,9 @@ if (window.navigator.appName == "Microsoft Internet Explorer") {
 <h2 id="what-will-we-do">What will <em>we do</em> ?</h2>
 <p>Write <strong>a compiler</strong> for <code>NanoML -&gt; X86</code></p>
 <p>But Rome wasn’t built in a day … and neither is any serious software.</p>
-<div class="figure">
-<img src="../static/img/Eiffel.jpg" alt="Rome wasn’t built in a day" />
-<p class="caption">Rome wasn’t built in a day</p>
-</div>
+<figure>
+<img src="../static/img/Eiffel.jpg" alt="Rome wasn’t built in a day" /><figcaption>Rome wasn’t built in a day</figcaption>
+</figure>
 <p>So we will write <em>many</em> compilers:</p>
 <ul>
 <li>Numbers and increment/decrement</li>
@@ -365,6 +363,7 @@ if (window.navigator.appName == "Microsoft Internet Explorer") {
 <li>Functions</li>
 <li>Tuples and Structures</li>
 <li>Lambdas and closures</li>
+<li>Types and Inference</li>
 <li>Garbage Collection</li>
 </ul>
 <h2 id="what-will-you-learn">What will <em>you learn</em> ?</h2>

@@ -1,7 +1,14 @@
-# TODO 
+# TODO
 
-- lectures/00-intro.markdown 
-- homeworks/00-warmup.markdown
++ links.md
++ assignments.md
++ grades.md      
++ index.md       
++ lectures.md    
++ contact.md     
++ calendar.md    
++ seating.pdf
+
 - groups.md
-- seating.pdf
-
++ lectures/00-intro.markdown
+- homeworks/00-warmup.markdown

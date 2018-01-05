@@ -15,8 +15,6 @@ According to the venerable [Wikipedia](https://en.wikipedia.org/wiki/Compiler)
 >  The most common reason for converting source code is
 > to create an executable program.
 
-
-
 In the course of the next ten weeks, we will look at
 how to convert programs written in a high-level language
 think ML from [CSE 130](http://ucsd-progsys.github.io/cse130/),
@@ -39,16 +37,16 @@ In particular,
 > all academic work will be done by the student to whom it is assigned,
 > without unauthorized aid of any kind.
 
-You are expected to do your own work on all assignments; when 
-specified, you **may work in pairs** -- but will submit the 
-assignments individually. You may (and are encouraged to) 
-engage in **general discussions** with your classmates 
-regarding the assignments, but specific details of a 
-solution, including the solution itself, 
+You are expected to do your own work on all assignments; when
+specified, you **may work in pairs** -- but will submit the
+assignments individually. You may (and are encouraged to)
+engage in **general discussions** with your classmates
+regarding the assignments, but specific details of a
+solution, including the solution itself,
 **must always be your own work**.
 
-There will be graded assignments and exam in this course, 
-as described below. All exams are closed book; no tools 
+There will be graded assignments and exam in this course,
+as described below. All exams are closed book; no tools
 other than your brain and a writing instrument are to be used.
 
 Incidents which violate the University's rules on integrity of scholarship
@@ -63,6 +61,5 @@ regarding the course, please see the instructor.
 Your class work might be used for research purposes. For example, we may
 use anonymized student assignments to design algorithms or build tools to
 help programmers. Any student who wishes to opt out can contact the
-instructor or TA to do so after final grades have been issued. 
+instructor or TA to do so after final grades have been issued.
 **This has no impact on your grade in any manner.**
-
