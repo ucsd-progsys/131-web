@@ -74,7 +74,7 @@ siteCtx =
     constField "github_username"    "ucsd-progsys/131-web"      `mappend`
     constField "google_username"    "rjhala@eng.ucsd.edu"       `mappend`
     constField "google_userid"      "u/0/106612421534244742464" `mappend`
-    constField "piazza_classid"     "ucsd/fall2016/cse131/home" `mappend`
+    constField "piazza_classid"     "ucsd/winter2018/cse131/home" `mappend`
     defaultContext
 
 
