@@ -6,7 +6,8 @@ headerImg: road.jpg
 ## Clicker Groups
 
 - [Seating Chart](/static/img/center119.pdf)
-- Groups-TBD
+- [Groups](/static/img/groups.txt) 
+- [Register your clicker here](https://goo.gl/forms/uVtZ7oRVfvS56M5r1)
 
 ## Calendar (Deadlines, Office Hours)
 
