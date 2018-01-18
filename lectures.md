@@ -7,7 +7,8 @@ headerImg: books.jpg
 |:----------:|:------------------------------|:----------------------:|:-----------:|:----------:|
 | 1/8        | Introduction                  | [html][lec1] [md][md1] |             |            |
 | 1/17       | Crash course in Haskell       | [html][lec2] [md][md2] |             |            |
-| 1/22       | Crash course in Haskell       | [html][lec2] [md][md2] |             |            |
+| 1/22       | Numbers, Unary-Ops, Variables | [html][lec3] [md][md3] | [pdf][pdf3] | [hs][cod3] |
+
 
 ## Discussions
 
