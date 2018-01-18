@@ -42,8 +42,9 @@ vs.
 ```ocaml
 (* val incr : int -> int *)
 let incr x = x + 1
+let stincr = fun x -> x + 1
 
-let eleven = incr 10
+let eleven = incr (10 + 2)
 ```
 
 vs
@@ -62,6 +63,14 @@ eleven = incr 10
 ## Pattern Matching
 
 **Ocaml**
+
+[1;2;3;4;5]
+
+  ==> 15
+
+let rec sumList (xs : int lint) : int = match xs with
+  | [] -> 0
+  | (x::xs) -> x + sumList xs
 
 ```ocaml
 (* val listSum : int list -> int list *)
@@ -115,6 +124,8 @@ A handy table
 |:--------:|:-----------:|:-----------:|
 | `::`     | "cons"      | "has type"  |
 | `:`      | "has type"  | "cons"      |
+
+
 
 
 
@@ -271,13 +282,16 @@ Very similar: Ocaml's `fun` is replaced with Haskell's `\`
 let partition f xs = (filter f xs, filter (negate f) xs)
 ```
 
+(12, "cat")
+
+
 vs
 
 **Haskell**
 
 ```haskell
 partition :: (a -> Bool) -> [a] -> ([a], [a])
-partition f xs = (filter f xs, filter (negate f) xs)
+partition p xs = (filter p xs, filter (negate p) xs)
 ```
 
 **Note**
@@ -372,7 +386,6 @@ E. `[0, 10, 20, 30]`
 We can simplify the `sort` using list comprehensions, as in Python:
 
 ```haskell
-sort :: (Ord a) => [a] -> [a]
 sort []     = []
 sort (h:t)  = sort ls ++ [h] ++ sort rs
   where
