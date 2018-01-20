@@ -783,5 +783,5 @@ Lets take our `adder` compiler out for a spin!
 
 Will iterate on this till we have a pretty kick-ass language.
 
-[evans-x86-guide]: www.cs.virginia.edu/~evans/cs216/guides/x86.html
+[evans-x86-guide]: http://www.cs.virginia.edu/~evans/cs216/guides/x86.html
 [x86-full]: http://www.felixcloutier.com/x86/
