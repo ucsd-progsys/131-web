@@ -113,7 +113,7 @@ sort' []    = []
 sort' (h:t) = sort' ls ++ [h] ++ sort' rs
   where
     ls      = [x | x <- t, x <= h]
-    rs      = [x | x <- t,  h < x]
+    rs      = [x | x <- t, h < x]
 
 
 -- | Constructors
@@ -130,17 +130,24 @@ data Expr
   | Plus   Expr Expr
   | Minus  Expr Expr
   | Times  Expr Expr
-  deriving (Show)
+
 {-
-let ex0 = Number 5.1
-let ex1 = Plus  (ex0, Number 7.2)
-let ex2 = Minus (Number 4.3, Number 2.9)
+let ex0 = Number 5.
+let ex1 = Plus  (ex0, Number 7.)
+let ex2 = Minus (Number 4., Number 2.)
 let ex3 = Times (ex1, ex2)
 -}
 
+ex0 :: Expr
 ex0 = Number 5
+
+ex1 :: Expr
 ex1 = Plus  ex0 (Number 7)
+
+ex2 :: Expr
 ex2 = Minus (Number 4) (Number 2)
+
+ex3 :: Expr
 ex3 = Times ex1 ex2
 
 -- | Destructors
@@ -154,7 +161,6 @@ let rec eval e = match e with
   | Times (e1, e2) -> eval e1 *. eval e2
 -}
 
-
 eval :: Expr -> Double
 eval (Number    n) = n
 eval (Plus  e1 e2) = eval e1 + eval e2
@@ -164,33 +170,12 @@ eval (Times e1 e2) = eval e1 * eval e2
 -- | Recursive Functions
 
 {-
-let rec fact n
-  = let res = if n <= 0 then
-                1
-              else
-                fact (n-1)
-    in
-       Printf.printf ""
-
-let rec fact n =
-  let res = if n <= 0 then 1 else fact (n-1)          in
-  let _   = Printf.printf "fact n = %d, res = %d\n" n res in
-  res
-
+let fact n = if n <= 0 then 1 else n * fact (n-1)
 -}
 
 fact :: Int -> Int
--- fact n = if n <= 0 then 1 else n * fact (n-1)
-fact n
-  | n <= 0    = 1
-  | otherwise = fact (n-1)
+fact n = if n <= 0 then 1 else n * fact (n-1)
 
--- trace :: String -> a -> a
-fact' :: Int -> Int
-fact' n  = trace msg res
-  where
-    msg = printf "fact n = %d, res = %d\n" n res
-    res = if n <= 0 then 1 else n * fact' (n-1)
 
 -- | Printf Debugging
 
@@ -201,27 +186,29 @@ let fact n =
   res
 -}
 
+
+-- trace :: String -> a -> a
+fact' :: Int -> Int
+fact' n  = trace msg res
+  where
+    msg = printf "fact n = %d, res = %d\n" n res
+    res = if n <= 0 then 1 else n * fact' (n-1)
+
 --------------------------------------------------------------------------------
 
-{- CASE STUDY 1 -}
+{- CASE STUDY 1
 digitsOfInt :: Int -> [Int]
-digitsOfInt n
-  | n < 0      = []
-  | n < 10     = [n]
-  | otherwise  = digitsOfInt (n `div` 10) ++ [mod n 10]
-
-
--- pipe [f1,...,fn] x  = f1(f2(...(fn x)))
-
-pipe :: [a -> a] -> a -> a
-pipe = foldr (.) id
+digitsOfInt n =
+  if n < 0 then []
+  else if n < 10 then [n]
+  else  (digitsOfInt(n / 10)) ++  [n mod 10]
+-}
 
 {- CASE STUDY 2
-
-
-foo x     = e
-foo       = \x -> e
-
-let foo x = e
-let foo   = fun x -> e
+pipe :: [a -> a] -> a -> a
+pipe []               = \x -> x
+pipe [f1]             = \x -> f1 x
+pipe [f1, f2]         = \x -> f1 (f2 x)
+pipe [f1, f2, f3]     = \x -> f1 (f2 (f3 x))
+pipe [f1, f2, f3, f4] = \x -> f1 (f2 (f3 (f4 x)))
 -}
