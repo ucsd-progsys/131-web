@@ -10,7 +10,7 @@ atomic units over the entire quarter. By *atomic* I mean, for example, that
 ## Programming Assignments
 
 - [HW #0][hw0-git], due Fri 1/19 by 23:59pm
-- [HW #1][hw1-git], due Mon 2/29 by 23:59pm
+- [HW #1][hw1-git], due Mon 1/29 by 23:59pm
 
 <!--
 
