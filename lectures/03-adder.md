@@ -669,8 +669,6 @@ Lets see how our strategy works by example:
 
 ### Example: let1
 
-<img src="https://github.com/ucsd-progsys/131/blob/master/resources/let-1-to-asm.png" height="150">
-
 ![Convert let1 to Assembly](/static/img/let-1-to-asm.png)
 
 ### Example: let2
