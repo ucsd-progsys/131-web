@@ -8,7 +8,7 @@ headerImg: books.jpg
 | 1/8        | Introduction                  | [html][lec1] [md][md1] |             |            |
 | 1/17       | Crash course in Haskell       | [html][lec2] [md][md2] |             |            |
 | 1/22       | Numbers, Unary-Ops, Variables | [html][lec3] [md][md3] | [pdf][pdf3] | [hs][cod3] |
-
+| 1/26       | Branches and Bin-Ops          | [html][lec4] [md][md4] | [pdf][pdf4] | [hs][cod4] |
 
 ## Discussions
 
