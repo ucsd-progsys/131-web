@@ -202,7 +202,7 @@ type Tag   = Int
 We will now use:
 
 ```haskell
-type BareE = Bare ()     -- AST after parsing   
+type BareE = Expr ()     -- AST after parsing   
 type TagE  = Expr Tag    -- AST with distinct tags
 ```
 
@@ -244,8 +244,9 @@ If (Number 1 ()) (Number 22 ()) (Number 33 ()) ()
 ### Transforms: Tag
 
 The key work is done by `doTag i e`
-* Recursively walk over the `BareE` named `e` starting tagging at counter `i`
-* Returning a pair `(i', e')` of _updated counter_ `i'` and  tagged expr `e'`
+
+1. Recursively walk over the `BareE` named `e` starting tagging at counter `i`
+2. Return a pair `(i', e')` of _updated counter_ `i'` and  tagged expr `e'`
 
 **QUIZ**
 
@@ -289,12 +290,12 @@ doTag i (Number n _)    = (i + 1 , Number n i)
 
 doTag i (Var    x _)    = (i + 1 , Var     x i)
 
-doTag i (Let x e1 e2 i) = (i2 + 1, Let x e1' e2' i2)
+doTag i (Let x e1 e2 _) = (i2 + 1, Let x e1' e2' i2)
   where
     (i1, e1')           = doTag i  e1
     (i2, e2')           = doTag i1 e2
 
-doTag i (If e1 e2 e3 i) = (i3 + 1, If e1' e2' e3' i3)
+doTag i (If e1 e2 e3 _) = (i3 + 1, If e1' e2' e3' i3)
   where
     (i1, e1')           = doTag i  e1
     (i2, e2')           = doTag i1 e2
@@ -304,8 +305,10 @@ doTag i (If e1 e2 e3 i) = (i3 + 1, If e1' e2' e3' i3)
 (**ProTip:** Use `mapAccumL`)
 
 We can now tag the whole program by
-* calling `doTag` with  the initial counter (e.g. `0`),
-* throwing away the final counter.
+
+* Calling `doTag` with  the initial counter (e.g. `0`),
+
+* Throwing away the final counter.
 
 ```haskell
 tag :: BareE -> TagE

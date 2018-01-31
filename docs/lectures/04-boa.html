@@ -383,7 +383,7 @@ if (window.navigator.appName == "Microsoft Internet Explorer") {
 <p>Lets define a name for <code>Tag</code> (just integers).</p>
 <div class="sourceCode" id="cb10"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb10-1" data-line-number="1"><span class="kw">type</span> <span class="dt">Tag</span>   <span class="fu">=</span> <span class="dt">Int</span></a></code></pre></div>
 <p>We will now use:</p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb11-1" data-line-number="1"><span class="kw">type</span> <span class="dt">BareE</span> <span class="fu">=</span> <span class="dt">Bare</span> ()     <span class="co">-- AST after parsing   </span></a>
+<div class="sourceCode" id="cb11"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb11-1" data-line-number="1"><span class="kw">type</span> <span class="dt">BareE</span> <span class="fu">=</span> <span class="dt">Expr</span> ()     <span class="co">-- AST after parsing   </span></a>
 <a class="sourceLine" id="cb11-2" data-line-number="2"><span class="kw">type</span> <span class="dt">TagE</span>  <span class="fu">=</span> <span class="dt">Expr</span> <span class="dt">Tag</span>    <span class="co">-- AST with distinct tags</span></a></code></pre></div>
 <h3 id="types-assembly">Types: Assembly</h3>
 <p>Now, lets extend the <em>Assembly</em> with labels, comparisons and jumps:</p>
@@ -411,7 +411,11 @@ if (window.navigator.appName == "Microsoft Internet Explorer") {
 <div class="sourceCode" id="cb13"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb13-1" data-line-number="1">ghci<span class="fu">&gt;</span> parse <span class="st">&quot;if 1: 22 else: 33&quot;</span></a>
 <a class="sourceLine" id="cb13-2" data-line-number="2"><span class="dt">If</span> (<span class="dt">Number</span> <span class="dv">1</span> ()) (<span class="dt">Number</span> <span class="dv">22</span> ()) (<span class="dt">Number</span> <span class="dv">33</span> ()) ()</a></code></pre></div>
 <h3 id="transforms-tag">Transforms: Tag</h3>
-<p>The key work is done by <code>doTag i e</code> * Recursively walk over the <code>BareE</code> named <code>e</code> starting tagging at counter <code>i</code> * Returning a pair <code>(i', e')</code> of <em>updated counter</em> <code>i'</code> and tagged expr <code>e'</code></p>
+<p>The key work is done by <code>doTag i e</code></p>
+<ol type="1">
+<li>Recursively walk over the <code>BareE</code> named <code>e</code> starting tagging at counter <code>i</code></li>
+<li>Return a pair <code>(i', e')</code> of <em>updated counter</em> <code>i'</code> and tagged expr <code>e'</code></li>
+</ol>
 <p><strong>QUIZ</strong></p>
 <div class="sourceCode" id="cb14"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb14-1" data-line-number="1"><span class="ot">doTag ::</span> <span class="dt">Int</span> <span class="ot">-&gt;</span> <span class="dt">BareE</span> <span class="ot">-&gt;</span> (<span class="dt">Int</span>, <span class="dt">TagE</span>)</a>
 <a class="sourceLine" id="cb14-2" data-line-number="2">doTag i (<span class="dt">Number</span> n _)    <span class="fu">=</span> (i <span class="fu">+</span> <span class="dv">1</span> , <span class="dt">Number</span> n i)</a>
@@ -442,18 +446,22 @@ if (window.navigator.appName == "Microsoft Internet Explorer") {
 <a class="sourceLine" id="cb16-4" data-line-number="4"></a>
 <a class="sourceLine" id="cb16-5" data-line-number="5">doTag i (<span class="dt">Var</span>    x _)    <span class="fu">=</span> (i <span class="fu">+</span> <span class="dv">1</span> , <span class="dt">Var</span>     x i)</a>
 <a class="sourceLine" id="cb16-6" data-line-number="6"></a>
-<a class="sourceLine" id="cb16-7" data-line-number="7">doTag i (<span class="dt">Let</span> x e1 e2 i) <span class="fu">=</span> (i2 <span class="fu">+</span> <span class="dv">1</span>, <span class="dt">Let</span> x e1' e2' i2)</a>
+<a class="sourceLine" id="cb16-7" data-line-number="7">doTag i (<span class="dt">Let</span> x e1 e2 _) <span class="fu">=</span> (i2 <span class="fu">+</span> <span class="dv">1</span>, <span class="dt">Let</span> x e1' e2' i2)</a>
 <a class="sourceLine" id="cb16-8" data-line-number="8">  <span class="kw">where</span></a>
 <a class="sourceLine" id="cb16-9" data-line-number="9">    (i1, e1')           <span class="fu">=</span> doTag i  e1</a>
 <a class="sourceLine" id="cb16-10" data-line-number="10">    (i2, e2')           <span class="fu">=</span> doTag i1 e2</a>
 <a class="sourceLine" id="cb16-11" data-line-number="11"></a>
-<a class="sourceLine" id="cb16-12" data-line-number="12">doTag i (<span class="dt">If</span> e1 e2 e3 i) <span class="fu">=</span> (i3 <span class="fu">+</span> <span class="dv">1</span>, <span class="dt">If</span> e1' e2' e3' i3)</a>
+<a class="sourceLine" id="cb16-12" data-line-number="12">doTag i (<span class="dt">If</span> e1 e2 e3 _) <span class="fu">=</span> (i3 <span class="fu">+</span> <span class="dv">1</span>, <span class="dt">If</span> e1' e2' e3' i3)</a>
 <a class="sourceLine" id="cb16-13" data-line-number="13">  <span class="kw">where</span></a>
 <a class="sourceLine" id="cb16-14" data-line-number="14">    (i1, e1')           <span class="fu">=</span> doTag i  e1</a>
 <a class="sourceLine" id="cb16-15" data-line-number="15">    (i2, e2')           <span class="fu">=</span> doTag i1 e2</a>
 <a class="sourceLine" id="cb16-16" data-line-number="16">    (i3, e3')           <span class="fu">=</span> doTag i2 e3</a></code></pre></div>
 <p>(<strong>ProTip:</strong> Use <code>mapAccumL</code>)</p>
-<p>We can now tag the whole program by * calling <code>doTag</code> with the initial counter (e.g. <code>0</code>), * throwing away the final counter.</p>
+<p>We can now tag the whole program by</p>
+<ul>
+<li><p>Calling <code>doTag</code> with the initial counter (e.g. <code>0</code>),</p></li>
+<li><p>Throwing away the final counter.</p></li>
+</ul>
 <div class="sourceCode" id="cb17"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb17-1" data-line-number="1"><span class="ot">tag ::</span> <span class="dt">BareE</span> <span class="ot">-&gt;</span> <span class="dt">TagE</span></a>
 <a class="sourceLine" id="cb17-2" data-line-number="2">tag e <span class="fu">=</span> e'  <span class="kw">where</span>  (_, e') <span class="fu">=</span> doTag <span class="dv">0</span> e</a></code></pre></div>
 <h3 id="transforms-codegen">Transforms: CodeGen</h3>
