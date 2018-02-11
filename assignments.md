@@ -14,6 +14,10 @@ atomic units over the entire quarter. By *atomic* I mean, for example, that
 - [HW #2][hw2-git], due Mon 2/5  by 23:59pm
 - [HW #3][hw3-git], due Thu 2/15 by 23:59pm
 
+## Practice Midterm 
+
+- Midterm from [Fall 2016](static/midterm-fa16.pdf)
+
 <!--
 
 ## Sample Exam Questions
