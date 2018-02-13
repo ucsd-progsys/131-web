@@ -735,6 +735,7 @@ our_code_starts_here:
   jne error_non_number      
   mov esp, ebp
   pop ebp  
+  ret
 error_non_number:
   push eax
   push 0
