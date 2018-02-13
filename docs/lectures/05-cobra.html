@@ -930,10 +930,11 @@ if (window.navigator.appName == "Microsoft Internet Explorer") {
 <a class="sourceLine" id="cb37-13" data-line-number="13">  <span class="kw">jne</span> error_non_number      </a>
 <a class="sourceLine" id="cb37-14" data-line-number="14">  <span class="kw">mov</span> <span class="kw">esp</span>, <span class="kw">ebp</span></a>
 <a class="sourceLine" id="cb37-15" data-line-number="15">  <span class="kw">pop</span> <span class="kw">ebp</span>  </a>
-<a class="sourceLine" id="cb37-16" data-line-number="16"><span class="fu">error_non_number:</span></a>
-<a class="sourceLine" id="cb37-17" data-line-number="17">  <span class="kw">push</span> <span class="kw">eax</span></a>
-<a class="sourceLine" id="cb37-18" data-line-number="18">  <span class="kw">push</span> <span class="dv">0</span></a>
-<a class="sourceLine" id="cb37-19" data-line-number="19">  <span class="kw">call</span> error</a></code></pre></div>
+<a class="sourceLine" id="cb37-16" data-line-number="16">  <span class="kw">ret</span></a>
+<a class="sourceLine" id="cb37-17" data-line-number="17"><span class="fu">error_non_number:</span></a>
+<a class="sourceLine" id="cb37-18" data-line-number="18">  <span class="kw">push</span> <span class="kw">eax</span></a>
+<a class="sourceLine" id="cb37-19" data-line-number="19">  <span class="kw">push</span> <span class="dv">0</span></a>
+<a class="sourceLine" id="cb37-20" data-line-number="20">  <span class="kw">call</span> error</a></code></pre></div>
 <p>Aha, now the above works!</p>
 <div class="sourceCode" id="cb38"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb38-1" data-line-number="1"><span class="fu">make</span> tests/output/int-check.result</a>
 <a class="sourceLine" id="cb38-2" data-line-number="2"><span class="ex">...</span> expected number but got ...</a></code></pre></div>
