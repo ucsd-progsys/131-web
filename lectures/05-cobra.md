@@ -905,8 +905,10 @@ countVars :: AnfTagE -> Int
 Finding the _exact_ answer is **undecidable** in general (CSE 105),
 i.e. is _impossible_ to compute.
 
-However, it is easy to find an _overapproximate_ heuristic
+However, it is easy to find an _overapproximate_ heuristic, i.e.
+
 * a value guaranteed to be _larger_ than the than the max size,
+
 * and which is reasonable in practice.
 
 As usual, lets see if we can work out a heuristic by example.

@@ -1030,7 +1030,11 @@ if (window.navigator.appName == "Microsoft Internet Explorer") {
 <p>Ok, now that everything (else) seems to work, lets work out:</p>
 <div class="sourceCode" id="cb48"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb48-1" data-line-number="1"><span class="ot">countVars ::</span> <span class="dt">AnfTagE</span> <span class="ot">-&gt;</span> <span class="dt">Int</span></a></code></pre></div>
 <p>Finding the <em>exact</em> answer is <strong>undecidable</strong> in general (CSE 105), i.e. is <em>impossible</em> to compute.</p>
-<p>However, it is easy to find an <em>overapproximate</em> heuristic * a value guaranteed to be <em>larger</em> than the than the max size, * and which is reasonable in practice.</p>
+<p>However, it is easy to find an <em>overapproximate</em> heuristic, i.e.</p>
+<ul>
+<li><p>a value guaranteed to be <em>larger</em> than the than the max size,</p></li>
+<li><p>and which is reasonable in practice.</p></li>
+</ul>
 <p>As usual, lets see if we can work out a heuristic by example.</p>
 <h3 id="quiz-3">QUIZ</h3>
 <p>How many stack slots/vars are needed for the following program?</p>
