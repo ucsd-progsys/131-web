@@ -9,7 +9,7 @@ headerImg: books.jpg
 | 1/17       | Crash course in Haskell       | [html][lec2] [md][md2] |             |            |
 | 1/22       | Numbers, Unary-Ops, Variables | [html][lec3] [md][md3] | [pdf][pdf3] | [hs][cod3] |
 | 1/26       | Branches and Bin-Ops          | [html][lec4] [md][md4] | [pdf][pdf4] | [hs][cod4] |
-| 2/7        | Data Representation           | [html][lec5] [md][md5] |             | [hs][cod5] |
+| 2/7        | Data Representation           | [html][lec5] [md][md5] | [pdf][pdf5] | [hs][cod5] |
 
 ## Discussions
 
@@ -38,7 +38,7 @@ headerImg: books.jpg
 [lec5]: lectures/05-cobra.html
 [md5]:  http://github.com/ucsd-progsys/131-web/blob/master/lectures/05-cobra.md
 [cod5]: https://github.com/ucsd-cse131/05-cobra
-[pdf5]: static/img/05-cobra.pdf
+[pdf5]: static/img/cobra-notes.pdf
 
 [lec6]: lectures/06-diamond.html
 [md6]:  http://github.com/ucsd-progsys/131-web/blob/master/lectures/06-diamond.md
