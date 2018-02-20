@@ -13,6 +13,7 @@ atomic units over the entire quarter. By *atomic* I mean, for example, that
 - [HW #1][hw1-git], due Mon 1/29 by 23:59pm
 - [HW #2][hw2-git], due Mon 2/5  by 23:59pm
 - [HW #3][hw3-git], due Mon 2/19 by 23:59pm
+- [HW #4][hw4-git], due Wed 2/28 by 23:59pm
 
 ## Practice Midterm 
 
