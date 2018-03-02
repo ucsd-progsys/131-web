@@ -10,7 +10,8 @@ headerImg: books.jpg
 | 1/22       | Numbers, Unary-Ops, Variables | [html][lec3] [md][md3] | [pdf][pdf3] | [hs][cod3] |
 | 1/26       | Branches and Bin-Ops          | [html][lec4] [md][md4] | [pdf][pdf4] | [hs][cod4] |
 | 2/7        | Data Representation           | [html][lec5] [md][md5] | [pdf][pdf5] | [hs][cod5] |
-| 2/21       | Functions                     | [html][lec6] [md][md6] |             | [hs][cod6] |
+| 2/21       | Functions                     | [html][lec6] [md][md6] | [pdf][pdf6] | [hs][cod6] |
+| 3/2        | Heap Data Structures          | [html][lec7] [md][md7] |             | [hs][cod7] |
 
 ## Discussions
 

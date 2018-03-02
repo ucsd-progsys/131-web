@@ -688,8 +688,9 @@ compileBody :: Env -> AnfTagE -> Asm
 To compile a `Program` we compile each `Decl` and the main body expression
 
 ```haskell
-compileProg (Prog ds e) = compileBody emptyEnv e
-                       ++ concatMap   compileDecl ds
+compileProg (Prog ds e)
+  =  compileBody emptyEnv e
+  ++ concatMap   compileDecl ds
 ```
 
 **QUIZ:**
@@ -704,10 +705,19 @@ Does it matter whether we put the code for `e` before `ds`?
 
 Does it matter what order we compile the `ds` ?
 
-1. Yes 
+1. Yes
 2. No
 
 #### Compiling Declarations  
+
+```haskell
+compileDecl (Decl fname xs body)
+  = ILabel (Func fname)
+  : compileBody env body
+  where
+  env = fromListEnv (zip xs [-2,-3..])
+```
+
 
 To compile a single `Decl` we
 
@@ -718,8 +728,9 @@ To compile a single `Decl` we
 
 ```haskell
 compileDecl :: ADcl -> [Instruction]
-compileDecl (Decl f xs e _) = ILabel (DefFun (bindId f))
-                            : compileBody (paramsEnv xs) env e
+compileDecl (Decl f xs e _)
+  = ILabel (DefFun (bindId f))
+  : compileBody (paramsEnv xs) e
 ```
 
 The initial `Env` is created by `paramsEnv` which returns an `Env`
@@ -762,7 +773,8 @@ Finally, lets extend code generation to account for calls:
 
 ```haskell
 compileExpr :: Env -> AnfTagE -> [Instruction]
-compileExpr env (App f vs _) = call (DefFun f) [param env v | v <- vs]
+compileExpr env (App f vs _)
+  = call (DefFun f) [param env v | v <- vs]
 ```
 
 The function `param` converts an **immediate expressions**
@@ -826,8 +838,8 @@ def sumTo(n):
   r = 0
   i = n
   while (0 <= i):
-    r += i
-    i -= 1
+    r = r + i
+    i = i - 1
   return r
 
 sumTo(10000)
@@ -919,11 +931,11 @@ sumTo(5)
 ```python
 sumTo(5)
 ==> loop(0, 5)
-==> loop(0 + 5, 4)
-==> loop(0 + 5 + 4, 3)
-==> loop(0 + 5 + 4 + 3, 2)
-==> loop(0 + 5 + 4 + 3 + 2, 1)
-==> loop(0 + 5 + 4 + 3 + 2 + 1, 0)
+==> loop(5, 4)
+==> loop(9, 3)
+==> loop(12, 2)
+==> loop(14, 1)
+==> loop(15, 0)
 ==> 15
 ```
 
@@ -1107,3 +1119,47 @@ Later, we'll see how to represent **functions as values** using **closures**.
 [evans-x86-guide]:        http://www.cs.virginia.edu/~evans/cs216/guides/x86.html
 [mac-os-stack-alignment]: http://www.fabiensanglard.net/macosxassembly/index.php
 [hejlsberg-interview]:    https://www.infoq.com/news/2016/05/anders-hejlsberg-compiler
+
+
+
+
+```
+let x = 10
+  , y = 20
+in
+    x + y
+
+def foo(x, y):
+   x + y  
+
+```
+
+```haskell
+tail :: Expr a -> Expr (a, Bool)
+tail e = visit True e
+  where
+    visit b (Number n l)
+    visit b (Boolean n l)
+    visit b (Prim1 n l)
+
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.
