@@ -1,5 +1,5 @@
 ---
-title: Data on the Heap 
+title: Data on the Heap
 date: 2013-03-2
 headerImg: egg-eater.jpg
 ---
@@ -79,7 +79,7 @@ Next, lets informally develop a strategy for extending our language
 with pairs, implementing the above semantics. We need to work out
 strategies for:
 
-1. **Representing** pairs in the machine's memore,
+1. **Representing** pairs in the machine's memory,
 2. **Constructing** pairs (i.e. implementing `(e0, e1)` in assembly),
 3. **Accessing** pairs (i.e. implementing `e[0]` and `e[1]` in assembly).
 
@@ -623,16 +623,16 @@ def tup5(x1, x2, x3, x4, x5):
 
 We can write a single function to access tuples of any size.
 
-So the below code 
+So the below code
 
 ```python
-let t  = tup5( 1, 2 , 3 , 4 , 5) in 
-  , x0 = print(get(t, 0)) 
-  , x1 = print(get(t, 1)) 
-  , x2 = print(get(t, 2)) 
-  , x3 = print(get(t, 3)) 
-  , x4 = print(get(t, 4)) 
-in 
+let t  = tup5( 1, 2 , 3 , 4 , 5) in
+  , x0 = print(get(t, 0))
+  , x1 = print(get(t, 1))
+  , x2 = print(get(t, 2))
+  , x3 = print(get(t, 3))
+  , x4 = print(get(t, 4))
+in
   99
 ```
 
@@ -670,7 +670,7 @@ def tail(e):
 
 def get(e, i):
   if (i == 0):
-      head(e) 
+      head(e)
   else:
     get(tail(e), i-1)
 
@@ -679,16 +679,16 @@ let quad = tup4(1, 2, 3, 4) in
 
 q = (1, (2, (3, (4, false))))
 
-get(q, 0) = q[0] = 1 
+get(q, 0) = q[0] = 1
 get(q, 1) = get(q[1], 0) = 2   
-get(q, 2) = get(q[1], 1) = get(q[1][1], 0) = 3 
+get(q, 2) = get(q[1], 1) = get(q[1][1], 0) = 3
 get(q, 3) = get(q[1], 2) = get(q[1][1], 1) = get(q[1][1][1], 0) = get(4, 0)
           = 4[0]
 
 
 
 
-  
+
 ```
 
 
