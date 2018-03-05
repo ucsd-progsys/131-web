@@ -4,6 +4,18 @@ date: 2013-03-2
 headerImg: egg-eater.jpg
 ---
 
+data Expr a
+  = ...
+  | Bin { op   :: BinOp
+        , arg1 :: Expr a
+        , arg2 :: Expr a
+        , tag  :: a
+        , mag  :: Int
+        , pag :: Bool }
+```
+foo e@(Bin {}) = zoo e (stuff arg1 arg2)
+```
+
 Next, lets add support for
 
 * **Data Structures**
@@ -228,8 +240,7 @@ The resulting `eax` is the **value of the pair**
 
 * The last step ensures that the value carries the proper tag.
 
-ANF will ensure that `e1` and `e2` are both
-[immediate expressions](04-boa.md/#idea-immediate-expressions)
+ANF will ensure that `e1` and `e2` are both [immediate expressions](04-boa.md/#idea-immediate-expressions)
 which will make the second step above straightforward.
 
 **EXERCISE** How will we do ANF conversion for `(e1, e2)`?
