@@ -1,20 +1,8 @@
 ---
 title: Data on the Heap
-date: 2013-03-2
+date: 2017-03-2
 headerImg: egg-eater.jpg
 ---
-
-data Expr a
-  = ...
-  | Bin { op   :: BinOp
-        , arg1 :: Expr a
-        , arg2 :: Expr a
-        , tag  :: a
-        , mag  :: Int
-        , pag :: Bool }
-```
-foo e@(Bin {}) = zoo e (stuff arg1 arg2)
-```
 
 Next, lets add support for
 
