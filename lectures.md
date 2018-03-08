@@ -28,25 +28,27 @@ headerImg: books.jpg
 
 [lec4]: lectures/04-boa.html
 [md4]:  http://github.com/ucsd-progsys/131-web/blob/master/lectures/04-boa.md
-[cod4]: https://github.com/ucsd-cse131/04-boa
+[cod4]: https://github.com/ucsd-cse131/02-boa
 [pdf4]: static/img/boa-notes.pdf
 
 [lec5]: lectures/05-cobra.html
 [md5]:  http://github.com/ucsd-progsys/131-web/blob/master/lectures/05-cobra.md
-[cod5]: https://github.com/ucsd-cse131/05-cobra
+[cod5]: https://github.com/ucsd-cse131/03-cobra
 [pdf5]: static/img/cobra-notes.pdf
 
 [lec6]: lectures/06-diamond.html
 [md6]:  http://github.com/ucsd-progsys/131-web/blob/master/lectures/06-diamond.md
-[cod6]: https://github.com/ucsd-cse131/06-diamondback
+[cod6]: https://github.com/ucsd-cse131/04-diamondback
 [pdf6]: static/img/diamondback-notes.pdf
 
 [lec7]: lectures/07-egg-eater.html
 [md7]: http://github.com/ucsd-progsys/131-web/blob/master/lectures/07-egg-eater.md
+[cod7]: https://github.com/ucsd-cse131/05-egg-eater
 [pdf7]: static/img/egg-eater-notes.pdf
 
 [lec8]: lectures/08-fox.html
 [md8]: http://github.com/ucsd-progsys/131-web/blob/master/lectures/08-fox.md 
+[cod8]: https://github.com/ucsd-cse131/06-fox
 
 [lec9]: lectures/09-garter.html
 [md9]: http://github.com/ucsd-progsys/131-web/blob/master/lectures/09-garter.md
