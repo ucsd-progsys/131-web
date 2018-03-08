@@ -11,14 +11,8 @@ headerImg: books.jpg
 | 1/26       | Branches and Bin-Ops          | [html][lec4] [md][md4] | [pdf][pdf4] | [hs][cod4] |
 | 2/7        | Data Representation           | [html][lec5] [md][md5] | [pdf][pdf5] | [hs][cod5] |
 | 2/21       | Functions                     | [html][lec6] [md][md6] | [pdf][pdf6] | [hs][cod6] |
-| 3/2        | Heap Data Structures          | [html][lec7] [md][md7] |             | [hs][cod7] |
-
-## Discussions
-
-| Date       | Topic                    | Notes         |  Code      |
-|:----------:|:-------------------------|:-------------:|:----------:|
-| 1/15       | Running Haskell in Lab   | TBD           | TBD        |
-
+| 3/2        | Heap Data Structures          | [html][lec7] [md][md7] | [pdf][pdf7] | [hs][cod7] |
+| 3/9        | Garbage Collection            | [html][lec8] [md][md8] |             |            |
 
 [lec1]: lectures/01-introduction.html
 [md1]: http://github.com/ucsd-progsys/131-web/blob/master/lectures/01-introduction.md
@@ -49,9 +43,10 @@ headerImg: books.jpg
 
 [lec7]: lectures/07-egg-eater.html
 [md7]: http://github.com/ucsd-progsys/131-web/blob/master/lectures/07-egg-eater.md
+[pdf7]: static/img/egg-eater-notes.pdf
 
-[lec8]: lectures/08-fer-de-lance.html
-[md8]: http://github.com/ucsd-progsys/131-web/blob/master/lectures/08-fer-de-lance.md
+[lec8]: lectures/08-fox.html
+[md8]: http://github.com/ucsd-progsys/131-web/blob/master/lectures/08-fox.md 
 
 [lec9]: lectures/09-garter.html
 [md9]: http://github.com/ucsd-progsys/131-web/blob/master/lectures/09-garter.md

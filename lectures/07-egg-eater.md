@@ -380,7 +380,7 @@ int isPair(int p) {
 We can use the above test to recursively print (word)-values:
 
 ```c
-void printRec(int val) {
+void print(int val) {
   if(val & 0x00000001 ^ 0x00000001) { // val is a number
     printf("%d", val >> 1);
   }
@@ -393,9 +393,9 @@ void printRec(int val) {
   else if(isPair(val)) {            
     int* valp = (int*) (val - 1);    // extract address  
     printf("(");
-    printRec(*valp);                 // print first element
+    print(*valp);                 // print first element
     printf(", ");
-    printRec(*(valp + 1));           // print second element
+    print(*(valp + 1));           // print second element
     printf(")");
   }
   else {
@@ -592,8 +592,8 @@ interesting programs!
 
 First, lets see how to generalize pairs to allow for
 
-* triples `(e1,e2,e3)`,
-* quadruples `(e1,e2,e3,e4)`,
+* triples `(e1,e2,e3)`,     ---> (e1, (e2, e3))
+* quadruples `(e1,e2,e3,e4)`,   --> (e1, (e2, (e3, e4)))
 * pentuples `(e1,e2,e3,e4,e5)`
 
 and so on.
@@ -625,7 +625,32 @@ We can write a single function to access tuples of any size.
 So the below code
 
 ```python
-let t  = tup5( 1, 2 , 3 , 4 , 5) in
+yuple = (1, (2, (3, (4, 5))))
+get(yuple, 0) = 1
+get(yuple, 1) = 2
+get(yuple, 2) = 3
+get(yuple, 3) = 4
+get(yuple, 4) = 5
+
+
+
+def get(t, i):
+  if i == 0:
+    t[0]
+  else:
+    get(t[1],i-1)
+
+
+def tup3(x1, x2, x3):
+  (x1, (x2, x3))
+
+def tup4(x1, x2, x3, x4):
+  (x1, (x2, (x3, x4)))
+
+def tup5(x1, x2, x3, x4, x5):
+  (x1, (x2, (x3, (x4, x5))))
+
+let t  = tup5(1, 2, 3, 4, 5) in
   , x0 = print(get(t, 0))
   , x1 = print(get(t, 1))
   , x2 = print(get(t, 2))
@@ -658,15 +683,6 @@ def get(t, i):
 Using the above "library" we can write code like:
 
 ```haskell
-def tup4(x1, x2, x3, x4):
-  (x1, (x2, (x3, (x4, false)))
-
-def head(e):
-  e[0]
-
-def tail(e):
-  e[1]
-
 def get(e, i):
   if (i == 0):
       head(e)
@@ -675,22 +691,7 @@ def get(e, i):
 
 let quad = tup4(1, 2, 3, 4) in
   get(quad, 0) + get(quad, 1) + get(quad, 2) + get(quad, 3)
-
-q = (1, (2, (3, (4, false))))
-
-get(q, 0) = q[0] = 1
-get(q, 1) = get(q[1], 0) = 2   
-get(q, 2) = get(q[1], 1) = get(q[1][1], 0) = 3
-get(q, 3) = get(q[1], 2) = get(q[1][1], 1) = get(q[1][1][1], 0) = get(4, 0)
-          = 4[0]
-
-
-
-
-
 ```
-
-
 
 What will be the result of compiling the above?
 
@@ -818,7 +819,52 @@ tuples, letting the programmer write code like:
 e1[e2]                 # allowing expressions to be used as fields
 ```
 
+
 Next, we'll see how to
 
-* use the "pair" mechanism to add support for **higher-order functions** and
+* use the "pair" mechanism to add **higher-order functions** and
 * reclaim unused memory via **garbage collection**.
+
+```
+data List = Node Int List         -- (Int, List)
+          | Empty                 -- false
+
+1:2:3:4:5:6:7:8:[]
+(1,(2,(3,(4,(5,(6,(7,(8,false))))))))
+
+def isEmpty(l):            
+  l == false
+
+def cons(h, t):
+  (h, t)
+
+def head(e):
+  e[0]
+
+def tail(e):
+  e[1]
+
+def length(l):  
+  if isEmpty(l):
+    0
+  else:
+    1 + length(tail(l))
+
+data Tree = Node Int Tree Tree    -- (Int, Tree, Tree)
+          | Leaf                  -- False
+
+def node(n, l, r):  
+  return (n, l, r)
+
+def isLeaf(t):
+  t == false
+
+def nodeVal(t)::
+  t[0]
+
+def nodeLeft(t)::
+  t[1]
+
+def nodeRight(t)::
+  t[2]
+```
