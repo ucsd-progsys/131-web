@@ -19,6 +19,7 @@ atomic units over the entire quarter. By *atomic* I mean, for example, that
 ## Practice Midterm 
 
 - Midterm from [Fall 2016](static/img/midterm-fa16.pdf)
+- Final   from [Fall 2016](static/img/final-fa16.pdf)
 
 <!--
 

@@ -13,6 +13,9 @@ headerImg: fox.jpg
 Using the above "library" we can write code like:
 
 ```haskell
+def tup4(x1, x2, x3, x4):
+  (x1, (x2, (x3, (x4, false))))
+
 def get(e, i):
   if (i == 0):
     head(e)
@@ -30,9 +33,6 @@ What will be the result of compiling the above?
 3. Other run-time error
 4. `4`
 5. `10`
-
-
-
 
 ### QUIZ
 
@@ -73,33 +73,21 @@ in
   (x[0] + y, x[1] + y)
 ```
 
-### Example 3: Garbage at End (with stack)
+### Example 3: Garbage in Middle (with stack)
 
 ```python
 def foo(p, q):
-  let tmp = (p, q)
+  let tmp = (10, 20)
   in tmp[0] + tmp[1]
 
-let x = (1, 2)
-  , y = foo(10, 20)
+let y  = foo(10, 20)
+  , x  = (y, y + 1)
+  , z  = foo(100, 200)
 in
-   (x[0] + y, x[1] + y)
+  x[0] + z
 ```
 
-### Example 4: Garbage in Middle (with stack)
-
-```python
-def foo(p, q):
-  let tmp = (p, q)
-  in tmp[0] + tmp[1]
-
-let y = foo(10, 20)
-  , x = (1, 2)
-in
-   (x[0] + y, x[1] + y)
-```
-
-### Example 5: Transitive Reachability
+### Example 4: Transitive Reachability
 
 ```python
 def range(i, j):
@@ -108,48 +96,28 @@ def range(i, j):
   else:
     false
 
-def sum(acc, l):
+def sum(l):
   if l == false:
-    acc  
+    0
   else:
-    sum(acc + l0, l[1])
+    l[0] + sum(l[1])
 
-let l    = range(1, 3)
-  , tmp1 = let l1 = (10, l0)
-           in sum(0, l1)
-  , l0   = (0, l)
-  , tmp2 = let l2 = (100, l0)
-           in sum(0, l2)
+## hard
+let t1 = let l1 = range(1, 4)
+         in sum(l1)
+  , l  = range(10, 14)
+  , t2 = let l2 = range(100, 104)
+         in sum(l2)
 in
-  (tmp1 + tmp2, l)
-```
+  (t1 + t2, l)
 
-
-### Example 6: Transitive Reachability (with Stack)
-
-```python
-def range(i, j):
-  if (i < j):
-    (i, range(i+1, j))
-  else:
-    false
-
-def sum(acc, l):
-  if l == false:
-    acc  
-  else:
-    sum(acc + l0, l[1])
-
-def foo(x, l):
-  let tmp = (x, l)
-  in sum(0, tmp)
-
-let l    = range(1, 3)
-  , tmp1 = foo(10,  l)
-  , l0   = (0, l)
-  , tmp2 = foo(100, l)
+## easy
+let t1 =
+         let l1 = range(0, 3)
+         in sum(l1)
+  , l  = range(t1, t1 + 3)
 in
-  (tmp1 + tmp2, l)
+  (1000, l)
 ```
 
 ## TODO
