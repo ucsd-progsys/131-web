@@ -234,14 +234,17 @@ if (window.navigator.appName == "Microsoft Internet Explorer") {
 <h2 id="recap-tuples-on-the-heap">Recap: Tuples on the Heap</h2>
 <h3 id="quiz">QUIZ</h3>
 <p>Using the above “library” we can write code like:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb1-1" data-line-number="1">def get(e, i)<span class="fu">:</span></a>
-<a class="sourceLine" id="cb1-2" data-line-number="2">  <span class="kw">if</span> (i <span class="fu">==</span> <span class="dv">0</span>)<span class="fu">:</span></a>
-<a class="sourceLine" id="cb1-3" data-line-number="3">    head(e)</a>
-<a class="sourceLine" id="cb1-4" data-line-number="4">  <span class="kw">else</span><span class="fu">:</span></a>
-<a class="sourceLine" id="cb1-5" data-line-number="5">    get(tail(e), i<span class="fu">-</span><span class="dv">1</span>)</a>
-<a class="sourceLine" id="cb1-6" data-line-number="6"></a>
-<a class="sourceLine" id="cb1-7" data-line-number="7"><span class="kw">let</span> quad <span class="fu">=</span> tup4(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>) <span class="kw">in</span></a>
-<a class="sourceLine" id="cb1-8" data-line-number="8">  get(quad, <span class="dv">0</span>) <span class="fu">+</span> get(quad, <span class="dv">1</span>) <span class="fu">+</span> get(quad, <span class="dv">2</span>) <span class="fu">+</span> get(quad, <span class="dv">3</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb1-1" data-line-number="1">def tup4(x1, x2, x3, x4)<span class="fu">:</span></a>
+<a class="sourceLine" id="cb1-2" data-line-number="2">  (x1, (x2, (x3, (x4, false))))</a>
+<a class="sourceLine" id="cb1-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb1-4" data-line-number="4">def get(e, i)<span class="fu">:</span></a>
+<a class="sourceLine" id="cb1-5" data-line-number="5">  <span class="kw">if</span> (i <span class="fu">==</span> <span class="dv">0</span>)<span class="fu">:</span></a>
+<a class="sourceLine" id="cb1-6" data-line-number="6">    head(e)</a>
+<a class="sourceLine" id="cb1-7" data-line-number="7">  <span class="kw">else</span><span class="fu">:</span></a>
+<a class="sourceLine" id="cb1-8" data-line-number="8">    get(tail(e), i<span class="fu">-</span><span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb1-9" data-line-number="9"></a>
+<a class="sourceLine" id="cb1-10" data-line-number="10"><span class="kw">let</span> quad <span class="fu">=</span> tup4(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>) <span class="kw">in</span></a>
+<a class="sourceLine" id="cb1-11" data-line-number="11">  get(quad, <span class="dv">0</span>) <span class="fu">+</span> get(quad, <span class="dv">1</span>) <span class="fu">+</span> get(quad, <span class="dv">2</span>) <span class="fu">+</span> get(quad, <span class="dv">3</span>)</a></code></pre></div>
 <p>What will be the result of compiling the above?</p>
 <ol type="1">
 <li>Compile error</li>
@@ -275,68 +278,45 @@ if (window.navigator.appName == "Microsoft Internet Explorer") {
 <a class="sourceLine" id="cb4-4" data-line-number="4"></a>
 <a class="sourceLine" id="cb4-5" data-line-number="5"><span class="kw">in</span></a>
 <a class="sourceLine" id="cb4-6" data-line-number="6">  (x[<span class="dv">0</span>] <span class="op">+</span> y, x[<span class="dv">1</span>] <span class="op">+</span> y)</a></code></pre></div>
-<h3 id="example-3-garbage-at-end-with-stack">Example 3: Garbage at End (with stack)</h3>
+<h3 id="example-3-garbage-in-middle-with-stack">Example 3: Garbage in Middle (with stack)</h3>
 <div class="sourceCode" id="cb5"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb5-1" data-line-number="1"><span class="kw">def</span> foo(p, q):</a>
-<a class="sourceLine" id="cb5-2" data-line-number="2">  let tmp <span class="op">=</span> (p, q)</a>
+<a class="sourceLine" id="cb5-2" data-line-number="2">  let tmp <span class="op">=</span> (<span class="dv">10</span>, <span class="dv">20</span>)</a>
 <a class="sourceLine" id="cb5-3" data-line-number="3">  <span class="kw">in</span> tmp[<span class="dv">0</span>] <span class="op">+</span> tmp[<span class="dv">1</span>]</a>
 <a class="sourceLine" id="cb5-4" data-line-number="4"></a>
-<a class="sourceLine" id="cb5-5" data-line-number="5">let x <span class="op">=</span> (<span class="dv">1</span>, <span class="dv">2</span>)</a>
-<a class="sourceLine" id="cb5-6" data-line-number="6">  , y <span class="op">=</span> foo(<span class="dv">10</span>, <span class="dv">20</span>)</a>
-<a class="sourceLine" id="cb5-7" data-line-number="7"><span class="kw">in</span></a>
-<a class="sourceLine" id="cb5-8" data-line-number="8">   (x[<span class="dv">0</span>] <span class="op">+</span> y, x[<span class="dv">1</span>] <span class="op">+</span> y)</a></code></pre></div>
-<h3 id="example-4-garbage-in-middle-with-stack">Example 4: Garbage in Middle (with stack)</h3>
-<div class="sourceCode" id="cb6"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb6-1" data-line-number="1"><span class="kw">def</span> foo(p, q):</a>
-<a class="sourceLine" id="cb6-2" data-line-number="2">  let tmp <span class="op">=</span> (p, q)</a>
-<a class="sourceLine" id="cb6-3" data-line-number="3">  <span class="kw">in</span> tmp[<span class="dv">0</span>] <span class="op">+</span> tmp[<span class="dv">1</span>]</a>
-<a class="sourceLine" id="cb6-4" data-line-number="4"></a>
-<a class="sourceLine" id="cb6-5" data-line-number="5">let y <span class="op">=</span> foo(<span class="dv">10</span>, <span class="dv">20</span>)</a>
-<a class="sourceLine" id="cb6-6" data-line-number="6">  , x <span class="op">=</span> (<span class="dv">1</span>, <span class="dv">2</span>)</a>
-<a class="sourceLine" id="cb6-7" data-line-number="7"><span class="kw">in</span></a>
-<a class="sourceLine" id="cb6-8" data-line-number="8">   (x[<span class="dv">0</span>] <span class="op">+</span> y, x[<span class="dv">1</span>] <span class="op">+</span> y)</a></code></pre></div>
-<h3 id="example-5-transitive-reachability">Example 5: Transitive Reachability</h3>
-<div class="sourceCode" id="cb7"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb7-1" data-line-number="1"><span class="kw">def</span> <span class="bu">range</span>(i, j):</a>
-<a class="sourceLine" id="cb7-2" data-line-number="2">  <span class="cf">if</span> (i <span class="op">&lt;</span> j):</a>
-<a class="sourceLine" id="cb7-3" data-line-number="3">    (i, <span class="bu">range</span>(i<span class="op">+</span><span class="dv">1</span>, j))</a>
-<a class="sourceLine" id="cb7-4" data-line-number="4">  <span class="cf">else</span>:</a>
-<a class="sourceLine" id="cb7-5" data-line-number="5">    false</a>
-<a class="sourceLine" id="cb7-6" data-line-number="6"></a>
-<a class="sourceLine" id="cb7-7" data-line-number="7"><span class="kw">def</span> <span class="bu">sum</span>(acc, l):</a>
-<a class="sourceLine" id="cb7-8" data-line-number="8">  <span class="cf">if</span> l <span class="op">==</span> false:</a>
-<a class="sourceLine" id="cb7-9" data-line-number="9">    acc  </a>
-<a class="sourceLine" id="cb7-10" data-line-number="10">  <span class="cf">else</span>:</a>
-<a class="sourceLine" id="cb7-11" data-line-number="11">    <span class="bu">sum</span>(acc <span class="op">+</span> l0, l[<span class="dv">1</span>])</a>
-<a class="sourceLine" id="cb7-12" data-line-number="12"></a>
-<a class="sourceLine" id="cb7-13" data-line-number="13">let l    <span class="op">=</span> <span class="bu">range</span>(<span class="dv">1</span>, <span class="dv">3</span>)</a>
-<a class="sourceLine" id="cb7-14" data-line-number="14">  , tmp1 <span class="op">=</span> let l1 <span class="op">=</span> (<span class="dv">10</span>, l0)</a>
-<a class="sourceLine" id="cb7-15" data-line-number="15">           <span class="kw">in</span> <span class="bu">sum</span>(<span class="dv">0</span>, l1)</a>
-<a class="sourceLine" id="cb7-16" data-line-number="16">  , l0   <span class="op">=</span> (<span class="dv">0</span>, l)</a>
-<a class="sourceLine" id="cb7-17" data-line-number="17">  , tmp2 <span class="op">=</span> let l2 <span class="op">=</span> (<span class="dv">100</span>, l0)</a>
-<a class="sourceLine" id="cb7-18" data-line-number="18">           <span class="kw">in</span> <span class="bu">sum</span>(<span class="dv">0</span>, l2)</a>
-<a class="sourceLine" id="cb7-19" data-line-number="19"><span class="kw">in</span></a>
-<a class="sourceLine" id="cb7-20" data-line-number="20">  (tmp1 <span class="op">+</span> tmp2, l)</a></code></pre></div>
-<h3 id="example-6-transitive-reachability-with-stack">Example 6: Transitive Reachability (with Stack)</h3>
-<div class="sourceCode" id="cb8"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb8-1" data-line-number="1"><span class="kw">def</span> <span class="bu">range</span>(i, j):</a>
-<a class="sourceLine" id="cb8-2" data-line-number="2">  <span class="cf">if</span> (i <span class="op">&lt;</span> j):</a>
-<a class="sourceLine" id="cb8-3" data-line-number="3">    (i, <span class="bu">range</span>(i<span class="op">+</span><span class="dv">1</span>, j))</a>
-<a class="sourceLine" id="cb8-4" data-line-number="4">  <span class="cf">else</span>:</a>
-<a class="sourceLine" id="cb8-5" data-line-number="5">    false</a>
-<a class="sourceLine" id="cb8-6" data-line-number="6"></a>
-<a class="sourceLine" id="cb8-7" data-line-number="7"><span class="kw">def</span> <span class="bu">sum</span>(acc, l):</a>
-<a class="sourceLine" id="cb8-8" data-line-number="8">  <span class="cf">if</span> l <span class="op">==</span> false:</a>
-<a class="sourceLine" id="cb8-9" data-line-number="9">    acc  </a>
-<a class="sourceLine" id="cb8-10" data-line-number="10">  <span class="cf">else</span>:</a>
-<a class="sourceLine" id="cb8-11" data-line-number="11">    <span class="bu">sum</span>(acc <span class="op">+</span> l0, l[<span class="dv">1</span>])</a>
-<a class="sourceLine" id="cb8-12" data-line-number="12"></a>
-<a class="sourceLine" id="cb8-13" data-line-number="13"><span class="kw">def</span> foo(x, l):</a>
-<a class="sourceLine" id="cb8-14" data-line-number="14">  let tmp <span class="op">=</span> (x, l)</a>
-<a class="sourceLine" id="cb8-15" data-line-number="15">  <span class="kw">in</span> <span class="bu">sum</span>(<span class="dv">0</span>, tmp)</a>
-<a class="sourceLine" id="cb8-16" data-line-number="16"></a>
-<a class="sourceLine" id="cb8-17" data-line-number="17">let l    <span class="op">=</span> <span class="bu">range</span>(<span class="dv">1</span>, <span class="dv">3</span>)</a>
-<a class="sourceLine" id="cb8-18" data-line-number="18">  , tmp1 <span class="op">=</span> foo(<span class="dv">10</span>,  l)</a>
-<a class="sourceLine" id="cb8-19" data-line-number="19">  , l0   <span class="op">=</span> (<span class="dv">0</span>, l)</a>
-<a class="sourceLine" id="cb8-20" data-line-number="20">  , tmp2 <span class="op">=</span> foo(<span class="dv">100</span>, l)</a>
-<a class="sourceLine" id="cb8-21" data-line-number="21"><span class="kw">in</span></a>
-<a class="sourceLine" id="cb8-22" data-line-number="22">  (tmp1 <span class="op">+</span> tmp2, l)</a></code></pre></div>
+<a class="sourceLine" id="cb5-5" data-line-number="5">let y  <span class="op">=</span> foo(<span class="dv">10</span>, <span class="dv">20</span>)</a>
+<a class="sourceLine" id="cb5-6" data-line-number="6">  , x  <span class="op">=</span> (y, y <span class="op">+</span> <span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb5-7" data-line-number="7">  , z  <span class="op">=</span> foo(<span class="dv">100</span>, <span class="dv">200</span>)</a>
+<a class="sourceLine" id="cb5-8" data-line-number="8"><span class="kw">in</span></a>
+<a class="sourceLine" id="cb5-9" data-line-number="9">  x[<span class="dv">0</span>] <span class="op">+</span> z</a></code></pre></div>
+<h3 id="example-4-transitive-reachability">Example 4: Transitive Reachability</h3>
+<div class="sourceCode" id="cb6"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb6-1" data-line-number="1"><span class="kw">def</span> <span class="bu">range</span>(i, j):</a>
+<a class="sourceLine" id="cb6-2" data-line-number="2">  <span class="cf">if</span> (i <span class="op">&lt;</span> j):</a>
+<a class="sourceLine" id="cb6-3" data-line-number="3">    (i, <span class="bu">range</span>(i<span class="op">+</span><span class="dv">1</span>, j))</a>
+<a class="sourceLine" id="cb6-4" data-line-number="4">  <span class="cf">else</span>:</a>
+<a class="sourceLine" id="cb6-5" data-line-number="5">    false</a>
+<a class="sourceLine" id="cb6-6" data-line-number="6"></a>
+<a class="sourceLine" id="cb6-7" data-line-number="7"><span class="kw">def</span> <span class="bu">sum</span>(l):</a>
+<a class="sourceLine" id="cb6-8" data-line-number="8">  <span class="cf">if</span> l <span class="op">==</span> false:</a>
+<a class="sourceLine" id="cb6-9" data-line-number="9">    <span class="dv">0</span></a>
+<a class="sourceLine" id="cb6-10" data-line-number="10">  <span class="cf">else</span>:</a>
+<a class="sourceLine" id="cb6-11" data-line-number="11">    l[<span class="dv">0</span>] <span class="op">+</span> <span class="bu">sum</span>(l[<span class="dv">1</span>])</a>
+<a class="sourceLine" id="cb6-12" data-line-number="12"></a>
+<a class="sourceLine" id="cb6-13" data-line-number="13"><span class="co">## hard</span></a>
+<a class="sourceLine" id="cb6-14" data-line-number="14">let t1 <span class="op">=</span> let l1 <span class="op">=</span> <span class="bu">range</span>(<span class="dv">1</span>, <span class="dv">4</span>)</a>
+<a class="sourceLine" id="cb6-15" data-line-number="15">         <span class="kw">in</span> <span class="bu">sum</span>(l1)</a>
+<a class="sourceLine" id="cb6-16" data-line-number="16">  , l  <span class="op">=</span> <span class="bu">range</span>(<span class="dv">10</span>, <span class="dv">14</span>)</a>
+<a class="sourceLine" id="cb6-17" data-line-number="17">  , t2 <span class="op">=</span> let l2 <span class="op">=</span> <span class="bu">range</span>(<span class="dv">100</span>, <span class="dv">104</span>)</a>
+<a class="sourceLine" id="cb6-18" data-line-number="18">         <span class="kw">in</span> <span class="bu">sum</span>(l2)</a>
+<a class="sourceLine" id="cb6-19" data-line-number="19"><span class="kw">in</span></a>
+<a class="sourceLine" id="cb6-20" data-line-number="20">  (t1 <span class="op">+</span> t2, l)</a>
+<a class="sourceLine" id="cb6-21" data-line-number="21"></a>
+<a class="sourceLine" id="cb6-22" data-line-number="22"><span class="co">## easy</span></a>
+<a class="sourceLine" id="cb6-23" data-line-number="23">let t1 <span class="op">=</span></a>
+<a class="sourceLine" id="cb6-24" data-line-number="24">         let l1 <span class="op">=</span> <span class="bu">range</span>(<span class="dv">0</span>, <span class="dv">3</span>)</a>
+<a class="sourceLine" id="cb6-25" data-line-number="25">         <span class="kw">in</span> <span class="bu">sum</span>(l1)</a>
+<a class="sourceLine" id="cb6-26" data-line-number="26">  , l  <span class="op">=</span> <span class="bu">range</span>(t1, t1 <span class="op">+</span> <span class="dv">3</span>)</a>
+<a class="sourceLine" id="cb6-27" data-line-number="27"><span class="kw">in</span></a>
+<a class="sourceLine" id="cb6-28" data-line-number="28">  (<span class="dv">1000</span>, l)</a></code></pre></div>
 <h2 id="todo">TODO</h2>
 <ul>
 <li>Heaps for above examples<br />
