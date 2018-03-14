@@ -12,7 +12,9 @@ headerImg: books.jpg
 | 2/7        | Data Representation           | [html][lec5] [md][md5] | [pdf][pdf5] | [hs][cod5] |
 | 2/21       | Functions                     | [html][lec6] [md][md6] | [pdf][pdf6] | [hs][cod6] |
 | 3/2        | Heap Data Structures          | [html][lec7] [md][md7] | [pdf][pdf7] | [hs][cod7] |
-| 3/9        | Garbage Collection            | [html][lec8] [md][md8] |             |            |
+| 3/9        | Garbage Collection            | [html][lec8] [md][md8] | [pdf][pdf8] |            |
+
+
 
 [lec1]: lectures/01-introduction.html
 [md1]: http://github.com/ucsd-progsys/131-web/blob/master/lectures/01-introduction.md

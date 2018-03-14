@@ -271,6 +271,9 @@ if (window.navigator.appName == "Microsoft Internet Explorer") {
 <a class="sourceLine" id="cb3-3" data-line-number="3">        <span class="kw">in</span> tmp[<span class="dv">0</span>] <span class="op">+</span> tmp[<span class="dv">1</span>]</a>
 <a class="sourceLine" id="cb3-4" data-line-number="4"><span class="kw">in</span></a>
 <a class="sourceLine" id="cb3-5" data-line-number="5">  (x[<span class="dv">0</span>] <span class="op">+</span> y, x[<span class="dv">1</span>] <span class="op">+</span> y)</a></code></pre></div>
+<p><a href="https://youtu.be/LddzswC7jEM">Click to see video</a></p>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/LddzswC7jEM" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen>
+</iframe>
 <h3 id="example-2-garbage-in-middle">Example 2: Garbage in Middle</h3>
 <div class="sourceCode" id="cb4"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb4-1" data-line-number="1">let y <span class="op">=</span> let tmp <span class="op">=</span> (<span class="dv">10</span>, <span class="dv">20</span>)</a>
 <a class="sourceLine" id="cb4-2" data-line-number="2">        <span class="kw">in</span> tmp[<span class="dv">0</span>] <span class="op">+</span> tmp[<span class="dv">1</span>]</a>
@@ -278,6 +281,9 @@ if (window.navigator.appName == "Microsoft Internet Explorer") {
 <a class="sourceLine" id="cb4-4" data-line-number="4"></a>
 <a class="sourceLine" id="cb4-5" data-line-number="5"><span class="kw">in</span></a>
 <a class="sourceLine" id="cb4-6" data-line-number="6">  (x[<span class="dv">0</span>] <span class="op">+</span> y, x[<span class="dv">1</span>] <span class="op">+</span> y)</a></code></pre></div>
+<p><a href="https://youtu.be/2u0y-u1ksbY">Click to see video</a></p>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/2u0y-u1ksbY" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen>
+</iframe>
 <h3 id="example-3-garbage-in-middle-with-stack">Example 3: Garbage in Middle (with stack)</h3>
 <div class="sourceCode" id="cb5"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb5-1" data-line-number="1"><span class="kw">def</span> foo(p, q):</a>
 <a class="sourceLine" id="cb5-2" data-line-number="2">  let tmp <span class="op">=</span> (<span class="dv">10</span>, <span class="dv">20</span>)</a>
@@ -288,6 +294,9 @@ if (window.navigator.appName == "Microsoft Internet Explorer") {
 <a class="sourceLine" id="cb5-7" data-line-number="7">  , z  <span class="op">=</span> foo(<span class="dv">100</span>, <span class="dv">200</span>)</a>
 <a class="sourceLine" id="cb5-8" data-line-number="8"><span class="kw">in</span></a>
 <a class="sourceLine" id="cb5-9" data-line-number="9">  x[<span class="dv">0</span>] <span class="op">+</span> z</a></code></pre></div>
+<p><a href="https://youtu.be/pCrBJWDwr2k">Click to see video</a></p>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/pCrBJWDwr2k" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen>
+</iframe>
 <h3 id="example-4-transitive-reachability">Example 4: Transitive Reachability</h3>
 <div class="sourceCode" id="cb6"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb6-1" data-line-number="1"><span class="kw">def</span> <span class="bu">range</span>(i, j):</a>
 <a class="sourceLine" id="cb6-2" data-line-number="2">  <span class="cf">if</span> (i <span class="op">&lt;</span> j):</a>
@@ -301,36 +310,15 @@ if (window.navigator.appName == "Microsoft Internet Explorer") {
 <a class="sourceLine" id="cb6-10" data-line-number="10">  <span class="cf">else</span>:</a>
 <a class="sourceLine" id="cb6-11" data-line-number="11">    l[<span class="dv">0</span>] <span class="op">+</span> <span class="bu">sum</span>(l[<span class="dv">1</span>])</a>
 <a class="sourceLine" id="cb6-12" data-line-number="12"></a>
-<a class="sourceLine" id="cb6-13" data-line-number="13"><span class="co">## hard</span></a>
-<a class="sourceLine" id="cb6-14" data-line-number="14">let t1 <span class="op">=</span> let l1 <span class="op">=</span> <span class="bu">range</span>(<span class="dv">1</span>, <span class="dv">4</span>)</a>
+<a class="sourceLine" id="cb6-13" data-line-number="13">let t1 <span class="op">=</span></a>
+<a class="sourceLine" id="cb6-14" data-line-number="14">         let l1 <span class="op">=</span> <span class="bu">range</span>(<span class="dv">0</span>, <span class="dv">3</span>)</a>
 <a class="sourceLine" id="cb6-15" data-line-number="15">         <span class="kw">in</span> <span class="bu">sum</span>(l1)</a>
-<a class="sourceLine" id="cb6-16" data-line-number="16">  , l  <span class="op">=</span> <span class="bu">range</span>(<span class="dv">10</span>, <span class="dv">14</span>)</a>
-<a class="sourceLine" id="cb6-17" data-line-number="17">  , t2 <span class="op">=</span> let l2 <span class="op">=</span> <span class="bu">range</span>(<span class="dv">100</span>, <span class="dv">104</span>)</a>
-<a class="sourceLine" id="cb6-18" data-line-number="18">         <span class="kw">in</span> <span class="bu">sum</span>(l2)</a>
-<a class="sourceLine" id="cb6-19" data-line-number="19"><span class="kw">in</span></a>
-<a class="sourceLine" id="cb6-20" data-line-number="20">  (t1 <span class="op">+</span> t2, l)</a>
-<a class="sourceLine" id="cb6-21" data-line-number="21"></a>
-<a class="sourceLine" id="cb6-22" data-line-number="22"><span class="co">## easy</span></a>
-<a class="sourceLine" id="cb6-23" data-line-number="23">let t1 <span class="op">=</span></a>
-<a class="sourceLine" id="cb6-24" data-line-number="24">         let l1 <span class="op">=</span> <span class="bu">range</span>(<span class="dv">0</span>, <span class="dv">3</span>)</a>
-<a class="sourceLine" id="cb6-25" data-line-number="25">         <span class="kw">in</span> <span class="bu">sum</span>(l1)</a>
-<a class="sourceLine" id="cb6-26" data-line-number="26">  , l  <span class="op">=</span> <span class="bu">range</span>(t1, t1 <span class="op">+</span> <span class="dv">3</span>)</a>
-<a class="sourceLine" id="cb6-27" data-line-number="27"><span class="kw">in</span></a>
-<a class="sourceLine" id="cb6-28" data-line-number="28">  (<span class="dv">1000</span>, l)</a></code></pre></div>
-<h2 id="todo">TODO</h2>
-<ul>
-<li>Heaps for above examples<br />
-</li>
-<li><p>QUIZ: which allocation will trigger GC?</p></li>
-<li>Mark</li>
-<li><p>QUIZ: which is marked?</p></li>
-<li>Forward</li>
-<li><p>QUIZ: what is forwarding address?</p></li>
-<li>Redirect</li>
-<li><p>QUIZ: why not redirect DURING forward?</p></li>
-<li>Compact</li>
-<li><p>QUIZ: ??</p></li>
-</ul>	
+<a class="sourceLine" id="cb6-16" data-line-number="16">  , l  <span class="op">=</span> <span class="bu">range</span>(t1, t1 <span class="op">+</span> <span class="dv">3</span>)</a>
+<a class="sourceLine" id="cb6-17" data-line-number="17"><span class="kw">in</span></a>
+<a class="sourceLine" id="cb6-18" data-line-number="18">  (<span class="dv">1000</span>, l)</a></code></pre></div>
+<p><a href="https://youtu.be/3MEmwxtEprE">Click to see video</a></p>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/3MEmwxtEprE" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen>
+</iframe>	
                 <hr>
             </div>
         </div>

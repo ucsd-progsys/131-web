@@ -62,6 +62,11 @@ in
   (x[0] + y, x[1] + y)
 ```
 
+[Click to see video][mov1]
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/LddzswC7jEM" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+
+
 ### Example 2: Garbage in Middle
 
 ```python
@@ -72,6 +77,11 @@ let y = let tmp = (10, 20)
 in
   (x[0] + y, x[1] + y)
 ```
+
+[Click to see video][mov2]
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/2u0y-u1ksbY" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+
 
 ### Example 3: Garbage in Middle (with stack)
 
@@ -86,6 +96,11 @@ let y  = foo(10, 20)
 in
   x[0] + z
 ```
+
+[Click to see video][mov3]
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/pCrBJWDwr2k" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+
 
 ### Example 4: Transitive Reachability
 
@@ -102,16 +117,6 @@ def sum(l):
   else:
     l[0] + sum(l[1])
 
-## hard
-let t1 = let l1 = range(1, 4)
-         in sum(l1)
-  , l  = range(10, 14)
-  , t2 = let l2 = range(100, 104)
-         in sum(l2)
-in
-  (t1 + t2, l)
-
-## easy
 let t1 =
          let l1 = range(0, 3)
          in sum(l1)
@@ -120,19 +125,14 @@ in
   (1000, l)
 ```
 
-## TODO
+[Click to see video][mov4]
 
-- Heaps for above examples  
-- QUIZ: which allocation will trigger GC?
+<iframe width="560" height="315" src="https://www.youtube.com/embed/3MEmwxtEprE" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
 
-- Mark
-- QUIZ: which is marked?
 
-- Forward
-- QUIZ: what is forwarding address?
+[mov1]: https://youtu.be/LddzswC7jEM
+[mov2]: https://youtu.be/2u0y-u1ksbY
+[mov3]: https://youtu.be/pCrBJWDwr2k
+[mov4]: https://youtu.be/3MEmwxtEprE 
 
-- Redirect
-- QUIZ: why not redirect DURING forward?
 
-- Compact
-- QUIZ: ??
