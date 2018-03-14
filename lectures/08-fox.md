@@ -64,7 +64,7 @@ in
 
 [Click to see video][mov1]
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/LddzswC7jEM" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+<iframe src="https://www.youtube.com/embed/LddzswC7jEM" width="560" height="315" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
 
 
 ### Example 2: Garbage in Middle
@@ -80,7 +80,7 @@ in
 
 [Click to see video][mov2]
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/2u0y-u1ksbY" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+<iframe src="https://www.youtube.com/embed/2u0y-u1ksbY" width="560" height="315" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
 
 
 ### Example 3: Garbage in Middle (with stack)
@@ -99,7 +99,7 @@ in
 
 [Click to see video][mov3]
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/pCrBJWDwr2k" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+<iframe src="https://www.youtube.com/embed/pCrBJWDwr2k" width="560" height="315" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
 
 
 ### Example 4: Transitive Reachability
@@ -127,7 +127,7 @@ in
 
 [Click to see video][mov4]
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/3MEmwxtEprE" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+<iframe src="https://www.youtube.com/embed/3MEmwxtEprE" width="560" height="315" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
 
 
 [mov1]: https://youtu.be/LddzswC7jEM
