@@ -51,6 +51,7 @@ headerImg: books.jpg
 [lec8]: lectures/08-fox.html
 [md8]: http://github.com/ucsd-progsys/131-web/blob/master/lectures/08-fox.md 
 [cod8]: https://github.com/ucsd-cse131/06-fox
+[pdf8]: static/img/fox-notes.pdf
 
 [lec9]: lectures/09-garter.html
 [md9]: http://github.com/ucsd-progsys/131-web/blob/master/lectures/09-garter.md
