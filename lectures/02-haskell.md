@@ -64,14 +64,6 @@ eleven = incr 10
 
 **Ocaml**
 
-[1;2;3;4;5]
-
-  ==> 15
-
-let rec sumList (xs : int lint) : int = match xs with
-  | [] -> 0
-  | (x::xs) -> x + sumList xs
-
 ```ocaml
 (* val listSum : int list -> int list *)
 let rec listSum xs = match xs with
