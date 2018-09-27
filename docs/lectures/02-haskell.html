@@ -262,9 +262,6 @@ if (window.navigator.appName == "Microsoft Internet Explorer") {
 <p><code>let</code> not needed for top-level binding.</p>
 <h2 id="pattern-matching">Pattern Matching</h2>
 <p><strong>Ocaml</strong></p>
-<p>[1;2;3;4;5]</p>
-<p>==&gt; 15</p>
-<p>let rec sumList (xs : int lint) : int = match xs with | [] -&gt; 0 | (x::xs) -&gt; x + sumList xs</p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode ocaml"><code class="sourceCode ocaml"><a class="sourceLine" id="cb5-1" data-line-number="1"><span class="co">(* val listSum : int list -&gt; int list *)</span></a>
 <a class="sourceLine" id="cb5-2" data-line-number="2"><span class="kw">let</span> <span class="kw">rec</span> listSum xs = <span class="kw">match</span> xs <span class="kw">with</span></a>
 <a class="sourceLine" id="cb5-3" data-line-number="3">  | []       -&gt; <span class="dv">0</span></a>

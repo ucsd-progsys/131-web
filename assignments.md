@@ -42,7 +42,9 @@ atomic units over the entire quarter. By *atomic* I mean, for example, that
 
 -->
 
-[hw0-git]: https://github.com/ucsd-cse131/00-warmup
+[hw0-git]: https://classroom.github.com/a/OjQrcTj6
+
+[hw0-git-old]: https://github.com/ucsd-cse131/00-warmup
 [hw1-git]: https://github.com/ucsd-cse131/01-adder
 [hw2-git]: https://github.com/ucsd-cse131/02-boa
 [hw3-git]: https://github.com/ucsd-cse131/03-cobra
