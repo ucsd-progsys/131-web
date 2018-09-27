@@ -1,7 +1,7 @@
 ---
 title: Hello, world! 
 headerImg: Eiffel.png
-date: 2018-01-08
+date: 2018-09-28
 ---
 
 
@@ -126,33 +126,32 @@ We will
 
 ### Who *are* we?
 
-* **Boss:** Ranjit Jhala
-* **TAs:** Rami Gokhan, Anish Tondwalkar, Madhuri Yoganatha 
+* **Prof:** Ranjit Jhala
+* **TAs:** Marc Andrysco, Gary Soeller, Anish Tondwalkar
 
 ### How will we *grade*?
 
 **(30%) Assignments**
 
-+ 7 assignments, [first one is up, due 1/19](https://github.com/ucsd-cse131/00-warmup)
++ 7 assignments, [first one is up, due 10/5](https://github.com/ucsd-cse131/00-warmup)
 + All programming
 + Groups of 2
 
 
-**(30%) Midterm (2/16)**
+**(30%) Midterm (11/2)**
 
 + In-class  
 + 2-sided printed "cheat sheet"
 
 
-**(35%) Final (3/21)**
+**(35%) Final (12/14)**
 
-+ 2-sided printed cheat sheet
-
++ 2-sided printed "cheat sheet"
 
 **(05%) Clickers**
 
 + *Attempting to answer* > 75% questions
-+ From next week, please sit in [the space](/static/img/center119.pdf) assigned to [your group](/static/img/groups.txt)
++ From next week, please sit in [the space](/static/img/center216.pdf) assigned to [your group](/static/img/groups.txt)
 
 **(05%) Piazza Extra Credit**
 

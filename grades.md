@@ -5,7 +5,7 @@ headerImg: beach.jpg
 
 - **Class Participation (5%)** :
   Involves answering questions with the clicker.
-  Register your clicker [in this google form](https://goo.gl/forms/uVtZ7oRVfvS56M5r1)
+  Register your clicker [in this google form](https://goo.gl/forms/qL6E5ADtYVz600iE2) 
   - Use your PID `A0XXXXXXXXX`
 
 - **(Seven) Homework Assignments (30%)** :
@@ -16,12 +16,12 @@ headerImg: beach.jpg
   hours 59 minutes and 59 seconds past a deadline.
 
 - **Midterm (30%)** :
-  Will be held on **Friday February 16th, in lecture**.
+  Will be held on **Friday November 2nd, in lecture**.
   The midterm is **closed book**, but you may use a
   double-sided **"cheat sheet"**.
 
 - **Final (35%)** :
-  Will be held on **Wednesday March 21st, from 3.00 -- 6:00pm**.
+  Will be held on **Friday December 14th, from 8.00 -- 11:00am**.
   It **must** be taken at the scheduled time and location.
   To turn in your completed final examination, you must
   present a valid UCSD ID at the time the examination

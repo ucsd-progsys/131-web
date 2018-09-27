@@ -5,10 +5,10 @@ headerImg: world-map.jpg
 
 ## Co-ordinates
 
-- *Lectures:*          MWF 3:00-3:50p in CENTER 119
-- *Discussion:*        M 8:00-8:50p   in CENTER 119
-- *Final:*             Wednesday March 21, 3-6PM.
-- *Announcements:*     [Posted on Piazza; check often!](https://piazza.com/class/jc2ce1cs4n223)
+- *Lectures:*          MWF 10:00-10:50p in CENTER 216
+- *Discussion:*        W 4:00-4:50p     in CENTER 119
+- *Final:*             Friday Dec 14, 8 - 11AM 
+- *Announcements:*     [Posted on Piazza; check often!](https://piazza.com/class/jmkt5fpo5h4387)
 
 ## Instructor
 
@@ -16,6 +16,6 @@ headerImg: world-map.jpg
 
 ## Teaching Assistants
 
-* [Rami Gokhan Kici](http://www.cs.ucsd.edu/~rkici)
-* [Anish Tondwalkar](http://www.cs.ucsd.edu/~pvekris)
-* [Madhuri Kadur Yoganatha](https://www.linkedin.com/in/madhuri-yoganatha)
+* [Marc Andrysco](https://cseweb.ucsd.edu/~mandrysc/) 
+* [Gary Soeller](https://github.com/soelgary) 
+* [Anish Tondwalkar](http://ani.sh/) 

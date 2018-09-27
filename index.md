@@ -3,7 +3,6 @@ title: Compilers
 headerImg: Eiffel.png
 ---
 
-
 CSE 131 is an introduction to modern Compiler Design.
 According to the venerable [Wikipedia](https://en.wikipedia.org/wiki/Compiler)
 
@@ -25,6 +24,37 @@ will reinforce and tie together concepts learnt in
 Computer Organization and Programming Languages, in
 particular showing the connections between assembly (x86),
 systems (C) and functional (Haskell) programming.
+
+## Diversity and Inclusion
+
+We are committed to fostering a learning environment for
+this course that supports a diversity of thoughts, perspectives
+and experiences, and respects your identities (including race,
+ethnicity, heritage, gender, sex, class, sexuality, religion,
+ability, age, educational background, etc.) Our goal is to
+create a diverse and inclusive learning environment where
+all students feel comfortable and can thrive.
+
+Our instructional staff will make a concerted effort to 
+be welcoming and inclusive to the wide diversity of students 
+in this course.  If there is a way we can make you feel more 
+included please let one of the course staff know, either in 
+person, via email/discussion board, or even in a note under 
+the door.  Our learning about diverse perspectives and 
+identities is an ongoing process, and we welcome your 
+perspectives and input.  
+
+We also expect that you, as a student in this course, will 
+honor and respect your classmates, abiding by the [UCSD Principles of Community](https://ucsd.edu/about/principles.html).  
+Please understand that others’ backgrounds, perspectives 
+and experiences may be different than your own, and help 
+us to build an environment where everyone is respected 
+and feels comfortable.
+
+If you experience any sort of harassment or discrimination, 
+please contact the instructor as soon as possible.   If you 
+prefer to speak with someone outside of the course, please 
+contact the [Office of Prevention of Harassment and Discrimination.](https://ophd.ucsd.edu/) 
 
 
 ## Integrity of Scholarship
