@@ -115,10 +115,10 @@ General recipe, applies to any large system
 
 We will
 
-1. Start with a teeny tiny language,
-2. Build a full compiler for it,
-3. Add a few features,
-4. **Go to** step 2.
+* **Step 1** Start with a teeny tiny language,
+* **Step 2** Build a full compiler for it,
+* **Step 3** Add a few features,
+* **Go  to** Step 2.
 
 (Yes, loops forever, but we will hit Ctrl-C in 10 weeks...)
 
@@ -126,16 +126,23 @@ We will
 
 ### Who *are* we?
 
-* **Prof:** Ranjit Jhala
-* **TAs:** Marc Andrysco, Gary Soeller, Anish Tondwalkar
+**Prof:** 
+
+* Ranjit Jhala
+
+**TAs:** 
+
+* Marc Andrysco
+* Gary Soeller
+* Anish Tondwalkar
 
 ### How will we *grade*?
 
 **(30%) Assignments**
 
-+ 7 assignments, [first one is up, due 10/5](https://github.com/ucsd-cse131/00-warmup)
++ 7 assignments, [first one is up, due 10/5](https://classroom.github.com/a/OjQrcTj6)
 + All programming
-+ Groups of 2
++ Groups of upto 2
 
 
 **(30%) Midterm (11/2)**
@@ -151,7 +158,7 @@ We will
 **(05%) Clickers**
 
 + *Attempting to answer* > 75% questions
-+ From next week, please sit in [the space](/static/img/center216.pdf) assigned to [your group](/static/img/groups.txt)
++ Starting from _next week_ 
 
 **(05%) Piazza Extra Credit**
 
@@ -230,6 +237,9 @@ Here are some links to get you started:
 
 * [Haskell for Ocaml Programmers][haskell-for-ocamlers]
 * [Hoogle: Type-based API Search][hoogle]
+
+### Lets Go! 
+
 
 [hoogle]: https://www.haskell.org/hoogle/
 [haskell-for-ocamlers]: http://science.raphael.poss.name/haskell-for-ocaml-programmers.html

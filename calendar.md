@@ -3,10 +3,8 @@ title: Calendar
 headerImg: road.jpg
 ---
 
-## Clicker Groups
+## Clickers 
 
-- [Seating Chart](/static/img/center216-TBD.pdf)
-- [Groups](/static/img/groups-TBD.txt) 
 - [Register your clicker here](https://goo.gl/forms/aXVSks1T2iRGmiZj1)
 
 ## Calendar (Deadlines, Office Hours)
