@@ -1,5 +1,11 @@
 module CrashCourse where
 
+
+
+
+
+  
+
 {-
 [a] -> [b] -> [(a, b)]
 
