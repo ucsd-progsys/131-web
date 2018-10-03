@@ -3,10 +3,11 @@ title: Lecture Notes
 headerImg: books.jpg
 ---
 
-| Date       | Topic                         | Notes                  |  Notes      |  Code      |
-|:----------:|:------------------------------|:----------------------:|:-----------:|:----------:|
-| 9/28       | Introduction                  | [html][lec1] [md][md1] |             |            |
-| 10/1       | Crash course in Haskell       | [html][lec2] [md][md2] |             |            |
+| Date       | Topic                         | Notes                  |  Notes      |  Code          |
+|:----------:|:------------------------------|:----------------------:|:-----------:|:--------------:|
+| 9/28       | Introduction                  | [html][lec1] [md][md1] |             |                |
+| 10/1       | Crash course in Haskell       | [html][lec2] [md][md2] |             | [code][cod2]   |
+| 10/1       | Numbers, UnaryOps, Variables  | [html][lec3] [md][md3] |             | [code][cod3]   |
 
 [lec1]: lectures/01-introduction.html
 [md1]: http://github.com/ucsd-progsys/131-web/blob/master/lectures/01-introduction.md

@@ -439,11 +439,11 @@ if (window.navigator.appName == "Microsoft Internet Explorer") {
 <a class="sourceLine" id="cb26-5" data-line-number="5">  | Times  <span class="kw">of</span> expr * expr</a></code></pre></div>
 <p>vs</p>
 <p><strong>Haskell</strong></p>
-<div class="sourceCode" id="cb27"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb27-1" data-line-number="1"><span class="kw">data</span> <span class="dt">Expr</span></a>
+<div class="sourceCode" id="cb27"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb27-1" data-line-number="1"><span class="kw">data</span> <span class="dt">Mond</span> </a>
 <a class="sourceLine" id="cb27-2" data-line-number="2">  <span class="fu">=</span> <span class="dt">Number</span> <span class="dt">Double</span></a>
-<a class="sourceLine" id="cb27-3" data-line-number="3">  <span class="fu">|</span> <span class="dt">Plus</span>   <span class="dt">Expr</span> <span class="dt">Expr</span></a>
-<a class="sourceLine" id="cb27-4" data-line-number="4">  <span class="fu">|</span> <span class="dt">Minus</span>  <span class="dt">Expr</span> <span class="dt">Expr</span></a>
-<a class="sourceLine" id="cb27-5" data-line-number="5">  <span class="fu">|</span> <span class="dt">Times</span>  <span class="dt">Expr</span> <span class="dt">Expr</span></a></code></pre></div>
+<a class="sourceLine" id="cb27-3" data-line-number="3">  <span class="fu">|</span> <span class="dt">Plus</span>   <span class="dt">Mond</span> <span class="dt">Mond</span></a>
+<a class="sourceLine" id="cb27-4" data-line-number="4">  <span class="fu">|</span> <span class="dt">Minus</span>  <span class="dt">Mond</span> <span class="dt">Mond</span> </a>
+<a class="sourceLine" id="cb27-5" data-line-number="5">  <span class="fu">|</span> <span class="dt">Times</span>  <span class="dt">Mond</span> <span class="dt">Mond</span> </a></code></pre></div>
 <h2 id="constructing-data">Constructing Data</h2>
 <p><strong>Ocaml</strong></p>
 <div class="sourceCode" id="cb28"><pre class="sourceCode ocaml"><code class="sourceCode ocaml"><a class="sourceLine" id="cb28-1" data-line-number="1"><span class="kw">let</span> ex0 = Number <span class="dv">5</span>.</a>

@@ -402,11 +402,11 @@ vs
 **Haskell**
 
 ```haskell
-data Expr
+data Mond 
   = Number Double
-  | Plus   Expr Expr
-  | Minus  Expr Expr
-  | Times  Expr Expr
+  | Plus   Mond Mond
+  | Minus  Mond Mond 
+  | Times  Mond Mond 
 ```
 
 ## Constructing Data

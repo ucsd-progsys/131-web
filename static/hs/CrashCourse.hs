@@ -3,7 +3,6 @@ module CrashCourse where
 
 
 
-
   
 
 {-
@@ -32,7 +31,43 @@ let eleven = incr 10
 incr :: Int -> Int
 incr x = x + 1
 
--- eleven = incr 10
+eleven = incr 10
+
+-- sep   = ", " 
+-- words = ["cat", "dog", "jorse"]
+-- out   = "cat, dog, jorse"
+
+join sep []     = ""
+join sep [w]    = w 
+join sep (w:ws) = w ++ sep ++ join sep ws 
+
+
+
+isEven :: Int -> Bool 
+isEven n = n `mod` 2 == 0
+
+-- myFilter isEven [0..10] ==> [0,2,4,6,8,10] 
+
+myFilter :: (a -> Bool) -> [a] -> [a]
+myFilter f []     = []
+myFilter f (x:xs) 
+  | f x           = x : rest 
+  | True          = rest 
+  where 
+    rest          = myFilter f xs 
+                    
+
+
+-- HEREHEREHEREHEREHEREHEREHERE
+
+
+
+
+-- join sep ["cat", "dog", "jorse"] = "cat" ++ sep ++ "dog" ++ sep ++ "jorse"
+
+
+
+
 
 
 {-
@@ -52,6 +87,19 @@ listSum xs = case xs of
 listSum' :: [Int] -> Int
 listSum' []     = 0
 listSum' (x:xs) = x + listSum' xs
+
+
+quiz3 = x + 1 
+  where 
+    x = x + 1
+
+{-
+A. Syntax Error 
+B. Type Error 
+C. Other unspecified angst from compiler 
+D. 1 
+E. "Overflow"
+-}
 
 
 {-
@@ -95,7 +143,38 @@ let partition f xs = (filter f xs, filter (negate f) xs)
 -}
 
 partition :: (a -> Bool) -> [a] -> ([a], [a])
-partition f xs = (filter f xs, filter (negate f) xs)
+-- partition f xs = (myFilter f xs, myFilter (negate f) xs)
+partition f xs = ( [ x | x <- xs,      f x  ]  
+                 , [ x | x <- xs, not (f x) ] )
+
+
+qsort []     = []
+qsort (h:t)  = qsort ls ++ [h] ++ qsort rs
+  where
+    ls       = [ x | x <- t, x <  h ] -- _undineded 
+    rs       = [ x | x <- t, x >= h ] -- _undinededzz 
+
+    -- (ls,rs)  = partition (\x -> x < h) t
+
+data Mond 
+  = MNumber Double
+  | MPlus   Mond Mond
+  | MMinus  Mond Mond 
+  | MTimes  Mond Mond 
+  deriving (Show)
+
+{-  What is "the type of" `MPlus` ?
+
+A. Go away (error)
+B. Mond 
+C. (Mond, Mond)
+D. Other 
+-}
+
+A. Rubios 
+B. Taco Villa 
+C. Goodys 
+D. Pines
 
 {-
 (* val sort : 'a list -> 'a list *)
