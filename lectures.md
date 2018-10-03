@@ -18,7 +18,7 @@ headerImg: books.jpg
 
 [lec3]: lectures/03-adder.html
 [md3]: http://github.com/ucsd-progsys/131-web/blob/master/lectures/03-adder.md
-[cod3]: https://github.com/ucsd-cse131/01-adder
+[cod3]: https://github.com/ucsd-cse131-fa18/01-adder
 [pdf3]: static/img/adder-notes.pdf
 
 [lec4]: lectures/04-boa.html
