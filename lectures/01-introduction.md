@@ -244,3 +244,9 @@ Here are some links to get you started:
 [hoogle]: https://www.haskell.org/hoogle/
 [haskell-for-ocamlers]: http://science.raphael.poss.name/haskell-for-ocaml-programmers.html
 [soap-fortran-assembly]: http://worrydream.com/dbx/
+
+
+
+["cat", "dog", "horse"]   -- :: [String]  -- words 
+                                String    -- separator
+"cat;dog;horse"           -- :: String    -- "crunche words with separator"

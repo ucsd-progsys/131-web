@@ -420,7 +420,7 @@ asm1 = [ IMov (EAX) (Const 7)
 ```
 
 ```haskell
-src1 = "add1(add1(12))"
+src2 = "add1(add1(12))"
 
 exp2 = Add1 (Add1 (Number 12))
 
@@ -496,13 +496,13 @@ ghci> (compile (Number 12)
 
 ghci> compile (Add1 (Number 12))
 [ IMov (Reg EAX) (Const 12)
-, IADd (Reg EAX) (Const 1)
+, IAdd (Reg EAX) (Const 1)
 ]
 
 ghci> compile (Add1 (Add1 (Number 12)))
 [ IMov (Reg EAX) (Const 12)
-, IADd (Reg EAX) (Const 1)
-, IADd (Reg EAX) (Const 1)
+, IAdd (Reg EAX) (Const 1)
+, IAdd (Reg EAX) (Const 1)
 ]
 ```
 

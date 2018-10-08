@@ -3,7 +3,7 @@ module CrashCourse where
 
 
 
-  
+import Debug.Trace (trace)   
 
 {-
 [a] -> [b] -> [(a, b)]
@@ -156,12 +156,46 @@ qsort (h:t)  = qsort ls ++ [h] ++ qsort rs
 
     -- (ls,rs)  = partition (\x -> x < h) t
 
-data Mond 
-  = MNumber Double
-  | MPlus   Mond Mond
-  | MMinus  Mond Mond 
-  | MTimes  Mond Mond 
+data Mond a 
+  = MNumber a 
+  | MPlus   (Mond a) (Mond a)
+  | MMinus  (Mond a) (Mond a) 
+  | MTimes  (Mond a) (Mond a) 
   deriving (Show)
+
+m0 = MNumber 1 
+m1 = MNumber 3 
+m2 = MPlus   m0 m1 
+m3 = MMinus  m0 m1 
+m4 = MTimes  m2 m3 
+
+evalMond m = let res = case m of 
+                         (MNumber d)     -> d
+                         (MPlus   m1 m2) -> evalMond m1 + evalMond m2 
+                         (MMinus  m1 m2) -> evalMond m1 - evalMond m2 
+                         (MTimes  m1 m2) -> evalMond m1 - evalMond m2 
+                 msg = show ("evalMond", m, res)
+             in
+                trace msg res 
+{- 
+def facto(n):
+  if n <= 0:
+    res = 0
+  else:
+    res = n * facto(n-1)
+  print "facto: ", n, res 
+  return res 
+ -}
+
+
+
+facto :: Int -> Int 
+facto n = let res = if n <= 0 then 0 else n * facto (n-1)
+              msg = show ("facto", n, res)
+          in 
+              trace msg res 
+
+
 
 {-  What is "the type of" `MPlus` ?
 
@@ -170,11 +204,6 @@ B. Mond
 C. (Mond, Mond)
 D. Other 
 -}
-
-A. Rubios 
-B. Taco Villa 
-C. Goodys 
-D. Pines
 
 {-
 (* val sort : 'a list -> 'a list *)
