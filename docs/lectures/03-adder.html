@@ -518,7 +518,7 @@ if (window.navigator.appName == "Microsoft Internet Explorer") {
 <a class="sourceLine" id="cb24-5" data-line-number="5">asm1 <span class="fu">=</span> [ <span class="dt">IMov</span> (<span class="dt">EAX</span>) (<span class="dt">Const</span> <span class="dv">7</span>)</a>
 <a class="sourceLine" id="cb24-6" data-line-number="6">       , <span class="dt">IAdd</span> (<span class="dt">EAX</span>) (<span class="dt">Const</span> <span class="dv">1</span>)</a>
 <a class="sourceLine" id="cb24-7" data-line-number="7">       ]</a></code></pre></div>
-<div class="sourceCode" id="cb25"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb25-1" data-line-number="1">src1 <span class="fu">=</span> <span class="st">&quot;add1(add1(12))&quot;</span></a>
+<div class="sourceCode" id="cb25"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb25-1" data-line-number="1">src2 <span class="fu">=</span> <span class="st">&quot;add1(add1(12))&quot;</span></a>
 <a class="sourceLine" id="cb25-2" data-line-number="2"></a>
 <a class="sourceLine" id="cb25-3" data-line-number="3">exp2 <span class="fu">=</span> <span class="dt">Add1</span> (<span class="dt">Add1</span> (<span class="dt">Number</span> <span class="dv">12</span>))</a>
 <a class="sourceLine" id="cb25-4" data-line-number="4"></a>
@@ -569,13 +569,13 @@ if (window.navigator.appName == "Microsoft Internet Explorer") {
 <a class="sourceLine" id="cb30-4" data-line-number="4"></a>
 <a class="sourceLine" id="cb30-5" data-line-number="5">ghci<span class="fu">&gt;</span> compile (<span class="dt">Add1</span> (<span class="dt">Number</span> <span class="dv">12</span>))</a>
 <a class="sourceLine" id="cb30-6" data-line-number="6">[ <span class="dt">IMov</span> (<span class="dt">Reg</span> <span class="dt">EAX</span>) (<span class="dt">Const</span> <span class="dv">12</span>)</a>
-<a class="sourceLine" id="cb30-7" data-line-number="7">, <span class="dt">IADd</span> (<span class="dt">Reg</span> <span class="dt">EAX</span>) (<span class="dt">Const</span> <span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb30-7" data-line-number="7">, <span class="dt">IAdd</span> (<span class="dt">Reg</span> <span class="dt">EAX</span>) (<span class="dt">Const</span> <span class="dv">1</span>)</a>
 <a class="sourceLine" id="cb30-8" data-line-number="8">]</a>
 <a class="sourceLine" id="cb30-9" data-line-number="9"></a>
 <a class="sourceLine" id="cb30-10" data-line-number="10">ghci<span class="fu">&gt;</span> compile (<span class="dt">Add1</span> (<span class="dt">Add1</span> (<span class="dt">Number</span> <span class="dv">12</span>)))</a>
 <a class="sourceLine" id="cb30-11" data-line-number="11">[ <span class="dt">IMov</span> (<span class="dt">Reg</span> <span class="dt">EAX</span>) (<span class="dt">Const</span> <span class="dv">12</span>)</a>
-<a class="sourceLine" id="cb30-12" data-line-number="12">, <span class="dt">IADd</span> (<span class="dt">Reg</span> <span class="dt">EAX</span>) (<span class="dt">Const</span> <span class="dv">1</span>)</a>
-<a class="sourceLine" id="cb30-13" data-line-number="13">, <span class="dt">IADd</span> (<span class="dt">Reg</span> <span class="dt">EAX</span>) (<span class="dt">Const</span> <span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb30-12" data-line-number="12">, <span class="dt">IAdd</span> (<span class="dt">Reg</span> <span class="dt">EAX</span>) (<span class="dt">Const</span> <span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb30-13" data-line-number="13">, <span class="dt">IAdd</span> (<span class="dt">Reg</span> <span class="dt">EAX</span>) (<span class="dt">Const</span> <span class="dv">1</span>)</a>
 <a class="sourceLine" id="cb30-14" data-line-number="14">]</a></code></pre></div>
 <h1 id="adder-3">Adder-3</h1>
 <p>You do it!</p>

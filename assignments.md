@@ -9,7 +9,8 @@ atomic units over the entire quarter. By *atomic* I mean, for example, that
 
 ## Programming Assignments
 
-- [HW #0][hw0-git], due Fri 10/5 by 23:59pm
+- [HW #0][hw0-git], due Fri 10/5  by 23:59pm
+- [HW #1][hw1-git], due Mon 10/15 by 23:59pm
 
 ## Practice Midterm 
 
@@ -43,7 +44,7 @@ atomic units over the entire quarter. By *atomic* I mean, for example, that
 -->
 
 [hw0-git]: https://classroom.github.com/a/OjQrcTj6
-[hw1-git]: https://github.com/ucsd-cse131/01-adder
+[hw1-git]: https://classroom.github.com/a/4pyfq2O8
 [hw2-git]: https://github.com/ucsd-cse131/02-boa
 [hw3-git]: https://github.com/ucsd-cse131/03-cobra
 [hw4-git]: https://github.com/ucsd-cse131/04-diamondback
