@@ -598,11 +598,11 @@ The stack **grows downward** (i.e. to **smaller** addresses)
 
 We have lots of 4-byte slots on the stack at offsets from the "stack pointer" at addresses:
 
-* `[ESP - 4 * 1]`, `[ESP - 4 * 2]`, ...,
+* `[EBP - 4 * 1]`, `[EBP - 4 * 2]`, ...,
 
 ### How to compute mapping from _variables_ to _slots_ ?
 
-The `i`-th _stack-variable_ lives at address `[ESP - 4 * i]`
+The `i`-th _stack-variable_ lives at address `[EBP - 4 * i]`
 
 **Required** A mapping
 
@@ -649,7 +649,7 @@ At each point, we have `env` that maps (previously defined) `Id` to `StackPositi
 
 To compile `x` given `env`
 
-1. Move `[esp - 4 * i]` into `eax`
+1. Move `[ebp - 4 * i]` into `eax`
 
 (where `env` maps `x |-> i`)
 
@@ -658,7 +658,7 @@ To compile `x` given `env`
 To compile `let x = e1 in e2` we
 
 1. Compile `e1` using `env` (i.e. resulting value will be stored in `eax`)
-2. Move `eax` into `[esp - 4 * i]`
+2. Move `eax` into `[ebp - 4 * i]`
 3. Compile `e2` using `env'`
 
 (where `env'` be `env` with `x |-> i` i.e. push `x` onto `env` at position `i`)
@@ -693,11 +693,11 @@ data Expr = ...
           | Var Id             
 ```
 
-Lets enrich the `Instruction` to include the register-offset `[esp - 4*i]`
+Lets enrich the `Instruction` to include the register-offset `[ebp - 4*i]`
 
 ```haskell
 data Arg = ...
-         | RegOffset Reg Int    -- `[esp - 4*i]` modeled as `RegOffset ESP i`
+         | RegOffset Reg Int    -- `[ebp - 4*i]` modeled as `RegOffset EBP i`
 ```
 
 ### Environments
@@ -735,7 +735,7 @@ Ok, now we're almost done. Just add the code formalizing the [above strategy](#s
 **Variable Use**
 
 ```haskell
-compileEnv env (Var x) = [ IMov (Reg EAX) (RegOffset ESP i) ]
+compileEnv env (Var x) = [ IMov (Reg EAX) (RegOffset EBP i) ]
   where
     i                  = fromMaybe err (lookup x env)
     err                = error (printf "Error: Variable '%s' is unbound" x)
@@ -745,7 +745,7 @@ compileEnv env (Var x) = [ IMov (Reg EAX) (RegOffset ESP i) ]
 
 ```haskell
 compileEnv env (Let x e1 e2 l)  = compileEnv env  e1  
-                               ++ IMov (RegOffset ESP i) (Reg EAX)
+                               ++ IMov (RegOffset EBP i) (Reg EAX)
                                 : compileEnv env' e2
       where
         (i, env')               = pushEnv x env
