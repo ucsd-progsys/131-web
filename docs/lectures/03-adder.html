@@ -650,10 +650,10 @@ if (window.navigator.appName == "Microsoft Internet Explorer") {
 <p>The stack <strong>grows downward</strong> (i.e. to <strong>smaller</strong> addresses)</p>
 <p>We have lots of 4-byte slots on the stack at offsets from the “stack pointer” at addresses:</p>
 <ul>
-<li><code>[ESP - 4 * 1]</code>, <code>[ESP - 4 * 2]</code>, …,</li>
+<li><code>[EBP - 4 * 1]</code>, <code>[EBP - 4 * 2]</code>, …,</li>
 </ul>
 <h3 id="how-to-compute-mapping-from-variables-to-slots">How to compute mapping from <em>variables</em> to <em>slots</em> ?</h3>
-<p>The <code>i</code>-th <em>stack-variable</em> lives at address <code>[ESP - 4 * i]</code></p>
+<p>The <code>i</code>-th <em>stack-variable</em> lives at address <code>[EBP - 4 * i]</code></p>
 <p><strong>Required</strong> A mapping</p>
 <ul>
 <li>From <em>source variables</em> (<code>x</code>, <code>y</code>, <code>z</code> …)</li>
@@ -687,14 +687,14 @@ if (window.navigator.appName == "Microsoft Internet Explorer") {
 <p><strong>Variable Use</strong></p>
 <p>To compile <code>x</code> given <code>env</code></p>
 <ol type="1">
-<li>Move <code>[esp - 4 * i]</code> into <code>eax</code></li>
+<li>Move <code>[ebp - 4 * i]</code> into <code>eax</code></li>
 </ol>
 <p>(where <code>env</code> maps <code>x |-&gt; i</code>)</p>
 <p><strong>Variable Definition</strong></p>
 <p>To compile <code>let x = e1 in e2</code> we</p>
 <ol type="1">
 <li>Compile <code>e1</code> using <code>env</code> (i.e. resulting value will be stored in <code>eax</code>)</li>
-<li>Move <code>eax</code> into <code>[esp - 4 * i]</code></li>
+<li>Move <code>eax</code> into <code>[ebp - 4 * i]</code></li>
 <li>Compile <code>e2</code> using <code>env'</code></li>
 </ol>
 <p>(where <code>env'</code> be <code>env</code> with <code>x |-&gt; i</code> i.e. push <code>x</code> onto <code>env</code> at position <code>i</code>)</p>
@@ -720,9 +720,9 @@ if (window.navigator.appName == "Microsoft Internet Explorer") {
 <a class="sourceLine" id="cb37-3" data-line-number="3"><span class="kw">data</span> <span class="dt">Expr</span> <span class="fu">=</span> <span class="fu">...</span></a>
 <a class="sourceLine" id="cb37-4" data-line-number="4">          <span class="fu">|</span> <span class="dt">Let</span> <span class="dt">Id</span> <span class="dt">Expr</span> <span class="dt">Expr</span>    <span class="co">-- `let x = e1 in e2` modeled as is `Let x e1 e2`</span></a>
 <a class="sourceLine" id="cb37-5" data-line-number="5">          <span class="fu">|</span> <span class="dt">Var</span> <span class="dt">Id</span>             </a></code></pre></div>
-<p>Lets enrich the <code>Instruction</code> to include the register-offset <code>[esp - 4*i]</code></p>
+<p>Lets enrich the <code>Instruction</code> to include the register-offset <code>[ebp - 4*i]</code></p>
 <div class="sourceCode" id="cb38"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb38-1" data-line-number="1"><span class="kw">data</span> <span class="dt">Arg</span> <span class="fu">=</span> <span class="fu">...</span></a>
-<a class="sourceLine" id="cb38-2" data-line-number="2">         <span class="fu">|</span> <span class="dt">RegOffset</span> <span class="dt">Reg</span> <span class="dt">Int</span>    <span class="co">-- `[esp - 4*i]` modeled as `RegOffset ESP i`</span></a></code></pre></div>
+<a class="sourceLine" id="cb38-2" data-line-number="2">         <span class="fu">|</span> <span class="dt">RegOffset</span> <span class="dt">Reg</span> <span class="dt">Int</span>    <span class="co">-- `[ebp - 4*i]` modeled as `RegOffset EBP i`</span></a></code></pre></div>
 <h3 id="environments">Environments</h3>
 <p>Lets create a new <code>Env</code> type to track stack-positions of variables</p>
 <div class="sourceCode" id="cb39"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb39-1" data-line-number="1"><span class="kw">data</span> <span class="dt">Env</span> <span class="fu">=</span> [(<span class="dt">Id</span>, <span class="dt">Int</span>)]</a></code></pre></div>
@@ -745,13 +745,13 @@ if (window.navigator.appName == "Microsoft Internet Explorer") {
 <p>Ok, now we’re almost done. Just add the code formalizing the <a href="#strategy">above strategy</a></p>
 <h3 id="code">Code</h3>
 <p><strong>Variable Use</strong></p>
-<div class="sourceCode" id="cb41"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb41-1" data-line-number="1">compileEnv env (<span class="dt">Var</span> x) <span class="fu">=</span> [ <span class="dt">IMov</span> (<span class="dt">Reg</span> <span class="dt">EAX</span>) (<span class="dt">RegOffset</span> <span class="dt">ESP</span> i) ]</a>
+<div class="sourceCode" id="cb41"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb41-1" data-line-number="1">compileEnv env (<span class="dt">Var</span> x) <span class="fu">=</span> [ <span class="dt">IMov</span> (<span class="dt">Reg</span> <span class="dt">EAX</span>) (<span class="dt">RegOffset</span> <span class="dt">EBP</span> i) ]</a>
 <a class="sourceLine" id="cb41-2" data-line-number="2">  <span class="kw">where</span></a>
 <a class="sourceLine" id="cb41-3" data-line-number="3">    i                  <span class="fu">=</span> fromMaybe err (lookup x env)</a>
 <a class="sourceLine" id="cb41-4" data-line-number="4">    err                <span class="fu">=</span> error (printf <span class="st">&quot;Error: Variable '%s' is unbound&quot;</span> x)</a></code></pre></div>
 <p><strong>Variable Definition</strong></p>
 <div class="sourceCode" id="cb42"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb42-1" data-line-number="1">compileEnv env (<span class="dt">Let</span> x e1 e2 l)  <span class="fu">=</span> compileEnv env  e1  </a>
-<a class="sourceLine" id="cb42-2" data-line-number="2">                               <span class="fu">++</span> <span class="dt">IMov</span> (<span class="dt">RegOffset</span> <span class="dt">ESP</span> i) (<span class="dt">Reg</span> <span class="dt">EAX</span>)</a>
+<a class="sourceLine" id="cb42-2" data-line-number="2">                               <span class="fu">++</span> <span class="dt">IMov</span> (<span class="dt">RegOffset</span> <span class="dt">EBP</span> i) (<span class="dt">Reg</span> <span class="dt">EAX</span>)</a>
 <a class="sourceLine" id="cb42-3" data-line-number="3">                                <span class="fu">:</span> compileEnv env' e2</a>
 <a class="sourceLine" id="cb42-4" data-line-number="4">      <span class="kw">where</span></a>
 <a class="sourceLine" id="cb42-5" data-line-number="5">        (i, env')               <span class="fu">=</span> pushEnv x env</a></code></pre></div>
