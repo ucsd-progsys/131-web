@@ -685,13 +685,68 @@ Lets see how our strategy works by example:
 
 ![Convert let1 to Assembly](/static/img/let-1-to-asm.png)
 
-### Example: let2
+### QUIZ: let2
 
-![Convert let2 to Assembly](/static/img/let-2-to-asm.png)
+When we compile
+
+```haskell 
+let x = 10 
+  , y = add1(x)
+in
+  add1(y)
+```
+
+The assembly looks like
+
+```asm
+mov eax, 10                ; LHS of let x = 10
+mov [ebp - 4*1], eax       ; save x on the stack 
+mov eax, [ebp - 4*1]       ; LHS of   , y = add1(x) 
+add eax, 1                 ; "" 
+???
+add eax, 1
+```
+
+What .asm instructions shall we fill in for `???` 
+
+```asm
+mov [ebp - 4 * 1], eax    ; A  
+mov eax, [ebp - 4 * 1]
+
+mov [ebp - 4 * 1], eax    ; B  
+
+mov [ebp - 4 * 2], eax    ; C  
+
+mov [ebp - 4 * 2], eax    ; D  
+mov eax, [ebp - 4 * 2]
+
+EMPTY (No Instructions)   ; E 
+```
+
+<!-- ![Convert let2 to Assembly](/static/img/let-2-to-asm.png) -->
 
 ### Example: let3
 
-![Convert let3 to Assembly](/static/img/let-3-to-asm.png)
+Lets compile
+
+```haskell 
+let a = 10 
+  , c = let b = add1(a)
+        in 
+            add1(b)
+in
+    add1(c)
+```
+
+Lets figure out what the assembly looks like!
+
+```asm
+mov eax, 10                ; LHS of let a = 10
+mov [ebp - 4*1], eax       ; save a on the stack 
+??? 
+```
+<!-- ![Convert let3 to Assembly](/static/img/let-3-to-asm.png) --> 
+
 
 ## Step 2: Types
 
