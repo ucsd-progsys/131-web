@@ -720,7 +720,7 @@ mov [ebp - 4 * 2], eax    ; C
 mov [ebp - 4 * 2], eax    ; D  
 mov eax, [ebp - 4 * 2]
 
-EMPTY (No Instructions)   ; E 
+                          ; E  (empty! no instructions)
 ```
 
 <!-- ![Convert let2 to Assembly](/static/img/let-2-to-asm.png) -->
