@@ -632,14 +632,28 @@ in
     add1(z)         -- [z |- 3, y |-> 2, x |-> 1]
 ```
 
+### QUIZ 
+
+At what position on the stack do we store variable `c` ? 
+
+
 ```haskell
 let a = 1                 -- []
-  , c = let b = add1(a)   -- [a |-> 1]
-        in add1(b)        --    [b |-> 2, a |-> 1]
-                          --    [a |-> 1]
-in                        -- [c |-> 2, a |-> 1]
-    add1(c)               -- [c |-> 2, a |-> 1]
+  , c = let b = add1(a)   -- 
+        in add1(b)        --
+                          --    
+in                        --
+    add1(c)               -- 
 ```
+
+A. 1 
+B. 2 
+C. 3 
+D. 4 
+E. not on stack! 
+
+
+
 
 ### Strategy
 
