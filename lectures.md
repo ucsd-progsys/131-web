@@ -7,7 +7,8 @@ headerImg: books.jpg
 |:----------:|:------------------------------|:----------------------:|:-----------:|:--------------:|
 | 9/28       | Introduction                  | [html][lec1] [md][md1] |             |                |
 | 10/1       | Crash course in Haskell       | [html][lec2] [md][md2] |             | [code][cod2]   |
-| 10/1       | Numbers, UnaryOps, Variables  | [html][lec3] [md][md3] |             | [code][cod3]   |
+| 10/8       | Numbers, UnaryOps, Variables  | [html][lec3] [md][md3] |             | [code][cod3]   |
+| 10/15      | Branches and Binary Operators | [html][lec4] [md][md4] |             | [code][cod4]   |
 
 [lec1]: lectures/01-introduction.html
 [md1]: http://github.com/ucsd-progsys/131-web/blob/master/lectures/01-introduction.md

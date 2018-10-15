@@ -546,11 +546,11 @@ Need to store 1 variable -- `x`
 ### Example: let2
 
 ```haskell
-let x = 10
-  , y = add1(x)
-  , z = add1(y)
+let x = 10         -- x = 10
+  , y = add1(x)    -- y = 11
+  , z = add1(y)    -- z = 12
 in
-    add1(z)
+    add1(z)        -- 13
 ```
 
 Need to store 3 variable -- `x, y, z`
@@ -623,7 +623,6 @@ in                  -- [ x |-> 1 ]
     x
 ```
 
-
 ```haskell
 let x = 1           -- []
   , y = add1(x)     -- [x |-> 1]
@@ -632,25 +631,47 @@ in
     add1(z)         -- [z |- 3, y |-> 2, x |-> 1]
 ```
 
-### QUIZ 
+### QUIZ
 
-At what position on the stack do we store variable `c` ? 
-
+At what position on the stack do we store variable `c` ?
 
 ```haskell
-let a = 1                 -- []
-  , c = let b = add1(a)   -- 
-        in add1(b)        --
-                          --    
-in                        --
-    add1(c)               -- 
+                          -- []
+let a = 1                 -- [a |-> 1]
+  , c =                   -- [a |-> 1]
+        let b = add1(a)   --     [b |-> 2, a |-> 1]
+        in add1(b)        -- [a |-> 1]
+                          -- [c |-> 2, a |-> 1]
+in
+    add1(c)
 ```
 
-A. 1 
-B. 2 
-C. 3 
-D. 4 
-E. not on stack! 
+A. 1
+B. 2
+C. 3
+D. 4
+E. not on stack!
+
+
+```haskell                   "ENVIRONMENT"
+                          -- []
+let a = 1                 -- [a |-> 1]
+  , b = 2                 -- [b |-> 2, a |-> 1]
+  , c =                   --
+        let b  = add1(a)  -- [b |-> 3, b -> 2, a |-> 1]
+        in add1(b)        --
+                          -- [b |-> 2, a |-> 1]
+in
+    add1(b)
+```
+
+```haskell
+              -- ENV(n)
+let x = STUFF 
+              -- [x |-> n+1, ENV(n)]
+in OTHERSTUFF 
+              -- ENV(n)
+```
 
 
 
@@ -773,8 +794,39 @@ data Arg = ...
 
 Lets create a new `Env` type to track stack-positions of variables
 
+
+
 ```haskell
 data Env = [(Id, Int)]
+
+data Maybe a = Nothing | Just a
+
+lookupEnv :: Env -> Id -> Maybe Int
+lookupEnv [] x              = Nothing 
+lookupEnv ((y, n) : rest) x = if x == y 
+                                then Just n 
+                                else lookupEnv rest x 
+
+pushEnv   :: Env -> Id -> (Int, Env)
+pushEnv env x = (xn , env')
+  where
+    env'      = (x, xn) : env
+    xn        = 1 + length env
+
+compile env (Let x e1 e2) = 
+  compile env e1
+  ++ -- EAX hold the value of "x"
+  [IMov (RegOffset EBP xn) EAX ]
+  ++
+  compile env' e2
+  where
+    (xn, env') = pushEnv env x
+
+compile env (Var x) = [IMov EAX (RegOffset EBP xn)]
+  where
+    xn              = case lookupEnv env x of
+                         Just n -> n
+                         Nothing -> error "variable out of scope"
 ```
 
 API:
