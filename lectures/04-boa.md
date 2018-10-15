@@ -44,7 +44,6 @@ else:
 
 * Since `10` is _not_ `0` we evaluate the "then" case to get `22`
 
-
 ### Example: `If2`
 
 ```haskell
@@ -56,10 +55,11 @@ else:
 
 * Since `sub(1)` _is_ `0` we evaluate the "else" case to get `-1`
 
-
-### Example: `If3`
+### QUIZ: `If3`
 
 `if-else` is also an _expression_ so we can nest them:
+
+What should the following evaluate to?
 
 ```haskell
 let x = if sub(1):
@@ -73,8 +73,16 @@ in
     999
 ```  
 
-* `x` is bound to `-1`...
-* ... which is _non-zero_ so we evaluate `add1(x)` yielding `0`
+**A.** `999`
+**B.** `0`
+**C.** `1`
+**D.** `1000`
+**E.** `-1`
+
+<!-- 
+  * `x` is bound to `-1`...
+  * ... which is _non-zero_ so we evaluate `add1(x)` yielding `0`
+-->
 
 ### Control Flow in Assembly
 
