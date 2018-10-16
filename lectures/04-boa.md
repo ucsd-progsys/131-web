@@ -27,6 +27,14 @@ We will stick to our recipe of:
 3. Implement with **type-transforming-functions**,
 4. Validate with **tests**.
 
+```haskell
+data Expr = ENum                  -- 12 
+          | EPrim1 Op1  Expr      -- add1(e)
+          | EVar   Id             -- x
+          | ELet   Id   Expr Expr -- let x = e1 in e2
+          | EIf    Expr Expr Expr
+```
+
 ### Examples
 
 First, lets look at some examples of what we mean by branches.
@@ -53,6 +61,9 @@ else:
   sub1(0)
 ```
 
+
+
+
 * Since `sub(1)` _is_ `0` we evaluate the "else" case to get `-1`
 
 ### QUIZ: `If3`
@@ -62,7 +73,7 @@ else:
 What should the following evaluate to?
 
 ```haskell
-let x = if sub(1):
+let x = if sub1(1):
           22
         else:
           sub1(0)
@@ -73,11 +84,11 @@ in
     999
 ```  
 
-**A.** `999`
-**B.** `0`
-**C.** `1`
-**D.** `1000`
-**E.** `-1`
+* **A.** `999`
+* **B.** `0`
+* **C.** `1`
+* **D.** `1000`
+* **E.** `-1`
 
 <!-- 
   * `x` is bound to `-1`...
@@ -95,7 +106,7 @@ our_code_label:
   ...
 ```
 
-are "landmark" from which execution (control-flow)
+are _"landmarks"_ from which execution (control-flow)
 can be started, or to which it can be diverted,
 
 * **comparisons** of the form
@@ -104,9 +115,8 @@ can be started, or to which it can be diverted,
 cmp a1, a2
 ```
 
-do a (numeric) comparison between the values
-referred to by `a1` and `a2`, storing the result
-in a special processor **flag**,
+* Perform a (numeric) **comparison** between the values `a1` and `a2`, and 
+* Store the result in a special **processor flag**,
 
 * **Jump** operations of the form
 
@@ -116,8 +126,8 @@ je  LABEL     # jump if previous comparison result was EQUAL
 jne LABEL     # jump if previous comparison result was NOT-EQUAL  
 ```
 
-use the result of the _flag_ set by the most recent `cmp` to
-*transfer control flow* to the given `LABEL`
+* Use the result of the **flag** set by the most recent `cmp` 
+* To _continue execution_ from the given `LABEL`
 
 ### QUIZ
 
@@ -146,13 +156,13 @@ else:
 
 We will:
 
-1. Evaluate `eCond`
+1. Compile `eCond`
 2. Compare the result (in `eax`) against `0`
 3. Jump if the result _is zero_ to a **special** `"IfFalse"` label
-  * At which we will evaluate `eElse`,
-  * Ending with a special `"IfExit"` label.
+    * At which we will evaluate `eElse`,
+    * Ending with a special `"IfExit"` label.
 4. (Otherwise) continue to evaluate `eTrue`
-  * And then jump (unconditionally) to the `"IfExit"` label.
+    * And then jump (unconditionally) to the `"IfExit"` label.
 
 ### Example: If-Expressions to `Asm`
 
@@ -191,9 +201,9 @@ data Expr a
   = Number Int                        a
   | Add1   (Expr a)                   a
   | Sub1   (Expr a)                   a
-  | Let    Id (Expr a) (Expr a)       a   
+  | Let    Id (Expr a) (Expr a)       a
   | Var    Id                         a
-  | If     (Expr a) (Expr a) (Expr a) a         
+  | If     (Expr a) (Expr a) (Expr a) a
 ```
 
 * Add `if-else` expressions and
@@ -210,7 +220,7 @@ type Tag   = Int
 We will now use:
 
 ```haskell
-type BareE = Expr ()     -- AST after parsing   
+type BareE = Expr ()     -- AST after parsing
 type TagE  = Expr Tag    -- AST with distinct tags
 ```
 
@@ -221,7 +231,7 @@ Now, lets extend the _Assembly_ with labels, comparisons and jumps:
 ```haskell
 data Label
   = BranchFalse Tag
-  | BranchExit  Tag          
+  | BranchExit  Tag
 
 data Instruction
   = ...
@@ -270,7 +280,7 @@ doTag i (Let x e1 e2 _) = (_2    , Let x e1' e2' i2)
 
 What expressions shall we fill in for `_1` and `_2` ?
 
-```
+```haskell
 {- A -}   _1 = i
           _2 = i + 1
 
@@ -287,6 +297,7 @@ What expressions shall we fill in for `_1` and `_2` ?
           _2 = i1 + 1
 ```
 
+<!--
 
 We can now fill in the complete version:
 
@@ -310,6 +321,8 @@ doTag i (If e1 e2 e3 _) = (i3 + 1, If e1' e2' e3' i3)
     (i3, e3')           = doTag i2 e3
 ```
 
+-->
+
 (**ProTip:** Use `mapAccumL`)
 
 We can now tag the whole program by
@@ -328,17 +341,17 @@ tag e = e'  where  (_, e') = doTag 0 e
 Now that we have the tags we lets implement our [compilation strategy](#strategy)
 
 ```haskell
-compile env (If eCond eTrue eFalse i)    
-  =   compile env eCond ++
-    [ ICmp (Reg EAX) (Const 0)
-    , IJe (BranchFalse i)
+compile env (If eCond eTrue eFalse i)
+  =   compile env eCond ++              -- compile `eCond`
+    [ ICmp (Reg EAX) (Const 0)          -- compare result to 0
+    , IJe (BranchFalse i)               -- if-zero then jump to 'False'-block
     ]
-   ++ compile env eTrue  ++
-    [ IJmp   lExit
-    , ILabel (BranchFalse i)
-    ]
-   ++ compile env eFalse ++
-    [ ILabel (BranchExit i) ]
+   ++ compile env eTrue  ++             -- code for `True`-block
+    [ IJmp   lExit      ]               -- jump to exit (don't execute `False`-block!)
+   ++
+      ILabel (BranchFalse i)            -- start of `False`-block
+   : compile env eFalse ++              -- code for `False`-block
+    [ ILabel (BranchExit i) ]           -- exit
 ```
 
 ### Recap: Branches
