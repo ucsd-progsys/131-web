@@ -248,93 +248,108 @@ if (window.navigator.appName == "Microsoft Internet Explorer") {
 <li>Implement with <strong>type-transforming-functions</strong>,</li>
 <li>Validate with <strong>tests</strong>.</li>
 </ol>
+<div class="sourceCode" id="cb1"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw">data</span> <span class="dt">Expr</span> <span class="fu">=</span> <span class="dt">ENum</span>                  <span class="co">-- 12 </span></a>
+<a class="sourceLine" id="cb1-2" data-line-number="2">          <span class="fu">|</span> <span class="dt">EPrim1</span> <span class="dt">Op1</span>  <span class="dt">Expr</span>      <span class="co">-- add1(e)</span></a>
+<a class="sourceLine" id="cb1-3" data-line-number="3">          <span class="fu">|</span> <span class="dt">EVar</span>   <span class="dt">Id</span>             <span class="co">-- x</span></a>
+<a class="sourceLine" id="cb1-4" data-line-number="4">          <span class="fu">|</span> <span class="dt">ELet</span>   <span class="dt">Id</span>   <span class="dt">Expr</span> <span class="dt">Expr</span> <span class="co">-- let x = e1 in e2</span></a>
+<a class="sourceLine" id="cb1-5" data-line-number="5">          <span class="fu">|</span> <span class="dt">EIf</span>    <span class="dt">Expr</span> <span class="dt">Expr</span> <span class="dt">Expr</span></a></code></pre></div>
 <h3 id="examples">Examples</h3>
 <p>First, lets look at some examples of what we mean by branches.</p>
 <ul>
 <li>For now, lets treat <code>0</code> as “false” and non-zero as “true”</li>
 </ul>
 <h3 id="example-if1">Example: <code>If1</code></h3>
-<div class="sourceCode" id="cb1"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw">if</span> <span class="dv">10</span><span class="fu">:</span></a>
-<a class="sourceLine" id="cb1-2" data-line-number="2">  <span class="dv">22</span></a>
-<a class="sourceLine" id="cb1-3" data-line-number="3"><span class="kw">else</span><span class="fu">:</span></a>
-<a class="sourceLine" id="cb1-4" data-line-number="4">  sub1(<span class="dv">0</span>)</a></code></pre></div>
-<ul>
-<li>Since <code>10</code> is <em>not</em> <code>0</code> we evaluate the “then” case to get <code>22</code></li>
-</ul>
-<h3 id="example-if2">Example: <code>If2</code></h3>
-<div class="sourceCode" id="cb2"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="kw">if</span> sub(<span class="dv">1</span>)<span class="fu">:</span></a>
+<div class="sourceCode" id="cb2"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="kw">if</span> <span class="dv">10</span><span class="fu">:</span></a>
 <a class="sourceLine" id="cb2-2" data-line-number="2">  <span class="dv">22</span></a>
 <a class="sourceLine" id="cb2-3" data-line-number="3"><span class="kw">else</span><span class="fu">:</span></a>
 <a class="sourceLine" id="cb2-4" data-line-number="4">  sub1(<span class="dv">0</span>)</a></code></pre></div>
 <ul>
+<li>Since <code>10</code> is <em>not</em> <code>0</code> we evaluate the “then” case to get <code>22</code></li>
+</ul>
+<h3 id="example-if2">Example: <code>If2</code></h3>
+<div class="sourceCode" id="cb3"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="kw">if</span> sub(<span class="dv">1</span>)<span class="fu">:</span></a>
+<a class="sourceLine" id="cb3-2" data-line-number="2">  <span class="dv">22</span></a>
+<a class="sourceLine" id="cb3-3" data-line-number="3"><span class="kw">else</span><span class="fu">:</span></a>
+<a class="sourceLine" id="cb3-4" data-line-number="4">  sub1(<span class="dv">0</span>)</a></code></pre></div>
+<ul>
 <li>Since <code>sub(1)</code> <em>is</em> <code>0</code> we evaluate the “else” case to get <code>-1</code></li>
 </ul>
-<h3 id="example-if3">Example: <code>If3</code></h3>
+<h3 id="quiz-if3">QUIZ: <code>If3</code></h3>
 <p><code>if-else</code> is also an <em>expression</em> so we can nest them:</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="kw">let</span> x <span class="fu">=</span> <span class="kw">if</span> sub(<span class="dv">1</span>)<span class="fu">:</span></a>
-<a class="sourceLine" id="cb3-2" data-line-number="2">          <span class="dv">22</span></a>
-<a class="sourceLine" id="cb3-3" data-line-number="3">        <span class="kw">else</span><span class="fu">:</span></a>
-<a class="sourceLine" id="cb3-4" data-line-number="4">          sub1(<span class="dv">0</span>)</a>
-<a class="sourceLine" id="cb3-5" data-line-number="5"><span class="kw">in</span></a>
-<a class="sourceLine" id="cb3-6" data-line-number="6">  <span class="kw">if</span> x<span class="fu">:</span></a>
-<a class="sourceLine" id="cb3-7" data-line-number="7">    add1(x)</a>
-<a class="sourceLine" id="cb3-8" data-line-number="8">  <span class="kw">else</span><span class="fu">:</span></a>
-<a class="sourceLine" id="cb3-9" data-line-number="9">    <span class="dv">999</span></a></code></pre></div>
+<p>What should the following evaluate to?</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb4-1" data-line-number="1"><span class="kw">let</span> x <span class="fu">=</span> <span class="kw">if</span> sub1(<span class="dv">1</span>)<span class="fu">:</span></a>
+<a class="sourceLine" id="cb4-2" data-line-number="2">          <span class="dv">22</span></a>
+<a class="sourceLine" id="cb4-3" data-line-number="3">        <span class="kw">else</span><span class="fu">:</span></a>
+<a class="sourceLine" id="cb4-4" data-line-number="4">          sub1(<span class="dv">0</span>)</a>
+<a class="sourceLine" id="cb4-5" data-line-number="5"><span class="kw">in</span></a>
+<a class="sourceLine" id="cb4-6" data-line-number="6">  <span class="kw">if</span> x<span class="fu">:</span></a>
+<a class="sourceLine" id="cb4-7" data-line-number="7">    add1(x)</a>
+<a class="sourceLine" id="cb4-8" data-line-number="8">  <span class="kw">else</span><span class="fu">:</span></a>
+<a class="sourceLine" id="cb4-9" data-line-number="9">    <span class="dv">999</span></a></code></pre></div>
 <ul>
-<li><code>x</code> is bound to <code>-1</code>…</li>
-<li>… which is <em>non-zero</em> so we evaluate <code>add1(x)</code> yielding <code>0</code></li>
+<li><strong>A.</strong> <code>999</code></li>
+<li><strong>B.</strong> <code>0</code></li>
+<li><strong>C.</strong> <code>1</code></li>
+<li><strong>D.</strong> <code>1000</code></li>
+<li><strong>E.</strong> <code>-1</code></li>
 </ul>
+<!-- 
+  * `x` is bound to `-1`...
+  * ... which is _non-zero_ so we evaluate `add1(x)` yielding `0`
+-->
 <h3 id="control-flow-in-assembly">Control Flow in Assembly</h3>
 <p>To compile branches, we will use:</p>
 <ul>
 <li><strong>labels</strong> of the form</li>
 </ul>
-<div class="sourceCode" id="cb4"><pre class="sourceCode asm"><code class="sourceCode fasm"><a class="sourceLine" id="cb4-1" data-line-number="1"><span class="fu">our_code_label:</span></a>
-<a class="sourceLine" id="cb4-2" data-line-number="2">  ...</a></code></pre></div>
-<p>are “landmark” from which execution (control-flow) can be started, or to which it can be diverted,</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode asm"><code class="sourceCode fasm"><a class="sourceLine" id="cb5-1" data-line-number="1"><span class="fu">our_code_label:</span></a>
+<a class="sourceLine" id="cb5-2" data-line-number="2">  ...</a></code></pre></div>
+<p>are <em>“landmarks”</em> from which execution (control-flow) can be started, or to which it can be diverted,</p>
 <ul>
 <li><strong>comparisons</strong> of the form</li>
 </ul>
-<div class="sourceCode" id="cb5"><pre class="sourceCode asm"><code class="sourceCode fasm"><a class="sourceLine" id="cb5-1" data-line-number="1"><span class="bu">cmp</span> a1, a2</a></code></pre></div>
-<p>do a (numeric) comparison between the values referred to by <code>a1</code> and <code>a2</code>, storing the result in a special processor <strong>flag</strong>,</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode asm"><code class="sourceCode fasm"><a class="sourceLine" id="cb6-1" data-line-number="1"><span class="bu">cmp</span> a1, a2</a></code></pre></div>
 <ul>
-<li><strong>Jump</strong> operations of the form</li>
+<li>Perform a (numeric) <strong>comparison</strong> between the values <code>a1</code> and <code>a2</code>, and</li>
+<li><p>Store the result in a special <strong>processor flag</strong>,</p></li>
+<li><p><strong>Jump</strong> operations of the form</p></li>
 </ul>
-<div class="sourceCode" id="cb6"><pre class="sourceCode asm"><code class="sourceCode fasm"><a class="sourceLine" id="cb6-1" data-line-number="1"><span class="bu">jmp</span> <span class="pp">LABEL</span>     # jump unconditionally (i.e. always)</a>
-<a class="sourceLine" id="cb6-2" data-line-number="2"><span class="bu">je</span>  <span class="pp">LABEL</span>     # jump <span class="pp">if</span> previous comparison result was EQUAL  </a>
-<a class="sourceLine" id="cb6-3" data-line-number="3"><span class="bu">jne</span> <span class="pp">LABEL</span>     # jump <span class="pp">if</span> previous comparison result was <span class="bu">NOT</span>-EQUAL  </a></code></pre></div>
-<p>use the result of the <em>flag</em> set by the most recent <code>cmp</code> to <em>transfer control flow</em> to the given <code>LABEL</code></p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode asm"><code class="sourceCode fasm"><a class="sourceLine" id="cb7-1" data-line-number="1"><span class="bu">jmp</span> <span class="pp">LABEL</span>     # jump unconditionally (i.e. always)</a>
+<a class="sourceLine" id="cb7-2" data-line-number="2"><span class="bu">je</span>  <span class="pp">LABEL</span>     # jump <span class="pp">if</span> previous comparison result was EQUAL  </a>
+<a class="sourceLine" id="cb7-3" data-line-number="3"><span class="bu">jne</span> <span class="pp">LABEL</span>     # jump <span class="pp">if</span> previous comparison result was <span class="bu">NOT</span>-EQUAL  </a></code></pre></div>
+<ul>
+<li>Use the result of the <strong>flag</strong> set by the most recent <code>cmp</code></li>
+<li>To <em>continue execution</em> from the given <code>LABEL</code></li>
+</ul>
 <h3 id="quiz">QUIZ</h3>
 <p>Which of the following is a valid x86 encoding of</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb7-1" data-line-number="1"><span class="cf">if</span> <span class="dv">10</span>:</a>
-<a class="sourceLine" id="cb7-2" data-line-number="2">  <span class="dv">22</span></a>
-<a class="sourceLine" id="cb7-3" data-line-number="3"><span class="cf">else</span></a>
-<a class="sourceLine" id="cb7-4" data-line-number="4">  <span class="dv">33</span></a></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb8-1" data-line-number="1"><span class="cf">if</span> <span class="dv">10</span>:</a>
+<a class="sourceLine" id="cb8-2" data-line-number="2">  <span class="dv">22</span></a>
+<a class="sourceLine" id="cb8-3" data-line-number="3"><span class="cf">else</span></a>
+<a class="sourceLine" id="cb8-4" data-line-number="4">  <span class="dv">33</span></a></code></pre></div>
 <figure>
 <img src="../static/img/quiz-if-asm.png" alt="QUIZ: Compiling if-else" /><figcaption>QUIZ: Compiling if-else</figcaption>
 </figure>
 <h3 id="strategy">Strategy</h3>
 <p>To compile an expression of the form</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb8-1" data-line-number="1"><span class="kw">if</span> eCond<span class="fu">:</span></a>
-<a class="sourceLine" id="cb8-2" data-line-number="2">  eThen</a>
-<a class="sourceLine" id="cb8-3" data-line-number="3"><span class="kw">else</span><span class="fu">:</span></a>
-<a class="sourceLine" id="cb8-4" data-line-number="4">  eElse</a></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb9-1" data-line-number="1"><span class="kw">if</span> eCond<span class="fu">:</span></a>
+<a class="sourceLine" id="cb9-2" data-line-number="2">  eThen</a>
+<a class="sourceLine" id="cb9-3" data-line-number="3"><span class="kw">else</span><span class="fu">:</span></a>
+<a class="sourceLine" id="cb9-4" data-line-number="4">  eElse</a></code></pre></div>
 <p>We will:</p>
 <ol type="1">
-<li>Evaluate <code>eCond</code></li>
+<li>Compile <code>eCond</code></li>
 <li>Compare the result (in <code>eax</code>) against <code>0</code></li>
-<li>Jump if the result <em>is zero</em> to a <strong>special</strong> <code>&quot;IfFalse&quot;</code> label</li>
-</ol>
+<li>Jump if the result <em>is zero</em> to a <strong>special</strong> <code>&quot;IfFalse&quot;</code> label
 <ul>
 <li>At which we will evaluate <code>eElse</code>,</li>
 <li>Ending with a special <code>&quot;IfExit&quot;</code> label.</li>
-</ul>
-<ol start="4" type="1">
-<li>(Otherwise) continue to evaluate <code>eTrue</code></li>
-</ol>
+</ul></li>
+<li>(Otherwise) continue to evaluate <code>eTrue</code>
 <ul>
 <li>And then jump (unconditionally) to the <code>&quot;IfExit&quot;</code> label.</li>
-</ul>
+</ul></li>
+</ol>
 <h3 id="example-if-expressions-to-asm">Example: If-Expressions to <code>Asm</code></h3>
 <p>Lets see how our strategy works by example:</p>
 <h3 id="example-if1-1">Example: if1</h3>
@@ -345,7 +360,7 @@ if (window.navigator.appName == "Microsoft Internet Explorer") {
 <figure>
 <img src="../static/img/if-2-to-asm.png" alt="Example: if2" /><figcaption>Example: if2</figcaption>
 </figure>
-<h3 id="example-if3-1">Example: if3</h3>
+<h3 id="example-if3">Example: if3</h3>
 <figure>
 <img src="../static/img/if-3-to-asm.png" alt="Example: if3" /><figcaption>Example: if3</figcaption>
 </figure>
@@ -365,13 +380,13 @@ if (window.navigator.appName == "Microsoft Internet Explorer") {
 </figure>
 <h3 id="types-source">Types: Source</h3>
 <p>Lets modify the <em>Source Expression</em></p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb9-1" data-line-number="1"><span class="kw">data</span> <span class="dt">Expr</span> a</a>
-<a class="sourceLine" id="cb9-2" data-line-number="2">  <span class="fu">=</span> <span class="dt">Number</span> <span class="dt">Int</span>                        a</a>
-<a class="sourceLine" id="cb9-3" data-line-number="3">  <span class="fu">|</span> <span class="dt">Add1</span>   (<span class="dt">Expr</span> a)                   a</a>
-<a class="sourceLine" id="cb9-4" data-line-number="4">  <span class="fu">|</span> <span class="dt">Sub1</span>   (<span class="dt">Expr</span> a)                   a</a>
-<a class="sourceLine" id="cb9-5" data-line-number="5">  <span class="fu">|</span> <span class="dt">Let</span>    <span class="dt">Id</span> (<span class="dt">Expr</span> a) (<span class="dt">Expr</span> a)       a   </a>
-<a class="sourceLine" id="cb9-6" data-line-number="6">  <span class="fu">|</span> <span class="dt">Var</span>    <span class="dt">Id</span>                         a</a>
-<a class="sourceLine" id="cb9-7" data-line-number="7">  <span class="fu">|</span> <span class="dt">If</span>     (<span class="dt">Expr</span> a) (<span class="dt">Expr</span> a) (<span class="dt">Expr</span> a) a         </a></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb10-1" data-line-number="1"><span class="kw">data</span> <span class="dt">Expr</span> a</a>
+<a class="sourceLine" id="cb10-2" data-line-number="2">  <span class="fu">=</span> <span class="dt">Number</span> <span class="dt">Int</span>                        a</a>
+<a class="sourceLine" id="cb10-3" data-line-number="3">  <span class="fu">|</span> <span class="dt">Add1</span>   (<span class="dt">Expr</span> a)                   a</a>
+<a class="sourceLine" id="cb10-4" data-line-number="4">  <span class="fu">|</span> <span class="dt">Sub1</span>   (<span class="dt">Expr</span> a)                   a</a>
+<a class="sourceLine" id="cb10-5" data-line-number="5">  <span class="fu">|</span> <span class="dt">Let</span>    <span class="dt">Id</span> (<span class="dt">Expr</span> a) (<span class="dt">Expr</span> a)       a</a>
+<a class="sourceLine" id="cb10-6" data-line-number="6">  <span class="fu">|</span> <span class="dt">Var</span>    <span class="dt">Id</span>                         a</a>
+<a class="sourceLine" id="cb10-7" data-line-number="7">  <span class="fu">|</span> <span class="dt">If</span>     (<span class="dt">Expr</span> a) (<span class="dt">Expr</span> a) (<span class="dt">Expr</span> a) a</a></code></pre></div>
 <ul>
 <li>Add <code>if-else</code> expressions and</li>
 <li>Add <strong>tags</strong> of type <code>a</code> for each sub-expression
@@ -381,23 +396,23 @@ if (window.navigator.appName == "Microsoft Internet Explorer") {
 </ul></li>
 </ul>
 <p>Lets define a name for <code>Tag</code> (just integers).</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb10-1" data-line-number="1"><span class="kw">type</span> <span class="dt">Tag</span>   <span class="fu">=</span> <span class="dt">Int</span></a></code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb11-1" data-line-number="1"><span class="kw">type</span> <span class="dt">Tag</span>   <span class="fu">=</span> <span class="dt">Int</span></a></code></pre></div>
 <p>We will now use:</p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb11-1" data-line-number="1"><span class="kw">type</span> <span class="dt">BareE</span> <span class="fu">=</span> <span class="dt">Expr</span> ()     <span class="co">-- AST after parsing   </span></a>
-<a class="sourceLine" id="cb11-2" data-line-number="2"><span class="kw">type</span> <span class="dt">TagE</span>  <span class="fu">=</span> <span class="dt">Expr</span> <span class="dt">Tag</span>    <span class="co">-- AST with distinct tags</span></a></code></pre></div>
+<div class="sourceCode" id="cb12"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb12-1" data-line-number="1"><span class="kw">type</span> <span class="dt">BareE</span> <span class="fu">=</span> <span class="dt">Expr</span> ()     <span class="co">-- AST after parsing</span></a>
+<a class="sourceLine" id="cb12-2" data-line-number="2"><span class="kw">type</span> <span class="dt">TagE</span>  <span class="fu">=</span> <span class="dt">Expr</span> <span class="dt">Tag</span>    <span class="co">-- AST with distinct tags</span></a></code></pre></div>
 <h3 id="types-assembly">Types: Assembly</h3>
 <p>Now, lets extend the <em>Assembly</em> with labels, comparisons and jumps:</p>
-<div class="sourceCode" id="cb12"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb12-1" data-line-number="1"><span class="kw">data</span> <span class="dt">Label</span></a>
-<a class="sourceLine" id="cb12-2" data-line-number="2">  <span class="fu">=</span> <span class="dt">BranchFalse</span> <span class="dt">Tag</span></a>
-<a class="sourceLine" id="cb12-3" data-line-number="3">  <span class="fu">|</span> <span class="dt">BranchExit</span>  <span class="dt">Tag</span>          </a>
-<a class="sourceLine" id="cb12-4" data-line-number="4"></a>
-<a class="sourceLine" id="cb12-5" data-line-number="5"><span class="kw">data</span> <span class="dt">Instruction</span></a>
-<a class="sourceLine" id="cb12-6" data-line-number="6">  <span class="fu">=</span> <span class="fu">...</span></a>
-<a class="sourceLine" id="cb12-7" data-line-number="7">  <span class="fu">|</span> <span class="dt">ICmp</span>   <span class="dt">Arg</span>   <span class="dt">Arg</span>  <span class="co">-- Compare two arguments</span></a>
-<a class="sourceLine" id="cb12-8" data-line-number="8">  <span class="fu">|</span> <span class="dt">ILabel</span> <span class="dt">Label</span>      <span class="co">-- Create a label</span></a>
-<a class="sourceLine" id="cb12-9" data-line-number="9">  <span class="fu">|</span> <span class="dt">IJmp</span>   <span class="dt">Label</span>      <span class="co">-- Jump always</span></a>
-<a class="sourceLine" id="cb12-10" data-line-number="10">  <span class="fu">|</span> <span class="dt">IJe</span>    <span class="dt">Label</span>      <span class="co">-- Jump if equal  </span></a>
-<a class="sourceLine" id="cb12-11" data-line-number="11">  <span class="fu">|</span> <span class="dt">IJne</span>   <span class="dt">Label</span>      <span class="co">-- Jump if not-equal</span></a></code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb13-1" data-line-number="1"><span class="kw">data</span> <span class="dt">Label</span></a>
+<a class="sourceLine" id="cb13-2" data-line-number="2">  <span class="fu">=</span> <span class="dt">BranchFalse</span> <span class="dt">Tag</span></a>
+<a class="sourceLine" id="cb13-3" data-line-number="3">  <span class="fu">|</span> <span class="dt">BranchExit</span>  <span class="dt">Tag</span></a>
+<a class="sourceLine" id="cb13-4" data-line-number="4"></a>
+<a class="sourceLine" id="cb13-5" data-line-number="5"><span class="kw">data</span> <span class="dt">Instruction</span></a>
+<a class="sourceLine" id="cb13-6" data-line-number="6">  <span class="fu">=</span> <span class="fu">...</span></a>
+<a class="sourceLine" id="cb13-7" data-line-number="7">  <span class="fu">|</span> <span class="dt">ICmp</span>   <span class="dt">Arg</span>   <span class="dt">Arg</span>  <span class="co">-- Compare two arguments</span></a>
+<a class="sourceLine" id="cb13-8" data-line-number="8">  <span class="fu">|</span> <span class="dt">ILabel</span> <span class="dt">Label</span>      <span class="co">-- Create a label</span></a>
+<a class="sourceLine" id="cb13-9" data-line-number="9">  <span class="fu">|</span> <span class="dt">IJmp</span>   <span class="dt">Label</span>      <span class="co">-- Jump always</span></a>
+<a class="sourceLine" id="cb13-10" data-line-number="10">  <span class="fu">|</span> <span class="dt">IJe</span>    <span class="dt">Label</span>      <span class="co">-- Jump if equal  </span></a>
+<a class="sourceLine" id="cb13-11" data-line-number="11">  <span class="fu">|</span> <span class="dt">IJne</span>   <span class="dt">Label</span>      <span class="co">-- Jump if not-equal</span></a></code></pre></div>
 <h3 id="transforms">Transforms</h3>
 <p>We can’t expect <em>programmer</em> to put in tags (yuck.)</p>
 <ul>
@@ -408,8 +423,8 @@ if (window.navigator.appName == "Microsoft Internet Explorer") {
 </figure>
 <h3 id="transforms-parse">Transforms: Parse</h3>
 <p>Just as before, but now puts a dummy <code>()</code> into each position</p>
-<div class="sourceCode" id="cb13"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb13-1" data-line-number="1">ghci<span class="fu">&gt;</span> parse <span class="st">&quot;if 1: 22 else: 33&quot;</span></a>
-<a class="sourceLine" id="cb13-2" data-line-number="2"><span class="dt">If</span> (<span class="dt">Number</span> <span class="dv">1</span> ()) (<span class="dt">Number</span> <span class="dv">22</span> ()) (<span class="dt">Number</span> <span class="dv">33</span> ()) ()</a></code></pre></div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb14-1" data-line-number="1">ghci<span class="fu">&gt;</span> parse <span class="st">&quot;if 1: 22 else: 33&quot;</span></a>
+<a class="sourceLine" id="cb14-2" data-line-number="2"><span class="dt">If</span> (<span class="dt">Number</span> <span class="dv">1</span> ()) (<span class="dt">Number</span> <span class="dv">22</span> ()) (<span class="dt">Number</span> <span class="dv">33</span> ()) ()</a></code></pre></div>
 <h3 id="transforms-tag">Transforms: Tag</h3>
 <p>The key work is done by <code>doTag i e</code></p>
 <ol type="1">
@@ -417,45 +432,53 @@ if (window.navigator.appName == "Microsoft Internet Explorer") {
 <li>Return a pair <code>(i', e')</code> of <em>updated counter</em> <code>i'</code> and tagged expr <code>e'</code></li>
 </ol>
 <p><strong>QUIZ</strong></p>
-<div class="sourceCode" id="cb14"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb14-1" data-line-number="1"><span class="ot">doTag ::</span> <span class="dt">Int</span> <span class="ot">-&gt;</span> <span class="dt">BareE</span> <span class="ot">-&gt;</span> (<span class="dt">Int</span>, <span class="dt">TagE</span>)</a>
-<a class="sourceLine" id="cb14-2" data-line-number="2">doTag i (<span class="dt">Number</span> n _)    <span class="fu">=</span> (i <span class="fu">+</span> <span class="dv">1</span> , <span class="dt">Number</span> n i)</a>
-<a class="sourceLine" id="cb14-3" data-line-number="3">doTag i (<span class="dt">Var</span>    x _)    <span class="fu">=</span> (i <span class="fu">+</span> <span class="dv">1</span> , <span class="dt">Var</span>     x i)</a>
-<a class="sourceLine" id="cb14-4" data-line-number="4">doTag i (<span class="dt">Let</span> x e1 e2 _) <span class="fu">=</span> (_2    , <span class="dt">Let</span> x e1' e2' i2)</a>
-<a class="sourceLine" id="cb14-5" data-line-number="5">  <span class="kw">where</span></a>
-<a class="sourceLine" id="cb14-6" data-line-number="6">    (i1, e1')           <span class="fu">=</span> doTag i  e1</a>
-<a class="sourceLine" id="cb14-7" data-line-number="7">    (i2, e2')           <span class="fu">=</span> doTag _1 e2</a></code></pre></div>
+<div class="sourceCode" id="cb15"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb15-1" data-line-number="1"><span class="ot">doTag ::</span> <span class="dt">Int</span> <span class="ot">-&gt;</span> <span class="dt">BareE</span> <span class="ot">-&gt;</span> (<span class="dt">Int</span>, <span class="dt">TagE</span>)</a>
+<a class="sourceLine" id="cb15-2" data-line-number="2">doTag i (<span class="dt">Number</span> n _)    <span class="fu">=</span> (i <span class="fu">+</span> <span class="dv">1</span> , <span class="dt">Number</span> n i)</a>
+<a class="sourceLine" id="cb15-3" data-line-number="3">doTag i (<span class="dt">Var</span>    x _)    <span class="fu">=</span> (i <span class="fu">+</span> <span class="dv">1</span> , <span class="dt">Var</span>     x i)</a>
+<a class="sourceLine" id="cb15-4" data-line-number="4">doTag i (<span class="dt">Let</span> x e1 e2 _) <span class="fu">=</span> (_2    , <span class="dt">Let</span> x e1' e2' i2)</a>
+<a class="sourceLine" id="cb15-5" data-line-number="5">  <span class="kw">where</span></a>
+<a class="sourceLine" id="cb15-6" data-line-number="6">    (i1, e1')           <span class="fu">=</span> doTag i  e1</a>
+<a class="sourceLine" id="cb15-7" data-line-number="7">    (i2, e2')           <span class="fu">=</span> doTag _1 e2</a></code></pre></div>
 <p>What expressions shall we fill in for <code>_1</code> and <code>_2</code> ?</p>
-<pre><code>{- A -}   _1 = i
-          _2 = i + 1
-
-{- B -}   _1 = i
-          _2 = i1 + 1
-
-{- C -}   _1 = i
-          _2 = i2 + 1
-
-{- D -}   _1 = i1
-          _2 = i2 + 1
-
-{- E -}   _1 = i2
-          _2 = i1 + 1</code></pre>
-<p>We can now fill in the complete version:</p>
-<div class="sourceCode" id="cb16"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb16-1" data-line-number="1"><span class="ot">doTag ::</span> <span class="dt">Int</span> <span class="ot">-&gt;</span> <span class="dt">BareE</span> <span class="ot">-&gt;</span> (<span class="dt">Int</span>, <span class="dt">TagE</span>)</a>
-<a class="sourceLine" id="cb16-2" data-line-number="2"></a>
-<a class="sourceLine" id="cb16-3" data-line-number="3">doTag i (<span class="dt">Number</span> n _)    <span class="fu">=</span> (i <span class="fu">+</span> <span class="dv">1</span> , <span class="dt">Number</span> n i)</a>
-<a class="sourceLine" id="cb16-4" data-line-number="4"></a>
-<a class="sourceLine" id="cb16-5" data-line-number="5">doTag i (<span class="dt">Var</span>    x _)    <span class="fu">=</span> (i <span class="fu">+</span> <span class="dv">1</span> , <span class="dt">Var</span>     x i)</a>
+<div class="sourceCode" id="cb16"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb16-1" data-line-number="1"><span class="co">{- A -}</span>   _1 <span class="fu">=</span> i</a>
+<a class="sourceLine" id="cb16-2" data-line-number="2">          _2 <span class="fu">=</span> i <span class="fu">+</span> <span class="dv">1</span></a>
+<a class="sourceLine" id="cb16-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb16-4" data-line-number="4"><span class="co">{- B -}</span>   _1 <span class="fu">=</span> i</a>
+<a class="sourceLine" id="cb16-5" data-line-number="5">          _2 <span class="fu">=</span> i1 <span class="fu">+</span> <span class="dv">1</span></a>
 <a class="sourceLine" id="cb16-6" data-line-number="6"></a>
-<a class="sourceLine" id="cb16-7" data-line-number="7">doTag i (<span class="dt">Let</span> x e1 e2 _) <span class="fu">=</span> (i2 <span class="fu">+</span> <span class="dv">1</span>, <span class="dt">Let</span> x e1' e2' i2)</a>
-<a class="sourceLine" id="cb16-8" data-line-number="8">  <span class="kw">where</span></a>
-<a class="sourceLine" id="cb16-9" data-line-number="9">    (i1, e1')           <span class="fu">=</span> doTag i  e1</a>
-<a class="sourceLine" id="cb16-10" data-line-number="10">    (i2, e2')           <span class="fu">=</span> doTag i1 e2</a>
-<a class="sourceLine" id="cb16-11" data-line-number="11"></a>
-<a class="sourceLine" id="cb16-12" data-line-number="12">doTag i (<span class="dt">If</span> e1 e2 e3 _) <span class="fu">=</span> (i3 <span class="fu">+</span> <span class="dv">1</span>, <span class="dt">If</span> e1' e2' e3' i3)</a>
-<a class="sourceLine" id="cb16-13" data-line-number="13">  <span class="kw">where</span></a>
-<a class="sourceLine" id="cb16-14" data-line-number="14">    (i1, e1')           <span class="fu">=</span> doTag i  e1</a>
-<a class="sourceLine" id="cb16-15" data-line-number="15">    (i2, e2')           <span class="fu">=</span> doTag i1 e2</a>
-<a class="sourceLine" id="cb16-16" data-line-number="16">    (i3, e3')           <span class="fu">=</span> doTag i2 e3</a></code></pre></div>
+<a class="sourceLine" id="cb16-7" data-line-number="7"><span class="co">{- C -}</span>   _1 <span class="fu">=</span> i</a>
+<a class="sourceLine" id="cb16-8" data-line-number="8">          _2 <span class="fu">=</span> i2 <span class="fu">+</span> <span class="dv">1</span></a>
+<a class="sourceLine" id="cb16-9" data-line-number="9"></a>
+<a class="sourceLine" id="cb16-10" data-line-number="10"><span class="co">{- D -}</span>   _1 <span class="fu">=</span> i1</a>
+<a class="sourceLine" id="cb16-11" data-line-number="11">          _2 <span class="fu">=</span> i2 <span class="fu">+</span> <span class="dv">1</span></a>
+<a class="sourceLine" id="cb16-12" data-line-number="12"></a>
+<a class="sourceLine" id="cb16-13" data-line-number="13"><span class="co">{- E -}</span>   _1 <span class="fu">=</span> i2</a>
+<a class="sourceLine" id="cb16-14" data-line-number="14">          _2 <span class="fu">=</span> i1 <span class="fu">+</span> <span class="dv">1</span></a></code></pre></div>
+<!--
+
+We can now fill in the complete version:
+
+
+```haskell
+doTag :: Int -> BareE -> (Int, TagE)
+
+doTag i (Number n _)    = (i + 1 , Number n i)
+
+doTag i (Var    x _)    = (i + 1 , Var     x i)
+
+doTag i (Let x e1 e2 _) = (i2 + 1, Let x e1' e2' i2)
+  where
+    (i1, e1')           = doTag i  e1
+    (i2, e2')           = doTag i1 e2
+
+doTag i (If e1 e2 e3 _) = (i3 + 1, If e1' e2' e3' i3)
+  where
+    (i1, e1')           = doTag i  e1
+    (i2, e2')           = doTag i1 e2
+    (i3, e3')           = doTag i2 e3
+```
+
+-->
 <p>(<strong>ProTip:</strong> Use <code>mapAccumL</code>)</p>
 <p>We can now tag the whole program by</p>
 <ul>
@@ -466,17 +489,17 @@ if (window.navigator.appName == "Microsoft Internet Explorer") {
 <a class="sourceLine" id="cb17-2" data-line-number="2">tag e <span class="fu">=</span> e'  <span class="kw">where</span>  (_, e') <span class="fu">=</span> doTag <span class="dv">0</span> e</a></code></pre></div>
 <h3 id="transforms-codegen">Transforms: CodeGen</h3>
 <p>Now that we have the tags we lets implement our <a href="#strategy">compilation strategy</a></p>
-<div class="sourceCode" id="cb18"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb18-1" data-line-number="1">compile env (<span class="dt">If</span> eCond eTrue eFalse i)    </a>
-<a class="sourceLine" id="cb18-2" data-line-number="2">  <span class="fu">=</span>   compile env eCond <span class="fu">++</span></a>
-<a class="sourceLine" id="cb18-3" data-line-number="3">    [ <span class="dt">ICmp</span> (<span class="dt">Reg</span> <span class="dt">EAX</span>) (<span class="dt">Const</span> <span class="dv">0</span>)</a>
-<a class="sourceLine" id="cb18-4" data-line-number="4">    , <span class="dt">IJe</span> (<span class="dt">BranchFalse</span> i)</a>
+<div class="sourceCode" id="cb18"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb18-1" data-line-number="1">compile env (<span class="dt">If</span> eCond eTrue eFalse i)</a>
+<a class="sourceLine" id="cb18-2" data-line-number="2">  <span class="fu">=</span>   compile env eCond <span class="fu">++</span>              <span class="co">-- compile `eCond`</span></a>
+<a class="sourceLine" id="cb18-3" data-line-number="3">    [ <span class="dt">ICmp</span> (<span class="dt">Reg</span> <span class="dt">EAX</span>) (<span class="dt">Const</span> <span class="dv">0</span>)          <span class="co">-- compare result to 0</span></a>
+<a class="sourceLine" id="cb18-4" data-line-number="4">    , <span class="dt">IJe</span> (<span class="dt">BranchFalse</span> i)               <span class="co">-- if-zero then jump to 'False'-block</span></a>
 <a class="sourceLine" id="cb18-5" data-line-number="5">    ]</a>
-<a class="sourceLine" id="cb18-6" data-line-number="6">   <span class="fu">++</span> compile env eTrue  <span class="fu">++</span></a>
-<a class="sourceLine" id="cb18-7" data-line-number="7">    [ <span class="dt">IJmp</span>   lExit</a>
-<a class="sourceLine" id="cb18-8" data-line-number="8">    , <span class="dt">ILabel</span> (<span class="dt">BranchFalse</span> i)</a>
-<a class="sourceLine" id="cb18-9" data-line-number="9">    ]</a>
-<a class="sourceLine" id="cb18-10" data-line-number="10">   <span class="fu">++</span> compile env eFalse <span class="fu">++</span></a>
-<a class="sourceLine" id="cb18-11" data-line-number="11">    [ <span class="dt">ILabel</span> (<span class="dt">BranchExit</span> i) ]</a></code></pre></div>
+<a class="sourceLine" id="cb18-6" data-line-number="6">   <span class="fu">++</span> compile env eTrue  <span class="fu">++</span>             <span class="co">-- code for `True`-block</span></a>
+<a class="sourceLine" id="cb18-7" data-line-number="7">    [ <span class="dt">IJmp</span>   lExit      ]               <span class="co">-- jump to exit (don't execute `False`-block!)</span></a>
+<a class="sourceLine" id="cb18-8" data-line-number="8">   <span class="fu">++</span></a>
+<a class="sourceLine" id="cb18-9" data-line-number="9">      <span class="dt">ILabel</span> (<span class="dt">BranchFalse</span> i)            <span class="co">-- start of `False`-block</span></a>
+<a class="sourceLine" id="cb18-10" data-line-number="10">   <span class="fu">:</span> compile env eFalse <span class="fu">++</span>              <span class="co">-- code for `False`-block</span></a>
+<a class="sourceLine" id="cb18-11" data-line-number="11">    [ <span class="dt">ILabel</span> (<span class="dt">BranchExit</span> i) ]           <span class="co">-- exit</span></a></code></pre></div>
 <h3 id="recap-branches">Recap: Branches</h3>
 <ul>
 <li><code>Tag</code> each sub-expression,</li>
