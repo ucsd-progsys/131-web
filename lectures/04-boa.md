@@ -73,7 +73,7 @@ else:
 What should the following evaluate to?
 
 ```haskell
-let x = if sub1(1):
+let x = if sub(1):
           22
         else:
           sub1(0)
@@ -255,8 +255,15 @@ We can't expect _programmer_ to put in tags (yuck.)
 Just as before, but now puts a dummy `()` into each position
 
 ```haskell
-ghci> parse "if 1: 22 else: 33"
+λ> let parseStr s = fmap (const ()) (parse "" s)
+
+λ> let e = parseStr "if 1: 22 else: 33"
+
+λ> e
 If (Number 1 ()) (Number 22 ()) (Number 33 ()) ()
+
+λ> label e
+If (Number 1 ((),0)) (Number 22 ((),1)) (Number 33 ((),2)) ((),3)
 ```
 
 ### Transforms: Tag
@@ -499,9 +506,43 @@ Because `1` and `x` are **immediate expressions**
 * `v1 + v2`
 * `v1 - v2`
 * `v1 * v2`
-* `if v: e1 else: e2`
+
+### QUIZ
+
+Is the following expression in ANF?
+
+```haskell
+(1 + 2) * (3 + 4)
+```
+
+**A.** Yes, its ANF.
+**B.** Nope, its not.
+**C.** Remind me, whats ANF?
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 
 ### Compound Expressions
 
 Unfortunately, the below is _not_ in ANF
@@ -512,7 +553,11 @@ Unfortunately, the below is _not_ in ANF
 
 * As the `*` has _non-immediate_ arguments.
 
-However, note the following variant _is in ANF_
+-->
+
+### Conversion to ANF
+
+However, note the following variant _is_ in ANF
 
 ```haskell
 let t1 = 1 + 2
