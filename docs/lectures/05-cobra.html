@@ -248,7 +248,11 @@ if (window.navigator.appName == "Microsoft Internet Explorer") {
 </ol>
 <h2 id="representation">1. Representation</h2>
 <h3 id="motivation-why-booleans">Motivation: Why booleans?</h3>
-<p>In the 21st century, its a bit silly to use + <code>0</code> for <code>false</code> and + non-zero for <code>true</code>.</p>
+<p>In the year 2018, its a bit silly to use</p>
+<ul>
+<li><code>0</code> for <code>false</code> and</li>
+<li>non-zero for <code>true</code>.</li>
+</ul>
 <p>But really, <code>boolean</code> is a stepping stone to other data</p>
 <ul>
 <li>Pointers,</li>
@@ -297,10 +301,14 @@ if (window.navigator.appName == "Microsoft Internet Explorer") {
 </tr>
 </tbody>
 </table>
+<p>Pros</p>
 <ul>
 <li>Can have <em>lots</em> of different types, but</li>
-<li>Takes up double memory,</li>
-<li>Operators <code>+</code>, <code>-</code> do two memory reads <code>[eax]</code>, <code>[eax - 4]</code>.</li>
+</ul>
+<p>Cons</p>
+<ul>
+<li>Takes up <em>double</em> memory,</li>
+<li>Operators <code>+</code>, <code>-</code> do <em>two</em> memory reads <code>[eax]</code>, <code>[eax - 4]</code>.</li>
 </ul>
 <p>In short, rather wasteful. Don’t need <em>so many</em> types.</p>
 <h3 id="option-2-use-a-tag-bit">Option 2: Use a <em>Tag Bit</em></h3>
@@ -310,6 +318,7 @@ if (window.navigator.appName == "Microsoft Internet Explorer") {
 <li><code>0</code> for <code>number</code></li>
 <li><code>1</code> for <code>boolean</code></li>
 </ul>
+<p>(Hmm, why not <code>0</code> for <code>boolean</code> and <code>1</code> for <code>number</code>?)</p>
 <h3 id="tag-bit-numbers">Tag Bit: Numbers</h3>
 <p>So <code>number</code> is the binary representation shifted left by 1 bit</p>
 <ul>
@@ -576,7 +585,7 @@ if (window.navigator.appName == "Microsoft Internet Explorer") {
 </tr>
 </tbody>
 </table>
-<p>That is, <em>addition</em> (and similarly, _subtraction) work <em>as is</em> with the shifted representation.</p>
+<p>That is, <em>addition</em> (and similarly, <em>subtraction</em>) works <em>as is</em> with the shifted representation.</p>
 <h3 id="quiz-multiplication">QUIZ: Multiplication</h3>
 <p>What will be the result (using our code so far) of:</p>
 <div class="sourceCode" id="cb13"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb13-1" data-line-number="1">ghci<span class="fu">&gt;</span> exec <span class="st">&quot;12 * 4&quot;</span></a></code></pre></div>

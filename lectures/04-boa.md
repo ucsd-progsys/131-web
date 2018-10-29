@@ -392,6 +392,9 @@ What is the assembly corresponding to `33 - 10` ?
 ```nasm
 ?1 eax, ?2
 ?3 eax, ?4
+
+mov eax, 33
+sub eax, 10
 ```
 
 
@@ -402,6 +405,14 @@ What is the assembly corresponding to `33 - 10` ?
 * **C.** `?1 = sub`, `?2 = 10`, `?3 = mov`, `?4 = 33`
 
 * **D.** `?1 = mov`, `?2 = 10`, `?3 = sub`, `?4 = 33`
+
+How to compile `n1 * n2` 
+
+```nasm
+mov eax, n1
+mul eax, n2
+```
+
 
 
 #### Example: Bin1
@@ -416,6 +427,52 @@ Lets start with some easy ones. The source:
 * Add `n2` to `eax`.
 
 #### Example: Bin2
+
+```haskell
+let x = 10        -- position 1 on stack
+  , y = 20        -- position 2 on stack
+  , z = 30        -- position 3 on stack
+in
+   x + (y * z)
+```
+
+```haskell
+let x = 10        -- position 1 on stack
+  , y = 20        -- position 2 on stack
+  , z = 30        -- position 3 on stack
+  , tmp = y * z
+in
+   x + tmp
+```
+
+
+
+
+
+
+```nasm
+mov eax, 10
+mov [ebp - 4*1], eax    ; put x on stack
+mov eax, 20
+mov [ebp - 4*2], eax    ; put y on stack
+mov eax, 30
+mov [ebp - 4*3], eax    ; put z on stack
+
+mov eax, [ebp - 4*2]    ; grab y 
+mul eax, [ebp - 4*3]    ; mul by z 
+mov [ebp - 4*4], eax    ; put tmp on stack
+
+mov eax, [ebp - 4*1]    ; grab x
+add eax, [ebp - 4*4]
+
+```
+
+
+
+
+
+
+
 
 What if the first operand is a variable?
 
@@ -492,13 +549,15 @@ Why were `1 + 2` and `x + y` so easy to compile but `(1 + 2) * (3 + 4)` not?
 
 Because `1` and `x` are **immediate expressions**
 
-* Their values don't require any computation,
-* Either a constant, or,
-* Can be read off the stack.
+Their values don't require any computation!
+
+* Either a **constant**, or,
+* **variable** whose value is on the stack.
 
 ### Idea: Administrative Normal Form (ANF)
 
-> An expression is in **Administrative Normal Form (ANF)**
+An expression is in **Administrative Normal Form (ANF)**
+
 > if **all primitive operations** have **immediate** arguments.
 
 **Primitive Operations:** Those whose values we _need_ for computation to proceed.
@@ -507,17 +566,20 @@ Because `1` and `x` are **immediate expressions**
 * `v1 - v2`
 * `v1 * v2`
 
+
 ### QUIZ
 
 Is the following expression in ANF?
 
 ```haskell
-(1 + 2) * (3 + 4)
+(1 + 2) * (4 - 3)
 ```
 
 **A.** Yes, its ANF.
-**B.** Nope, its not.
-**C.** Remind me, whats ANF?
+**B.** Nope, its not, because of `+`
+**C.** Nope, its not, because of `*`
+**D.** Nope, its not, because of `-`
+**E.** Huh,  WTF is ANF?
 
 
 
@@ -525,9 +587,24 @@ Is the following expression in ANF?
 
 
 
+```haskell
+isImm :: Expr -> Bool
+isImm (Number {}) = True
+isImm (Id {})     = True
+isImm _           = False
 
+isANF :: Expr -> Bool
+isANF (Number {})       = True
+isANF (Id {})           = True
+isANF (Prim1 _ e1 _)    = isANF e1 -- no need to be `isImm e1`!
 
+isANF (Prim2 _ e1 e2 _) = isImm e1 && isImm e2
+isANF (Let _ e1 e2 _)   = isANF e1 && isANF e2
+isANF (If e1 e2 e3 _)   = ???   && isANF e2 && isANF e3
+```
 
+**A.** _must be_ isImm
+**B.** _meh_ ANF is fine!
 
 
 
@@ -566,6 +643,12 @@ in
     t1 * t2
 ```
 
+How can we compile the above code?
+
+```asm
+; TODO in class
+```
+
 ### Binary Operations: Strategy
 
 We can convert _any_ expression to ANF
@@ -574,7 +657,7 @@ We can convert _any_ expression to ANF
 
 ![Compiler Pipeline with ANF](/static/img/compiler-pipeline-anf.png)
 
-* **Step 1:** Compiling ANF into Assembly             
+* **Step 1:** Compiling ANF into Assembly
 * **Step 2:** Converting Expressions into ANF
 
 ### Types: Source
@@ -615,7 +698,10 @@ data Instruction
 ### Types: ANF
 
 We _can_ define a separate type for ANF (try it!)
-* but cumbersome as it requires duplicating a bunch of code.
+
+... but ...
+
+_super tedious_ as it requires duplicating a bunch of code.
 
 Instead, lets write a _function_ that describes **immediate expressions**
 
@@ -630,23 +716,132 @@ We can now think of **immediate** expressions as:
 
 > The _subset_ of `Expr` _such that_ `isImm` returns `True`
 
+### QUIZ
+
 Similarly, lets write a function that describes **ANF** expressions
 
 ```haskell
 isAnf :: Expr a -> Bool
 isAnf (Number  _     _) = True
 isAnf (Var     _     _) = True
-isAnf (Prim2 _ e1 e2 _) = isImm e1 && isImm e2
-isAnf (If e1 e2 e3   _) = isImm e1 && isAnf e2 && isAnf e3
-isAnf (Let x e1 e2   _) = isAnf e1 && isAnf e2
+isAnf (Prim2 _ e1 e2 _) = _1
+isAnf (If e1 e2 e3   _) = _2
+isAnf (Let x e1 e2   _) = _3
 ```
+
+What should we fill in for `_1`?
+
+```haskell
+{- A -} isAnf e1
+{- B -} isAnf e2
+{- C -} isAnf e1 && isAnf e2
+{- D -} isImm e1 && isImm e2
+{- E -} isImm e2
+```
+
+### QUIZ
+
+Similarly, lets write a function that describes **ANF** expressions
+
+```haskell
+isAnf :: Expr a -> Bool
+isAnf (Number  _     _) = True
+isAnf (Var     _     _) = True
+isAnf (Prim1 _ e1 _)    = isAnf e1 
+isAnf (Prim2 _ e1 e2 _) = isImm e1 && isImm e2 
+isAnf (If e1 e2 e3   _) = isANF e1 && isANF e2 && isANF e3
+isAnf (Let x e1 e2   _) = isANF e1 && isANF e2 
+```
+
+What should we fill in for `_2`?
+
+```haskell
+{- A -} isAnf e1      -- <<<<
+{- B -} isImm e1      -- <<<<
+{- C -} True
+{- D -} False
+```
+
 
 We can now think of **ANF** expressions as:
 
 > The _subset_ of `Expr` _such that_ `isAnf` returns `True`
 
-We can use the above to **test** our ANF conversion.
+Use the above function to **test** our ANF conversion.
 
+
+```haskell 
+immArg :: Env -> ImmExpr -> Arg
+immArg env (Number n _) = Const n
+immArg env (Id x _)     = RegOffset EBP (lookupEnv env x)
+
+compileImm :: Env -> ImmExpr Tag -> [Instruction]
+compileImm env v  = [IMov (Reg EAX) (immArg env v) ]
+
+compile :: Env -> AnfExpr Tag -> [Instruction]
+compile env v@(Number {})  = compileImm env v
+compile env v@(Id _ _)     = compileImm env v 
+compile env (Prim1 op e)   = compile env e
+                          ++ [ (prim1Asm op (Reg EAX) (Const 1)]
+compile env (Prim2 op v1 v2) = [ compileImm env v1 
+                               , prim2asm o (Reg EAX) (immArg env v2) 
+                               ]
+
+prim2Asm Add2 = IAdd
+prim2Asm Sub2 = ISub
+prim2Asm Mul2 = IMul
+
+prim1Asm Add1 = IAdd
+prim1Asm Sub1 = ISub
+
+
+anf :: Int -> Expr a -> (Int, AnfExpr a)
+anf i p@(Number {}) = (i, p)
+anf i v@(Id {})     = (i, v)
+anf i (Prim1 o e)   = (i', Prim1 o e') 
+  where 
+    (i', e')        = anf i e
+
+anf i (Prim2 o e1 e2) = (i2, mkLet (bs1 ++ bs2) (Prim2 o v1 v2))
+  where
+     (i1, (bs1, v1))  = imm i  e1
+     (i2, (bs2, v2))  = imm i1 e2
+
+anf i (Let x  e1 e2)  = (i2, Let x e1' e2')
+  where 
+     (i1, e1')        = anf i e1
+     (i2, e2')        = anf i1 e2
+
+anf i (If  e1 e2 e3)  = (i3, If e1' e2' e3')
+  where 
+     (i1, e1')        = anf i e1
+     (i2, e2')        = anf i1 e2
+     (i3, e3')        = anf i2 e3
+
+imm :: Int -> Expr a -> (Int, ([(Id , AnfExpr a)] , ImmExpr a))
+imm i e@(Number {}) = (i, ([], e))
+imm i e@(Id {})     = (i, ([], e))
+imm i e@(Prim1 {})  = immExp i e
+imm i e@(If {})     = immExp i e
+imm i e@(Let {})    = immExp i e
+
+imm i (Prim2 o e1 e2) = (i2+1, ((v, Prim2 o v1 v2) : bs2 ++ bs1, Id v))
+  where
+    (i1, (bs1, v1)) = imm i e1
+    (i2, (bs2, v2)) = imm i1 e2
+    v               = mkTmpVar i2
+
+mkTmpVar i = "tmp" ++ show i
+
+mkLet :: [(Id , AnfExpr a)] -> AnfExpr a -> AnfExpr a
+mkLet []              e = e
+mkLet ((x1, e1) : bs) e = Let x1 e1 (mkLet bs e)
+
+immExp i e  = (i' + 1, ([(v, e')], v))
+  where
+    (i',e') = anf e
+    v       = mkTmpVar i'
+```
 
 ### Types & Strategy
 
@@ -815,24 +1010,19 @@ anf (Prim2 o e1 e2) = lets (b1s ++ b2s)
     (b2s, v2)       = imm e2
 
 lets :: [(Id, AnfE)] -> AnfE -> AnfE
-lets [] e'         = e
+lets []         e' = e
 lets ((x,e):bs) e' = Let x e (lets bs e')
 ```
 
-Same principle applies to `If`
-
-* use `imm` to make the condition _immediate_
-* use `anf` to recursively transform the branches.
+Intuitively, `lets` _stitches_ together a bunch of definitions 
+as follows: 
 
 ```haskell
-anf (If e1 e2 e3)   = lets bs (If t e1' e2')  
-  where
-    (bs, t)         = imm e1
-    e1'             = anf e1
-    e2'             = anf e2
+lets [(x1, e1), (x2, e2), (x3, e3)] e
+  ===> Let x1 e1 (Let x2 e2 (Let x3 e3 e))
 ```
 
-Finally, for `Let` just make sure we recursively `anf`
+For `Let` just make sure we recursively `anf`
 the sub-expressions.
 
 ```haskell
@@ -841,6 +1031,19 @@ anf (Let x e1 e2)   = Let x e1' e2'
     e1'             = anf e1
     e2'             = anf e2
 ```
+
+Same principle applies to `If`
+
+* use `anf` to recursively transform the branches.
+
+```haskell
+anf (If e1 e2 e3) = If e1' e2' e3'  
+  where
+    e1'           = anf e1
+    e2'           = anf e2
+    e3'           = anf e3
+```
+
 
 ### ANF: Making Arguments Immediate via `imm`
 
@@ -857,8 +1060,8 @@ No need to create an variables if the expression
 is _already_ immediate:
 
 ```haskell
-imm v@(Number _)    = ( [], v )
-imm v@(Id     _)    = ( [], v )
+imm (Number n l) = ( [], Number n l )
+imm (Id     x l) = ( [], Id     x l )
 ```
 
 The tricky case is when the expression has a primop:
@@ -866,7 +1069,7 @@ The tricky case is when the expression has a primop:
 ```haskell
 imm (Prim2 o e1 e2) = ( b1s ++ b2s ++ [(t,  Prim2 o v1 v2)]
                       , Id t  )
-  t                 = FreshVar
+  t                 = makeFreshVar ()
   (b1s, v1)         = imm e1
   (b2s, v2)         = imm e2  
 ```
@@ -894,11 +1097,11 @@ imm e@(If _ _ _) = immExp e
 immExp :: AnfE -> ([(Id, AnfE)], ImmE)
 immExp e = ([(t, e')], t)
   where
-    t    = FreshVar
     e'   = anf e
+    t    = makeFreshVar ()
 ```
 
-### One last thing: Whats up with `FreshVar` ?
+### One last thing: Whats up with `makeFreshVar` ?
 
 Wait a minute, what is this magic **FRESH** ?
 
@@ -910,7 +1113,7 @@ What's that? Global variables? Increment a counter?
 
 We will use a counter, but will have to **pass its value around**
 
-* Just like `tag`
+> Just like `doTag`
 
 ```haskell
 anf :: Int -> BareE -> (Int, AnfE)

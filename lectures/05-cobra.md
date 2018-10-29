@@ -30,7 +30,8 @@ Our plan will be to (start with `boa`) and add the following features:
 
 ### Motivation: Why booleans?
 
-In the 21st century, its a bit silly to use
+In the year 2018, its a bit silly to use
+
 + `0` for `false` and
 + non-zero for `true`.
 
@@ -61,10 +62,14 @@ First word is `0` means `bool`, is `1` means `number`, `2` means pointer etc.
 |   `false`|    `[0x000000001][0x00000000]`|
 |    `true`|    `[0x000000001][0x00000001]`|
 
+Pros
 
-+ Can have _lots_ of different types, but
-- Takes up double memory,
-- Operators `+`, `-` do two memory reads `[eax]`, `[eax - 4]`.
+* Can have _lots_ of different types, but
+
+Cons
+
+* Takes up _double_ memory,
+* Operators `+`, `-` do _two_ memory reads `[eax]`, `[eax - 4]`.
 
 In short, rather wasteful. Don't need _so many_ types.
 
@@ -76,6 +81,8 @@ Can distinguish _two_ types with a _single bit_.
 
 * `0` for `number`
 * `1` for `boolean`
+
+(Hmm, why not `0` for `boolean` and `1` for `number`?)
 
 ### Tag Bit: Numbers
 
@@ -314,8 +321,8 @@ Thus, our _source values_ have the following _representations:
 |      `3 + 5 = 8`|                `6 + 10 = 16` |
 |        `n1 + n2`|  `2*n1 + 2*n2 = 2*(n1 + n2)` |
 
-That is, _addition_ (and similarly, _subtraction)
-work _as is_ with the shifted representation.
+That is, _addition_ (and similarly, _subtraction_)
+works _as is_ with the shifted representation.
 
 ### QUIZ: Multiplication
 
