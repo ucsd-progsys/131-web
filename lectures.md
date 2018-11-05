@@ -10,6 +10,7 @@ headerImg: books.jpg
 | 10/8       | Numbers, UnaryOps, Variables  | [html][lec3] [md][md3] |             | [code][cod3]   |
 | 10/15      | Branches and Binary Operators | [html][lec4] [md][md4] |             | [code][cod4]   |
 | 10/24      | Data Representation           | [html][lec5] [md][md5] |             | [code][cod5]   |
+| 11/5       | Functions                     | [html][lec6] [md][md6] |             | [code][cod6]   |
 
 [lec1]: lectures/01-introduction.html
 [md1]: http://github.com/ucsd-progsys/131-web/blob/master/lectures/01-introduction.md
