@@ -111,6 +111,21 @@ we represent a pair `(2, 3)` on the _stack_ as:
 -------
 ```
 
+**QUIZ**
+
+How many words would we need to store the tuple
+
+```
+(3, (4, 5)) 
+``` 
+
+1. `1` word 
+2. `2` words 
+3. `3` words 
+4. `4` words 
+5. `5` words 
+
+<!--  
 ### Pairs vs. Primitive Values
 
 The main difference between pairs and primitive values
@@ -124,6 +139,8 @@ For example:
 
 Thus, once you start _nesting_ pairs we can't neatly tuck
 all the data into a fixed number of 1- or 2- word slots.
+
+-->
 
 ### Pointers
 
