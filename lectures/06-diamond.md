@@ -710,15 +710,6 @@ Does it matter what order we compile the `ds` ?
 
 #### Compiling Declarations  
 
-```haskell
-compileDecl (Decl fname xs body)
-  = ILabel (Func fname)
-  : compileBody env body
-  where
-  env = fromListEnv (zip xs [-2,-3..])
-```
-
-
 To compile a single `Decl` we
 
 1. Create a block starting with a label for the function's name
@@ -738,7 +729,9 @@ mapping each [parameter to its stack position](#strategy-definitions)
 
 ```haskell
 paramsEnv :: [Bind a] -> Env
-paramsEnv xs = fromListEnv (zip (bindId <$> xs) [-2, -3..])
+paramsEnv xs = fromListEnv (zip xids [-2, -3..])
+  where
+    xids     = map bindId xs
 ```
 
 (Recall that `bindId` [extracts](#bindings) the `Id` from each `Bind`)
@@ -1119,47 +1112,3 @@ Later, we'll see how to represent **functions as values** using **closures**.
 [evans-x86-guide]:        http://www.cs.virginia.edu/~evans/cs216/guides/x86.html
 [mac-os-stack-alignment]: http://www.fabiensanglard.net/macosxassembly/index.php
 [hejlsberg-interview]:    https://www.infoq.com/news/2016/05/anders-hejlsberg-compiler
-
-
-
-
-```
-let x = 10
-  , y = 20
-in
-    x + y
-
-def foo(x, y):
-   x + y  
-
-```
-
-```haskell
-tail :: Expr a -> Expr (a, Bool)
-tail e = visit True e
-  where
-    visit b (Number n l)
-    visit b (Boolean n l)
-    visit b (Prim1 n l)
-
-```
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-.

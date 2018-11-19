@@ -1,6 +1,6 @@
 ---
 title: Data on the Heap
-date: 2017-03-2
+date: 2018-11-19
 headerImg: egg-eater.jpg
 ---
 
