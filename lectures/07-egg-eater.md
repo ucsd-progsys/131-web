@@ -115,15 +115,15 @@ we represent a pair `(2, 3)` on the _stack_ as:
 
 How many words would we need to store the tuple
 
+```python
+(3, (4, 5))
 ```
-(3, (4, 5)) 
-``` 
 
-1. `1` word 
-2. `2` words 
-3. `3` words 
-4. `4` words 
-5. `5` words 
+1. `1` word
+2. `2` words
+3. `3` words
+4. `4` words
+5. `5` words
 
 <!--  
 ### Pairs vs. Primitive Values
