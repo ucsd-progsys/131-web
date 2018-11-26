@@ -797,14 +797,8 @@ all the data into a fixed number of 1- or 2- word slots.
 <a class="sourceLine" id="cb24-2" data-line-number="2">  TODO<span class="op">-</span>IN<span class="op">-</span>CLASS</a></code></pre></div>
 <h3 id="quiz">QUIZ</h3>
 <p>Using the above “library” we can write code like:</p>
-<div class="sourceCode" id="cb25"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb25-1" data-line-number="1">def get(e, i)<span class="fu">:</span></a>
-<a class="sourceLine" id="cb25-2" data-line-number="2">  <span class="kw">if</span> (i <span class="fu">==</span> <span class="dv">0</span>)<span class="fu">:</span></a>
-<a class="sourceLine" id="cb25-3" data-line-number="3">      head(e)</a>
-<a class="sourceLine" id="cb25-4" data-line-number="4">  <span class="kw">else</span><span class="fu">:</span></a>
-<a class="sourceLine" id="cb25-5" data-line-number="5">    get(tail(e), i<span class="fu">-</span><span class="dv">1</span>)</a>
-<a class="sourceLine" id="cb25-6" data-line-number="6"></a>
-<a class="sourceLine" id="cb25-7" data-line-number="7"><span class="kw">let</span> quad <span class="fu">=</span> tup4(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>) <span class="kw">in</span></a>
-<a class="sourceLine" id="cb25-8" data-line-number="8">  get(quad, <span class="dv">0</span>) <span class="fu">+</span> get(quad, <span class="dv">1</span>) <span class="fu">+</span> get(quad, <span class="dv">2</span>) <span class="fu">+</span> get(quad, <span class="dv">3</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb25"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb25-1" data-line-number="1"><span class="kw">let</span> quad <span class="fu">=</span> tup4(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>) <span class="kw">in</span></a>
+<a class="sourceLine" id="cb25-2" data-line-number="2">  get(quad, <span class="dv">0</span>) <span class="fu">+</span> get(quad, <span class="dv">1</span>) <span class="fu">+</span> get(quad, <span class="dv">2</span>) <span class="fu">+</span> get(quad, <span class="dv">3</span>)</a></code></pre></div>
 <p>What will be the result of compiling the above?</p>
 <ol type="1">
 <li>Compile error</li>
@@ -896,7 +890,7 @@ all the data into a fixed number of 1- or 2- word slots.
 1:2:3:4:5:6:7:8:[]
 (1,(2,(3,(4,(5,(6,(7,(8,false))))))))
 
-def isEmpty(l):            
+def isEmpty(l):
   l == false
 
 def cons(h, t):

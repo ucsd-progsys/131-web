@@ -695,17 +695,12 @@ def get(t, i):
   TODO-IN-CLASS
 ```
 
+
 ### QUIZ
 
 Using the above "library" we can write code like:
 
 ```haskell
-def get(e, i):
-  if (i == 0):
-      head(e)
-  else:
-    get(tail(e), i-1)
-
 let quad = tup4(1, 2, 3, 4) in
   get(quad, 0) + get(quad, 1) + get(quad, 2) + get(quad, 3)
 ```
@@ -717,9 +712,6 @@ What will be the result of compiling the above?
 3. Other run-time error
 4. `4`
 5. `10`
-
-
-
 
 ### QUIZ
 
@@ -849,7 +841,7 @@ data List = Node Int List         -- (Int, List)
 1:2:3:4:5:6:7:8:[]
 (1,(2,(3,(4,(5,(6,(7,(8,false))))))))
 
-def isEmpty(l):            
+def isEmpty(l):
   l == false
 
 def cons(h, t):
