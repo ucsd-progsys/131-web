@@ -642,27 +642,19 @@ We can write a single function to access tuples of any size.
 So the below code
 
 ```python
-yuple = (1, (2, (3, (4, 5))))
-get(yuple, 0) = 1
-get(yuple, 1) = 2
-get(yuple, 2) = 3
-get(yuple, 3) = 4
-get(yuple, 4) = 5
+let yuple = (10, (20, (30, (40, (50, false))))) in 
+
+get(yuple, 0) = 10
+get(yuple, 1) = 20
+get(yuple, 2) = 30
+get(yuple, 3) = 40
+get(yuple, 4) = 50
 
 
-
-def get(t, i):
-  if i == 0:
-    t[0]
-  else:
-    get(t[1],i-1)
 
 
 def tup3(x1, x2, x3):
   (x1, (x2, x3))
-
-def tup4(x1, x2, x3, x4):
-  (x1, (x2, (x3, x4)))
 
 def tup5(x1, x2, x3, x4, x5):
   (x1, (x2, (x3, (x4, x5))))
@@ -718,7 +710,26 @@ What will be the result of compiling the above?
 Using the above "library" we can write code like:
 
 ```haskell
-let quad = tup4(1, 2, 3) in
+
+
+def get(t, i):
+  if i == 0:
+    t[0]
+  else:
+    get(t[1],i-1)
+
+get(t, 2) ===> get(t[1], 1) ===> get(t[1][1], 0)
+
+
+def tup3(x1, x2, x3):
+  (x1, (x2, (x3, false)))
+
+let quad = tup3(1, 2, 3) in
+  quad = (1, (2, 3))
+  quad[1] = (2, 3)
+  quad[1][1] = (3, false)
+  quad[1][1][1] = false
+
   get(quad, 0) + get(quad, 1) + get(quad, 2) + get(quad, 3)
 ```
 

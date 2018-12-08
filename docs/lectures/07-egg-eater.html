@@ -752,39 +752,31 @@ all the data into a fixed number of 1- or 2- word slots.
 <h3 id="accessing-tuples">Accessing Tuples</h3>
 <p>We can write a single function to access tuples of any size.</p>
 <p>So the below code</p>
-<div class="sourceCode" id="cb22"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb22-1" data-line-number="1">yuple <span class="op">=</span> (<span class="dv">1</span>, (<span class="dv">2</span>, (<span class="dv">3</span>, (<span class="dv">4</span>, <span class="dv">5</span>))))</a>
-<a class="sourceLine" id="cb22-2" data-line-number="2">get(yuple, <span class="dv">0</span>) <span class="op">=</span> <span class="dv">1</span></a>
-<a class="sourceLine" id="cb22-3" data-line-number="3">get(yuple, <span class="dv">1</span>) <span class="op">=</span> <span class="dv">2</span></a>
-<a class="sourceLine" id="cb22-4" data-line-number="4">get(yuple, <span class="dv">2</span>) <span class="op">=</span> <span class="dv">3</span></a>
-<a class="sourceLine" id="cb22-5" data-line-number="5">get(yuple, <span class="dv">3</span>) <span class="op">=</span> <span class="dv">4</span></a>
-<a class="sourceLine" id="cb22-6" data-line-number="6">get(yuple, <span class="dv">4</span>) <span class="op">=</span> <span class="dv">5</span></a>
-<a class="sourceLine" id="cb22-7" data-line-number="7"></a>
+<div class="sourceCode" id="cb22"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb22-1" data-line-number="1">let yuple <span class="op">=</span> (<span class="dv">10</span>, (<span class="dv">20</span>, (<span class="dv">30</span>, (<span class="dv">40</span>, (<span class="dv">50</span>, false))))) <span class="kw">in</span> </a>
+<a class="sourceLine" id="cb22-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb22-3" data-line-number="3">get(yuple, <span class="dv">0</span>) <span class="op">=</span> <span class="dv">10</span></a>
+<a class="sourceLine" id="cb22-4" data-line-number="4">get(yuple, <span class="dv">1</span>) <span class="op">=</span> <span class="dv">20</span></a>
+<a class="sourceLine" id="cb22-5" data-line-number="5">get(yuple, <span class="dv">2</span>) <span class="op">=</span> <span class="dv">30</span></a>
+<a class="sourceLine" id="cb22-6" data-line-number="6">get(yuple, <span class="dv">3</span>) <span class="op">=</span> <span class="dv">40</span></a>
+<a class="sourceLine" id="cb22-7" data-line-number="7">get(yuple, <span class="dv">4</span>) <span class="op">=</span> <span class="dv">50</span></a>
 <a class="sourceLine" id="cb22-8" data-line-number="8"></a>
 <a class="sourceLine" id="cb22-9" data-line-number="9"></a>
-<a class="sourceLine" id="cb22-10" data-line-number="10"><span class="kw">def</span> get(t, i):</a>
-<a class="sourceLine" id="cb22-11" data-line-number="11">  <span class="cf">if</span> i <span class="op">==</span> <span class="dv">0</span>:</a>
-<a class="sourceLine" id="cb22-12" data-line-number="12">    t[<span class="dv">0</span>]</a>
-<a class="sourceLine" id="cb22-13" data-line-number="13">  <span class="cf">else</span>:</a>
-<a class="sourceLine" id="cb22-14" data-line-number="14">    get(t[<span class="dv">1</span>],i<span class="dv">-1</span>)</a>
-<a class="sourceLine" id="cb22-15" data-line-number="15"></a>
-<a class="sourceLine" id="cb22-16" data-line-number="16"></a>
-<a class="sourceLine" id="cb22-17" data-line-number="17"><span class="kw">def</span> tup3(x1, x2, x3):</a>
-<a class="sourceLine" id="cb22-18" data-line-number="18">  (x1, (x2, x3))</a>
-<a class="sourceLine" id="cb22-19" data-line-number="19"></a>
-<a class="sourceLine" id="cb22-20" data-line-number="20"><span class="kw">def</span> tup4(x1, x2, x3, x4):</a>
-<a class="sourceLine" id="cb22-21" data-line-number="21">  (x1, (x2, (x3, x4)))</a>
-<a class="sourceLine" id="cb22-22" data-line-number="22"></a>
-<a class="sourceLine" id="cb22-23" data-line-number="23"><span class="kw">def</span> tup5(x1, x2, x3, x4, x5):</a>
-<a class="sourceLine" id="cb22-24" data-line-number="24">  (x1, (x2, (x3, (x4, x5))))</a>
-<a class="sourceLine" id="cb22-25" data-line-number="25"></a>
-<a class="sourceLine" id="cb22-26" data-line-number="26">let t  <span class="op">=</span> tup5(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>) <span class="kw">in</span></a>
-<a class="sourceLine" id="cb22-27" data-line-number="27">  , x0 <span class="op">=</span> <span class="bu">print</span>(get(t, <span class="dv">0</span>))</a>
-<a class="sourceLine" id="cb22-28" data-line-number="28">  , x1 <span class="op">=</span> <span class="bu">print</span>(get(t, <span class="dv">1</span>))</a>
-<a class="sourceLine" id="cb22-29" data-line-number="29">  , x2 <span class="op">=</span> <span class="bu">print</span>(get(t, <span class="dv">2</span>))</a>
-<a class="sourceLine" id="cb22-30" data-line-number="30">  , x3 <span class="op">=</span> <span class="bu">print</span>(get(t, <span class="dv">3</span>))</a>
-<a class="sourceLine" id="cb22-31" data-line-number="31">  , x4 <span class="op">=</span> <span class="bu">print</span>(get(t, <span class="dv">4</span>))</a>
-<a class="sourceLine" id="cb22-32" data-line-number="32"><span class="kw">in</span></a>
-<a class="sourceLine" id="cb22-33" data-line-number="33">  <span class="dv">99</span></a></code></pre></div>
+<a class="sourceLine" id="cb22-10" data-line-number="10"></a>
+<a class="sourceLine" id="cb22-11" data-line-number="11"></a>
+<a class="sourceLine" id="cb22-12" data-line-number="12"><span class="kw">def</span> tup3(x1, x2, x3):</a>
+<a class="sourceLine" id="cb22-13" data-line-number="13">  (x1, (x2, x3))</a>
+<a class="sourceLine" id="cb22-14" data-line-number="14"></a>
+<a class="sourceLine" id="cb22-15" data-line-number="15"><span class="kw">def</span> tup5(x1, x2, x3, x4, x5):</a>
+<a class="sourceLine" id="cb22-16" data-line-number="16">  (x1, (x2, (x3, (x4, x5))))</a>
+<a class="sourceLine" id="cb22-17" data-line-number="17"></a>
+<a class="sourceLine" id="cb22-18" data-line-number="18">let t  <span class="op">=</span> tup5(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>) <span class="kw">in</span></a>
+<a class="sourceLine" id="cb22-19" data-line-number="19">  , x0 <span class="op">=</span> <span class="bu">print</span>(get(t, <span class="dv">0</span>))</a>
+<a class="sourceLine" id="cb22-20" data-line-number="20">  , x1 <span class="op">=</span> <span class="bu">print</span>(get(t, <span class="dv">1</span>))</a>
+<a class="sourceLine" id="cb22-21" data-line-number="21">  , x2 <span class="op">=</span> <span class="bu">print</span>(get(t, <span class="dv">2</span>))</a>
+<a class="sourceLine" id="cb22-22" data-line-number="22">  , x3 <span class="op">=</span> <span class="bu">print</span>(get(t, <span class="dv">3</span>))</a>
+<a class="sourceLine" id="cb22-23" data-line-number="23">  , x4 <span class="op">=</span> <span class="bu">print</span>(get(t, <span class="dv">4</span>))</a>
+<a class="sourceLine" id="cb22-24" data-line-number="24"><span class="kw">in</span></a>
+<a class="sourceLine" id="cb22-25" data-line-number="25">  <span class="dv">99</span></a></code></pre></div>
 <p>should print out:</p>
 <pre><code>0
 1
@@ -809,8 +801,27 @@ all the data into a fixed number of 1- or 2- word slots.
 </ol>
 <h3 id="quiz-1">QUIZ</h3>
 <p>Using the above “library” we can write code like:</p>
-<div class="sourceCode" id="cb26"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb26-1" data-line-number="1"><span class="kw">let</span> quad <span class="fu">=</span> tup4(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>) <span class="kw">in</span></a>
-<a class="sourceLine" id="cb26-2" data-line-number="2">  get(quad, <span class="dv">0</span>) <span class="fu">+</span> get(quad, <span class="dv">1</span>) <span class="fu">+</span> get(quad, <span class="dv">2</span>) <span class="fu">+</span> get(quad, <span class="dv">3</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb26"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb26-1" data-line-number="1"></a>
+<a class="sourceLine" id="cb26-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb26-3" data-line-number="3">def get(t, i)<span class="fu">:</span></a>
+<a class="sourceLine" id="cb26-4" data-line-number="4">  <span class="kw">if</span> i <span class="fu">==</span> <span class="dv">0</span><span class="fu">:</span></a>
+<a class="sourceLine" id="cb26-5" data-line-number="5">    t[<span class="dv">0</span>]</a>
+<a class="sourceLine" id="cb26-6" data-line-number="6">  <span class="kw">else</span><span class="fu">:</span></a>
+<a class="sourceLine" id="cb26-7" data-line-number="7">    get(t[<span class="dv">1</span>],i<span class="fu">-</span><span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb26-8" data-line-number="8"></a>
+<a class="sourceLine" id="cb26-9" data-line-number="9">get(t, <span class="dv">2</span>) <span class="fu">===&gt;</span> get(t[<span class="dv">1</span>], <span class="dv">1</span>) <span class="fu">===&gt;</span> get(t[<span class="dv">1</span>][<span class="dv">1</span>], <span class="dv">0</span>)</a>
+<a class="sourceLine" id="cb26-10" data-line-number="10"></a>
+<a class="sourceLine" id="cb26-11" data-line-number="11"></a>
+<a class="sourceLine" id="cb26-12" data-line-number="12">def tup3(x1, x2, x3)<span class="fu">:</span></a>
+<a class="sourceLine" id="cb26-13" data-line-number="13">  (x1, (x2, (x3, false)))</a>
+<a class="sourceLine" id="cb26-14" data-line-number="14"></a>
+<a class="sourceLine" id="cb26-15" data-line-number="15"><span class="kw">let</span> quad <span class="fu">=</span> tup3(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>) <span class="kw">in</span></a>
+<a class="sourceLine" id="cb26-16" data-line-number="16">  quad <span class="fu">=</span> (<span class="dv">1</span>, (<span class="dv">2</span>, <span class="dv">3</span>))</a>
+<a class="sourceLine" id="cb26-17" data-line-number="17">  quad[<span class="dv">1</span>] <span class="fu">=</span> (<span class="dv">2</span>, <span class="dv">3</span>)</a>
+<a class="sourceLine" id="cb26-18" data-line-number="18">  quad[<span class="dv">1</span>][<span class="dv">1</span>] <span class="fu">=</span> (<span class="dv">3</span>, false)</a>
+<a class="sourceLine" id="cb26-19" data-line-number="19">  quad[<span class="dv">1</span>][<span class="dv">1</span>][<span class="dv">1</span>] <span class="fu">=</span> false</a>
+<a class="sourceLine" id="cb26-20" data-line-number="20"></a>
+<a class="sourceLine" id="cb26-21" data-line-number="21">  get(quad, <span class="dv">0</span>) <span class="fu">+</span> get(quad, <span class="dv">1</span>) <span class="fu">+</span> get(quad, <span class="dv">2</span>) <span class="fu">+</span> get(quad, <span class="dv">3</span>)</a></code></pre></div>
 <p>What will be the result of compiling the above?</p>
 <ol type="1">
 <li>Compile error</li>
