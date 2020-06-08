@@ -414,8 +414,8 @@ src1 = "add1(7)"
 
 exp1 = Add1 (Number 7)
 
-asm1 = [ IMov (EAX) (Const 7)
-       , IAdd (EAX) (Const 1)
+asm1 = [ IMov (Reg EAX) (Const 7)
+       , IAdd (Reg EAX) (Const 1)
        ]
 ```
 
