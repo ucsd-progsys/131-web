@@ -443,7 +443,7 @@ if (window.navigator.appName == "Microsoft Internet Explorer") {
 <a class="sourceLine" id="cb17-6" data-line-number="6"></a>
 <a class="sourceLine" id="cb17-7" data-line-number="7"><span class="kw">instance</span> <span class="dt">ToX86</span> <span class="dt">Arg</span> <span class="kw">where</span></a>
 <a class="sourceLine" id="cb17-8" data-line-number="8">  asm (<span class="dt">Const</span> n) <span class="fu">=</span> printf <span class="st">&quot;%d&quot;</span> n</a>
-<a class="sourceLine" id="cb17-9" data-line-number="9">  arg (<span class="dt">Reg</span> r)   <span class="fu">=</span> asm r</a>
+<a class="sourceLine" id="cb17-9" data-line-number="9">  asm (<span class="dt">Reg</span> r)   <span class="fu">=</span> asm r</a>
 <a class="sourceLine" id="cb17-10" data-line-number="10"></a>
 <a class="sourceLine" id="cb17-11" data-line-number="11"><span class="kw">instance</span> <span class="dt">ToX86</span> <span class="dt">Register</span> <span class="kw">where</span></a>
 <a class="sourceLine" id="cb17-12" data-line-number="12">  asm <span class="dt">EAX</span> <span class="fu">=</span> <span class="st">&quot;eax&quot;</span></a></code></pre></div>
@@ -522,9 +522,10 @@ if (window.navigator.appName == "Microsoft Internet Explorer") {
 <a class="sourceLine" id="cb25-2" data-line-number="2"></a>
 <a class="sourceLine" id="cb25-3" data-line-number="3">exp2 <span class="fu">=</span> <span class="dt">Add1</span> (<span class="dt">Add1</span> (<span class="dt">Number</span> <span class="dv">12</span>))</a>
 <a class="sourceLine" id="cb25-4" data-line-number="4"></a>
-<a class="sourceLine" id="cb25-5" data-line-number="5">asm2 <span class="fu">=</span> [ <span class="dt">IMov</span> (<span class="dt">EAX</span>) (<span class="dt">Const</span> <span class="dv">7</span>)</a>
-<a class="sourceLine" id="cb25-6" data-line-number="6">       , <span class="dt">IAdd</span> (<span class="dt">EAX</span>) (<span class="dt">Const</span> <span class="dv">1</span>)</a>
-<a class="sourceLine" id="cb25-7" data-line-number="7">       ]</a></code></pre></div>
+<a class="sourceLine" id="cb25-5" data-line-number="5">asm2 <span class="fu">=</span> [ <span class="dt">IMov</span> (<span class="dt">Reg</span> <span class="dt">EAX</span>) (<span class="dt">Const</span> <span class="dv">12</span>)</a>
+<a class="sourceLine" id="cb25-6" data-line-number="6">       , <span class="dt">IAdd</span> (<span class="dt">Reg</span> <span class="dt">EAX</span>) (<span class="dt">Const</span> <span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb25-7" data-line-number="7">       , <span class="dt">IAdd</span> (<span class="dt">Reg</span> <span class="dt">EAX</span>) (<span class="dt">Const</span> <span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb25-8" data-line-number="8">       ]</a></code></pre></div>
 <h2 id="transforms">3. Transforms</h2>
 <p>Now lets go back and suitably extend the transforms:</p>
 <div class="sourceCode" id="cb26"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb26-1" data-line-number="1"><span class="ot">parse   ::</span> <span class="dt">Text</span> <span class="ot">-&gt;</span> <span class="dt">Expr</span>     <span class="co">-- 1. Transform source-string into AST</span></a>
