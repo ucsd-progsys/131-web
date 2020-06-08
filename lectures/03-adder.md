@@ -302,7 +302,7 @@ instance ToX86 Instruction where
 
 instance ToX86 Arg where
   asm (Const n) = printf "%d" n
-  arg (Reg r)   = asm r
+  asm (Reg r)   = asm r
 
 instance ToX86 Register where
   asm EAX = "eax"
@@ -424,8 +424,9 @@ src2 = "add1(add1(12))"
 
 exp2 = Add1 (Add1 (Number 12))
 
-asm2 = [ IMov (EAX) (Const 7)
-       , IAdd (EAX) (Const 1)
+asm2 = [ IMov (Reg EAX) (Const 12)
+       , IAdd (Reg EAX) (Const 1)
+       , IAdd (Reg EAX) (Const 1)
        ]
 ```
 
