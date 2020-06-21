@@ -784,7 +784,7 @@ compile env v@(Id _ _)     = compileImm env v
 compile env (Prim1 op e)   = compile env e
                           ++ [ (prim1Asm op (Reg EAX) (Const 1)]
 compile env (Prim2 op v1 v2) = [ compileImm env v1 
-                               , prim2asm o (Reg EAX) (immArg env v2) 
+                               , prim2Asm o (Reg EAX) (immArg env v2) 
                                ]
 
 prim2Asm Add2 = IAdd

@@ -774,7 +774,7 @@ Unfortunately, the below is _not_ in ANF
 <a class="sourceLine" id="cb40-11" data-line-number="11">compile env (<span class="dt">Prim1</span> op e)   <span class="fu">=</span> compile env e</a>
 <a class="sourceLine" id="cb40-12" data-line-number="12">                          <span class="fu">++</span> [ (prim1Asm op (<span class="dt">Reg</span> <span class="dt">EAX</span>) (<span class="dt">Const</span> <span class="dv">1</span>)]</a>
 <a class="sourceLine" id="cb40-13" data-line-number="13">compile env (<span class="dt">Prim2</span> op v1 v2) <span class="fu">=</span> [ compileImm env v1 </a>
-<a class="sourceLine" id="cb40-14" data-line-number="14">                               , prim2asm o (<span class="dt">Reg</span> <span class="dt">EAX</span>) (immArg env v2) </a>
+<a class="sourceLine" id="cb40-14" data-line-number="14">                               , prim2Asm o (<span class="dt">Reg</span> <span class="dt">EAX</span>) (immArg env v2) </a>
 <a class="sourceLine" id="cb40-15" data-line-number="15">                               ]</a>
 <a class="sourceLine" id="cb40-16" data-line-number="16"></a>
 <a class="sourceLine" id="cb40-17" data-line-number="17">prim2Asm <span class="dt">Add2</span> <span class="fu">=</span> <span class="dt">IAdd</span></a>
