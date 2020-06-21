@@ -354,7 +354,7 @@ compile env (If eCond eTrue eFalse i)
     , IJe (BranchFalse i)               -- if-zero then jump to 'False'-block
     ]
    ++ compile env eTrue  ++             -- code for `True`-block
-    [ IJmp   lExit      ]               -- jump to exit (don't execute `False`-block!)
+    [ IJmp (BranchExit i) ]               -- jump to exit (don't execute `False`-block!)
    ++
       ILabel (BranchFalse i)            -- start of `False`-block
    : compile env eFalse ++              -- code for `False`-block

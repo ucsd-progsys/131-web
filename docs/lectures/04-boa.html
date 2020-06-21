@@ -502,7 +502,7 @@ doTag i (If e1 e2 e3 _) = (i3 + 1, If e1' e2' e3' i3)
 <a class="sourceLine" id="cb18-4" data-line-number="4">    , <span class="dt">IJe</span> (<span class="dt">BranchFalse</span> i)               <span class="co">-- if-zero then jump to 'False'-block</span></a>
 <a class="sourceLine" id="cb18-5" data-line-number="5">    ]</a>
 <a class="sourceLine" id="cb18-6" data-line-number="6">   <span class="fu">++</span> compile env eTrue  <span class="fu">++</span>             <span class="co">-- code for `True`-block</span></a>
-<a class="sourceLine" id="cb18-7" data-line-number="7">    [ <span class="dt">IJmp</span>   lExit      ]               <span class="co">-- jump to exit (don't execute `False`-block!)</span></a>
+<a class="sourceLine" id="cb18-7" data-line-number="7">    [ <span class="dt">IJmp</span> (<span class="dt">BranchExit</span> i) ]               <span class="co">-- jump to exit (don't execute `False`-block!)</span></a>
 <a class="sourceLine" id="cb18-8" data-line-number="8">   <span class="fu">++</span></a>
 <a class="sourceLine" id="cb18-9" data-line-number="9">      <span class="dt">ILabel</span> (<span class="dt">BranchFalse</span> i)            <span class="co">-- start of `False`-block</span></a>
 <a class="sourceLine" id="cb18-10" data-line-number="10">   <span class="fu">:</span> compile env eFalse <span class="fu">++</span>              <span class="co">-- code for `False`-block</span></a>
