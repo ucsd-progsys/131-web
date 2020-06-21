@@ -136,7 +136,7 @@ Which of the following is a valid x86 encoding of
 ```python
 if 10:
   22
-else
+else:
   33
 ```
 
