@@ -1091,8 +1091,8 @@ That is, simply
 * bind them to a fresh variable.
 
 ```haskell
-imm e@(If _ _ _) = immExp e
-imm e@(If _ _ _) = immExp e
+imm e@(If  _ _ _) = immExp e
+imm e@(Let _ _ _) = immExp e
 
 immExp :: AnfE -> ([(Id, AnfE)], ImmE)
 immExp e = ([(t, e')], t)

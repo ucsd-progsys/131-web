@@ -993,8 +993,8 @@ Unfortunately, the below is _not_ in ANF
 <li><code>anf</code> the relevant expressions,</li>
 <li>bind them to a fresh variable.</li>
 </ul>
-<div class="sourceCode" id="cb57"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb57-1" data-line-number="1">imm e<span class="fu">@</span>(<span class="dt">If</span> _ _ _) <span class="fu">=</span> immExp e</a>
-<a class="sourceLine" id="cb57-2" data-line-number="2">imm e<span class="fu">@</span>(<span class="dt">If</span> _ _ _) <span class="fu">=</span> immExp e</a>
+<div class="sourceCode" id="cb57"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb57-1" data-line-number="1">imm e<span class="fu">@</span>(<span class="dt">If</span>  _ _ _) <span class="fu">=</span> immExp e</a>
+<a class="sourceLine" id="cb57-2" data-line-number="2">imm e<span class="fu">@</span>(<span class="dt">Let</span> _ _ _) <span class="fu">=</span> immExp e</a>
 <a class="sourceLine" id="cb57-3" data-line-number="3"></a>
 <a class="sourceLine" id="cb57-4" data-line-number="4"><span class="ot">immExp ::</span> <span class="dt">AnfE</span> <span class="ot">-&gt;</span> ([(<span class="dt">Id</span>, <span class="dt">AnfE</span>)], <span class="dt">ImmE</span>)</a>
 <a class="sourceLine" id="cb57-5" data-line-number="5">immExp e <span class="fu">=</span> ([(t, e')], t)</a>
