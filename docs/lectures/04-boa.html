@@ -267,17 +267,17 @@ if (window.navigator.appName == "Microsoft Internet Explorer") {
 <li>Since <code>10</code> is <em>not</em> <code>0</code> we evaluate the “then” case to get <code>22</code></li>
 </ul>
 <h3 id="example-if2">Example: <code>If2</code></h3>
-<div class="sourceCode" id="cb3"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="kw">if</span> sub(<span class="dv">1</span>)<span class="fu">:</span></a>
+<div class="sourceCode" id="cb3"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="kw">if</span> sub1(<span class="dv">1</span>)<span class="fu">:</span></a>
 <a class="sourceLine" id="cb3-2" data-line-number="2">  <span class="dv">22</span></a>
 <a class="sourceLine" id="cb3-3" data-line-number="3"><span class="kw">else</span><span class="fu">:</span></a>
 <a class="sourceLine" id="cb3-4" data-line-number="4">  sub1(<span class="dv">0</span>)</a></code></pre></div>
 <ul>
-<li>Since <code>sub(1)</code> <em>is</em> <code>0</code> we evaluate the “else” case to get <code>-1</code></li>
+<li>Since <code>sub1(1)</code> <em>is</em> <code>0</code> we evaluate the “else” case to get <code>-1</code></li>
 </ul>
 <h3 id="quiz-if3">QUIZ: <code>If3</code></h3>
 <p><code>if-else</code> is also an <em>expression</em> so we can nest them:</p>
 <p>What should the following evaluate to?</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb4-1" data-line-number="1"><span class="kw">let</span> x <span class="fu">=</span> <span class="kw">if</span> sub(<span class="dv">1</span>)<span class="fu">:</span></a>
+<div class="sourceCode" id="cb4"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb4-1" data-line-number="1"><span class="kw">let</span> x <span class="fu">=</span> <span class="kw">if</span> sub1(<span class="dv">1</span>)<span class="fu">:</span></a>
 <a class="sourceLine" id="cb4-2" data-line-number="2">          <span class="dv">22</span></a>
 <a class="sourceLine" id="cb4-3" data-line-number="3">        <span class="kw">else</span><span class="fu">:</span></a>
 <a class="sourceLine" id="cb4-4" data-line-number="4">          sub1(<span class="dv">0</span>)</a>
