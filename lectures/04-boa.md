@@ -773,7 +773,10 @@ Use the above function to **test** our ANF conversion.
 ```haskell 
 immArg :: Env -> ImmExpr -> Arg
 immArg env (Number n _) = Const n
-immArg env (Id x _)     = RegOffset EBP (lookupEnv env x)
+immArg env (Id x _)     = RegOffset EBP i
+  where
+    i                   = fromMaybe err (lookupEnv env x)
+    err                 = error (printf "Error: Variable '%s' is unbound" x)
 
 compileImm :: Env -> ImmExpr Tag -> [Instruction]
 compileImm env v  = [IMov (Reg EAX) (immArg env v) ]
