@@ -55,7 +55,7 @@ else:
 ### Example: `If2`
 
 ```haskell
-if sub(1):
+if sub1(1):
   22
 else:
   sub1(0)
@@ -64,7 +64,7 @@ else:
 
 
 
-* Since `sub(1)` _is_ `0` we evaluate the "else" case to get `-1`
+* Since `sub1(1)` _is_ `0` we evaluate the "else" case to get `-1`
 
 ### QUIZ: `If3`
 
@@ -73,7 +73,7 @@ else:
 What should the following evaluate to?
 
 ```haskell
-let x = if sub(1):
+let x = if sub1(1):
           22
         else:
           sub1(0)
