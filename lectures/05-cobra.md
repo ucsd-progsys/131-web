@@ -567,6 +567,7 @@ In fact, lets try to see what happens with our code on the above:
 
 ```haskell
 ghci> exec "2 + true"
+Unknown value: 0x80000005
 ```
 
 Oops.
