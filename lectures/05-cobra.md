@@ -57,8 +57,8 @@ First word is `0` means `bool`, is `1` means `number`, `2` means pointer etc.
 |---------:|------------------------------:|
 |       `3`|    `[0x000000000][0x00000003]`|
 |       `5`|    `[0x000000000][0x00000005]`|
-|      `12`|    `[0x000000000][0x0000000c]`|
-|      `42`|    `[0x000000000][0x0000002a]`|
+|      `12`|    `[0x000000000][0x00000018]`|
+|      `42`|    `[0x000000000][0x00000054]`|
 |   `false`|    `[0x000000001][0x00000000]`|
 |    `true`|    `[0x000000001][0x00000001]`|
 
@@ -157,8 +157,8 @@ So, our examples become:
 |   `Boolean True`|   `HexConst 0x80000001`|
 |       `Number 3`|   `HexConst 0x00000006`|
 |       `Number 5`|   `HexConst 0x0000000a`|
-|      `Number 12`|   `HexConst 0x0000000c`|
-|      `Number 42`|   `HexConst 0x0000002a`|
+|      `Number 12`|   `HexConst 0x00000018`|
+|      `Number 42`|   `HexConst 0x00000054`|
 
 
 ### Transforms
@@ -353,7 +353,7 @@ Thus, our _source values_ have the following _representations:
 |              `3`|                          `6` |
 |              `5`|                         `10` |
 |     `3 * 5 = 15`|                `6 * 10 = 60` |
-|        `n1 * n2`|  `2*n1 * 2*n2 = 4*(n1 + n2)` |
+|        `n1 * n2`|  `2*n1 * 2*n2 = 4*(n1 * n2)` |
 
 Thus, multiplication ends up accumulating the factor of 2.
 * Result is _two times_ the desired one.
@@ -567,6 +567,7 @@ In fact, lets try to see what happens with our code on the above:
 
 ```haskell
 ghci> exec "2 + true"
+Unknown value: 0x80000005
 ```
 
 Oops.

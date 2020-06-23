@@ -285,11 +285,11 @@ if (window.navigator.appName == "Microsoft Internet Explorer") {
 </tr>
 <tr class="odd">
 <td style="text-align: right;"><code>12</code></td>
-<td style="text-align: right;"><code>[0x000000000][0x0000000c]</code></td>
+<td style="text-align: right;"><code>[0x000000000][0x00000018]</code></td>
 </tr>
 <tr class="even">
 <td style="text-align: right;"><code>42</code></td>
-<td style="text-align: right;"><code>[0x000000000][0x0000002a]</code></td>
+<td style="text-align: right;"><code>[0x000000000][0x00000054]</code></td>
 </tr>
 <tr class="odd">
 <td style="text-align: right;"><code>false</code></td>
@@ -459,11 +459,11 @@ if (window.navigator.appName == "Microsoft Internet Explorer") {
 </tr>
 <tr class="odd">
 <td style="text-align: right;"><code>Number 12</code></td>
-<td style="text-align: right;"><code>HexConst 0x0000000c</code></td>
+<td style="text-align: right;"><code>HexConst 0x00000018</code></td>
 </tr>
 <tr class="even">
 <td style="text-align: right;"><code>Number 42</code></td>
-<td style="text-align: right;"><code>HexConst 0x0000002a</code></td>
+<td style="text-align: right;"><code>HexConst 0x00000054</code></td>
 </tr>
 </tbody>
 </table>
@@ -625,7 +625,7 @@ if (window.navigator.appName == "Microsoft Internet Explorer") {
 </tr>
 <tr class="even">
 <td style="text-align: right;"><code>n1 * n2</code></td>
-<td style="text-align: right;"><code>2*n1 * 2*n2 = 4*(n1 + n2)</code></td>
+<td style="text-align: right;"><code>2*n1 * 2*n2 = 4*(n1 * n2)</code></td>
 </tr>
 </tbody>
 </table>
@@ -777,7 +777,8 @@ if (window.navigator.appName == "Microsoft Internet Explorer") {
 <p>or</p>
 <div class="sourceCode" id="cb27"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb27-1" data-line-number="1"><span class="dv">7</span> <span class="fu">&lt;</span> false</a></code></pre></div>
 <p>In fact, lets try to see what happens with our code on the above:</p>
-<div class="sourceCode" id="cb28"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb28-1" data-line-number="1">ghci<span class="fu">&gt;</span> exec <span class="st">&quot;2 + true&quot;</span></a></code></pre></div>
+<div class="sourceCode" id="cb28"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb28-1" data-line-number="1">ghci<span class="fu">&gt;</span> exec <span class="st">&quot;2 + true&quot;</span></a>
+<a class="sourceLine" id="cb28-2" data-line-number="2"><span class="dt">Unknown</span> value<span class="fu">:</span> <span class="bn">0x80000005</span></a></code></pre></div>
 <p>Oops.</p>
 <h3 id="checking-tags-at-run-time">Checking Tags at Run-Time</h3>
 <p>Later, we will look into adding a <em>static</em> type system that will reject such meaningless programs at <em>compile</em> time. For now, lets see how to extend the compilation to <em>abort execution</em> when the wrong <em>types of operands</em> are found when the code is <em>executing</em>.</p>

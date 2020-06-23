@@ -55,7 +55,7 @@ else:
 ### Example: `If2`
 
 ```haskell
-if sub(1):
+if sub1(1):
   22
 else:
   sub1(0)
@@ -64,7 +64,7 @@ else:
 
 
 
-* Since `sub(1)` _is_ `0` we evaluate the "else" case to get `-1`
+* Since `sub1(1)` _is_ `0` we evaluate the "else" case to get `-1`
 
 ### QUIZ: `If3`
 
@@ -73,7 +73,7 @@ else:
 What should the following evaluate to?
 
 ```haskell
-let x = if sub(1):
+let x = if sub1(1):
           22
         else:
           sub1(0)
@@ -136,7 +136,7 @@ Which of the following is a valid x86 encoding of
 ```python
 if 10:
   22
-else
+else:
   33
 ```
 
@@ -354,7 +354,7 @@ compile env (If eCond eTrue eFalse i)
     , IJe (BranchFalse i)               -- if-zero then jump to 'False'-block
     ]
    ++ compile env eTrue  ++             -- code for `True`-block
-    [ IJmp   lExit      ]               -- jump to exit (don't execute `False`-block!)
+    [ IJmp (BranchExit i) ]               -- jump to exit (don't execute `False`-block!)
    ++
       ILabel (BranchFalse i)            -- start of `False`-block
    : compile env eFalse ++              -- code for `False`-block
@@ -773,7 +773,10 @@ Use the above function to **test** our ANF conversion.
 ```haskell 
 immArg :: Env -> ImmExpr -> Arg
 immArg env (Number n _) = Const n
-immArg env (Id x _)     = RegOffset EBP (lookupEnv env x)
+immArg env (Id x _)     = RegOffset EBP i
+  where
+    i                   = fromMaybe err (lookupEnv env x)
+    err                 = error (printf "Error: Variable '%s' is unbound" x)
 
 compileImm :: Env -> ImmExpr Tag -> [Instruction]
 compileImm env v  = [IMov (Reg EAX) (immArg env v) ]
@@ -784,7 +787,7 @@ compile env v@(Id _ _)     = compileImm env v
 compile env (Prim1 op e)   = compile env e
                           ++ [ (prim1Asm op (Reg EAX) (Const 1)]
 compile env (Prim2 op v1 v2) = [ compileImm env v1 
-                               , prim2asm o (Reg EAX) (immArg env v2) 
+                               , prim2Asm o (Reg EAX) (immArg env v2) 
                                ]
 
 prim2Asm Add2 = IAdd
@@ -1091,8 +1094,8 @@ That is, simply
 * bind them to a fresh variable.
 
 ```haskell
-imm e@(If _ _ _) = immExp e
-imm e@(If _ _ _) = immExp e
+imm e@(If  _ _ _) = immExp e
+imm e@(Let _ _ _) = immExp e
 
 immExp :: AnfE -> ([(Id, AnfE)], ImmE)
 immExp e = ([(t, e')], t)
